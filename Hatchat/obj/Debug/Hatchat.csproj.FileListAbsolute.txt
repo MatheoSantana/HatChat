@@ -1,0 +1,60 @@
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\Hatchat.exe.config
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\Hatchat.exe
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\Hatchat.pdb
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.csproj.AssemblyReference.cache
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Properties.Resources.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.csproj.GenerateResource.cache
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.csproj.CoreCompileInputs.cache
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.exe
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.pdb
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialMensajesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.Login.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.PerfilAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.PerfilDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalChatAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalChatDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.Register.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterClasesAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterClasesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.csproj.AssemblyReference.cache
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialMensajesDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.Login.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesAlumno.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.PerfilAlumno.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.PerfilDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalChatAlumno.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalChatDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.Register.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterAlumno.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterClasesAlumno.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterClasesDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterDocente.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.Properties.Resources.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.csproj.GenerateResource.cache
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.csproj.CoreCompileInputs.cache
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.exe
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.pdb
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.csproj.AssemblyReference.cache
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialMensajesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.Login.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.PerfilAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.PerfilDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalChatAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalChatDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.Register.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterClasesAlumno.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterClasesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Presentacion.RegisterDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.Properties.Resources.resources
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.csproj.GenerateResource.cache
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.csproj.CoreCompileInputs.cache
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.exe
+C:\Users\miusi\OneDrive\Escritorio\SegundaEntrega\ChatInstitucionalV2\Hatchat\obj\Debug\Hatchat.pdb

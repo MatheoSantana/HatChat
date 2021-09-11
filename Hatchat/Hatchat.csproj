@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0F2E11B5-3D36-4A6D-BA81-836B6555B82C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Hatchat</RootNamespace>
+    <AssemblyName>Hatchat</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.24.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Logica\Administrador.cs" />
+    <Compile Include="Logica\Alumno.cs" />
+    <Compile Include="Logica\Asignatura.cs" />
+    <Compile Include="Logica\AsignaturaCursa.cs" />
+    <Compile Include="Logica\AsignaturaDictada.cs" />
+    <Compile Include="Logica\AsignaturaSolicitudClaseAl.cs" />
+    <Compile Include="Logica\AsignaturaSolicitudClaseDo.cs" />
+    <Compile Include="Logica\Chat.cs" />
+    <Compile Include="Logica\ChateaAl.cs" />
+    <Compile Include="Logica\ChateaDo.cs" />
+    <Compile Include="Logica\Clase.cs" />
+    <Compile Include="Logica\Agenda.cs" />
+    <Compile Include="Logica\ClaseSolicitudClaseAl.cs" />
+    <Compile Include="Logica\ClaseSolicitudClaseDo.cs" />
+    <Compile Include="Logica\Contiene.cs" />
+    <Compile Include="Logica\Cursa.cs" />
+    <Compile Include="Logica\Dicta.cs" />
+    <Compile Include="Logica\Docente.cs" />
+    <Compile Include="Logica\Mensaje.cs" />
+    <Compile Include="Logica\Orientacion.cs" />
+    <Compile Include="Logica\Preguntas.cs" />
+    <Compile Include="Logica\Program.cs" />
+    <Compile Include="Logica\Responde.cs" />
+    <Compile Include="Logica\RespondeClaseAl.cs" />
+    <Compile Include="Logica\RespondeClaseDo.cs" />
+    <Compile Include="Logica\SolicitaChat.cs" />
+    <Compile Include="Logica\SolicitudClaseAl.cs" />
+    <Compile Include="Logica\SolicitudClaseDo.cs" />
+    <Compile Include="Logica\SolicitudModif.cs" />
+    <Compile Include="Logica\Usuario.cs" />
+    <Compile Include="Persistencia\Conexion.cs" />
+    <Compile Include="Presentacion\HistorialMensajesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\HistorialMensajesDocente.designer.cs">
+      <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\MensajesAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\MensajesAlumno.designer.cs">
+      <DependentUpon>MensajesAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\MensajesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\MensajesDocente.designer.cs">
+      <DependentUpon>MensajesDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\PerfilAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\PerfilAlumno.designer.cs">
+      <DependentUpon>PerfilAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\PerfilDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\PerfilDocente.designer.cs">
+      <DependentUpon>PerfilDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\PrincipalChatAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\PrincipalChatAlumno.designer.cs">
+      <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\PrincipalChatDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\PrincipalChatDocente.designer.cs">
+      <DependentUpon>PrincipalChatDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Register.designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\RegisterAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\RegisterAlumno.designer.cs">
+      <DependentUpon>RegisterAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\RegisterClasesAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\RegisterClasesAlumno.designer.cs">
+      <DependentUpon>RegisterClasesAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\RegisterClasesDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\RegisterClasesDocente.designer.cs">
+      <DependentUpon>RegisterClasesDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\RegisterDocente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\RegisterDocente.designer.cs">
+      <DependentUpon>RegisterDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentacion\HistorialMensajesDocente.resx">
+      <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\MensajesAlumno.resx">
+      <DependentUpon>MensajesAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\MensajesDocente.resx">
+      <DependentUpon>MensajesDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\PerfilAlumno.resx">
+      <DependentUpon>PerfilAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\PerfilDocente.resx">
+      <DependentUpon>PerfilDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\PrincipalChatAlumno.resx">
+      <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\PrincipalChatDocente.resx">
+      <DependentUpon>PrincipalChatDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\RegisterAlumno.resx">
+      <DependentUpon>RegisterAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\RegisterClasesAlumno.resx">
+      <DependentUpon>RegisterClasesAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\RegisterClasesDocente.resx">
+      <DependentUpon>RegisterClasesDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\RegisterDocente.resx">
+      <DependentUpon>RegisterDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Recursos\Administrador.png" />
+    <Content Include="Recursos\Alumno.png" />
+    <Content Include="Recursos\boton alumno.png" />
+    <Content Include="Recursos\boton docente.png" />
+    <Content Include="Recursos\cerrar sesion.png" />
+    <Content Include="Recursos\chat blanco.png" />
+    <Content Include="Recursos\chat gris.png" />
+    <Content Include="Recursos\Docente.png" />
+    <Content Include="Recursos\español chiquito.png" />
+    <Content Include="Recursos\grupos blanco.png" />
+    <Content Include="Recursos\grupos gris.png" />
+    <Content Include="Recursos\historial blanco.png" />
+    <Content Include="Recursos\historial gris.png" />
+    <Content Include="Recursos\ingles chiquito.png" />
+    <Content Include="Recursos\logo imagen.ico" />
+    <Content Include="Recursos\logo imagen.png" />
+    <Content Include="Recursos\logo nombre.ico" />
+    <Content Include="Recursos\logo nombre.png" />
+    <Content Include="Recursos\mensaje blanco.png" />
+    <Content Include="Recursos\mensaje gris.png" />
+    <Content Include="Recursos\perfil blanco.png" />
+    <Content Include="Recursos\perfil gris.png" />
+    <Content Include="Recursos\volver.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
