@@ -35,6 +35,16 @@ namespace Hatchat.Logica
             this.respuesta_seguridad = respuesta_seguridad;
             this.activo = activo;
         }
+        public Usuario(string ci, string nombre, string primer_apellido, string segundo_apellido, byte[] fotoDePerfil, string apodo, bool activo)
+        {
+            this.ci = ci;
+            this.nombre = nombre;
+            this.primer_apellido = primer_apellido;
+            this.segundo_apellido = segundo_apellido;
+            this.fotoDePerfil = fotoDePerfil;
+            this.apodo = apodo;
+            this.activo = activo;
+        }
         public string Ci
         {
             get { return ci; }
@@ -85,13 +95,24 @@ namespace Hatchat.Logica
             get { return activo; }
             set { activo = value; }
         }
-        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        public byte[] ToByteArray(string StringToConvert)
+        {
+
+            char[] CharArray = StringToConvert.ToCharArray();
+            byte[] ByteArray = new byte[CharArray.Length];
+            for (int i = 0; i < CharArray.Length; i++)
+            {
+                ByteArray[i] = Convert.ToByte(CharArray);
+            }
+            return ByteArray;
+        }
+        public Image ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
             return Image.FromStream(ms);
         }
 
-        public static byte[] ImageToByteArray(Image imageIn)
+        public byte[] ImageToByteArray(Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, ImageFormat.Jpeg);

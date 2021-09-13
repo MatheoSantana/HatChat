@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hatchat.Logica
 {
-    class SolicitudClaseAl
+    public class SolicitudClaseAl
     {
         private int idSolicitudClaseAl;
         private DateTime fechaHora;

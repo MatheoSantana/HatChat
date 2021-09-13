@@ -11,23 +11,25 @@ namespace Hatchat.Presentacion
     public partial class MensajesAlumno : Form
     {
         private List<Logica.Docente> docentes = new List<Logica.Docente>();
+        private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
         public Form login;
         public Form perfilAlumno;
         public Form principalChatAlumno;
         int y = 50;
+        Persistencia.Conexion conexion;
         public MensajesAlumno()
         {
             InitializeComponent();
             Text = "Mensajes";
 
-            
+
             ClientSize = new Size(1280, 720);
 
             StartPosition = FormStartPosition.CenterScreen;
             panelContenedor.Visible = false;
             panelEnviarMensaje.Visible = false;
             //nav
-            pbxFotoPerfilNav.Image = Login.encontrado.FotoDePerfil;
+            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -56,17 +58,12 @@ namespace Hatchat.Presentacion
 
 
             cbxDestinatario.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Logica.Cursa cur in Login.cursan)
+            conexion = new Persistencia.Conexion();
+            docentes = conexion.SelectDocentesDictandoAAlumno(Login.encontrado.Ci);
+            foreach (Logica.Docente doc in docentes)
             {
-                foreach (Logica.Dicta dic in Login.dictan)
-                {
-                    if (cur.CiAlumno == Login.encontrado.Ci && cur.IdClase == dic.IdClase &&  == cur.Asignatura && !docentes.Contains(dic.Docente))
-                    {
-                        docentes.Add(dic.Docente);
-                        cbxDestinatario.Items.Add(dic.Docente.Nombre + " " + dic.Docente.Primer_apellido);
 
-                    }
-                }
+                cbxDestinatario.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
             }
 
             CargarMensajes();
@@ -76,7 +73,7 @@ namespace Hatchat.Presentacion
         {
             try
             {
-                Login.mensajes.Add(new Logica.Mensaje(((Logica.Alumno)Login.encontrado), txtAsunto.Text, DateTime.Now, rtbxMensajeAEnviar.Text, docentes[cbxDestinatario.SelectedIndex], "Realizado"));
+                conexion.EnviarMensajeAlumno(new Logica.Mensaje(Login.encontrado.Ci, txtAsunto.Text, DateTime.Now, rtbxMensajeAEnviar.Text, docentes[cbxDestinatario.SelectedIndex].Ci, "Realizado"));
                 MessageBox.Show("Se ha enviado el mensaje correctamente");
                 txtAsunto.Text = "";
                 rtbxMensajeAEnviar.Text = "";
@@ -84,7 +81,8 @@ namespace Hatchat.Presentacion
                 docentes.Clear();
                 CargarMensajes();
                 panelEnviarMensaje.Visible = false;
-            }catch(System.ArgumentOutOfRangeException ex)
+            }
+            catch (System.ArgumentOutOfRangeException ex)
             {
                 MessageBox.Show("Debe ingresar un destinatario");
             }
@@ -108,35 +106,31 @@ namespace Hatchat.Presentacion
             lblFechaDocente.Text = "Fecha:";
             lblHoraDocente.Text = "Hora:";
             rtbxRespuestaDocecnte.Text = "";
-            foreach (Logica.Mensaje men in Login.mensajes)
-            {
-                if (men.Alumno == Login.encontrado && ("lbl" + men.FechaHoraAlumno.ToString()) == ((Label)sender).Name && ((Label)sender).Text == men.Docente.Nombre + " " + men.Docente.Primer_apellido + "\n" + men.Asunto)
-                {
-                    panelContenedor.Visible = true;
-                    lblNombreDocente.Text += ("\n" + men.Docente.Nombre + " " + men.Docente.Primer_apellido);
-                    lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd:MM:yyyy");
-                    lblHoraAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("HH:mm");
-                    lblConsultaAlumno.Text += "\n" + men.Asunto;
-                    lblConsultaDocente.Text += "\n" + men.Asunto;
-                    lblNombreAlumno.Text += "\n" + men.Alumno.Nombre + " " + men.Alumno.Primer_apellido;
-                    rtbxMensajeEnviado.Text = men.MensajeAlumno;
-                    pbxAlumno.Image = men.Alumno.FotoDePerfil;
-                    pbxDocente.Image = men.Docente.FotoDePerfil;
-                    foreach (Logica.Contesta cont in Login.contestan)
-                    {
-                        if (men.Docente == cont.Docente && cont.Alumno == men.Alumno && cont.FechaHoraAlumno==men.FechaHoraAlumno)
-                        {
-                            lblFechaDocente.Text += "\n" + cont.FechaHoraDocente.ToString("dd:MM:yyyy");
-                            lblHoraDocente.Text += "\n" + cont.FechaHoraDocente.ToString("HH:mm");
-                            rtbxRespuestaDocecnte.Text = cont.MensajeDocente;
-                            
-                        }
-                    }
+
+            Logica.Mensaje men = null;
+            men = conexion.SelectAbrirMensaje(men.StringAId(((Label)sender).Name));
+            Logica.Docente docente = (Logica.Docente)conexion.SelectUsuarioCi(men.Docente);
+
+            panelContenedor.Visible = true;
+            lblNombreDocente.Text += ("\n" + docente.Nombre + " " + docente.Primer_apellido);
+            lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd:MM:yyyy");
+            lblHoraAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("HH:mm");
+            lblConsultaAlumno.Text += "\n" + men.Asunto;
+            lblConsultaDocente.Text += "\n" + men.Asunto;
+            lblNombreAlumno.Text += "\n" + Login.encontrado.Nombre + " " + Login.encontrado.Primer_apellido;
+            rtbxMensajeEnviado.Text = men.MensajeAlumno;
+            pbxAlumno.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+            pbxDocente.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
+
+            lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
+            lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
+            rtbxRespuestaDocecnte.Text = men.MensajeDocente;
 
 
 
-                }
-            }
+
+
+
         }
         private void MensajesAlumno_Load(object sender, EventArgs e)
         {
@@ -179,24 +173,23 @@ namespace Hatchat.Presentacion
             panelNavMensajes.Controls.Clear();
             panelEnviarMensaje.Visible = false;
             panelContenedor.Visible = false;
-            foreach (Logica.Mensaje men in Login.mensajes)
+            mensajes = conexion.SelectCargarMensajes(Login.encontrado.Ci);
+            foreach (Logica.Mensaje men in mensajes)
             {
-                if (men.Alumno == Login.encontrado)
-                {
+                Logica.Docente docente = (Logica.Docente)conexion.SelectUsuarioCi(men.Docente);
+                Label dina = new Label();
+                dina.Height = 46;
+                dina.Width = 150;
+                dina.Location = new Point(50, y);
+                y += 50;
+                dina.Name = "lblM" + men.IdMensaje.ToString();
+                dina.Text = docente.Nombre + " " + docente.Primer_apellido + "\n" + men.Asunto;
 
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(50, y);
-                    y += 50;
-                    dina.Name = "lbl" + men.FechaHoraAlumno.ToString();
-                    dina.Text = men.Docente.Nombre + " " + men.Docente.Primer_apellido + "\n" + men.Asunto;
-
-                    dina.Click += new EventHandler(AbrirMensaje);
-                    panelNavMensajes.Controls.Add(dina);
+                dina.Click += new EventHandler(AbrirMensaje);
+                panelNavMensajes.Controls.Add(dina);
 
 
-                }
+
             }
         }
 
@@ -212,17 +205,10 @@ namespace Hatchat.Presentacion
 
         private void btnNuevoChat_Click(object sender, EventArgs e)
         {
-            foreach (Logica.Cursa cur in Login.cursan)
+            docentes = conexion.SelectDocentesDictandoAAlumno(Login.encontrado.Ci);
+            foreach (Logica.Docente doc in docentes)
             {
-                foreach (Logica.Dicta dic in Login.dictan)
-                {
-                    if (cur.Alumno == Login.encontrado && cur.Clase == dic.Clase && dic.Asignatura == cur.Asignatura && !docentes.Contains(dic.Docente))
-                    {
-                        docentes.Add(dic.Docente);
-                        cbxDestinatario.Items.Add(dic.Docente.Nombre + " " + dic.Docente.Primer_apellido);
-
-                    }
-                }
+                cbxDestinatario.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
             }
             panelEnviarMensaje.Visible = true;
         }
