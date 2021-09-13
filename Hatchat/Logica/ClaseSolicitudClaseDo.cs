@@ -16,6 +16,11 @@ namespace Hatchat.Logica
         {
 
         }
+        public ClaseSolicitudClaseDo(int idClase, int oriClase)
+        {
+            this.idClase = idClase;
+            this.oriClase = oriClase;
+        }
         public ClaseSolicitudClaseDo(int idSolicitudClaseDo, int idClase, int oriClase)
         {
             this.idSolicitudClaseDo = idSolicitudClaseDo;
@@ -38,6 +43,11 @@ namespace Hatchat.Logica
             get { return oriClase; }
             set { oriClase = value; }
         }
-       
+
+        public void EnviarClaseSolicitudClaseDo()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarClaseSolicitudClaseDo(this);
+        }
     }
 }

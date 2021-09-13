@@ -51,6 +51,10 @@ namespace Hatchat.Logica
             get { return aceptada; }
             set { aceptada = value; }
         }
-
+        public void EnviarAsignaturaSolicitudClaseAl()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarAsignaturaSolicitudClaseAl(this);
+        }
     }
 }

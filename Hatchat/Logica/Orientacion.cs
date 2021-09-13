@@ -13,7 +13,7 @@ namespace Hatchat.Logica
         public Orientacion()
         {
         }
-        public Orientacion(string nombre, int id, bool activo)
+        public Orientacion(int id, string nombre, bool activo)
         {
             this.nombre = nombre;
             this.id = id;
@@ -34,6 +34,12 @@ namespace Hatchat.Logica
         {
             get { return activo; }
             set { activo = value; }
+        }
+
+        public List<Orientacion> SelectOrientaciones()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectOrientaciones();
         }
     }
 }

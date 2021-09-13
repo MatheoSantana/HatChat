@@ -149,5 +149,15 @@ namespace Hatchat.Logica
                 return false;
             }
         }
+        public void AltaUsuario()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AltaUsuario(this);
+        }
+        public Usuario SelectUsuarioCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectUsuarioCi(ci);
+        }
     }
 }

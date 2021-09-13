@@ -10,6 +10,8 @@ namespace Hatchat.Presentacion
 {
     public partial class MensajesDocente : Form
     {
+        private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
+        Logica.Mensaje mensajeSeleccionado = null;
         public Form login;
         public Form perfilDocente;
         public Form principalChatDocente;
@@ -21,7 +23,7 @@ namespace Hatchat.Presentacion
 
             Text = "Mensajes";
 
-            
+
             ClientSize = new Size(1280, 720);
 
             StartPosition = FormStartPosition.CenterScreen;
@@ -29,7 +31,7 @@ namespace Hatchat.Presentacion
             try
             {
                 Icon = new Icon(Application.StartupPath + "logo imagen.ico");
-                pbxFotoPerfilNav.Image = Login.encontrado.FotoDePerfil;
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje blanco.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
@@ -94,24 +96,21 @@ namespace Hatchat.Presentacion
             y = 50;
             panelNavMensajes.Controls.Clear();
             panelContenedor.Visible = false;
-            foreach (Logica.Mensaje men in Login.mensajes)
+            mensajes = new Logica.Mensaje().SelectCargarMensajesDo(Login.encontrado.Ci);
+            foreach (Logica.Mensaje men in mensajes)
             {
-                if (men.Docente == Login.encontrado)
-                {
+                Logica.Alumno alumno = (Logica.Alumno)new Logica.Alumno().SelectUsuarioCi(men.Alumno);
+                Label dina = new Label();
+                dina.Height = 46;
+                dina.Width = 150;
+                dina.Location = new Point(50, y);
+                y += 50;
+                dina.Name = "lblM" + men.IdMensaje.ToString();
+                dina.Text = alumno.Nombre + " " + alumno.Primer_apellido + "\n" + men.Asunto;
 
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(50, y);
-                    y += 50;
-                    dina.Name = "lbl" + men.FechaHoraAlumno.ToString();
-                    dina.Text = men.Alumno.Nombre + " " + men.Alumno.Primer_apellido + "\n" + men.Asunto;
+                dina.Click += new EventHandler(AbrirMensaje);
+                panelNavMensajes.Controls.Add(dina);
 
-                    dina.Click += new EventHandler(AbrirMensaje);
-                    panelNavMensajes.Controls.Add(dina);
-
-
-                }
             }
         }
         private void AbrirMensaje(object sender, EventArgs e)
@@ -120,6 +119,7 @@ namespace Hatchat.Presentacion
             panelContenedor.Visible = true;
             pbxDocente.Image = null;
             pbxAlumno.Image = null;
+            mensajeSeleccionado = null;
             lblNombreDocente.Text = "Docente:";
             lblFechaAlumno.Text = "Fecha:";
             lblHoraAlumno.Text = "Hora:";
@@ -131,53 +131,45 @@ namespace Hatchat.Presentacion
             lblFechaDocente.Text = "Fecha:";
             lblHoraDocente.Text = "Hora:";
             rtbxRespuesta.Text = "";
-            foreach (Logica.Mensaje men in Login.mensajes)
-            {
-                if (men.Docente == Login.encontrado && ("lbl" + men.FechaHoraAlumno.ToString()) == ((Label)sender).Name && ((Label)sender).Text == men.Alumno.Nombre + " " + men.Alumno.Primer_apellido + "\n" + men.Asunto)
-                {
-                    panelContenedor.Visible = true;
-                    lblNombreDocente.Text += ("\n" + men.Docente.Nombre + " " + men.Docente.Primer_apellido);
-                    lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd:MM:yyyy");
-                    lblHoraAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("HH:mm");
-                    lblConsultaAlumno.Text += "\n" + men.Asunto;
-                    lblConsultaDocente.Text += "\n" + men.Asunto;
-                    lblNombreAlumno.Text += "\n" + men.Alumno.Nombre + " " + men.Alumno.Primer_apellido;
-                    rtbxMensajeRecibido.Text = men.MensajeAlumno;
-                    pbxAlumno.Image = men.Alumno.FotoDePerfil;
-                    pbxDocente.Image = men.Docente.FotoDePerfil;
-                    foreach (Logica.Contesta cont in Login.contestan)
-                    {
-                        if (men.Docente == cont.Docente && cont.Alumno == men.Alumno && cont.FechaHoraAlumno == men.FechaHoraAlumno)
-                        {
-                            lblFechaDocente.Text += "\n" + cont.FechaHoraDocente.ToString("dd:MM:yyyy");
-                            lblHoraDocente.Text += "\n" + cont.FechaHoraDocente.ToString("HH:mm");
-                            rtbxRespuesta.Text = cont.MensajeDocente;
-                            rtbxRespuesta.Enabled = false;
-                            btnEnviar.Visible = false;
-                        }
-                    }
-                }
-            }
+
+            mensajeSeleccionado = mensajeSeleccionado.SelectAbrirMensaje(((Label)sender).Name);
+            Logica.Alumno alumno = (Logica.Alumno)new Logica.Alumno().SelectUsuarioCi(mensajeSeleccionado.Alumno);
+
+            panelContenedor.Visible = true;
+            lblNombreDocente.Text += ("\n" + Login.encontrado.Nombre + " " + Login.encontrado.Primer_apellido);
+            lblFechaAlumno.Text += "\n" + mensajeSeleccionado.FechaHoraAlumno.ToString("dd:MM:yyyy");
+            lblHoraAlumno.Text += "\n" + mensajeSeleccionado.FechaHoraAlumno.ToString("HH:mm");
+            lblConsultaAlumno.Text += "\n" + mensajeSeleccionado.Asunto;
+            lblConsultaDocente.Text += "\n" + mensajeSeleccionado.Asunto;
+            lblNombreAlumno.Text += "\n" + alumno.Nombre + " " + alumno.Primer_apellido;
+            rtbxMensajeRecibido.Text = mensajeSeleccionado.MensajeAlumno;
+            pbxAlumno.Image = alumno.ByteArrayToImage(alumno.FotoDePerfil);
+            pbxDocente.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+
+            lblFechaDocente.Text += "\n" + mensajeSeleccionado.FechaHoraDocente.ToString("dd:MM:yyyy");
+            lblHoraDocente.Text += "\n" + mensajeSeleccionado.FechaHoraDocente.ToString("HH:mm");
+            rtbxRespuesta.Text = mensajeSeleccionado.MensajeDocente;
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            foreach (Logica.Mensaje men in Login.mensajes)
-            {
-                if (men.Docente == Login.encontrado && ("Hora:\n" + men.FechaHoraAlumno.ToString("HH:mm")) == lblHoraAlumno.Text && "Fecha:\n" + men.FechaHoraAlumno.ToString("dd:MM:yyyy") == lblFechaAlumno.Text && lblNombreAlumno.Text == "Alumno:\n" + men.Alumno.Nombre + " " + men.Alumno.Primer_apellido && men.Estado == "Realizado")
-                {
-                    
-                                    Login.contestan.Add(new Logica.Contesta(men.Alumno, ((Logica.Docente)Login.encontrado), men.FechaHoraAlumno, rtbxRespuesta.Text, DateTime.Now));
-                                    men.Estado = "Contestado";
-                                    MessageBox.Show("Se ha enviado el mensaje correctamente");
 
-                                    CargarMensajes();
-                                
-                }else if (men.Estado != "Realizado")
-                {
-                    MessageBox.Show("este mensaje ya ha sido respondido");
-                }
+
+            if (mensajeSeleccionado.Estado != "Realizado")
+            {
+                MessageBox.Show("este mensaje ya ha sido respondido");
             }
+            else
+            {
+                mensajeSeleccionado.FechaHoraDocente = DateTime.Now;
+                mensajeSeleccionado.MensajeDocente = rtbxRespuesta.Text;
+                mensajeSeleccionado.Estado = "contestado";
+                mensajeSeleccionado.EnviarMensajeDocente();
+                MessageBox.Show("Se ha enviado el mensaje correctamente");
+                mensajeSeleccionado = null;
+                CargarMensajes();
+            }
+
         }
     }
 }

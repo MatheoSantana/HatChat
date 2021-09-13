@@ -136,5 +136,30 @@ namespace Hatchat.Logica
             DateTime fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
             return fh;
         }
+        public List<Mensaje> SelectCargarMensajesDo(string docente)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectCargarMensajesDo(docente);
+        }
+        public List<Mensaje> SelectCargarMensajesAl(string alumno)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectCargarMensajesAl(alumno);
+        }
+        public Mensaje SelectAbrirMensaje(string idMensaje)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAbrirMensaje(StringAId(idMensaje));
+        }
+        public void EnviarMensajeAlumno()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarMensajeAlumno(this);
+        }
+        public void EnviarMensajeDocente()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarMensajeDocente(this);
+        }
     }
 }

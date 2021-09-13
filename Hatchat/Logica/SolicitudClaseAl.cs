@@ -15,6 +15,12 @@ namespace Hatchat.Logica
 
         public SolicitudClaseAl() { 
         }
+        public SolicitudClaseAl(DateTime fechaHora, bool pendiente, string alumno)
+        {
+            this.fechaHora = fechaHora;
+            this.pendiente = pendiente;
+            this.alumno = alumno;
+        }
         public SolicitudClaseAl(int idSolicitudClaseAl, DateTime fechaHora, bool pendiente, string alumno)
         {
             this.idSolicitudClaseAl = idSolicitudClaseAl;
@@ -43,6 +49,17 @@ namespace Hatchat.Logica
             set { alumno = value; }
             get { return alumno; }
         }
+        public void EnviarSolicitudClaseAl()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarSolicitudClaseAl(this);
+        }
 
+        public void SelectIdSolicitudClaseAl()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            idSolicitudClaseAl=conexion.SelectIdSolicitudClaseAl(this);
+            
+        }
     }
 }

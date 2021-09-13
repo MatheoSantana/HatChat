@@ -48,5 +48,11 @@ namespace Hatchat.Logica
         {
             return nombre +anio +" - " + id;
         }
+
+        public List<Asignatura> SelectAsignaturasPorClaseAnioYorientacion(string clase, int anio, int orientacion)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturasPorClaseAnioYorientacion(clase, anio, orientacion);
+        }
     }
 }

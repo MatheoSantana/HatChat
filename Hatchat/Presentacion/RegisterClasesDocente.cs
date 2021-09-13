@@ -13,12 +13,14 @@ namespace Hatchat.Presentacion
         public Form login;
         public Form registerDocente;
         private int ychbx = 50, xchbx = 50, xlbl=50, ylbl=50;
-        private int conteoClases=0;
-        private Logica.Clase claseSeleccionada=null;
-        private List<Logica.Clase> clases = new List<Logica.Clase>();
+
+        private Logica.Clase claseSeleccionada = null;
+        private List<Logica.ClaseSolicitudClaseDo> solicitudClases = new List<Logica.ClaseSolicitudClaseDo>();
         private List<Logica.Asignatura> asigs = new List<Logica.Asignatura>();
-        private List<Logica.Dicta> dictaAs = new List<Logica.Dicta>();
+        private List<Logica.AsignaturaSolicitudClaseDo> soliAsigs = new List<Logica.AsignaturaSolicitudClaseDo>();
+        private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
         private Logica.Docente docente = new Logica.Docente();
+        private Logica.Orientacion orientacionSeleccionada = null;
         public RegisterClasesDocente()
         {
             InitializeComponent();
@@ -49,7 +51,7 @@ namespace Hatchat.Presentacion
 
             
 
-            foreach (Logica.Orientacion ori in Login.orientaciones)
+            foreach (Logica.Orientacion ori in orientaciones)
             {
                 cbxOrientacion.Items.Add(ori.Nombre);
             }
@@ -84,19 +86,11 @@ namespace Hatchat.Presentacion
             xchbx = 50;
             cbxAnio.Items.Clear();
             cbxClases.Items.Clear();
-            List<int> anios = new List<int>();
-
-            foreach (Logica.Clase cla in Login.clases)
+            orientacionSeleccionada = orientaciones[cbxOrientacion.SelectedIndex];
+            
+            foreach (int anio in new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientacionSeleccionada.Id)))
             {
-                if (!anios.Contains(cla.Anio) && cla.Orientacion.Nombre == cbxOrientacion.SelectedItem.ToString())
-                {
-                    anios.Add(cla.Anio);
-                }
-            }
-            anios.Sort();
-            foreach (int anio in anios)
-            {
-                cbxAnio.Items.Add(anio);
+                cbxAnio.Items.Add(anio.ToString());
             }
         }
 
@@ -107,15 +101,8 @@ namespace Hatchat.Presentacion
             xchbx = 50;
             cbxClases.Items.Clear();
             List<string> clase = new List<string>();
-            foreach (Logica.Clase cla in Login.clases)
-            {
-                if (cla.Anio.ToString() == cbxAnio.SelectedItem.ToString() && cla.Orientacion.Nombre == cbxOrientacion.SelectedItem.ToString())
-                {
-                    clase.Add(cla.Nombre);
-                }
-            }
-            clase.Sort();
-            foreach (string cla in clase)
+
+            foreach (string cla in new List<string>(new Logica.Clase().SelectNombreClasePorAnioYorientacion(Convert.ToInt32(cbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id)))
             {
                 cbxClases.Items.Add(cla);
             }
@@ -123,14 +110,25 @@ namespace Hatchat.Presentacion
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            docente.FotoDePerfil = Image.FromFile("Docente.png");
-            foreach (Logica.Dicta dic in dictaAs)
+            docente.FotoDePerfil = docente.ImageToByteArray(Image.FromFile("Docente.png"));
+            docente.AltaUsuario();
+            Logica.SolicitudClaseDo solicitudClaseDo = new Logica.SolicitudClaseDo(DateTime.Now, true, docente.Ci);
+            solicitudClaseDo.EnviarSolicitudClaseDo();
+            solicitudClaseDo.SelectIdSolicitudClaseDo();
+            foreach (Logica.ClaseSolicitudClaseDo claseSolicitudClaseDo in solicitudClases)
             {
-                dic.Docente = docente;
+                claseSolicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.IdSolicitudClaseDo;
+                claseSolicitudClaseDo.EnviarClaseSolicitudClaseDo();
             }
-            Login.dictan.AddRange(dictaAs);
-            Login.usuarios.Add(docente);
-            MessageBox.Show("Se ha creado el docente correctamente\nVolviendo al Login");
+            foreach (Logica.AsignaturaSolicitudClaseDo soliAsig in soliAsigs)
+            {
+                soliAsig.IdSolicitudClaseDo = solicitudClaseDo.IdSolicitudClaseDo;
+                soliAsig.Aceptada = true;
+                soliAsig.EnviarAsignaturaSolicitudClaseDo();
+            }
+
+
+            MessageBox.Show("Se ha creado el alumno correctamente\nVolviendo al Login");
             login.Show();
             this.Dispose();
         }
@@ -141,40 +139,30 @@ namespace Hatchat.Presentacion
             asigs.Clear();
             ychbx = 50;
             xchbx = 50;
-            foreach (Logica.Clase cla in Login.clases)
+            asigs.AddRange(new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cbxClases.SelectedItem.ToString(), Convert.ToInt32(cbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id));
+            claseSeleccionada.Anio = Convert.ToInt32(cbxAnio.SelectedItem.ToString());
+            claseSeleccionada.Orientacion = orientacionSeleccionada.Id;
+            claseSeleccionada.Nombre = cbxClases.SelectedItem.ToString();
+            claseSeleccionada.SelectIdClasePorPorNombreAnioYorientacion();
+
+            foreach (Logica.Asignatura asig in asigs)
             {
-                if (cla.Orientacion.Nombre==cbxOrientacion.SelectedItem.ToString() && cla.Anio.ToString()==cbxAnio.SelectedItem.ToString() && cla.Nombre==cbxClases.SelectedItem.ToString())
+                CheckBox dina = new CheckBox();
+
+                dina.Height = 23;
+                dina.Width = 150;
+                dina.Location = new Point(xchbx, ychbx);
+                if (xchbx == 400)
                 {
-                    claseSeleccionada = cla;
-                    
-                    foreach(Logica.Contiene conti in Login.contienen)
-                    {
-                        if (conti.Orientacion.Nombre == claseSeleccionada.Orientacion.Nombre && conti.Asignatura.Anio==claseSeleccionada.Anio)
-                        {
-                            asigs.Add(conti.Asignatura);
-                        }
-                    }
-                    
-                    foreach (Logica.Asignatura asig in asigs)
-                    {
-                        CheckBox dina = new CheckBox();
-
-                        dina.Height = 23;
-                        dina.Width = 150;
-                        dina.Location = new Point(xchbx, ychbx);
-                        if (xchbx == 400)
-                        {
-                            xchbx = -125;
-                            ychbx += 25;
-                        }
-                        xchbx += 175;
-                        dina.Name = "chbx" + asig.Id;
-                        dina.Text = asig.Nombre;
-
-                        dina.CheckedChanged += new EventHandler(AsignaturaCambiada);
-                        panelAsignaturas.Controls.Add(dina);
-                    }
+                    xchbx = -125;
+                    ychbx += 25;
                 }
+                xchbx += 175;
+                dina.Name = "chbx" + asig.Id;
+                dina.Text = asig.Nombre;
+
+                dina.CheckedChanged += new EventHandler(AsignaturaCambiada);
+                panelAsignaturas.Controls.Add(dina);
             }
 
         }
@@ -185,28 +173,31 @@ namespace Hatchat.Presentacion
                 foreach (Logica.Asignatura asig in asigs)
                 {
 
-                    if (((CheckBox)sender).Name == "chbx"+asig.Id)
+                    if (((CheckBox)sender).Name == "chbx" + asig.Id)
                     {
-                        Logica.Dicta dic = new Logica.Dicta();
-                        dic.Asignatura = asig;
-                        dic.Clase = claseSeleccionada;
-                        dictaAs.Add(dic);
+                        Logica.AsignaturaSolicitudClaseDo soliAsig = new Logica.AsignaturaSolicitudClaseDo();
+                        soliAsig.IdAsignatura = asig.Id;
+                        soliAsig.IdClaseAsig = claseSeleccionada.IdClase;
+                        soliAsig.OriClaseAsig = orientacionSeleccionada.Id;
+                        soliAsigs.Add(soliAsig);
                     }
-                            
+
                 }
             }
             else
             {
+                Logica.AsignaturaSolicitudClaseDo encontrado = null;
                 foreach (Logica.Asignatura asig in asigs)
                 {
-                    foreach (Logica.Dicta dic in dictaAs)
+                    foreach (Logica.AsignaturaSolicitudClaseDo soliAsi in soliAsigs)
                     {
-                        if (((CheckBox)sender).Name == "chbx" + asig.Id && dic.Clase==claseSeleccionada && dic.Asignatura==asig)
+                        if (((CheckBox)sender).Name == "chbx" + asig.Id && soliAsi.IdClaseAsig == claseSeleccionada.IdClase && soliAsi.OriClaseAsig == orientacionSeleccionada.Id && soliAsi.IdAsignatura == asig.Id)
                         {
-                            dictaAs.Remove(dic);
+                            encontrado = soliAsi;
                         }
                     }
                 }
+                soliAsigs.Remove(encontrado);
             }
         }
 
@@ -215,9 +206,10 @@ namespace Hatchat.Presentacion
             
             panelAgregadas.AutoScrollPosition =Point.Empty;
             panelAsignaturas.AutoScrollPosition = Point.Empty;
-            if (!clases.Contains(claseSeleccionada))
+            Logica.ClaseSolicitudClaseDo claseSolicitudClaseDo = new Logica.ClaseSolicitudClaseDo(claseSeleccionada.IdClase, orientacionSeleccionada.Id);
+            if (!solicitudClases.Contains(claseSolicitudClaseDo))
             {
-                
+
                 Label dina = new Label();
                 dina.Height = 46;
                 dina.Width = 150;
@@ -228,30 +220,29 @@ namespace Hatchat.Presentacion
                     ylbl += 25;
                 }
                 xlbl += 175;
-                dina.Name = "lblClase" + conteoClases.ToString();
-                conteoClases++;
+                dina.Name = "lblClase" + claseSeleccionada.IdClase;
                 dina.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre;
-                foreach(Logica.Asignatura asig in asigs)
+                foreach (Logica.Asignatura asig in asigs)
                 {
-                    foreach (Logica.Dicta dic in dictaAs)
+                    foreach (Logica.AsignaturaSolicitudClaseDo soliAsi in soliAsigs)
                     {
-                        if (dic.Asignatura==asig && dic.Clase==claseSeleccionada)
+                        if (soliAsi.IdClaseAsig == claseSeleccionada.IdClase && soliAsi.OriClaseAsig == orientacionSeleccionada.Id && soliAsi.IdAsignatura == asig.Id)
                         {
                             dina.Text += "\n" + asig.Nombre;
                             dina.Height += 23;
                         }
                     }
-                    
-                    
                 }
-                dina.Text += "\n" + claseSeleccionada.Orientacion.Nombre;/* + "\n(click para borrar)";
+                dina.Text += "\n" + orientacionSeleccionada.Nombre;/* + "\n(click para borrar)";
                 dina.Click += new EventHandler(EliminarClase);*/
                 panelAgregadas.Controls.Add(dina);
                 panelAsignaturas.Controls.Clear();
                 cbxOrientacion.SelectedItem = 0;
                 cbxAnio.Items.Clear();
                 cbxClases.Items.Clear();
-                clases.Add(claseSeleccionada);
+                solicitudClases.Add(claseSolicitudClaseDo);
+                claseSeleccionada = null;
+                orientacionSeleccionada = null;
             }
 
         }

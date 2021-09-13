@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hatchat.Logica
 {
-    class AsignaturaSolicitudClaseDo
+    public class AsignaturaSolicitudClaseDo
     {
         private int idSolicitudClaseDo;
         private int idClaseAsig;
@@ -50,6 +50,11 @@ namespace Hatchat.Logica
         {
             get { return aceptada; }
             set { aceptada = value; }
+        }
+        public void EnviarAsignaturaSolicitudClaseDo()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarAsignaturaSolicitudClaseDo(this);
         }
     }
 }

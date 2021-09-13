@@ -73,7 +73,8 @@ namespace Hatchat.Presentacion
         {
             try
             {
-                conexion.EnviarMensajeAlumno(new Logica.Mensaje(Login.encontrado.Ci, txtAsunto.Text, DateTime.Now, rtbxMensajeAEnviar.Text, docentes[cbxDestinatario.SelectedIndex].Ci, "Realizado"));
+                Logica.Mensaje men = new Logica.Mensaje(Login.encontrado.Ci, txtAsunto.Text, DateTime.Now, rtbxMensajeAEnviar.Text, docentes[cbxDestinatario.SelectedIndex].Ci, "realizado");
+                men.EnviarMensajeAlumno();
                 MessageBox.Show("Se ha enviado el mensaje correctamente");
                 txtAsunto.Text = "";
                 rtbxMensajeAEnviar.Text = "";
@@ -108,8 +109,8 @@ namespace Hatchat.Presentacion
             rtbxRespuestaDocecnte.Text = "";
 
             Logica.Mensaje men = null;
-            men = conexion.SelectAbrirMensaje(men.StringAId(((Label)sender).Name));
-            Logica.Docente docente = (Logica.Docente)conexion.SelectUsuarioCi(men.Docente);
+            men = men.SelectAbrirMensaje(((Label)sender).Name);
+            Logica.Docente docente = (Logica.Docente)new Logica.Docente().SelectUsuarioCi(men.Docente);
 
             panelContenedor.Visible = true;
             lblNombreDocente.Text += ("\n" + docente.Nombre + " " + docente.Primer_apellido);
@@ -125,11 +126,6 @@ namespace Hatchat.Presentacion
             lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
             lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
             rtbxRespuestaDocecnte.Text = men.MensajeDocente;
-
-
-
-
-
 
         }
         private void MensajesAlumno_Load(object sender, EventArgs e)
@@ -173,10 +169,10 @@ namespace Hatchat.Presentacion
             panelNavMensajes.Controls.Clear();
             panelEnviarMensaje.Visible = false;
             panelContenedor.Visible = false;
-            mensajes = conexion.SelectCargarMensajes(Login.encontrado.Ci);
+            mensajes = mensajes = new Logica.Mensaje().SelectCargarMensajesAl(Login.encontrado.Ci);
             foreach (Logica.Mensaje men in mensajes)
             {
-                Logica.Docente docente = (Logica.Docente)conexion.SelectUsuarioCi(men.Docente);
+                Logica.Docente docente = (Logica.Docente)new Logica.Docente().SelectUsuarioCi(men.Docente);
                 Label dina = new Label();
                 dina.Height = 46;
                 dina.Width = 150;
@@ -187,8 +183,6 @@ namespace Hatchat.Presentacion
 
                 dina.Click += new EventHandler(AbrirMensaje);
                 panelNavMensajes.Controls.Add(dina);
-
-
 
             }
         }
