@@ -121,14 +121,13 @@ namespace Hatchat.Presentacion
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
 
-            Persistencia.Conexion conexion = new Persistencia.Conexion();
-            encontrado = conexion.SelectUsuarioCi(txtCedula.Text);
+            encontrado = encontrado.SelectUsuarioCi(txtCedula.Text);
             
             if (encontrado != null)
             {
                 if (encontrado.Password.ToString() == txtPassword.Text)
                 {
-                    if (conexion.SelectDocente(txtCedula.Text))
+                    if (encontrado.SelectDocente())
                     {
                         txtCedula.Text = "";
                         txtPassword.Text = "";
@@ -155,7 +154,7 @@ namespace Hatchat.Presentacion
 
 
                     }
-                    else if (conexion.SelectAlumno(txtCedula.Text))
+                    else if (encontrado.SelectAlumno())
                     {
                         txtCedula.Text = "";
                         txtPassword.Text = "";
@@ -179,7 +178,7 @@ namespace Hatchat.Presentacion
                         perfilAlumno.principalChatAlumno = principalChatAlumno;
                         perfilAlumno.mensajesAlumno = mensajesAlumno;
                     }
-                    else if(conexion.SelectAdministrador(txtCedula.Text))
+                    else if(encontrado.SelectAdministrador())
                     {
                         MessageBox.Show("Desarrollo");
                     }

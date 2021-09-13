@@ -9,16 +9,16 @@ namespace Hatchat.Logica
 {
     public class Usuario
     {
-        private string ci;
-        private string password;
-        private string nombre;
-        private string primer_apellido;
-        private string segundo_apellido;
-        private byte[] fotoDePerfil;
-        private string apodo;
-        private int pregunta_seguridad;
-        private string respuesta_seguridad;
-        private bool activo;
+        protected string ci;
+        protected string password;
+        protected string nombre;
+        protected string primer_apellido;
+        protected string segundo_apellido;
+        protected byte[] fotoDePerfil;
+        protected string apodo;
+        protected int pregunta_seguridad;
+        protected string respuesta_seguridad;
+        protected bool activo;
         public Usuario()
         {
         }
@@ -158,6 +158,21 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectUsuarioCi(ci);
+        }
+        public bool SelectAlumno()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAlumno(ci);
+        }
+        public bool SelectDocente()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectDocente(ci);
+        }
+        public bool SelectAdministrador()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAdministrador(ci);
         }
     }
 }
