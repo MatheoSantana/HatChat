@@ -19,7 +19,6 @@ namespace Hatchat.Logica
         }
         public SolicitudClaseDo(DateTime fechaHora, bool pendiente, string docente)
         {
-            this.idSolicitudClaseDo = idSolicitudClaseDo;
             this.fechaHora = fechaHora;
             this.pendiente = pendiente;
             this.docente = docente;

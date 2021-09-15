@@ -17,7 +17,7 @@ namespace Hatchat.Presentacion
         {
             InitializeComponent();
             Text = "Perfil";
-            
+
             ClientSize = new Size(1280, 720);
 
             lblCambiarFoto.ForeColor = Color.Blue;
@@ -28,7 +28,7 @@ namespace Hatchat.Presentacion
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
-                pbxFotoPerfilNav.Image = Login.encontrado.FotoDePerfil;
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil blanco.png");
@@ -54,25 +54,20 @@ namespace Hatchat.Presentacion
 
             lblNombre.Text += Login.encontrado.Nombre + " " + Login.encontrado.Primer_apellido + " " + Login.encontrado.Segundo_apellido;
             lblCedula.Text += Login.encontrado.Ci;
-            pbxFoto.Image = Login.encontrado.FotoDePerfil;
+            pbxFoto.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             pbxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
             txtApodo.Text = Login.encontrado.Apodo;
             txtPassword.Text = Login.encontrado.Password;
             txtPasswordCon.Text = Login.encontrado.Password;
             cbxPregs.DropDownStyle = ComboBoxStyle.DropDownList;
-            int x = 0;
-            foreach(Logica.PreguntaSeg preg in Login.pregs)
+
+            foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
                 cbxPregs.Items.Add(preg.Pregunta);
-                if (Login.encontrado.Preguta_seguridad == preg)
-                {
-                    cbxPregs.SelectedIndex = x;
-                }
-                x++;
             }
-            
+            cbxPregs.SelectedIndex = Login.encontrado.SelectPreguntaSeguridad().Id;
             txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
-            
+
         }
 
         private void PerfilAlumno_Load(object sender, EventArgs e)
@@ -112,7 +107,7 @@ namespace Hatchat.Presentacion
         private void lblCambiarFoto_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofdFoto = new OpenFileDialog();
-            ofdFoto.Filter = "Imagenes|*.jpg; *.png; *.jpeg";
+            ofdFoto.Filter = "Imagenes|*.jpeg";
             ofdFoto.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             ofdFoto.Title = "Seleccionar imagen";
             if (ofdFoto.ShowDialog() == DialogResult.OK)
@@ -123,34 +118,22 @@ namespace Hatchat.Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            foreach (Logica.Usuario us in Login.usuarios)
-            {
-                if (us == Login.encontrado)
-                {
-                    us.Apodo = txtApodo.Text;
-                    us.Password = txtPassword.Text;
-                    us.Respuesta_seguridad = txtRespuesta.Text;
-                    int y = 0;
-                    foreach (Logica.PreguntaSeg preg in Login.pregs)
-                    {
-                        if (cbxPregs.SelectedItem.ToString()== preg.Pregunta)
-                        {
-                            us.Preguta_seguridad=preg;
-                        }
-                        y++;
-                    }
-                    us.FotoDePerfil = pbxFoto.Image;
-                    MessageBox.Show("Se cerrará la sesion para recargar los datos");
-                    Login.encontrado = null;
-                    login.Show();
-                    this.Dispose();
-                }
-            }
+            Login.encontrado.Apodo = txtApodo.Text;
+            Login.encontrado.Password = txtPassword.Text;
+            Login.encontrado.Respuesta_seguridad = txtRespuesta.Text;
+            Login.encontrado.Preguta_seguridad = cbxPregs.SelectedIndex;
+            Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
+            Login.encontrado.UpdatePerfil();
+            MessageBox.Show("Se cerrará la sesion para recargar los datos");
+            Login.encontrado = null;
+            login.Show();
+            this.Dispose();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Login.usuarios.Remove(Login.encontrado);
+            Login.encontrado.Activo = false;
+            Login.encontrado.RemoveUsuario();
             Login.encontrado = null;
             login.Show();
             this.Dispose();

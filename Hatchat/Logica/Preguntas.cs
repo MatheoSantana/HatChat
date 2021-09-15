@@ -29,5 +29,11 @@ namespace Hatchat.Logica
             set { pregSeguridad = value; }
             get { return pregSeguridad; }
         }
+
+        public List<PreguntaSeg> SelectPreguntasSeguridad()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectPreguntasSeguridad();
+        }
     }
 }

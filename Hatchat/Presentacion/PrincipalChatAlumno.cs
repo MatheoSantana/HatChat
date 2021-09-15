@@ -24,7 +24,7 @@ namespace Hatchat.Presentacion
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
-                pbxFotoPerfilNav.Image = Login.encontrado.FotoDePerfil;
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxChatNav.Image = Image.FromFile("chat blanco.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");

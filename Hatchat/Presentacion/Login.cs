@@ -27,7 +27,7 @@ namespace Hatchat.Presentacion
         string usuarioNoEncontrado;
         string contraseñaIncorrecta;
 
-        public static Logica.Usuario encontrado = null;
+        public static Logica.Usuario encontrado = new Logica.Usuario();
 
         public static string idioma;
         Font fuenteLink = new Font("Arial", 9.0f, FontStyle.Underline);
@@ -218,10 +218,6 @@ namespace Hatchat.Presentacion
             registerDocente.register = register;
             registerAlumno.login = this;
             registerAlumno.register = register;
-
-
-
-
 
         }
 

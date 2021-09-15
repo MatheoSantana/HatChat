@@ -34,7 +34,7 @@ namespace Hatchat.Presentacion
             lblTitulo.Text = "Crea tu cuenta de docente";
 
             cbxPreguntas.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Logica.PreguntaSeg preg in Login.pregs)
+            foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
                 cbxPreguntas.Items.Add(preg.Pregunta);
             }
@@ -86,14 +86,10 @@ namespace Hatchat.Presentacion
                 aceptable = false;
                 error += "\nLas contraseñas no son iguales";
             }
-            foreach (Logica.Usuario us in Login.usuarios)
+            if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
             {
-                if (us.Ci.ToString() == txtCedula.Text)
-                {
-                    aceptable = false;
-                    error += "\n\nAdvertencia: esa cedula ya esta ingresada";
-                }
-
+                aceptable = false;
+                error += "\n\nAdvertencia: esa cedula ya esta ingresada";
             }
             if (!aceptable)
             {
@@ -106,7 +102,7 @@ namespace Hatchat.Presentacion
                 doc.Primer_apellido = txtPrimerApellido.Text;
                 doc.Segundo_apellido = txtSegundoApellido.Text;
                 doc.Password = txtPassword.Text;
-                doc.Preguta_seguridad = Login.pregs[cbxPreguntas.SelectedIndex];
+                doc.Preguta_seguridad = cbxPreguntas.SelectedIndex;
                 doc.Respuesta_seguridad = txtRespuesta.Text;
                 RegisterClasesDocente registerClasesDocente = new RegisterClasesDocente();
                 this.registerClasesDocente = registerClasesDocente;

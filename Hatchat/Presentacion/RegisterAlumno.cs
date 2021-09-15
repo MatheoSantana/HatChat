@@ -31,13 +31,13 @@ namespace Hatchat.Presentacion
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
 
-            
+
             pbxVolver.SizeMode = PictureBoxSizeMode.StretchImage;
 
             lblTitulo.Text = "Crea tu cuenta de alumno";
 
             cbxPreguntas.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Logica.PreguntaSeg preg in Login.pregs)
+            foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
                 cbxPreguntas.Items.Add(preg.Pregunta);
             }
@@ -88,16 +88,15 @@ namespace Hatchat.Presentacion
                 aceptable = false;
                 error += "\nLas contraseñas no son iguales";
             }
-            
-            foreach (Logica.Usuario us in Login.usuarios)
-            {
-                if (us.Ci.ToString() == txtCedula.Text)
-                {
-                    aceptable = false;
-                    error += "\n\nAdvertencia: esa cedula ya esta ingresada";
-                }
 
+
+            if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
+            {
+                aceptable = false;
+                error += "\n\nAdvertencia: esa cedula ya esta ingresada";
             }
+
+
             if (!aceptable)
             {
                 MessageBox.Show(error);
@@ -109,7 +108,7 @@ namespace Hatchat.Presentacion
                 alu.Primer_apellido = txtPrimerApellido.Text;
                 alu.Segundo_apellido = txtSegundoApellido.Text;
                 alu.Password = txtPassword.Text;
-                alu.Preguta_seguridad = Login.pregs[cbxPreguntas.SelectedIndex];
+                alu.Preguta_seguridad = cbxPreguntas.SelectedIndex;
                 alu.Respuesta_seguridad = txtRespuesta.Text;
                 RegisterClasesAlumno registerClasesAlumno = new RegisterClasesAlumno();
                 this.registerClasesAlumno = registerClasesAlumno;
@@ -131,6 +130,6 @@ namespace Hatchat.Presentacion
             this.Hide();
         }
 
-        
+
     }
 }

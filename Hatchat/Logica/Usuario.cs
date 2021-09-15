@@ -108,8 +108,37 @@ namespace Hatchat.Logica
         }
         public Image ByteArrayToImage(byte[] byteArrayIn)
         {
-            MemoryStream ms = new MemoryStream(byteArrayIn);
-            return Image.FromStream(ms);
+            if (!(byteArrayIn == null))
+            {
+                MemoryStream ms = new MemoryStream(byteArrayIn);
+                return Image.FromStream(ms);
+            }
+            else
+            {
+                if (SelectAdministrador())
+                {
+                    Image nueva = Image.FromFile("/Administrador.png");
+                    fotoDePerfil=ImageToByteArray(nueva);
+                    return nueva;
+                }else if (SelectAlumno())
+                {
+                    Image nueva = Image.FromFile("/Alumno.png");
+                    fotoDePerfil = ImageToByteArray(nueva);
+                    return nueva;
+                }
+                else if (SelectDocente())
+                {
+                    Image nueva = Image.FromFile("/Docente.png");
+                    fotoDePerfil = ImageToByteArray(nueva);
+                    return nueva;
+                }
+                else
+                {
+                    Image nueva = Image.FromFile("/Logo Nombre.png");
+                    fotoDePerfil = ImageToByteArray(nueva);
+                    return nueva;
+                }
+            }
         }
 
         public byte[] ImageToByteArray(Image imageIn)
@@ -120,7 +149,7 @@ namespace Hatchat.Logica
         }
         public bool VerficarCedula(string ci)
         {
-            
+
             int[] nCedula = new int[8];
             int guion = 0;
             int aux = 0;
@@ -159,6 +188,11 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectUsuarioCi(ci);
         }
+        public bool ExisteUsuarioCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.ExisteUsuarioCi(ci);
+        }
         public bool SelectAlumno()
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
@@ -174,5 +208,22 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAdministrador(ci);
         }
+        public PreguntaSeg SelectPreguntaSeguridad()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectPreguntaSeguridad(ci, pregunta_seguridad);
+        }
+        public void UpdatePerfil()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.UpdatePerfil(this);
+        }
+        public void RemoveUsuario()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.RemoveUsuario(ci);
+        }
+
+        
     }
 }
