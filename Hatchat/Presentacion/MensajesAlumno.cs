@@ -16,7 +16,7 @@ namespace Hatchat.Presentacion
         public Form perfilAlumno;
         public Form principalChatAlumno;
         int y = 50;
-        Persistencia.Conexion conexion;
+        
         public MensajesAlumno()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace Hatchat.Presentacion
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             try
             {
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje blanco.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
@@ -58,13 +58,8 @@ namespace Hatchat.Presentacion
 
 
             cbxDestinatario.DropDownStyle = ComboBoxStyle.DropDownList;
-            conexion = new Persistencia.Conexion();
-            docentes = conexion.SelectDocentesDictandoAAlumno(Login.encontrado.Ci);
-            foreach (Logica.Docente doc in docentes)
-            {
-
-                cbxDestinatario.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
-            }
+            
+            
 
             CargarMensajes();
         }
@@ -108,9 +103,21 @@ namespace Hatchat.Presentacion
             lblHoraDocente.Text = "Hora:";
             rtbxRespuestaDocecnte.Text = "";
 
-            Logica.Mensaje men = null;
+            Logica.Mensaje men = new Logica.Mensaje();
             men = men.SelectAbrirMensaje(((Label)sender).Name);
-            Logica.Docente docente = (Logica.Docente)new Logica.Docente().SelectUsuarioCi(men.Docente);
+            Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+            Logica.Docente docente = new Logica.Docente();
+
+            docente.Ci = usuario.Ci;
+            docente.Apodo = usuario.Apodo;
+            docente.Nombre = usuario.Nombre;
+            docente.Primer_apellido = usuario.Primer_apellido;
+            docente.Segundo_apellido = usuario.Segundo_apellido;
+            if (!(usuario.FotoDePerfil == null))
+            {
+                docente.FotoDePerfil = usuario.FotoDePerfil;
+            }
+            docente.Activo = usuario.Activo;
 
             panelContenedor.Visible = true;
             lblNombreDocente.Text += ("\n" + docente.Nombre + " " + docente.Primer_apellido);
@@ -122,9 +129,11 @@ namespace Hatchat.Presentacion
             rtbxMensajeEnviado.Text = men.MensajeAlumno;
             pbxAlumno.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             pbxDocente.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
-
-            lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
-            lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
+            if (!(men.Estado == "realizado"))
+            {
+                lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
+                lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
+            }
             rtbxRespuestaDocecnte.Text = men.MensajeDocente;
 
         }
@@ -156,7 +165,7 @@ namespace Hatchat.Presentacion
             DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
-                Login.encontrado = null;
+                Login.encontrado = new Logica.Usuario();
                 login.Show();
                 this.Dispose();
             }
@@ -172,7 +181,21 @@ namespace Hatchat.Presentacion
             mensajes = mensajes = new Logica.Mensaje().SelectCargarMensajesAl(Login.encontrado.Ci);
             foreach (Logica.Mensaje men in mensajes)
             {
-                Logica.Docente docente = (Logica.Docente)new Logica.Docente().SelectUsuarioCi(men.Docente);
+                
+                Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+                Logica.Docente docente = new Logica.Docente();
+
+                docente.Ci = usuario.Ci;
+                docente.Apodo = usuario.Apodo;
+                docente.Nombre = usuario.Nombre;
+                docente.Primer_apellido = usuario.Primer_apellido;
+                docente.Segundo_apellido = usuario.Segundo_apellido;
+                if (!(usuario.FotoDePerfil == null))
+                {
+                    docente.FotoDePerfil = usuario.FotoDePerfil;
+                }
+                docente.Activo = usuario.Activo;
+
                 Label dina = new Label();
                 dina.Height = 46;
                 dina.Width = 150;
@@ -199,7 +222,7 @@ namespace Hatchat.Presentacion
 
         private void btnNuevoChat_Click(object sender, EventArgs e)
         {
-            docentes = conexion.SelectDocentesDictandoAAlumno(Login.encontrado.Ci);
+            docentes = new Logica.Docente().SelectDocentesDictandoAAlumno(Login.encontrado.Ci);
             foreach (Logica.Docente doc in docentes)
             {
                 cbxDestinatario.Items.Add(doc.Nombre + " " + doc.Primer_apellido);

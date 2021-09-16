@@ -25,7 +25,7 @@ namespace Hatchat.Presentacion
                 pbxAlumno.Image = Image.FromFile("boton alumno.png");
                 pbxDocente.Image = Image.FromFile("boton docente.png");
                 pbxLogin.Image = Image.FromFile("volver.png");
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
             }
             catch (System.IO.FileNotFoundException ex)
             {

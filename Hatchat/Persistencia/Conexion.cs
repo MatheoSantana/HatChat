@@ -15,19 +15,20 @@ namespace Hatchat.Persistencia
 {
     public class Conexion
     {
-        
+
         static string server = "Server = localhost; ";
         static string port = "Port = 3306; ";
         static string database = "Database = Hatchat; ";
         static string uid = "Uid = root; ";
         static string pwd = "Pwd = math2002;";
-        static string connection = server+port+database+uid+pwd;
+        static string connection = server + port + database + uid + pwd;
         //inserts
         public void AltaUsuario(Usuario usuario)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "'," + usuario.FotoDePerfil + "," + usuario.Activo + "," + usuario.Preguta_seguridad + ");", conexion);
+            MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + usuario.Activo + "," + usuario.Preguta_seguridad + ");", conexion);
+            insertUsuario.Parameters.AddWithValue("imagen", usuario.FotoDePerfil);
             MySqlCommand insertHijo = new MySqlCommand("insert into " + usuario.GetType().Name + " values('" + usuario.Ci + "');", conexion);
             insertUsuario.ExecuteNonQuery();
             insertHijo.ExecuteNonQuery();
@@ -37,7 +38,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into solicitudClaseAl (fechaHora,pendiente,alumno) values('" + soli.FechaHora.ToString("YYYY") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.Pendiente + ",'" + soli.Alumno + "');", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into solicitudClaseAl (fechaHora,pendiente,alumno) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.Pendiente + ",'" + soli.Alumno + "');", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
         }
@@ -63,7 +64,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into SolicitudClaseDo (fechaHora,pendiente,docente) values('" + soli.FechaHora.ToString("YYYY") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.Pendiente + ",'" + soli.Docente + "');", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into SolicitudClaseDo (fechaHora,pendiente,docente) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.Pendiente + ",'" + soli.Docente + "');", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
         }
@@ -89,7 +90,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            string fechahora = mensaje.FechaHoraAlumno.ToString("YYYY") + "-" + mensaje.FechaHoraAlumno.ToString("MM") + "-" + mensaje.FechaHoraAlumno.ToString("dd") + "T" + mensaje.FechaHoraAlumno.ToString("HH") + ":" + mensaje.FechaHoraAlumno.ToString("mm") + ":" + mensaje.FechaHoraAlumno.ToString("ss");
+            string fechahora = mensaje.FechaHoraAlumno.ToString("yyyy") + "-" + mensaje.FechaHoraAlumno.ToString("MM") + "-" + mensaje.FechaHoraAlumno.ToString("dd") + "T" + mensaje.FechaHoraAlumno.ToString("HH") + ":" + mensaje.FechaHoraAlumno.ToString("mm") + ":" + mensaje.FechaHoraAlumno.ToString("ss");
             MySqlCommand insert = new MySqlCommand("insert into Mensaje (docente,alumno,fechaHora,mensajeAlumno,estado,asunto) values('" + mensaje.Docente + "','" + mensaje.Alumno + "','" + fechahora + "','" + mensaje.MensajeAlumno + "','" + mensaje.Estado + "','" + mensaje.Asunto + "');", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
@@ -98,9 +99,9 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            string fechahora = mensaje.FechaHoraAlumno.ToString("YYYY") + "-" + mensaje.FechaHoraAlumno.ToString("MM") + "-" + mensaje.FechaHoraAlumno.ToString("dd") + "T" + mensaje.FechaHoraAlumno.ToString("HH") + ":" + mensaje.FechaHoraAlumno.ToString("mm") + ":" + mensaje.FechaHoraAlumno.ToString("ss");
-            string fechaHoraDocente = mensaje.FechaHoraDocente.ToString("YYYY") + "-" + mensaje.FechaHoraDocente.ToString("MM") + "-" + mensaje.FechaHoraDocente.ToString("dd") + "T" + mensaje.FechaHoraDocente.ToString("HH") + ":" + mensaje.FechaHoraDocente.ToString("mm") + ":" + mensaje.FechaHoraDocente.ToString("ss");
-            MySqlCommand updateRespuesta = new MySqlCommand("update Mensaje set mensajeDocente ='"+mensaje.MensajeDocente+ "' where alumno='"+mensaje.Alumno+ "' and fechaHora='"+fechahora+"' ;", conexion);
+            string fechahora = mensaje.FechaHoraAlumno.ToString("yyyy") + "-" + mensaje.FechaHoraAlumno.ToString("MM") + "-" + mensaje.FechaHoraAlumno.ToString("dd") + "T" + mensaje.FechaHoraAlumno.ToString("HH") + ":" + mensaje.FechaHoraAlumno.ToString("mm") + ":" + mensaje.FechaHoraAlumno.ToString("ss");
+            string fechaHoraDocente = mensaje.FechaHoraDocente.ToString("yyyy") + "-" + mensaje.FechaHoraDocente.ToString("MM") + "-" + mensaje.FechaHoraDocente.ToString("dd") + "T" + mensaje.FechaHoraDocente.ToString("HH") + ":" + mensaje.FechaHoraDocente.ToString("mm") + ":" + mensaje.FechaHoraDocente.ToString("ss");
+            MySqlCommand updateRespuesta = new MySqlCommand("update Mensaje set mensajeDocente ='" + mensaje.MensajeDocente + "' where alumno='" + mensaje.Alumno + "' and fechaHora='" + fechahora + "' ;", conexion);
             MySqlCommand updateFechaDocente = new MySqlCommand("update Mensaje set fechaHoraDocente ='" + fechaHoraDocente + "' where alumno='" + mensaje.Alumno + "' and fechaHora='" + fechahora + "' ;", conexion);
             MySqlCommand updateEstado = new MySqlCommand("update Mensaje set estado ='" + mensaje.Estado + "' where alumno='" + mensaje.Alumno + "' and fechaHora='" + fechahora + "' ;", conexion);
             updateRespuesta.ExecuteNonQuery();
@@ -115,8 +116,8 @@ namespace Hatchat.Persistencia
         //login
         public Usuario SelectUsuarioCi(string ci)
         {
-            Usuario us = null;
-            MySqlDataReader reader = null;
+            Usuario us = new Usuario();
+            MySqlDataReader reader;
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             string query = "select * from Usuario where ci='" + ci + "';";
@@ -124,12 +125,11 @@ namespace Hatchat.Persistencia
             reader = select.ExecuteReader();
             if (reader.HasRows)
             {
-                us = new Usuario();
                 while (reader.Read())
                 {
-                    
                     us.Ci = reader.GetString("ci");
                     us.Apodo = reader.GetString("apodo");
+                    us.Nombre = reader.GetString("nombre");
                     us.Password = reader.GetString(3);
                     us.Primer_apellido = reader.GetString("apellido");
                     us.Segundo_apellido = reader.GetString("segApellido");
@@ -213,10 +213,16 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            MySqlCommand select = new MySqlCommand("select idSolicitudClaseDo from SolicitudClaseAl where fechaHora='" + soli.FechaHora.ToString("YYYY") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "' and docente='" + soli.Docente + "';", conexion);
+            MySqlCommand select = new MySqlCommand("select idSolicitudClaseDo from SolicitudClaseDo where fechaHora='" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "' and docente='" + soli.Docente + "';", conexion);
             reader = select.ExecuteReader();
-            int id;
-            id = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+            int id=0;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader.GetString("idSolicitudClaseDo"));
+                }
+            }
             conexion.Close();
             return id;
         }
@@ -242,10 +248,16 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            MySqlCommand select = new MySqlCommand("select idSolicitudClaseAl from SolicitudClaseAl where fechaHora='" + soli.FechaHora.ToString("YYYY") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "' and alumno='" + soli.Alumno + "';", conexion);
+            MySqlCommand select = new MySqlCommand("select idSolicitudClaseAl from SolicitudClaseAl where fechaHora='" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "' and alumno='" + soli.Alumno + "';", conexion);
             reader = select.ExecuteReader();
-            int id;
-            id = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+            int id=0;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+                }
+            }
             conexion.Close();
             return id;
         }
@@ -266,7 +278,18 @@ namespace Hatchat.Persistencia
 
             for (int x = 0; x < data.Rows.Count; x++)
             {
-                docentes.Add(new Docente(data.Rows[x][0].ToString(), data.Rows[x][1].ToString(), data.Rows[x][2].ToString(), data.Rows[x][3].ToString(), (byte[])data.Rows[x][4], data.Rows[x][5].ToString(), (bool)data.Rows[x][6]));
+                Docente doc = new Docente();
+                doc.Ci = data.Rows[x][0].ToString();
+                doc.Nombre = data.Rows[x][1].ToString();
+                doc.Primer_apellido = data.Rows[x][2].ToString();
+                doc.Segundo_apellido = data.Rows[x][3].ToString();
+                if (!(data.Rows[x][4].ToString() == ""))
+                {
+                    doc.FotoDePerfil = (byte[])data.Rows[x][4];
+                }
+                doc.Apodo = data.Rows[x][5].ToString();
+                doc.Activo = (bool)data.Rows[x][6];
+                docentes.Add(doc);
             }
 
             conexion.Close();
@@ -275,7 +298,7 @@ namespace Hatchat.Persistencia
 
         public Mensaje SelectAbrirMensaje(int idMensaje)
         {
-            Mensaje mensaje = null;
+            Mensaje mensaje = new Mensaje();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
@@ -283,15 +306,21 @@ namespace Hatchat.Persistencia
             reader = select.ExecuteReader();
             if (reader.HasRows)
             {
-                mensaje.IdMensaje = Convert.ToInt32(reader.GetString("idMensaje"));
-                mensaje.Docente = reader.GetString("docente");
-                mensaje.Alumno = reader.GetString("alumno");
-                mensaje.FechaHoraAlumno = mensaje.StringADateTime(reader.GetString("fechaHora"));
-                mensaje.MensajeAlumno = reader.GetString("mensajeAlumno");
-                mensaje.Estado = reader.GetString("estado");
-                mensaje.Asunto = reader.GetString("asunto");
-                mensaje.MensajeDocente = reader.GetString("mensajeDocente");
-                mensaje.FechaHoraDocente = mensaje.StringADateTime(reader.GetString("fechaHoraDocente"));
+                while (reader.Read())
+                {
+                    mensaje.IdMensaje = Convert.ToInt32(reader.GetString("idMensaje"));
+                    mensaje.Docente = reader.GetString("docente");
+                    mensaje.Alumno = reader.GetString("alumno");
+                    mensaje.FechaHoraAlumno = mensaje.StringADateTime(reader.GetString("fechaHora"));
+                    mensaje.MensajeAlumno = reader.GetString("mensajeAlumno");
+                    mensaje.Estado = reader.GetString("estado");
+                    mensaje.Asunto = reader.GetString("asunto");
+                    try 
+                    {
+                        mensaje.MensajeDocente = reader.GetString("mensajeDocente");
+                        mensaje.FechaHoraDocente = mensaje.StringADateTime(reader.GetString("fechaHoraDocente"));
+                    }catch(Exception ex) { }
+                }
             }
 
             conexion.Close();
@@ -306,21 +335,29 @@ namespace Hatchat.Persistencia
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
-            Mensaje[] mensajs = new Mensaje[data.Rows.Count];
+
+
             for (int x = 0; x < data.Rows.Count; x++)
             {
-                mensajs[x].IdMensaje = Convert.ToInt32(data.Rows[x][0].ToString());
-                mensajs[x].Docente = data.Rows[x][1].ToString();
-                mensajs[x].Alumno = data.Rows[x][2].ToString();
-                mensajs[x].FechaHoraAlumno = mensajs[x].StringADateTime(data.Rows[x][3].ToString());
-                mensajs[x].MensajeAlumno = data.Rows[x][4].ToString();
-                mensajs[x].Estado = data.Rows[x][5].ToString();
-                mensajs[x].Asunto = data.Rows[x][6].ToString();
-                mensajs[x].MensajeDocente = data.Rows[x][7].ToString();
-                mensajs[x].FechaHoraDocente = mensajs[x].StringADateTime(data.Rows[x][8].ToString());
+                Mensaje mensaje = new Mensaje();
+
+                mensaje.IdMensaje = Convert.ToInt32(data.Rows[x][0].ToString());
+                mensaje.Docente = data.Rows[x][1].ToString();
+                mensaje.Alumno = data.Rows[x][2].ToString();
+                mensaje.FechaHoraAlumno = mensaje.StringADateTime(data.Rows[x][3].ToString());
+                mensaje.MensajeAlumno = data.Rows[x][4].ToString();
+                mensaje.Estado = data.Rows[x][5].ToString();
+                mensaje.Asunto = data.Rows[x][6].ToString();
+                if (!(data.Rows[x][8].ToString() == ""))
+                {
+                    mensaje.MensajeDocente = data.Rows[x][7].ToString();
+                    mensaje.FechaHoraDocente = mensaje.StringADateTime(data.Rows[x][8].ToString());
+                }
+                
+                mensajes.Insert(0,mensaje);
             }
 
-            mensajes.AddRange(mensajs);
+
 
             conexion.Close();
             return mensajes;
@@ -340,20 +377,25 @@ namespace Hatchat.Persistencia
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
-            Mensaje[] mensajs = new Mensaje[data.Rows.Count];
+            
             for (int x = 0; x < data.Rows.Count; x++)
             {
-                mensajs[x].IdMensaje = Convert.ToInt32(data.Rows[x][0].ToString());
-                mensajs[x].Docente = data.Rows[x][1].ToString();
-                mensajs[x].Alumno = data.Rows[x][2].ToString();
-                mensajs[x].FechaHoraAlumno = mensajs[x].StringADateTime(data.Rows[x][3].ToString());
-                mensajs[x].MensajeAlumno = data.Rows[x][4].ToString();
-                mensajs[x].Estado = data.Rows[x][5].ToString();
-                mensajs[x].Asunto = data.Rows[x][6].ToString();
-                mensajs[x].MensajeDocente = data.Rows[x][7].ToString();
-                mensajs[x].FechaHoraDocente = mensajs[x].StringADateTime(data.Rows[x][8].ToString());
+                Mensaje mensaje = new Mensaje();
+                mensaje.IdMensaje = Convert.ToInt32(data.Rows[x][0].ToString());
+                mensaje.Docente = data.Rows[x][1].ToString();
+                mensaje.Alumno = data.Rows[x][2].ToString();
+                mensaje.FechaHoraAlumno = mensaje.StringADateTime(data.Rows[x][3].ToString());
+                mensaje.MensajeAlumno = data.Rows[x][4].ToString();
+                mensaje.Estado = data.Rows[x][5].ToString();
+                mensaje.Asunto = data.Rows[x][6].ToString();
+                mensaje.MensajeDocente = data.Rows[x][7].ToString();
+                if (!(data.Rows[x][8].ToString() == ""))
+                {
+                    mensaje.FechaHoraDocente = mensaje.StringADateTime(data.Rows[x][8].ToString());
+                }
+                mensajes.Add(mensaje);
             }
-            mensajes.AddRange(mensajs);
+            
 
             conexion.Close();
             return mensajes;
@@ -373,7 +415,12 @@ namespace Hatchat.Persistencia
             adapter.Fill(data);
             for (int x = 0; x < data.Rows.Count; x++)
             {
-                orientaciones.Add(new Orientacion(Convert.ToInt32(data.Rows[x][0].ToString()), data.Rows[x][1].ToString(), (bool)data.Rows[x][2]));
+
+                if (data.Rows[x][2].ToString() == "True")
+                {
+                    orientaciones.Add(new Orientacion(Convert.ToInt32(data.Rows[x][0].ToString()), data.Rows[x][1].ToString(), true));
+                }
+                
             }
             conexion.Close();
             return orientaciones;
@@ -381,17 +428,17 @@ namespace Hatchat.Persistencia
 
         public int[] selectAnioClasesPorOrientacion(int orientacion)
         {
-            
+
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Clase.anio from Clase, Orientacion where Orientacion.id=Clase.orientacion and Orientacion.id="+orientacion+ " group by Clase.anio order by Clase.anio;", conexion);
+            MySqlCommand select = new MySqlCommand("select Clase.anio from Clase, Orientacion where Orientacion.id=Clase.orientacion and Orientacion.id=" + orientacion + " group by Clase.anio order by Clase.anio;", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
             int[] anios = new int[data.Rows.Count];
             for (int x = 0; x < data.Rows.Count; x++)
             {
-                anios[x]=Convert.ToInt32(data.Rows[x][0]);
+                anios[x] = Convert.ToInt32(data.Rows[x][0]);
             }
             conexion.Close();
 
@@ -402,7 +449,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Clase.nombre from Clase, Orientacion where Orientacion.id=Clase.orientacion and Orientacion.id=" + orientacion + " and Clase.anio="+anio+" order by Clase.nombre;", conexion);
+            MySqlCommand select = new MySqlCommand("select Clase.nombre from Clase, Orientacion where Orientacion.id=Clase.orientacion and Orientacion.id=" + orientacion + " and Clase.anio=" + anio + " order by Clase.nombre;", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -419,10 +466,16 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            MySqlCommand select = new MySqlCommand("select idClase from Clase where nombre='" + nombre+ "' and anio="+anio+ " and Orientacion.id="+orientacion+";", conexion);
+            MySqlCommand select = new MySqlCommand("select idClase from Clase where nombre='" + nombre + "' and anio=" + anio + " and orientacion=" + orientacion + ";", conexion);
             reader = select.ExecuteReader();
-            int id;
-            id = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+            int id=0;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader.GetString("idClase"));
+                }
+            }
             conexion.Close();
             return id;
         }
@@ -430,7 +483,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Asignatura.id, Asignatura.nombre, Asignatura.anio, Asignatura.activo from Asignatura, Contiene, Orientacion, Clase where Clase.orientacion=Orientacion.id and Orientacion.id=Contiene.idOri and Contiene.idAsig=Asignatura.id and Orientacion.id=" + orientacion+" and Clase.nombre='"+clase+"' and Clase.anio="+anio+";", conexion);
+            MySqlCommand select = new MySqlCommand("select Asignatura.id, Asignatura.nombre, Asignatura.anio, Asignatura.activo from Asignatura, Contiene, Orientacion, Clase where Clase.orientacion=Orientacion.id and Orientacion.id=Contiene.idOri and Contiene.idAsig=Asignatura.id and Orientacion.id=" + orientacion + " and Clase.nombre='" + clase + "' and Clase.anio=" + anio + ";", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -468,7 +521,15 @@ namespace Hatchat.Persistencia
             MySqlDataReader reader = null;
             MySqlCommand select = new MySqlCommand("select PreguntaSeguridad.id, PreguntaSeguridad.pregSeguridad from PreguntaSeguridad, Usuario where Usuario.ci='" + ci + "' and Usuario.id=PreguntaSeguridad.id and Usuario.id=" + id + ";", conexion);
             reader = select.ExecuteReader();
-            PreguntaSeg preg = new PreguntaSeg(Convert.ToInt32(reader.GetString("id")), reader.GetString("pregSeguridad"));
+            PreguntaSeg preg = new PreguntaSeg(); ;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    preg = new PreguntaSeg(Convert.ToInt32(reader.GetString("id")), reader.GetString("pregSeguridad"));
+                }
+            }
+            
             conexion.Close();
             return preg;
         }
@@ -476,8 +537,8 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            
-            MySqlCommand Remove = new MySqlCommand("update Usuario set activo =false where ci='"+ci+"' ;", conexion);
+
+            MySqlCommand Remove = new MySqlCommand("update Usuario set activo =false where ci='" + ci + "' ;", conexion);
             Remove.ExecuteNonQuery();
             conexion.Close();
         }
@@ -485,11 +546,12 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateApodo = new MySqlCommand("update Usuario set apodo ='" + us.Apodo+"' where ci='"+us.Ci+ "' ;", conexion);
+            MySqlCommand updateApodo = new MySqlCommand("update Usuario set apodo ='" + us.Apodo + "' where ci='" + us.Ci + "' ;", conexion);
             MySqlCommand updatePassword = new MySqlCommand("update Usuario set contraseña ='" + us.Password + "' where ci='" + us.Ci + "' ;", conexion);
             MySqlCommand updateRespuesta = new MySqlCommand("update Usuario set resSeguridad ='" + us.Respuesta_seguridad + "' where ci='" + us.Ci + "' ;", conexion);
             MySqlCommand updatePregunta = new MySqlCommand("update Usuario set id =" + us.Preguta_seguridad + " where ci='" + us.Ci + "' ;", conexion);
-            MySqlCommand updateFoto = new MySqlCommand("update Usuario set foto =" + us.FotoDePerfil + " where ci='" + us.Ci + "' ;", conexion);
+            MySqlCommand updateFoto = new MySqlCommand("update Usuario set foto =@imagen where ci='" + us.Ci + "' ;", conexion);
+            updateFoto.Parameters.AddWithValue("imagen", us.FotoDePerfil);
             updateRespuesta.ExecuteNonQuery();
             updateApodo.ExecuteNonQuery();
             updatePassword.ExecuteNonQuery();

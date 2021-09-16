@@ -75,3 +75,17 @@ C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\bin\Debug\K4os.Has
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\bin\Debug\System.Numerics.Vectors.dll
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\bin\Debug\MySql.Data.xml
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\SegundaEntrega\Hatchat\obj\Debug\Hatchat.csproj.CopyComplete
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\MySql.Data.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\Google.Protobuf.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\Zstandard.Net.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\System.Memory.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\System.Buffers.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\MySql.Data.xml
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.csproj.CopyComplete

@@ -105,34 +105,37 @@ namespace Hatchat.Logica
         public DateTime StringADateTime(string fechaHora)
         {
             char[] dateTime= fechaHora.ToCharArray();
+            
             string year = "", month = "", day = "", minute = "", hour = "", second = "";
             for(int x = 0; x < dateTime.Length; x++)
             {
-                if(x>=0 && x <= 3)
+                if((x==0 || x == 1) && (fechaHora[x] != ':' && fechaHora[x] !=' ' && fechaHora[x]!='/'))
                 {
-                    year += fechaHora[x];
-                }else if(x==5 || x == 6)
+                    day += fechaHora[x];
+                    
+                }else if(x==3 || x == 4 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
                     month += fechaHora[x];
                 }
-                else if (x == 8 || x == 9)
+                else if (x >= 6 && x <= 9 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
-                    day += fechaHora[x];
+                    year += fechaHora[x];
                 }
-                else if (x == 11 || x == 12)
+                else if (x == 11 || x == 12 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
                     hour += fechaHora[x];
                 }
-                else if (x == 14 || x == 15)
+                else if (x == 14 || x == 15 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
                     minute += fechaHora[x];
                 }
-                else if (x == 17 || x == 18)
+                else if (x == 17 || x == 18 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
                     second += fechaHora[x];
                 }
                 
             }
+            
             DateTime fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
             return fh;
         }

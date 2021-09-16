@@ -40,7 +40,7 @@ namespace Hatchat.Presentacion
             Text = "Login";
             try
             {
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 fotoEspanol = Image.FromFile("español chiquito.png");
                 fotoIngles = Image.FromFile("ingles chiquito.png");
             }
@@ -123,9 +123,9 @@ namespace Hatchat.Presentacion
 
             encontrado = encontrado.SelectUsuarioCi(txtCedula.Text);
             
-            if (encontrado != null)
+            if (encontrado.Ci != "")
             {
-                if (encontrado.Password.ToString() == txtPassword.Text)
+                if (encontrado.Password == txtPassword.Text)
                 {
                     if (encontrado.SelectDocente())
                     {

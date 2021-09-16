@@ -117,24 +117,24 @@ namespace Hatchat.Logica
             {
                 if (SelectAdministrador())
                 {
-                    Image nueva = Image.FromFile("/Administrador.png");
+                    Image nueva = Image.FromFile("Administrador.png");
                     fotoDePerfil=ImageToByteArray(nueva);
                     return nueva;
                 }else if (SelectAlumno())
                 {
-                    Image nueva = Image.FromFile("/Alumno.png");
+                    Image nueva = Image.FromFile("Alumno.png");
                     fotoDePerfil = ImageToByteArray(nueva);
                     return nueva;
                 }
                 else if (SelectDocente())
                 {
-                    Image nueva = Image.FromFile("/Docente.png");
+                    Image nueva = Image.FromFile("Docente.png");
                     fotoDePerfil = ImageToByteArray(nueva);
                     return nueva;
                 }
                 else
                 {
-                    Image nueva = Image.FromFile("/Logo Nombre.png");
+                    Image nueva = Image.FromFile("Logo Nombre.png");
                     fotoDePerfil = ImageToByteArray(nueva);
                     return nueva;
                 }
@@ -149,15 +149,20 @@ namespace Hatchat.Logica
         }
         public bool VerficarCedula(string ci)
         {
-
             int[] nCedula = new int[8];
+            int[] numerosVer = { 2,9,8,7,6,3,4 };
             int guion = 0;
             int aux = 0;
             int suma = 0;
-            for (int x = 0; x < nCedula.Length; x++)
+            string pe = "";
+            for (int x = 0; x < 8; x++)
             {
-                nCedula[x] = Convert.ToInt32(ci[x]);
-                suma += (nCedula[x] * nCedula[x]);
+                pe = ci[x].ToString();
+                nCedula[x] = Convert.ToInt32(pe);
+                if (x < 7)
+                {
+                    suma += (nCedula[x] * numerosVer[x]);
+                }
             }
             for (int i = 0; i < 10; i++)
             {
@@ -224,6 +229,10 @@ namespace Hatchat.Logica
             conexion.RemoveUsuario(ci);
         }
 
-        
+        public List<Logica.Docente> SelectDocentesDictandoAAlumno(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectDocentesDictandoAAlumno(ci);
+        }
     }
 }

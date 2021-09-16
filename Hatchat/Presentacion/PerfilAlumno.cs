@@ -27,7 +27,7 @@ namespace Hatchat.Presentacion
 
             try
             {
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
@@ -65,7 +65,7 @@ namespace Hatchat.Presentacion
             {
                 cbxPregs.Items.Add(preg.Pregunta);
             }
-            cbxPregs.SelectedIndex = Login.encontrado.SelectPreguntaSeguridad().Id;
+            cbxPregs.SelectedIndex = (Login.encontrado.SelectPreguntaSeguridad().Id-1);
             txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
 
         }
@@ -98,7 +98,7 @@ namespace Hatchat.Presentacion
             DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
-                Login.encontrado = null;
+                Login.encontrado = new Logica.Usuario();
                 login.Show();
                 this.Dispose();
             }
@@ -121,11 +121,11 @@ namespace Hatchat.Presentacion
             Login.encontrado.Apodo = txtApodo.Text;
             Login.encontrado.Password = txtPassword.Text;
             Login.encontrado.Respuesta_seguridad = txtRespuesta.Text;
-            Login.encontrado.Preguta_seguridad = cbxPregs.SelectedIndex;
+            Login.encontrado.Preguta_seguridad = (cbxPregs.SelectedIndex+1);
             Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
             Login.encontrado.UpdatePerfil();
             MessageBox.Show("Se cerrará la sesion para recargar los datos");
-            Login.encontrado = null;
+            Login.encontrado = new Logica.Usuario();
             login.Show();
             this.Dispose();
         }
@@ -134,7 +134,7 @@ namespace Hatchat.Presentacion
         {
             Login.encontrado.Activo = false;
             Login.encontrado.RemoveUsuario();
-            Login.encontrado = null;
+            Login.encontrado = new Logica.Usuario();
             login.Show();
             this.Dispose();
         }

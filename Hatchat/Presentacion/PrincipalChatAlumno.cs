@@ -23,7 +23,7 @@ namespace Hatchat.Presentacion
             StartPosition = FormStartPosition.CenterScreen;
             try
             {
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxChatNav.Image = Image.FromFile("chat blanco.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
@@ -34,7 +34,7 @@ namespace Hatchat.Presentacion
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show("archivo faltante ("+ex.Message + ") comuníquese con el administrador.", "Error");
 
             }
 
@@ -81,7 +81,7 @@ namespace Hatchat.Presentacion
             DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
-                Login.encontrado = null;
+                Login.encontrado = new Logica.Usuario();
                 login.Show();
                 this.Dispose();
             }

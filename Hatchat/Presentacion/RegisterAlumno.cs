@@ -20,7 +20,7 @@ namespace Hatchat.Presentacion
             Text = "Register Alumno";
             try
             {
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxVolver.Image = Image.FromFile("volver.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -108,7 +108,7 @@ namespace Hatchat.Presentacion
                 alu.Primer_apellido = txtPrimerApellido.Text;
                 alu.Segundo_apellido = txtSegundoApellido.Text;
                 alu.Password = txtPassword.Text;
-                alu.Preguta_seguridad = cbxPreguntas.SelectedIndex;
+                alu.Preguta_seguridad = (cbxPreguntas.SelectedIndex+1);
                 alu.Respuesta_seguridad = txtRespuesta.Text;
                 RegisterClasesAlumno registerClasesAlumno = new RegisterClasesAlumno();
                 this.registerClasesAlumno = registerClasesAlumno;

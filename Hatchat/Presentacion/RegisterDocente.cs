@@ -17,7 +17,7 @@ namespace Hatchat.Presentacion
             Text = "Register Docente";
             try
             {
-                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxVolver.Image = Image.FromFile("volver.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -89,7 +89,7 @@ namespace Hatchat.Presentacion
             if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
             {
                 aceptable = false;
-                error += "\n\nAdvertencia: esa cedula ya esta ingresada";
+                error += "\n Esa cedula ya esta ingresada";
             }
             if (!aceptable)
             {
@@ -102,7 +102,7 @@ namespace Hatchat.Presentacion
                 doc.Primer_apellido = txtPrimerApellido.Text;
                 doc.Segundo_apellido = txtSegundoApellido.Text;
                 doc.Password = txtPassword.Text;
-                doc.Preguta_seguridad = cbxPreguntas.SelectedIndex;
+                doc.Preguta_seguridad = (cbxPreguntas.SelectedIndex+1);
                 doc.Respuesta_seguridad = txtRespuesta.Text;
                 RegisterClasesDocente registerClasesDocente = new RegisterClasesDocente();
                 this.registerClasesDocente = registerClasesDocente;

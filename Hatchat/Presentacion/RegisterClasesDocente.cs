@@ -14,13 +14,13 @@ namespace Hatchat.Presentacion
         public Form registerDocente;
         private int ychbx = 50, xchbx = 50, xlbl=50, ylbl=50;
 
-        private Logica.Clase claseSeleccionada = null;
+        private Logica.Clase claseSeleccionada = new Logica.Clase();
         private List<Logica.ClaseSolicitudClaseDo> solicitudClases = new List<Logica.ClaseSolicitudClaseDo>();
         private List<Logica.Asignatura> asigs = new List<Logica.Asignatura>();
         private List<Logica.AsignaturaSolicitudClaseDo> soliAsigs = new List<Logica.AsignaturaSolicitudClaseDo>();
         private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
         private Logica.Docente docente = new Logica.Docente();
-        private Logica.Orientacion orientacionSeleccionada = null;
+        private Logica.Orientacion orientacionSeleccionada = new Logica.Orientacion();
         public RegisterClasesDocente()
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace Hatchat.Presentacion
             lblTitulo.Text = "Crea tu cuenta de docente";
             try
             {
-                Icon = new Icon(Application.StartupPath + "logo imagen.ico");
+                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
                 pbxVolver.Image = Image.FromFile("volver.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -128,7 +128,7 @@ namespace Hatchat.Presentacion
             }
 
 
-            MessageBox.Show("Se ha creado el alumno correctamente\nVolviendo al Login");
+            MessageBox.Show("Se ha creado el Docente correctamente\nVolviendo al Login");
             login.Show();
             this.Dispose();
         }
@@ -241,8 +241,8 @@ namespace Hatchat.Presentacion
                 cbxAnio.Items.Clear();
                 cbxClases.Items.Clear();
                 solicitudClases.Add(claseSolicitudClaseDo);
-                claseSeleccionada = null;
-                orientacionSeleccionada = null;
+                claseSeleccionada = new Logica.Clase();
+                orientacionSeleccionada = new Logica.Orientacion();
             }
 
         }
