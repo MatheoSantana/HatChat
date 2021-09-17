@@ -58,5 +58,10 @@ namespace Hatchat.Logica
             get { return dictando; }
             set { dictando = value; }
         }
+        public string SelectCiPorAsignaturaDictadaYClase(string asignatura, int clase)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectCiPorAsignaturaDictadaYClase(asignatura, clase);
+        }
     }
 }

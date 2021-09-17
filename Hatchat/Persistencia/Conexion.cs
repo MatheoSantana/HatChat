@@ -582,5 +582,230 @@ namespace Hatchat.Persistencia
         }
 
         //register
+
+        //chats
+        
+        public List<Chat> SelectChatsActivosPorCedula(string ci)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Chat.idChat, Chat.idClase, Chat.oriClase, Chat.asignatura, Chat.fecha, Chat.horaInico, Chat.horaFin, Chat.titulo, Chat.activo from Chat, SolicitaChat where SolicitaChat.ciAlumno='" + ci+"'; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            List<Chat> chats = new List<Chat>();
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Chat chat = new Chat();
+
+                chat.IdChat = Convert.ToInt32(data.Rows[x][0].ToString());
+                chat.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                chat.OriClase = Convert.ToInt32(data.Rows[x][2].ToString());
+                chat.Asignatura = data.Rows[x][3].ToString();
+                chat.Fecha = chat.StringADateTime(data.Rows[x][4].ToString());
+                chat.HoraInicio = chat.StringADateTime(data.Rows[x][5].ToString());
+                if (!(data.Rows[x][6].ToString() == ""))
+                {
+                    chat.HoraFin = chat.StringADateTime(data.Rows[x][6].ToString());
+                }
+                chat.Titulo = data.Rows[x][7].ToString();
+                chat.Activo = false;
+                if (data.Rows[x][8].ToString() == "True")
+                {
+                    chat.Activo = true;
+                }
+                chats.Add(chat);
+            }
+            conexion.Close();
+            return chats;
+        }
+        public Asignatura SelectAsignaturaPorId(string id)
+        {
+            Asignatura encontrado = new Asignatura();
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Asignatura where id='" + id + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    encontrado.Id = reader.GetString("id");
+                    encontrado.Nombre = reader.GetString("nombre");
+                    encontrado.Anio =Convert.ToInt32(reader.GetString("anio"));
+                    encontrado.Activo = false;
+                    if (reader.GetString("activo").ToString() == "True")
+                    {
+                        encontrado.Activo = true;
+                    }
+
+                }
+            }
+            conexion.Close();
+            return encontrado;
+        }
+        public Clase SelectClasePorId(int id)
+        {
+            Clase encontrado = new Clase();
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Clase where idClase=" + id + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    encontrado.IdClase = Convert.ToInt32(reader.GetString("idClase"));
+                    encontrado.Nombre = reader.GetString("nombre");
+                    encontrado.Anio = Convert.ToInt32(reader.GetString("anio"));
+                    encontrado.Orientacion = Convert.ToInt32(reader.GetString("orientacion"));
+                    encontrado.Activo = false;
+                    try 
+                    {
+                        if (reader.GetString("activo").ToString() == "True")
+                        {
+                            encontrado.Activo = true;
+                        }
+                    }catch(Exception ex)
+                    {
+
+                    }
+                }
+            }
+            conexion.Close();
+            return encontrado;
+        }
+        public Chat SelectChatPorId(int id)
+        {
+            Chat chat = new Chat();
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from chat where idChat=" + id + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    chat.IdChat = Convert.ToInt32(reader.GetString("idChat"));
+                    chat.IdClase = Convert.ToInt32(reader.GetString("idClase"));
+                    chat.OriClase = Convert.ToInt32(reader.GetString("oriClase"));
+                    chat.Asignatura = reader.GetString("asignatura");
+                    chat.Fecha = chat.StringADateTime(reader.GetString("fecha"));
+                    chat.HoraInicio = chat.StringADateTime(reader.GetString("horaInico"));
+                    if (!(reader.GetString("horaFin") == ""))
+                    {
+                        chat.HoraFin = chat.StringADateTime(reader.GetString("horaFin"));
+                    }
+                    chat.Titulo = reader.GetString("titulo");
+                    chat.Activo = false;
+                    if (reader.GetString("activo") == "True")
+                    {
+                        chat.Activo = true;
+                    }
+                }
+            }
+            conexion.Close();
+            return chat;
+        }
+        public Agenda SelectAgendaConCi(string ci)
+        {
+            Agenda agenda = new Agenda();
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Agenda where ci='" + ci + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    agenda.IdAgenda = Convert.ToInt32(reader.GetString("idAgenda"));
+                    agenda.NomDia = reader.GetString("nomDia");
+                    agenda.HoraInicio = reader.GetString("horaInicio");
+                    agenda.HoraFin = reader.GetString("horaFin");
+                    agenda.Ci = reader.GetString("ci");
+                }
+            }
+            conexion.Close();
+            return agenda;
+        }
+
+        public string SelectCiPorAsignaturaDictadaYClase(string asignatura, int clase)
+        {
+            
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select ci from asignaturaDictada where asignaturaDictada='"+asignatura+ "' and idClase="+clase+";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            string ci = "";
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    ci = reader.GetString("ci");
+                }
+            }
+            conexion.Close();
+            return ci;
+        }
+
+        public List<ChateaAl> SelectChateaAlsPorIdChatMasFecha(int id, DateTime fecha)
+        {
+            List<ChateaAl> chateaAls = new List<ChateaAl>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from ChateaAl where idChat=" + id + " order by horaEnvioAl; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                ChateaAl chateaAl = new ChateaAl();
+
+                chateaAl.Ci = data.Rows[x][0].ToString();
+                chateaAl.IdChat = Convert.ToInt32(data.Rows[x][1].ToString());
+                Chat c = new Chat();
+                c.Fecha = fecha;
+                chateaAl.HoraEnvio = c.StringADateTime(data.Rows[x][2].ToString());
+                chateaAl.Contenido = data.Rows[x][3].ToString();
+                chateaAls.Add(chateaAl);
+            }
+            conexion.Close();
+            return chateaAls; ;
+        }
+        public List<ChateaDo> SelectChateaDosPorIdChatMasFecha(int id, DateTime fecha)
+        {
+            List<ChateaDo> chateaDos = new List<ChateaDo>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from ChateaDo where idChat=" + id + " order by horaEnvioDo; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                ChateaDo chateaDo = new ChateaDo();
+
+                chateaDo.Ci = data.Rows[x][0].ToString();
+                chateaDo.IdChat = Convert.ToInt32(data.Rows[x][1].ToString());
+                Chat c = new Chat();
+                c.Fecha = fecha;
+                chateaDo.HoraEnvio = c.StringADateTime(data.Rows[x][2].ToString());
+                chateaDo.Contenido = data.Rows[x][3].ToString();
+                chateaDos.Add(chateaDo);
+            }
+            conexion.Close();
+            return chateaDos; ;
+        }
+        //chats
     }
 }

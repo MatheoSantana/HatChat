@@ -6,57 +6,44 @@ using System.Threading.Tasks;
 
 namespace Hatchat.Logica
 {
-    class Agenda
+    public class Agenda
     {
         private String nomDia;
-        private int idClase;
-        private int orientacion;
-        private int asignaturaDictada;
-        private DateTime horaInicio;
-        private DateTime horaFin;
+        private string horaInicio;
+        private string horaFin;
         private string ci;
+        private int idAgenda;
 
         public Agenda()
         {
 
         }
 
-        public Agenda(string nomDia, int idClase, int orientacion, int asignaturaDictada, DateTime horaInicio, DateTime horaFin, string ci)
+        public Agenda(int idAgenda, string nomDia, string horaInicio, string horaFin, string ci)
         {
+            this.idAgenda = idAgenda;
             this.nomDia = nomDia;
-            this.idClase = idClase;
-            this.orientacion = orientacion;
-            this.asignaturaDictada = asignaturaDictada;
             this.horaInicio = horaInicio;
             this.horaFin = horaFin;
             this.ci = ci;
+        }
+        public int IdAgenda
+        {
+            get { return idAgenda; }
+            set { idAgenda = value; }
         }
         public string NomDia
         {
             get { return nomDia; }
             set { nomDia = value; }
         }
-        public int IdClase
-        {
-            get { return IdClase; }
-            set { IdClase = value; }
-        }
-        public int Orientacion
-        {
-            get { return orientacion; }
-            set { orientacion = value; }
-        }
-        public int AsignaturaDictada
-        {
-            get { return asignaturaDictada; }
-            set { asignaturaDictada = value; }
-        }
-        public DateTime HoraInicio
+        
+        public string HoraInicio
         {
             get { return horaInicio; }
             set { horaInicio = value; }
         }
-        public DateTime HoraFin
+        public string HoraFin
         {
             get { return horaFin; }
             set { horaFin = value; }
@@ -65,6 +52,12 @@ namespace Hatchat.Logica
         {
             get { return ci; }
             set { ci = value; }
+        }
+
+        public Agenda SelectAgendaConCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAgendaConCi(ci);
         }
     }
 }

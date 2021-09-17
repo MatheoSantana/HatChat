@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hatchat.Logica
 {
-    class Chat
+    public class Chat
     {
         private int idChat;
         private int idClase;
@@ -81,5 +81,119 @@ namespace Hatchat.Logica
             set { activo = value; }
             get { return activo; }
         }
+        public DateTime StringADateTime(string fechaHora)
+        {
+            DateTime fh=new DateTime();
+            List<char> dateTime = new List<char>(fechaHora.ToCharArray());
+            string year = "", month = "", day = "", minute = "", hour = "", second = "";
+            if (fechaHora.Length < 11)
+            {
+                if (dateTime.Contains(':'))
+                {
+                    for (int x = 0; x < fechaHora.Length; x++)
+                    {
+                        if ((x == 0 || x == 1) && (fechaHora[x] != ':'))
+                        {
+                            hour += fechaHora[x];
+
+                        }
+                        else if (x == 3 || x == 4 && (fechaHora[x] != ':'))
+                        {
+                            minute += fechaHora[x];
+                        }
+                        else if (x >= 6 && x <= 9 && (fechaHora[x] != ':'))
+                        {
+                            second += fechaHora[x];
+                        }
+
+                    }
+                    year = this.fecha.ToString("yyyy");
+                    month = this.fecha.ToString("MM");
+                    day = this.fecha.ToString("dd");
+                    fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
+                }
+                else
+                {
+                    for (int x = 0; x < fechaHora.Length; x++)
+                    {
+                        if ((x == 0 || x == 1) && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                        {
+                            day += fechaHora[x];
+
+                        }
+                        else if (x == 3 || x == 4 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                        {
+                            month += fechaHora[x];
+                        }
+                        else if (x >= 6 && x <= 9 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                        {
+                            year += fechaHora[x];
+                        }
+
+                    }
+                    fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day));
+                }
+            }
+            else
+            {
+
+                for (int x = 0; x < fechaHora.Length; x++)
+                {
+                    if ((x == 0 || x == 1) && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                    {
+                        day += fechaHora[x];
+
+                    }
+                    else if (x == 3 || x == 4 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                    {
+                        month += fechaHora[x];
+                    }
+                    else if (x >= 6 && x <= 9 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                    {
+                        year += fechaHora[x];
+                    }
+                    else if (x == 11 || x == 12 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                    {
+                        hour += fechaHora[x];
+                    }
+                    else if (x == 14 || x == 15 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                    {
+                        minute += fechaHora[x];
+                    }
+                    else if (x == 17 || x == 18 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                    {
+                        second += fechaHora[x];
+                    }
+                }
+                fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
+            }
+            return fh;
+        }
+        public List<Chat> SelectChatsActivosPorCedula(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectChatsActivosPorCedula(ci);
+        }
+        public Chat SelectChatPorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectChatPorId(id);
+        }
+        public int StringAId(string cadena)
+        {
+            char[] aConvertir = cadena.ToCharArray();
+
+            string preId = "";
+            for (int x = 0; x < aConvertir.Length; x++)
+            {
+                if (aConvertir[x] == '0' || aConvertir[x] == '1' || aConvertir[x] == '2' || aConvertir[x] == '3' || aConvertir[x] == '4' || aConvertir[x] == '5' || aConvertir[x] == '6' || aConvertir[x] == '7' || aConvertir[x] == '8' || aConvertir[x] == '9')
+                {
+                    preId += aConvertir[x];
+                }
+            }
+            return Convert.ToInt32(preId);
+        }
+
+        
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Logica\AsignaturaSolicitudClaseAl.cs" />
     <Compile Include="Logica\AsignaturaSolicitudClaseDo.cs" />
     <Compile Include="Logica\Chat.cs" />
+    <Compile Include="Logica\Chatea.cs" />
     <Compile Include="Logica\ChateaAl.cs" />
     <Compile Include="Logica\ChateaDo.cs" />
     <Compile Include="Logica\Clase.cs" />
@@ -242,6 +243,7 @@
     <Content Include="Recursos\mensaje gris.png" />
     <Content Include="Recursos\perfil blanco.png" />
     <Content Include="Recursos\perfil gris.png" />
+    <Content Include="Recursos\profesor.png" />
     <Content Include="Recursos\volver.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

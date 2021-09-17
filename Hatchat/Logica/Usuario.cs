@@ -213,6 +213,21 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAdministrador(ci);
         }
+        public bool SelectAlumno(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAlumno(ci);
+        }
+        public bool SelectDocente(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectDocente(ci);
+        }
+        public bool SelectAdministrador(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAdministrador(ci);
+        }
         public PreguntaSeg SelectPreguntaSeguridad()
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();

@@ -73,5 +73,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectNombreClasePorAnioYorientacion(anio, orientacion);
         }
+        public Clase SelectClasePorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectClasePorId(id);
+        }
     }
 }
