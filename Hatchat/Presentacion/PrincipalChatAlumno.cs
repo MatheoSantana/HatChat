@@ -54,6 +54,7 @@ namespace Hatchat.Presentacion
             pbxHistorialNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
+            cmbxMateria
         }
 
 
@@ -300,7 +301,16 @@ namespace Hatchat.Presentacion
 
         private void btnNuevoChat_Click(object sender, EventArgs e)
         {
-            panelNuevoChat.Visible=true;
+            panelNuevoChat.Visible = !panelNuevoChat.Visible;
+            panelIngresarChat.Visible = false;
+            c
+            
+        }
+
+        private void btnIngresarChat_Click(object sender, EventArgs e)
+        {
+            panelIngresarChat.Visible = !panelIngresarChat.Visible;
+            panelNuevoChat.Visible = false;
         }
     }
 }

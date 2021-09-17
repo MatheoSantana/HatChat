@@ -47,7 +47,7 @@ namespace Hatchat.Presentacion
             this.lblChatsIngresarChats = new System.Windows.Forms.Label();
             this.lblIngresarChat = new System.Windows.Forms.Label();
             this.btnRealizarNuevoChat = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbxMateria = new System.Windows.Forms.ComboBox();
             this.lblMateriaNuevoChat = new System.Windows.Forms.Label();
             this.lblTemaNuevoChat = new System.Windows.Forms.Label();
             this.txtTitulo = new System.Windows.Forms.TextBox();
@@ -74,7 +74,6 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxMensajeNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxChatNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
-            this.panelChatsActivos.SuspendLayout();
             this.panelNuevoChat.SuspendLayout();
             this.panelIngresarChat.SuspendLayout();
             this.panelChat.SuspendLayout();
@@ -183,11 +182,12 @@ namespace Hatchat.Presentacion
             this.btnIngresarChat.TabIndex = 4;
             this.btnIngresarChat.Text = "Ingresar Chat";
             this.btnIngresarChat.UseVisualStyleBackColor = true;
+            this.btnIngresarChat.Click += new System.EventHandler(this.btnIngresarChat_Click);
             // 
             // panelChatsActivos
             // 
             this.panelChatsActivos.AutoScroll = true;
-            this.panelChatsActivos.Controls.Add(this.panelNuevoChat);
+            this.panelChatsActivos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelChatsActivos.Location = new System.Drawing.Point(13, 162);
             this.panelChatsActivos.Name = "panelChatsActivos";
             this.panelChatsActivos.Size = new System.Drawing.Size(199, 416);
@@ -196,26 +196,27 @@ namespace Hatchat.Presentacion
             // panelNuevoChat
             // 
             this.panelNuevoChat.AutoScroll = true;
-            this.panelNuevoChat.Controls.Add(this.panelIngresarChat);
+            this.panelNuevoChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelNuevoChat.Controls.Add(this.btnRealizarNuevoChat);
-            this.panelNuevoChat.Controls.Add(this.comboBox1);
+            this.panelNuevoChat.Controls.Add(this.cmbxMateria);
             this.panelNuevoChat.Controls.Add(this.lblMateriaNuevoChat);
             this.panelNuevoChat.Controls.Add(this.lblTemaNuevoChat);
             this.panelNuevoChat.Controls.Add(this.txtTitulo);
             this.panelNuevoChat.Controls.Add(this.lblNuevoChat);
-            this.panelNuevoChat.Location = new System.Drawing.Point(0, 0);
+            this.panelNuevoChat.Location = new System.Drawing.Point(13, 162);
             this.panelNuevoChat.Name = "panelNuevoChat";
-            this.panelNuevoChat.Size = new System.Drawing.Size(199, 416);
+            this.panelNuevoChat.Size = new System.Drawing.Size(199, 315);
             this.panelNuevoChat.TabIndex = 6;
             // 
             // panelIngresarChat
             // 
             this.panelIngresarChat.AutoScroll = true;
+            this.panelIngresarChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelIngresarChat.Controls.Add(this.lblChatsIngresarChats);
             this.panelIngresarChat.Controls.Add(this.lblIngresarChat);
-            this.panelIngresarChat.Location = new System.Drawing.Point(0, 0);
+            this.panelIngresarChat.Location = new System.Drawing.Point(13, 162);
             this.panelIngresarChat.Name = "panelIngresarChat";
-            this.panelIngresarChat.Size = new System.Drawing.Size(199, 416);
+            this.panelIngresarChat.Size = new System.Drawing.Size(199, 193);
             this.panelIngresarChat.TabIndex = 7;
             // 
             // lblChatsIngresarChats
@@ -238,20 +239,20 @@ namespace Hatchat.Presentacion
             // 
             // btnRealizarNuevoChat
             // 
-            this.btnRealizarNuevoChat.Location = new System.Drawing.Point(121, 390);
+            this.btnRealizarNuevoChat.Location = new System.Drawing.Point(106, 254);
             this.btnRealizarNuevoChat.Name = "btnRealizarNuevoChat";
             this.btnRealizarNuevoChat.Size = new System.Drawing.Size(75, 23);
             this.btnRealizarNuevoChat.TabIndex = 5;
             this.btnRealizarNuevoChat.Text = "Realizar";
             this.btnRealizarNuevoChat.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // cmbxMateria
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(19, 145);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cmbxMateria.FormattingEnabled = true;
+            this.cmbxMateria.Location = new System.Drawing.Point(19, 145);
+            this.cmbxMateria.Name = "cmbxMateria";
+            this.cmbxMateria.Size = new System.Drawing.Size(160, 21);
+            this.cmbxMateria.TabIndex = 4;
             // 
             // lblMateriaNuevoChat
             // 
@@ -413,6 +414,8 @@ namespace Hatchat.Presentacion
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 590);
+            this.Controls.Add(this.panelIngresarChat);
+            this.Controls.Add(this.panelNuevoChat);
             this.Controls.Add(this.panelChat);
             this.Controls.Add(this.lblBienvenido);
             this.Controls.Add(this.panelChatsActivos);
@@ -431,7 +434,6 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxMensajeNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxChatNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).EndInit();
-            this.panelChatsActivos.ResumeLayout(false);
             this.panelNuevoChat.ResumeLayout(false);
             this.panelNuevoChat.PerformLayout();
             this.panelIngresarChat.ResumeLayout(false);
@@ -467,7 +469,7 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.TextBox txtTitulo;
         private System.Windows.Forms.Label lblNuevoChat;
         private System.Windows.Forms.Button btnRealizarNuevoChat;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxMateria;
         private System.Windows.Forms.Panel panelIngresarChat;
         private System.Windows.Forms.Label lblChatsIngresarChats;
         private System.Windows.Forms.Label lblIngresarChat;
