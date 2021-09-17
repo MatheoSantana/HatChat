@@ -173,6 +173,7 @@ namespace Hatchat.Presentacion
             this.btnNuevoChat.TabIndex = 3;
             this.btnNuevoChat.Text = "Nuevo Chat";
             this.btnNuevoChat.UseVisualStyleBackColor = true;
+            this.btnNuevoChat.Click += new System.EventHandler(this.btnNuevoChat_Click);
             // 
             // btnIngresarChat
             // 

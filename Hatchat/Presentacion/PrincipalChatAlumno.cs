@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Hatchat.Presentacion
 {
@@ -164,6 +165,7 @@ namespace Hatchat.Presentacion
         }
         public void CargarChat()
         {
+            
             int y;
             List<Logica.Chatea> mensajes = new List<Logica.Chatea>();
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(abierto.IdChat, abierto.Fecha);
@@ -181,6 +183,10 @@ namespace Hatchat.Presentacion
                             if (mensajes[x].HoraEnvio > mensajesDo[c].HoraEnvio && !mensajes.Contains(mensajesDo[c]))
                             {
                                 mensajes.Insert(x, mensajesDo[c]);
+                            }
+                            else
+                            {
+                                mensajes.Add(mensajesDo[c]);
                             }
                         }
                         catch (Exception ex)
@@ -210,8 +216,7 @@ namespace Hatchat.Presentacion
                 int xot = 20;
                 y = 50;
                 int m = 0;
-                panelCharla.VerticalScroll.Enabled = false;
-                panelCharla.VerticalScroll.Value = panelCharla.VerticalScroll.Maximum;
+                panelCharla.Controls.Clear();
                 foreach (Logica.Chatea cha in mensajs)
                 {
 
@@ -275,12 +280,15 @@ namespace Hatchat.Presentacion
                     }
                     dina.Text += "\n" + cha.Contenido;
                     panelCharla.Controls.Add(dina);
-
+                    panelCharla.VerticalScroll.Value = 0;
+                    
                 }
-                panelCharla.VerticalScroll.Value = panelCharla.VerticalScroll.Minimum;
-                panelCharla.VerticalScroll.Enabled = true;
-
+                foreach (Logica.Chatea ch in mensajes)
+                {
+                    panelCharla.VerticalScroll.Value = panelCharla.VerticalScroll.Maximum;
+                }
             }
+            
         }
       
         
@@ -288,6 +296,11 @@ namespace Hatchat.Presentacion
         private void tmrCargChat_Tick(object sender, EventArgs e)
         {
             CargarChat();
+        }
+
+        private void btnNuevoChat_Click(object sender, EventArgs e)
+        {
+            panelNuevoChat.Visible=true;
         }
     }
 }
