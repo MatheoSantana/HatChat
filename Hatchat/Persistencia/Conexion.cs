@@ -585,11 +585,45 @@ namespace Hatchat.Persistencia
 
         //chats
         
-        public List<Chat> SelectChatsActivosPorCedula(string ci)
+        public List<Chat> SelectChatsActivosPorCedulaAlumno(string ci)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Chat.idChat, Chat.idClase, Chat.oriClase, Chat.asignatura, Chat.fecha, Chat.horaInico, Chat.horaFin, Chat.titulo, Chat.activo from Chat, SolicitaChat where SolicitaChat.ciAlumno='" + ci+"'; ", conexion);
+            MySqlCommand select = new MySqlCommand("select Chat.idChat, Chat.idClase, Chat.oriClase, Chat.asignatura, Chat.fecha, Chat.horaInico, Chat.horaFin, Chat.titulo, Chat.activo from Chat, asignaturaCursa where asignaturaCursa.asignaturaCursada=Chat.asignatura and asignaturaCursa.idClase=Chat.idClase and asignaturaCursa.orientacion=Chat.oriClase and Chat.activo=true and asignaturaCursa.ci='" + ci +"'; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            List<Chat> chats = new List<Chat>();
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Chat chat = new Chat();
+
+                chat.IdChat = Convert.ToInt32(data.Rows[x][0].ToString());
+                chat.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                chat.OriClase = Convert.ToInt32(data.Rows[x][2].ToString());
+                chat.Asignatura = data.Rows[x][3].ToString();
+                chat.Fecha = chat.StringADateTime(data.Rows[x][4].ToString());
+                chat.HoraInicio = chat.StringADateTime(data.Rows[x][5].ToString());
+                if (!(data.Rows[x][6].ToString() == ""))
+                {
+                    chat.HoraFin = chat.StringADateTime(data.Rows[x][6].ToString());
+                }
+                chat.Titulo = data.Rows[x][7].ToString();
+                chat.Activo = false;
+                if (data.Rows[x][8].ToString() == "True")
+                {
+                    chat.Activo = true;
+                }
+                chats.Add(chat);
+            }
+            conexion.Close();
+            return chats;
+        }
+        public List<Chat> SelectChatsActivosPorCedulaDocente(string ci)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Chat.idChat, Chat.idClase, Chat.oriClase, Chat.asignatura, Chat.fecha, Chat.horaInico, Chat.horaFin, Chat.titulo, Chat.activo from Chat, asignaturaDictada where asignaturaDictada.asignaturaDictada=Chat.asignatura and asignaturaDictada.idClase=Chat.idClase and asignaturaDictada.orientacion=Chat.oriClase and Chat.activo=true and asignaturaDictada.ci='" + ci + "'; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -805,6 +839,119 @@ namespace Hatchat.Persistencia
             }
             conexion.Close();
             return chateaDos; ;
+        }
+
+        public List<Asignatura> SelectAsignaturasPorCi(string ci)
+        {
+            List<Asignatura> asignaturas = new List<Asignatura>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Asignatura.id, Asignatura.nombre, Asignatura.anio, Asignatura.activo from asignaturaCursa, Asignatura where asignaturaCursa.ci='" + ci + "' and asignaturaCursa.asignaturaCursada=Asignatura.id and Asignatura.activo=true and asignaturaCursa.cursando = true order by Asignatura.nombre; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Asignatura asig = new Asignatura();
+
+                asig.Id = data.Rows[x][0].ToString();
+                asig.Nombre = data.Rows[x][1].ToString();
+                asig.Anio = Convert.ToInt32(data.Rows[x][2].ToString());
+                asig.Activo = true;
+                asignaturas.Add(asig);
+            }
+            conexion.Close();
+            return asignaturas; ;
+        }
+        public List<AsignaturaCursa> SelectAsignaturasCursadasPorCi(string ci)
+        {
+            List<AsignaturaCursa> asignaturaCursa = new List<AsignaturaCursa>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from asignaturaCursa where ci='" + ci + "' and asignaturaCursa.cursando = true; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                AsignaturaCursa asigCursa = new AsignaturaCursa();
+
+                asigCursa.Ci = data.Rows[x][0].ToString();
+                asigCursa.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                asigCursa.Orientacion = Convert.ToInt32(data.Rows[x][2].ToString());
+                asigCursa.Anio = Convert.ToInt32(data.Rows[x][3].ToString());
+                asigCursa.AsignaturaCursada = data.Rows[x][4].ToString();
+                asigCursa.Cursando = true;
+                asignaturaCursa.Add(asigCursa);
+            }
+            conexion.Close();
+            return asignaturaCursa; 
+        }
+        public AsignaturaCursa SelectAsignaturaCursaPorAsignaturaYCi(string asignatura, string ci)
+        {
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from asignaturaCursa where ci='" + ci + "' and cursando= true and asignaturaCursada='"+ asignatura + "' = true;";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            AsignaturaCursa asigCursa = new AsignaturaCursa();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    asigCursa.Ci = reader.GetString("ci");
+                    asigCursa.IdClase = Convert.ToInt32(reader.GetString("idClase"));
+                    asigCursa.Orientacion = Convert.ToInt32(reader.GetString("orientacion"));
+                    asigCursa.Anio = Convert.ToInt32(reader.GetString("anio"));
+                    asigCursa.AsignaturaCursada = reader.GetString("asignaturaCursada");
+                    asigCursa.Cursando = true;
+                }
+            }
+            conexion.Close();
+            return asigCursa;
+        }
+        public void EnviarSolicitudChat(SolicitaChat soli)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into SolicitaChat values('"+soli.CiAlumno+"','" + soli.CiDocente + "','" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.IdClase + ","+soli.OriClase+",'"+soli.Asignatura+"',true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public List<SolicitaChat> SelectSolicitaChats(string ci)
+        {
+            List<SolicitaChat> solicitaChats = new List<SolicitaChat>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from SolicitaChat where ciDocente='" + ci + "' and pendiente = true; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                SolicitaChat solicitaChat = new SolicitaChat();
+
+                solicitaChat.CiAlumno = data.Rows[x][0].ToString();
+                solicitaChat.CiDocente = data.Rows[x][1].ToString();
+                solicitaChat.FechaHora = solicitaChat.StringADateTime(data.Rows[x][2].ToString());
+                solicitaChat.IdClase = Convert.ToInt32(data.Rows[x][3].ToString());
+                solicitaChat.OriClase = Convert.ToInt32(data.Rows[x][4].ToString());
+                solicitaChat.Asignatura = data.Rows[x][5].ToString();
+                solicitaChat.Pendiente = true;
+                solicitaChats.Add(solicitaChat);
+            }
+            conexion.Close();
+            return solicitaChats;
+        }
+        public void CrearChat(SolicitaChat soli)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            DateTime fecha = DateTime.Now;
+            MySqlCommand insert = new MySqlCommand("insert into Chat (idClase,oriClase,asignatura,fecha,horaInico,activo) values(" + soli.IdClase + "," + soli.OriClase + ",'" + fecha.ToString("yyyy") + "-" + fecha.ToString("MM") + "-" + fecha.ToString("dd") + "','"+ fecha.ToString("HH") + ":" + fecha.ToString("mm") + ":" + fecha.ToString("ss") + "'," + soli.OriClase + ",'" + soli.Asignatura + "',true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
         }
         //chats
     }

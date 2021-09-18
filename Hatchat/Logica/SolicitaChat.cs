@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hatchat.Logica
 {
-    class SolicitaChat
+    public class SolicitaChat
     {
         private string ciAlumno;
         private string ciDocente;
@@ -63,6 +63,54 @@ namespace Hatchat.Logica
         {
             get { return pendiente; }
             set { pendiente = value; }
+        }
+        public void EnviarSolicitudChat()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarSolicitudChat(this);
+        }
+        public List<SolicitaChat> SelectSolicitaChats(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectSolicitaChats(ci);
+        }
+        public DateTime StringADateTime(string fechaHora)
+        {
+            DateTime fh = new DateTime();
+            List<char> dateTime = new List<char>(fechaHora.ToCharArray());
+            string year = "", month = "", day = "", minute = "", hour = "", second = "";
+
+            for (int x = 0; x < fechaHora.Length; x++)
+            {
+                if ((x == 0 || x == 1) && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                {
+                    day += fechaHora[x];
+
+                }
+                else if (x == 3 || x == 4 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                {
+                    month += fechaHora[x];
+                }
+                else if (x >= 6 && x <= 9 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                {
+                    year += fechaHora[x];
+                }
+                else if (x == 11 || x == 12 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                {
+                    hour += fechaHora[x];
+                }
+                else if (x == 14 || x == 15 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                {
+                    minute += fechaHora[x];
+                }
+                else if (x == 17 || x == 18 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+                {
+                    second += fechaHora[x];
+                }
+            }
+            fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
+
+            return fh;
         }
     }
 }

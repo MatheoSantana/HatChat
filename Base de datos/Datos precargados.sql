@@ -94,7 +94,7 @@ insert into asignaturaCursa
 values('52848682',1,1,2021,'bdd2',true);
 
 insert into asignaturaCursa
-values('52848682',1,1,2021,'progdw3',true);
+values('52848682',1,1,2021,'mate3',true);
 
 /*--Alumno-2--*/
 insert into Usuario

@@ -121,11 +121,11 @@ namespace Hatchat.Presentacion
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
 
-            encontrado = encontrado.SelectUsuarioCi("52848682");
+            encontrado = encontrado.SelectUsuarioCi(txtCedula.Text/*"52848682"*/);
             
             if (encontrado.Ci != "")
             {
-                if (encontrado.Password == "matheo1234")
+                if (encontrado.Password == txtPassword.Text/*"matheo1234"*/)
                 {
                     if (encontrado.SelectDocente())
                     {

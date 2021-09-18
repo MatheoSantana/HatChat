@@ -19,6 +19,8 @@ namespace Hatchat.Presentacion
         private List<Logica.Chat> chats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
         Logica.Chat abierto = new Logica.Chat();
+        Logica.Clase seleccionada = new Logica.Clase();
+        private List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
         public PrincipalChatAlumno()
         {
             InitializeComponent();
@@ -54,7 +56,7 @@ namespace Hatchat.Presentacion
             pbxHistorialNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
-            cmbxMateria
+            cmbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
@@ -103,7 +105,7 @@ namespace Hatchat.Presentacion
         }
         private void cargarChats()
         {
-            List<Logica.Chat> chats = new Logica.Chat().SelectChatsActivosPorCedula(Login.encontrado.Ci);
+            List<Logica.Chat> chats = new Logica.Chat().SelectChatsActivosPorCedulaAlumno(Login.encontrado.Ci);
             bool iguales = true;
             if (this.chats.Count == chats.Count)
             {
@@ -122,7 +124,7 @@ namespace Hatchat.Presentacion
             if (!iguales)
             {
                 this.chats = chats;
-                y = 50;
+                y = 5;
                 panelChatsActivos.Controls.Clear();
 
                 foreach (Logica.Chat chat in chats)
@@ -136,7 +138,7 @@ namespace Hatchat.Presentacion
                     y += 50;
                     dina.Name = "lblC" + chat.IdChat.ToString();
                     dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
-
+                    dina.BorderStyle = BorderStyle.FixedSingle;
                     dina.Click += new EventHandler(AbrirChat);
                     panelChatsActivos.Controls.Add(dina);
                 }
@@ -303,7 +305,15 @@ namespace Hatchat.Presentacion
         {
             panelNuevoChat.Visible = !panelNuevoChat.Visible;
             panelIngresarChat.Visible = false;
-            c
+            
+            asignaturas = new Logica.Asignatura().SelectAsignaturasPorCi(Login.encontrado.Ci);
+            
+            foreach (Logica.Asignatura asignatura in asignaturas)
+            {
+                Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignatura.Id, Login.encontrado.Ci);
+                Logica.Clase clase = new Logica.Clase().SelectClasePorId(asignaturaCursada.IdClase);
+                cmbxMateria.Items.Add(asignatura.Nombre + " " + clase.Anio+clase.Nombre);
+            }
             
         }
 
@@ -311,6 +321,25 @@ namespace Hatchat.Presentacion
         {
             panelIngresarChat.Visible = !panelIngresarChat.Visible;
             panelNuevoChat.Visible = false;
+        }
+
+        private void btnRealizarNuevoChat_Click(object sender, EventArgs e)
+        {
+            
+            if (cmbxMateria.SelectedIndex!=-1)
+            {
+                Logica.SolicitaChat solicitaChat = new Logica.SolicitaChat();
+                solicitaChat.CiAlumno = Login.encontrado.Ci;
+                solicitaChat.Asignatura = asignaturas[cmbxMateria.SelectedIndex].Id;
+                Logica.AsignaturaCursa asignaturaCursa = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignaturas[cmbxMateria.SelectedIndex].Id, Login.encontrado.Ci);
+                solicitaChat.IdClase = asignaturaCursa.IdClase;
+                solicitaChat.FechaHora = DateTime.Now;
+                solicitaChat.Pendiente = true;
+                solicitaChat.OriClase = asignaturaCursa.Orientacion;
+                solicitaChat.CiDocente =new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(asignaturaCursa.AsignaturaCursada, asignaturaCursa.IdClase);
+                solicitaChat.EnviarSolicitudChat();
+                MessageBox.Show("Solicitud enviada");
+            }
         }
     }
 }

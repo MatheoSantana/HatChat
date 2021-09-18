@@ -83,7 +83,7 @@ namespace Hatchat.Logica
         }
         public DateTime StringADateTime(string fechaHora)
         {
-            DateTime fh=new DateTime();
+            DateTime fh = new DateTime();
             List<char> dateTime = new List<char>(fechaHora.ToCharArray());
             string year = "", month = "", day = "", minute = "", hour = "", second = "";
             if (fechaHora.Length < 11)
@@ -169,15 +169,25 @@ namespace Hatchat.Logica
             }
             return fh;
         }
-        public List<Chat> SelectChatsActivosPorCedula(string ci)
+        public List<Chat> SelectChatsActivosPorCedulaDocente(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectChatsActivosPorCedula(ci);
+            return conexion.SelectChatsActivosPorCedulaDocente(ci);
+        }
+        public List<Chat> SelectChatsActivosPorCedulaAlumno(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectChatsActivosPorCedulaAlumno(ci);
         }
         public Chat SelectChatPorId(int id)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectChatPorId(id);
+        }
+        public void CrearChat(SolicitaChat soli)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.CrearChat(soli);
         }
         public int StringAId(string cadena)
         {
@@ -192,8 +202,7 @@ namespace Hatchat.Logica
                 }
             }
             return Convert.ToInt32(preId);
-        }
 
-        
+        }
     }
 }
