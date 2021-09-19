@@ -297,6 +297,7 @@ namespace Hatchat.Presentacion
             this.btnEnviar.TabIndex = 1;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // panelCharla
             // 
@@ -334,6 +335,7 @@ namespace Hatchat.Presentacion
             this.btnCerrarChat.TabIndex = 12;
             this.btnCerrarChat.Text = "Cerrar Chat";
             this.btnCerrarChat.UseVisualStyleBackColor = true;
+            this.btnCerrarChat.Click += new System.EventHandler(this.btnCerrarChat_Click);
             // 
             // btnParticipantes
             // 

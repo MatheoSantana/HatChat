@@ -54,6 +54,16 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectChateaAlsPorIdChatMasFecha(id, fecha);
         }
+        public void InsertChateaAl()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.InsertChateaAl((ChateaAl)this);
+        }
+        public void InsertChateaDo()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.InsertChateaDo((ChateaDo)this);
+        }
     }
 
 }

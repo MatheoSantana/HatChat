@@ -10,7 +10,7 @@ namespace Hatchat.Presentacion
 {
     public partial class PrincipalChatDocente : Form
     {
-        int solci = 150;
+        int solci = 100;
         public Form login;
         public Form mensajesDocente;
         public Form perfilDocente;
@@ -99,6 +99,10 @@ namespace Hatchat.Presentacion
 
         private void btnSolicitudes_Click(object sender, EventArgs e)
         {
+            cargarSolicitudes();
+        }
+        private void cargarSolicitudes()
+        {
             panelAceptarChat.Visible = !panelAceptarChat.Visible;
             List<Logica.SolicitaChat> solicitaChats = new Logica.SolicitaChat().SelectSolicitaChats(Login.encontrado.Ci);
             bool iguales = true;
@@ -118,12 +122,13 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
+                panelAceptarChat.Controls.Clear();
                 this.solicitaChats = solicitaChats;
                 panelChatsActivos.Controls.Clear();
-
+                int m = 0;
                 foreach (Logica.SolicitaChat solicitaChat in solicitaChats)
                 {
-                    if (panelAceptarChat.Controls.Count < solicitaChats.Count + 2)
+                    if (panelAceptarChat.Controls.Count != solicitaChats.Count + 2)
                     {
                         Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(solicitaChat.Asignatura);
                         asignaturas.Add(asignatura);
@@ -133,22 +138,18 @@ namespace Hatchat.Presentacion
                         dina.Width = 150;
                         dina.Location = new Point(25, solci);
                         solci += 50;
-                        dina.Name = "lblS" + solicitaChat.Asignatura + "-" + solicitaChat.IdClase;
+                        dina.Name = "lblS" + m;
                         dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "(Click para aceptar)";
                         dina.BorderStyle = BorderStyle.FixedSingle;
                         dina.Click += new EventHandler(AceptarSolicitud);
                         panelAceptarChat.Controls.Add(dina);
+                        m++;
                     }
                 }
             }
-
-
         }
         private void AceptarSolicitud(object sender, EventArgs e)
         {
-
-            Logica.SolicitaChat solicitaChat = new Logica.SolicitaChat();
-            solicitaChat.CiAlumno = Login.encontrado.Ci;
             
                 string id = "";
                 for(int x = 4; x < ((Label)sender).Name.Length; x++)
@@ -163,16 +164,8 @@ namespace Hatchat.Presentacion
                     }
                 }
 
-            solicitaChat.Asignatura = id;
-            Logica.AsignaturaCursa asignaturaCursa = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(id, Login.encontrado.Ci);
-            solicitaChat.IdClase = asignaturaCursa.IdClase;
-            solicitaChat.FechaHora = DateTime.Now;
-            solicitaChat.Pendiente = false;
-            solicitaChat.OriClase = asignaturaCursa.Orientacion;
-            solicitaChat.CiDocente = new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(asignaturaCursa.AsignaturaCursada, asignaturaCursa.IdClase);
-            new Logica.Chat().CrearChat(solicitaChat);
-
-
+            new Logica.Chat().CrearChat(solicitaChats[Convert.ToInt32(id)]);
+            cargarSolicitudes();
         }
 
         private void tmrCargChat_Tick(object sender, EventArgs e)
@@ -372,6 +365,12 @@ namespace Hatchat.Presentacion
                 }
             }
 
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            new Logica.ChateaDo(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaDo();
+            txtMensajeChat.Text = "";
         }
     }
 }

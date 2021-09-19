@@ -341,5 +341,16 @@ namespace Hatchat.Presentacion
                 MessageBox.Show("Solicitud enviada");
             }
         }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            new Logica.ChateaAl(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaAl();
+            txtMensajeChat.Text = "";
+        }
+
+        private void btnCerrarChat_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

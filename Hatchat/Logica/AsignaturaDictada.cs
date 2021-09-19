@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hatchat.Logica
 {
-    class AsignaturaDictada
+    public class AsignaturaDictada
     {
         private string ci;
         private int idClase;
@@ -62,6 +62,11 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectCiPorAsignaturaDictadaYClase(asignatura, clase);
+        }
+        public AsignaturaDictada SelectAsignaturaDictadaPorAsignaturaYCi(string asignatura, string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturaDictadaPorAsignaturaYCi(asignatura, ci);
         }
     }
 }
