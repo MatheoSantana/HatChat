@@ -89,3 +89,4 @@ C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\K4os.Hash.x
 C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\System.Numerics.Vectors.dll
 C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\bin\Debug\MySql.Data.xml
 C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.csproj.CopyComplete
+C:\Users\miusi\OneDrive\Escritorio\Segunda entrega\Hatchat\obj\Debug\Hatchat.Presentacion.Titulo.resources

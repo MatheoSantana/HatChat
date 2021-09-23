@@ -10,7 +10,6 @@ namespace Hatchat.Presentacion
 {
     public partial class PrincipalChatDocente : Form
     {
-        int solci = 100;
         public Form login;
         public Form mensajesDocente;
         public Form perfilDocente;
@@ -122,10 +121,26 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
+                int y=5;
                 panelAceptarChat.Controls.Clear();
+
+                Label lblIngresarChat = new Label();
+                lblIngresarChat.Height = 13;
+                lblIngresarChat.Width = 93;
+                lblIngresarChat.Location = new Point(27, 11);
+                lblIngresarChat.Name = "lblIngresarChat";
+                lblIngresarChat.Text = "Ingresar a un chat";
+                panelAceptarChat.Controls.Add(lblIngresarChat);
+
+                Label lblChatsIngresarChats = new Label();
+                lblChatsIngresarChats.Height = 13;
+                lblChatsIngresarChats.Width = 37;
+                lblChatsIngresarChats.Location = new Point(27, 27);
+                lblChatsIngresarChats.Name = "lblChatsIngresarChats";
+                lblChatsIngresarChats.Text = "Chats:";
+                panelAceptarChat.Controls.Add(lblChatsIngresarChats);
                 this.solicitaChats = solicitaChats;
-                panelChatsActivos.Controls.Clear();
-                int m = 0;
+                int m = 30;
                 foreach (Logica.SolicitaChat solicitaChat in solicitaChats)
                 {
                     if (panelAceptarChat.Controls.Count != solicitaChats.Count + 2)
@@ -136,8 +151,8 @@ namespace Hatchat.Presentacion
                         Label dina = new Label();
                         dina.Height = 46;
                         dina.Width = 150;
-                        dina.Location = new Point(25, solci);
-                        solci += 50;
+                        dina.Location = new Point(25, y);
+                        y += 50;
                         dina.Name = "lblS" + m;
                         dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "(Click para aceptar)";
                         dina.BorderStyle = BorderStyle.FixedSingle;
@@ -163,7 +178,7 @@ namespace Hatchat.Presentacion
                         x = ((Label)sender).Name.Length;
                     }
                 }
-
+            solicitaChats[Convert.ToInt32(id)].AceptarChat();
             new Logica.Chat().CrearChat(solicitaChats[Convert.ToInt32(id)]);
             cargarSolicitudes();
         }
@@ -171,6 +186,7 @@ namespace Hatchat.Presentacion
         private void tmrCargChat_Tick(object sender, EventArgs e)
         {
             CargarChat();
+            CerrarChat();
         }
 
         private void tmrCargChats_Tick(object sender, EventArgs e)
@@ -198,7 +214,7 @@ namespace Hatchat.Presentacion
             if (!iguales)
             {
                 this.chats = chats;
-                y = 5;
+                int y = 5;
                 panelChatsActivos.Controls.Clear();
 
                 foreach (Logica.Chat chat in chats)
@@ -371,6 +387,27 @@ namespace Hatchat.Presentacion
         {
             new Logica.ChateaDo(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaDo();
             txtMensajeChat.Text = "";
+        }
+        private void CerrarChat()
+        {
+
+            if (!(abierto == new Logica.Chat()))
+            {
+                bool cerrar = true;
+                foreach (Logica.Chat chat in chats)
+                {
+                    if (chat.IdChat == abierto.IdChat)
+                    {
+                        cerrar = false;
+                    }
+                }
+                if (cerrar)
+                {
+                    panelChat.Visible = false;
+                    tmrCargChat.Enabled = false;
+                    MessageBox.Show("Este chat a sido cerrado");
+                }
+            }
         }
     }
 }

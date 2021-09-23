@@ -165,7 +165,7 @@ insert into Dicta
 values('29993223',2,2,2021);
 
 insert into asignaturaDictada
-values('29993223',1,1,2021,'progds3',true);
+values('29993223',1,1,2021,'mate3',true);
 
 /*--Docente-3--*/
 insert into Usuario

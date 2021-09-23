@@ -74,6 +74,11 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectSolicitaChats(ci);
         }
+        public void AceptarChat()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AceptarChat(this);
+        }
         public DateTime StringADateTime(string fechaHora)
         {
             DateTime fh = new DateTime();

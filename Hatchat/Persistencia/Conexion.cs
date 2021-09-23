@@ -1024,5 +1024,25 @@ namespace Hatchat.Persistencia
             insert.ExecuteNonQuery();
             conexion.Close();
         }
+        public void CerrarChat(Chat chat)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updateEstado = new MySqlCommand("update Chat set activo = false where idChat="+chat.IdChat+";", conexion);
+            updateEstado.ExecuteNonQuery();
+            MySqlCommand updateHoraFin = new MySqlCommand("update Chat set horaFin = '"+ chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm") + ":" + chat.HoraFin.ToString("ss") + "' where idChat=" + chat.IdChat + ";", conexion);
+            updateHoraFin.ExecuteNonQuery();
+            MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo = '"+chat.Titulo+"' where idChat=" + chat.IdChat + ";", conexion);
+            updateTitulo.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void AceptarChat(SolicitaChat soli)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updateEstado = new MySqlCommand("update SolicitaChat set pendiente = false where ciDocente='" + soli.CiDocente + "' and idClase=" + soli.IdClase + " and oriClase=" + soli.OriClase + " and asignatura='" + soli.Asignatura + "';", conexion);
+            updateEstado.ExecuteNonQuery();
+            conexion.Close();
+        }
     }
 }

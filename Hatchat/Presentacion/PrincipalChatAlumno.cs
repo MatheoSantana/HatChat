@@ -18,7 +18,7 @@ namespace Hatchat.Presentacion
         int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
-        Logica.Chat abierto = new Logica.Chat();
+        public static Logica.Chat abierto = new Logica.Chat();
         Logica.Clase seleccionada = new Logica.Clase();
         private List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
         public PrincipalChatAlumno()
@@ -299,6 +299,7 @@ namespace Hatchat.Presentacion
         private void tmrCargChat_Tick(object sender, EventArgs e)
         {
             CargarChat();
+            CerrarChat();
         }
 
         private void btnNuevoChat_Click(object sender, EventArgs e)
@@ -321,6 +322,8 @@ namespace Hatchat.Presentacion
         {
             panelIngresarChat.Visible = !panelIngresarChat.Visible;
             panelNuevoChat.Visible = false;
+
+
         }
 
         private void btnRealizarNuevoChat_Click(object sender, EventArgs e)
@@ -339,6 +342,7 @@ namespace Hatchat.Presentacion
                 solicitaChat.CiDocente =new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(asignaturaCursa.AsignaturaCursada, asignaturaCursa.IdClase);
                 solicitaChat.EnviarSolicitudChat();
                 MessageBox.Show("Solicitud enviada");
+                panelNuevoChat.Visible = false;
             }
         }
 
@@ -350,7 +354,33 @@ namespace Hatchat.Presentacion
 
         private void btnCerrarChat_Click(object sender, EventArgs e)
         {
+            abierto.Activo = false;
+            abierto.HoraFin = DateTime.Now;
+            Titulo titulo = new Titulo();
+            titulo.principalChatAlumno = this;
+            this.Enabled = false;
+            titulo.Show();
+        }
+        private void CerrarChat()
+        {
 
+            if (!(abierto == new Logica.Chat()))
+            {
+                bool cerrar = true;
+                foreach (Logica.Chat chat in chats)
+                {
+                    if (chat.IdChat == abierto.IdChat)
+                    {
+                        cerrar = false;
+                    }
+                }
+                if (cerrar)
+                {
+                    panelChat.Visible = false;
+                    tmrCargChat.Enabled = false;
+                    MessageBox.Show("Este chat a sido cerrado");
+                }
+            }
         }
     }
 }

@@ -204,5 +204,10 @@ namespace Hatchat.Logica
             return Convert.ToInt32(preId);
 
         }
+        public void CerrarChat()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.CerrarChat(this);
+        }
     }
 }

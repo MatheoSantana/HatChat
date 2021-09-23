@@ -197,7 +197,7 @@ namespace Hatchat.Presentacion
             // lblChatsIngresarChats
             // 
             this.lblChatsIngresarChats.AutoSize = true;
-            this.lblChatsIngresarChats.Location = new System.Drawing.Point(16, 33);
+            this.lblChatsIngresarChats.Location = new System.Drawing.Point(27, 27);
             this.lblChatsIngresarChats.Name = "lblChatsIngresarChats";
             this.lblChatsIngresarChats.Size = new System.Drawing.Size(37, 13);
             this.lblChatsIngresarChats.TabIndex = 2;

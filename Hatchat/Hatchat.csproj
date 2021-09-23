@@ -79,6 +79,12 @@
     <Compile Include="Logica\SolicitudModif.cs" />
     <Compile Include="Logica\Usuario.cs" />
     <Compile Include="Persistencia\Conexion.cs" />
+    <Compile Include="Presentacion\Titulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Titulo.Designer.cs">
+      <DependentUpon>Titulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\HistorialMensajesDocente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
       <DependentUpon>RegisterDocente.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentacion\Titulo.resx">
+      <DependentUpon>Titulo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\HistorialMensajesDocente.resx">
       <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
     </EmbeddedResource>
