@@ -209,5 +209,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.CerrarChat(this);
         }
+        public void CambiarTitulo()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.CambiarTitulo(this);
+        }
     }
 }

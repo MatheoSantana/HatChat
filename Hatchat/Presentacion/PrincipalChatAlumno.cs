@@ -111,7 +111,7 @@ namespace Hatchat.Presentacion
             {
                 for (int x = 0; x < chats.Count; x++)
                 {
-                    if (!(chats[x].IdChat == this.chats[x].IdChat))
+                    if (!(chats[x].IdChat == this.chats[x].IdChat) || chats[x].Titulo != this.chats[x].Titulo)
                     {
                         iguales = false;
                     }
@@ -149,6 +149,7 @@ namespace Hatchat.Presentacion
             panelChat.Visible = true;
             panelNuevoChat.Visible = false;
             panelIngresarChat.Visible = false;
+            btnCerrarChat.Visible = false;
             pcbxMaterialDatosClase.Image = null;
             lblMateriaClaseChat.Text = "";
             lblHoras.Text = "";
@@ -164,7 +165,14 @@ namespace Hatchat.Presentacion
             abierto = chat;
             tmrCargChat.Enabled = true;
             mensajs.Clear();
-
+            if (Login.encontrado.Ci == new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(abierto.IdChat, abierto.Fecha)[0].Ci)
+            {
+                Titulo titulo = new Titulo(false);
+                titulo.principalChatAlumno = this;
+                titulo.Show();
+                this.Enabled = false;
+                btnCerrarChat.Visible = true;
+            }
         }
         public void CargarChat()
         {
@@ -308,7 +316,7 @@ namespace Hatchat.Presentacion
             panelIngresarChat.Visible = false;
             
             asignaturas = new Logica.Asignatura().SelectAsignaturasPorCi(Login.encontrado.Ci);
-            
+            cmbxMateria.Items.Clear();
             foreach (Logica.Asignatura asignatura in asignaturas)
             {
                 Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignatura.Id, Login.encontrado.Ci);
@@ -356,7 +364,7 @@ namespace Hatchat.Presentacion
         {
             abierto.Activo = false;
             abierto.HoraFin = DateTime.Now;
-            Titulo titulo = new Titulo();
+            Titulo titulo = new Titulo(true);
             titulo.principalChatAlumno = this;
             this.Enabled = false;
             titulo.Show();

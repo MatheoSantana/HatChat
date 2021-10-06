@@ -1044,5 +1044,13 @@ namespace Hatchat.Persistencia
             updateEstado.ExecuteNonQuery();
             conexion.Close();
         }
+        public void CambiarTitulo(Chat chat)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo ='"+chat.Titulo+"' where idChat=" + chat.IdChat + ";", conexion);
+            updateTitulo.ExecuteNonQuery();
+            conexion.Close();
+        }
     }
 }

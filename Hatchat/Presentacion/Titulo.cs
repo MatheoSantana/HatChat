@@ -13,9 +13,11 @@ namespace Hatchat.Presentacion
     public partial class Titulo : Form
     {
         public Form principalChatAlumno;
-        public Titulo()
+        bool cerrar;
+        public Titulo(bool cerrar)
         {
             InitializeComponent();
+            this.cerrar = cerrar;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -29,8 +31,12 @@ namespace Hatchat.Presentacion
         private void btnListo_Click(object sender, EventArgs e)
         {
             PrincipalChatAlumno.abierto.Titulo = txtTema.Text;
-            PrincipalChatAlumno.abierto.CerrarChat();
-            PrincipalChatAlumno.abierto = new Logica.Chat();
+            PrincipalChatAlumno.abierto.CambiarTitulo();
+            if (cerrar)
+            {
+                PrincipalChatAlumno.abierto.CerrarChat();
+                PrincipalChatAlumno.abierto = new Logica.Chat();
+            }
             principalChatAlumno.Enabled = true;
             this.Dispose();
             

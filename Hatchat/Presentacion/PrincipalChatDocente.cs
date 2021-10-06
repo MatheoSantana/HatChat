@@ -121,7 +121,7 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
-                int y=5;
+                int y=45;
                 panelAceptarChat.Controls.Clear();
 
                 Label lblIngresarChat = new Label();
@@ -140,7 +140,7 @@ namespace Hatchat.Presentacion
                 lblChatsIngresarChats.Text = "Chats:";
                 panelAceptarChat.Controls.Add(lblChatsIngresarChats);
                 this.solicitaChats = solicitaChats;
-                int m = 30;
+                int m = 0;
                 foreach (Logica.SolicitaChat solicitaChat in solicitaChats)
                 {
                     if (panelAceptarChat.Controls.Count != solicitaChats.Count + 2)
