@@ -1052,5 +1052,73 @@ namespace Hatchat.Persistencia
             updateTitulo.ExecuteNonQuery();
             conexion.Close();
         }
+        
+        public List<SolicitudClaseAl> SelectSolicitudesClaseAl()
+        {
+            List<SolicitudClaseAl> solicitudesClaseAl = new List<SolicitudClaseAl>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from SolicitudClaseAl where pendiente = true order by fechaHora; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                SolicitudClaseAl soolicitudClaseAl = new SolicitudClaseAl();
+
+                soolicitudClaseAl.IdSolicitudClase = Convert.ToInt32(data.Rows[x][0].ToString());
+                soolicitudClaseAl.FechaHora = soolicitudClaseAl.StringADateTime(data.Rows[x][1].ToString());
+                soolicitudClaseAl.Pendiente = true;
+                soolicitudClaseAl.Alumno = data.Rows[x][3].ToString();
+                solicitudesClaseAl.Add(soolicitudClaseAl);
+            }
+            conexion.Close();
+            return solicitudesClaseAl;
+        }
+        public List<SolicitudClaseDo> SelectSolicitudesClaseDo()
+        {
+            List<SolicitudClaseDo> solicitudesClaseDo = new List<SolicitudClaseDo>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from SolicitudClaseDo where pendiente = true order by fechaHora; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                SolicitudClaseDo solcitudClaseDo = new SolicitudClaseDo();
+
+                solcitudClaseDo.IdSolicitudClase = Convert.ToInt32(data.Rows[x][0].ToString());
+                solcitudClaseDo.FechaHora = solcitudClaseDo.StringADateTime(data.Rows[x][1].ToString());
+                solcitudClaseDo.Pendiente = true;
+                solcitudClaseDo.Docente = data.Rows[x][3].ToString();
+                solicitudesClaseDo.Add(solcitudClaseDo);
+            }
+            conexion.Close();
+            return solicitudesClaseDo;
+        }
+        public List<SolicitudModif> SelectSolicitudesModif()
+        {
+            List<SolicitudModif> solicitudesModif = new List<SolicitudModif>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from SolicitudClaseDo where pendiente = true order by fechaHora; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                SolicitudModif solicitudModif = new SolicitudModif();
+
+                solicitudModif.IdSolicitudModif = Convert.ToInt32(data.Rows[x][0].ToString());
+                solicitudModif.FechaHora = solicitudModif.StringADateTime(data.Rows[x][1].ToString());
+                solicitudModif.ContraNueva = data.Rows[x][2].ToString();
+                solicitudModif.Pendiente = true;
+                solicitudModif.Usuario = data.Rows[x][4].ToString();
+                solicitudesModif.Add(solicitudModif);
+            }
+            conexion.Close();
+            return solicitudesModif;
+        }
     }
 }
