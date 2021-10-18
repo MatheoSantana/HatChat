@@ -56,5 +56,15 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.EnviarAsignaturaSolicitudClaseAl(this);
         }
+        public List<AsignaturaSolicitudClaseAl> SelectAsignaturaSolicitudClaseAl(int idSolicitudClaseAl)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturaSolicitudClaseAl(idSolicitudClaseAl);
+        }
+        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(int id, string asig, bool aceptar)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(id, asig, aceptar);
+        }
     }
 }

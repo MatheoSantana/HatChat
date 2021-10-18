@@ -41,5 +41,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectOrientaciones();
         }
+        public Orientacion SelectOrientacioPorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectOrientacioPorId(id);
+        }
     }
 }

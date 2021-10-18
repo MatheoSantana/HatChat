@@ -548,7 +548,7 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlCommand updateApodo = new MySqlCommand("update Usuario set apodo ='" + us.Apodo + "' where ci='" + us.Ci + "' ;", conexion);
-            MySqlCommand updatePassword = new MySqlCommand("update Usuario set contraseña ='" + us.Password + "' where ci='" + us.Ci + "' ;", conexion);
+            MySqlCommand updatePassword = new MySqlCommand("update Usuario set contrasenia ='" + us.Password + "' where ci='" + us.Ci + "' ;", conexion);
             MySqlCommand updateRespuesta = new MySqlCommand("update Usuario set resSeguridad ='" + us.Respuesta_seguridad + "' where ci='" + us.Ci + "' ;", conexion);
             MySqlCommand updatePregunta = new MySqlCommand("update Usuario set id =" + us.Preguta_seguridad + " where ci='" + us.Ci + "' ;", conexion);
             MySqlCommand updateFoto = new MySqlCommand("update Usuario set foto =@imagen where ci='" + us.Ci + "' ;", conexion);
@@ -1066,7 +1066,7 @@ namespace Hatchat.Persistencia
             {
                 SolicitudClaseAl soolicitudClaseAl = new SolicitudClaseAl();
 
-                soolicitudClaseAl.IdSolicitudClase = Convert.ToInt32(data.Rows[x][0].ToString());
+                soolicitudClaseAl.IdSolicitudClaseAl = Convert.ToInt32(data.Rows[x][0].ToString());
                 soolicitudClaseAl.FechaHora = soolicitudClaseAl.StringADateTime(data.Rows[x][1].ToString());
                 soolicitudClaseAl.Pendiente = true;
                 soolicitudClaseAl.Alumno = data.Rows[x][3].ToString();
@@ -1088,7 +1088,7 @@ namespace Hatchat.Persistencia
             {
                 SolicitudClaseDo solcitudClaseDo = new SolicitudClaseDo();
 
-                solcitudClaseDo.IdSolicitudClase = Convert.ToInt32(data.Rows[x][0].ToString());
+                solcitudClaseDo.IdSolicitudClaseDo = Convert.ToInt32(data.Rows[x][0].ToString());
                 solcitudClaseDo.FechaHora = solcitudClaseDo.StringADateTime(data.Rows[x][1].ToString());
                 solcitudClaseDo.Pendiente = true;
                 solcitudClaseDo.Docente = data.Rows[x][3].ToString();
@@ -1102,7 +1102,7 @@ namespace Hatchat.Persistencia
             List<SolicitudModif> solicitudesModif = new List<SolicitudModif>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from SolicitudClaseDo where pendiente = true order by fechaHora; ", conexion);
+            MySqlCommand select = new MySqlCommand("select * from SolicitudModif where pendiente = true order by fechaHora; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1119,6 +1119,278 @@ namespace Hatchat.Persistencia
             }
             conexion.Close();
             return solicitudesModif;
+        }
+        public SolicitudClaseAl SelectSolicitudClaseAlPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from SolicitudClaseAl where idSolicitudClaseAl=" + id + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            SolicitudClaseAl soli = new SolicitudClaseAl();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    soli.IdSolicitudClaseAl = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+                    soli.FechaHora = soli.StringADateTime(reader.GetString("fechaHora"));
+                    soli.Pendiente = true;
+                    soli.Alumno = reader.GetString("alumno");
+                }
+            }
+            conexion.Close();
+            return soli;
+        }
+        public List<ClaseSolicitudClaseAl> SelectClaseSolicitudClaseAl(int idSolicitudClaseAl)
+        {
+            List<ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<ClaseSolicitudClaseAl>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from claseSolicitudClaseAl where idSolicitudClaseAl = "+idSolicitudClaseAl+"; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                ClaseSolicitudClaseAl claseSolicitudClaseAl = new ClaseSolicitudClaseAl();
+
+                claseSolicitudClaseAl.IdSolicitudClaseAl = Convert.ToInt32(data.Rows[x][0].ToString());
+                claseSolicitudClaseAl.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                claseSolicitudClaseAl.OriClase = Convert.ToInt32(data.Rows[x][2].ToString());
+                claseSolicitudesClaseAl.Add(claseSolicitudClaseAl);
+            }
+            conexion.Close();
+            return claseSolicitudesClaseAl;
+        }
+        public List<AsignaturaSolicitudClaseAl> SelectAsignaturaSolicitudClaseAl(int idSolicitudClaseAl)
+        {
+            List<AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAl = new List<AsignaturaSolicitudClaseAl>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from asignaturaSolicitudClaseAl where idSolicitudClaseAl = " + idSolicitudClaseAl + "; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl = new AsignaturaSolicitudClaseAl();
+
+                asignaturaSolicitudClaseAl.IdSolicitudClaseAl = Convert.ToInt32(data.Rows[x][0].ToString());
+                asignaturaSolicitudClaseAl.IdClaseAsig = Convert.ToInt32(data.Rows[x][1].ToString());
+                asignaturaSolicitudClaseAl.OriClaseAsig = Convert.ToInt32(data.Rows[x][2].ToString());
+                asignaturaSolicitudClaseAl.IdAsignatura = data.Rows[x][3].ToString();
+                asignaturaSolicitudClaseAl.Aceptada = false;
+                if (data.Rows[x][4].ToString() == "True")
+                {
+                    asignaturaSolicitudClaseAl.Aceptada = true;
+                }
+                asignaturaSolicitudesClaseAl.Add(asignaturaSolicitudClaseAl);
+            }
+            conexion.Close();
+            return asignaturaSolicitudesClaseAl;
+        }
+        public void AceptarSolicitudClaseAlPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updatePendiente = new MySqlCommand("update SolicitudClaseAl set pendiente =false where idSolicitudClaseAl=" + id + ";", conexion);
+            updatePendiente.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(int id, string asig, bool aceptar)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada ="+aceptar+" where idSolicitudClaseAl=" + id + " and idAsignatura='"+asig+"';", conexion);
+            updateaceptada.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void InsertAsignaturaCursa(AsignaturaCursa asigCursa)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into asignaturaCursa values('" + asigCursa.Ci + "'," + asigCursa.IdClase + "," + asigCursa.Orientacion + "," + asigCursa.Anio + ",'" + asigCursa.AsignaturaCursada + "',true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void InsertCursa(Cursa cursa)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Cursa values('" + cursa.CiAlumno + "'," + cursa.IdClase + "," + cursa.Orientacion + "," + cursa.Anio + ");", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public SolicitudClaseDo SelectSolicitudClaseDoPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from SolicitudClaseAl where idSolicitudClaseDo=" + id + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            SolicitudClaseDo soli = new SolicitudClaseDo();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    soli.IdSolicitudClaseDo = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+                    soli.FechaHora = soli.StringADateTime(reader.GetString("fechaHora"));
+                    soli.Pendiente = true;
+                    soli.Docente = reader.GetString("docente");
+                }
+            }
+            conexion.Close();
+            return soli;
+        }
+        public List<ClaseSolicitudClaseDo> SelectClaseSolicitudClaseDo(int idSolicitudClaseAl)
+        {
+            List<ClaseSolicitudClaseDo> claseSolicitudesClaseDo = new List<ClaseSolicitudClaseDo>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from claseSolicitudesClaseAl where idSolicitudClaseAl = " + idSolicitudClaseAl + "; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                ClaseSolicitudClaseDo claseSolicitudClaseDo = new ClaseSolicitudClaseDo();
+
+                claseSolicitudClaseDo.IdSolicitudClaseDo = Convert.ToInt32(data.Rows[x][0].ToString());
+                claseSolicitudClaseDo.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                claseSolicitudClaseDo.OriClase = Convert.ToInt32(data.Rows[x][2].ToString());
+                claseSolicitudesClaseDo.Add(claseSolicitudClaseDo);
+            }
+            conexion.Close();
+            return claseSolicitudesClaseDo;
+        }
+        public List<AsignaturaSolicitudClaseDo> SelectAsignaturaSolicitudClaseDo(int idSolicitudClaseAl)
+        {
+            List<AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDo = new List<AsignaturaSolicitudClaseDo>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from asignaturaSolicitudClaseAl where idSolicitudClaseAl = " + idSolicitudClaseAl + "; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo = new AsignaturaSolicitudClaseDo();
+
+                asignaturaSolicitudClaseDo.IdSolicitudClaseDo = Convert.ToInt32(data.Rows[x][0].ToString());
+                asignaturaSolicitudClaseDo.IdClaseAsig = Convert.ToInt32(data.Rows[x][1].ToString());
+                asignaturaSolicitudClaseDo.OriClaseAsig = Convert.ToInt32(data.Rows[x][2].ToString());
+                asignaturaSolicitudClaseDo.IdAsignatura = data.Rows[x][3].ToString();
+                asignaturaSolicitudClaseDo.Aceptada = false;
+                if (data.Rows[x][4].ToString() == "True")
+                {
+                    asignaturaSolicitudClaseDo.Aceptada = true;
+                }
+                asignaturaSolicitudesClaseDo.Add(asignaturaSolicitudClaseDo);
+            }
+            conexion.Close();
+            return asignaturaSolicitudesClaseDo;
+        }
+        
+        public void AceptarSolicitudClaseDoPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updatePendiente = new MySqlCommand("update SolicitudClaseDo set pendiente =false where idSolicitudClaseDo=" + id + ";", conexion);
+            updatePendiente.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void AceptarAsignaturaSolicitudClaseDoPorIdSolicitudYIdAsig(int id, string asig, bool aceptar)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =" + aceptar + " where idSolicitudClaseAl=" + id + " and idAsignatura='" + asig + "';", conexion);
+            updateaceptada.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void InsertAsignaturaDictada(AsignaturaDictada asigDicta)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into asignaturaDictada values('" + asigDicta.Ci + "'," + asigDicta.IdClase + "," + asigDicta.Orientacion + "," + asigDicta.Anio + ",'" + asigDicta.AsigDictada + "',true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void InsertDicta(Dicta dicta)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Dicta values('" + dicta.CiDocente + "'," + dicta.IdClase + "," + dicta.Orientacion + "," + dicta.Anio + ");", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public SolicitudModif SelectSolicitudModifPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from SolicitudModif where idSolicitudModif=" + id + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            SolicitudModif soli = new SolicitudModif();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    soli.IdSolicitudModif = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+                    soli.FechaHora = soli.StringADateTime(reader.GetString("fechaHora"));
+                    soli.ContraNueva = reader.GetString("contraNueva");
+                    soli.Pendiente = true;
+                    soli.Usuario = reader.GetString("usuario");
+                }
+            }
+            conexion.Close();
+            return soli;
+        }
+        
+        public void AceptarSolicitudClaseDoPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updatePendiente = new MySqlCommand("update SolicitudClaseDo set pendiente =false where idSolicitudClaseDo=" + id + ";", conexion);
+            updatePendiente.ExecuteNonQuery();
+            conexion.Close();
+        }
+        
+        public void InsertDicta(Dicta dicta)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Dicta values('" + dicta.CiDocente + "'," + dicta.IdClase + "," + dicta.Orientacion + "," + dicta.Anio + ");", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+        public Orientacion SelectOrientacioPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from Orientacion where id="+ id +";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            Orientacion ori = new Orientacion();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    ori.Id = Convert.ToInt32(reader.GetString("id"));
+                    ori.Nombre =reader.GetString("nombre");
+                    ori.Activo = false;
+                    if (reader.GetString("activo") == "True")
+                    {
+                        ori.Activo = true;
+                    }
+                }
+            }
+            conexion.Close();
+            return ori;
         }
     }
 }

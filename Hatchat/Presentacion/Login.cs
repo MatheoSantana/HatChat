@@ -24,6 +24,8 @@ namespace Hatchat.Presentacion
         static PerfilAlumno perfilAlumno;
         static RegisterAlumno registerAlumno;
 
+        static PrincipalSolicitudesAdmin PrincipalSolicitudesAdmin;
+
         string usuarioNoEncontrado;
         string contraseñaIncorrecta;
 
@@ -180,7 +182,12 @@ namespace Hatchat.Presentacion
                     }
                     else if(encontrado.SelectAdministrador())
                     {
-                        MessageBox.Show("Desarrollo");
+                        txtCedula.Text = "";
+                        txtPassword.Text = "";
+                        PrincipalSolicitudesAdmin principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
+                        principalSolicitudesAdmin.login = this;
+                        principalSolicitudesAdmin.Show();
+                        this.Hide();
                     }
                 }
                 else

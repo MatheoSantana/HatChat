@@ -31,7 +31,7 @@ namespace Hatchat.Logica
             this.alumno = alumno;
         }
 
-        public int IdSolicitudClase
+        public int IdSolicitudClaseAl
         {
             get { return idSolicitudClase; }
             set { idSolicitudClase = value; }
@@ -89,6 +89,21 @@ namespace Hatchat.Logica
             DateTime fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
             return fh;
         }
+        public int StringAId(string cadena)
+        {
+            char[] aConvertir = cadena.ToCharArray();
+
+            string preId = "";
+            for (int x = 0; x < aConvertir.Length; x++)
+            {
+                if (aConvertir[x] == '0' || aConvertir[x] == '1' || aConvertir[x] == '2' || aConvertir[x] == '3' || aConvertir[x] == '4' || aConvertir[x] == '5' || aConvertir[x] == '6' || aConvertir[x] == '7' || aConvertir[x] == '8' || aConvertir[x] == '9')
+                {
+                    preId += aConvertir[x];
+                }
+            }
+            return Convert.ToInt32(preId);
+
+        }
         public void EnviarSolicitudClaseAl()
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
@@ -104,6 +119,16 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectSolicitudesClaseAl();
+        }
+        public SolicitudClaseAl SelectSolicitudClaseAlPorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectSolicitudClaseAlPorId(id);
+        }
+        public void AceptarSolicitudClaseAlPorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AceptarSolicitudClaseAlPorId(id);
         }
     }
 }

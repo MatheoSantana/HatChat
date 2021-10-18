@@ -15,10 +15,10 @@ namespace Hatchat.Logica
         public ClaseSolicitudClaseAl()
         {
         }
-        
-        public ClaseSolicitudClaseAl( int idClase, int oriClase)
+
+        public ClaseSolicitudClaseAl(int idClase, int oriClase)
         {
-            
+
             this.idClase = idClase;
             this.oriClase = oriClase;
         }
@@ -50,6 +50,11 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.EnviarClaseSolicitudClaseAl(this);
+        }
+        public List<ClaseSolicitudClaseAl> SelectClaseSolicitudClaseAl(int idSolicitudClaseAl)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectClaseSolicitudClaseAl(idSolicitudClaseAl);
         }
     }
 }

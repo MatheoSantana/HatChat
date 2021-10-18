@@ -43,5 +43,10 @@ namespace Hatchat.Logica
             get { return anio; }
             set { anio = value; }
         }
+        public void InsertCursa()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.InsertCursa(this);
+        }
     }
 }
