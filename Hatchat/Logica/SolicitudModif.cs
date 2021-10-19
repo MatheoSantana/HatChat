@@ -100,5 +100,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectSolicitudModifPorId(id);
         }
+        public void AceptarSolicitudModifPorSoliYAdmin(string ci, bool aceptar)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AceptarSolicitudModifPorSoliYAdmin(this, ci, aceptar);
+        }
     }
 }

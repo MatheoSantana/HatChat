@@ -70,9 +70,6 @@
     <Compile Include="Logica\Orientacion.cs" />
     <Compile Include="Logica\Preguntas.cs" />
     <Compile Include="Logica\Program.cs" />
-    <Compile Include="Logica\Responde.cs" />
-    <Compile Include="Logica\RespondeClaseAl.cs" />
-    <Compile Include="Logica\RespondeClaseDo.cs" />
     <Compile Include="Logica\SolicitaChat.cs" />
     <Compile Include="Logica\SolicitudClaseAl.cs" />
     <Compile Include="Logica\SolicitudClaseDo.cs" />

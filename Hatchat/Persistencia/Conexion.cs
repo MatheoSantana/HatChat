@@ -1190,19 +1190,21 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return asignaturaSolicitudesClaseAl;
         }
-        public void AceptarSolicitudClaseAlPorId(int id)
+        public void AceptarSolicitudClaseAlPorIdYAdmin(int id, string ci)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlCommand updatePendiente = new MySqlCommand("update SolicitudClaseAl set pendiente =false where idSolicitudClaseAl=" + id + ";", conexion);
             updatePendiente.ExecuteNonQuery();
+            MySqlCommand insertRespondeClaseAl = new MySqlCommand("insert into RespondeClaseAl values(" + id + ",'" + ci + "');", conexion);
+            insertRespondeClaseAl.ExecuteNonQuery();
             conexion.Close();
         }
-        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(int id, string asig, bool aceptar)
+        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(int id, string asig)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada ="+aceptar+" where idSolicitudClaseAl=" + id + " and idAsignatura='"+asig+"';", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =true where idSolicitudClaseAl=" + id + " and idAsignatura='"+asig+"';", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1293,19 +1295,21 @@ namespace Hatchat.Persistencia
             return asignaturaSolicitudesClaseDo;
         }
         
-        public void AceptarSolicitudClaseDoPorId(int id)
+        public void AceptarSolicitudClaseDoPorIdYAdmin(int id, string ci)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlCommand updatePendiente = new MySqlCommand("update SolicitudClaseDo set pendiente =false where idSolicitudClaseDo=" + id + ";", conexion);
             updatePendiente.ExecuteNonQuery();
+            MySqlCommand insertRespondeClaseDo = new MySqlCommand("insert into RespondeClaseDo values(" + id + ",'" + ci + "');", conexion);
+            insertRespondeClaseDo.ExecuteNonQuery();
             conexion.Close();
         }
-        public void AceptarAsignaturaSolicitudClaseDoPorIdSolicitudYIdAsig(int id, string asig, bool aceptar)
+        public void AceptarAsignaturaSolicitudClaseDoPorIdSolicitudYIdAsig(int id, string asig)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =" + aceptar + " where idSolicitudClaseAl=" + id + " and idAsignatura='" + asig + "';", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =true where idSolicitudClaseAl=" + id + " and idAsignatura='" + asig + "';", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1349,21 +1353,19 @@ namespace Hatchat.Persistencia
             return soli;
         }
         
-        public void AceptarSolicitudClaseDoPorId(int id)
+        public void AceptarSolicitudModifPorSoliYAdmin(SolicitudModif soli, string ci, bool aceptar)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updatePendiente = new MySqlCommand("update SolicitudClaseDo set pendiente =false where idSolicitudClaseDo=" + id + ";", conexion);
+            if (aceptar)
+            {
+                MySqlCommand updateContra = new MySqlCommand("update Usuario set contrasenia ='" + soli.ContraNueva + "' where ci='" + soli.Usuario + "';", conexion);
+                updateContra.ExecuteNonQuery();
+            }
+            MySqlCommand updatePendiente = new MySqlCommand("update SolicitudModif set pendiente =false where idSolicitudModif=" + soli.IdSolicitudModif + ";", conexion);
             updatePendiente.ExecuteNonQuery();
-            conexion.Close();
-        }
-        
-        public void InsertDicta(Dicta dicta)
-        {
-            MySqlConnection conexion = new MySqlConnection(connection);
-            conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into Dicta values('" + dicta.CiDocente + "'," + dicta.IdClase + "," + dicta.Orientacion + "," + dicta.Anio + ");", conexion);
-            insert.ExecuteNonQuery();
+            MySqlCommand insertResponde = new MySqlCommand("insert into Responde values(" + soli.IdSolicitudModif + ",'" + ci + "');", conexion);
+            insertResponde.ExecuteNonQuery();
             conexion.Close();
         }
 
