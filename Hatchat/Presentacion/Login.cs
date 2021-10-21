@@ -24,7 +24,10 @@ namespace Hatchat.Presentacion
         static PerfilAlumno perfilAlumno;
         static RegisterAlumno registerAlumno;
 
-        static PrincipalSolicitudesAdmin PrincipalSolicitudesAdmin;
+        static PrincipalSolicitudesAdmin principalSolicitudesAdmin;
+        static ABMAlumnoAdmin abmAlumnoAdmin;
+        
+
 
         string usuarioNoEncontrado;
         string contraseñaIncorrecta;
@@ -184,8 +187,14 @@ namespace Hatchat.Presentacion
                     {
                         txtCedula.Text = "";
                         txtPassword.Text = "";
-                        PrincipalSolicitudesAdmin principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
+                        principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
+                        abmAlumnoAdmin = new ABMAlumnoAdmin();
+
                         principalSolicitudesAdmin.login = this;
+                        principalSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
+
+                        abmAlumnoAdmin.login = this;
+                        abmAlumnoAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
                         principalSolicitudesAdmin.Show();
                         this.Hide();
                     }

@@ -133,7 +133,6 @@ namespace Hatchat.Presentacion
             this.pbxSolicitudesNav.Size = new System.Drawing.Size(81, 81);
             this.pbxSolicitudesNav.TabIndex = 1;
             this.pbxSolicitudesNav.TabStop = false;
-            this.pbxSolicitudesNav.Click += new System.EventHandler(this.pbxSolicitudesNav_Click);
             // 
             // lblSolicitudes
             // 

@@ -165,3 +165,6 @@ C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\bin\Debug\K4os.H
 C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\bin\Debug\System.Numerics.Vectors.dll
 C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\bin\Debug\MySql.Data.xml
 C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatchat.csproj.CopyComplete
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.PrincipalSolicitudesAdmin.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.ABMAlumnoAdmin.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.ABMDocenteAdmin.resources

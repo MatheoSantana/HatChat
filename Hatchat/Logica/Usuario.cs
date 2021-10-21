@@ -118,9 +118,10 @@ namespace Hatchat.Logica
                 if (SelectAdministrador())
                 {
                     Image nueva = Image.FromFile("Administrador.png");
-                    fotoDePerfil=ImageToByteArray(nueva);
+                    fotoDePerfil = ImageToByteArray(nueva);
                     return nueva;
-                }else if (SelectAlumno())
+                }
+                else if (SelectAlumno())
                 {
                     Image nueva = Image.FromFile("Alumno.png");
                     fotoDePerfil = ImageToByteArray(nueva);
@@ -144,13 +145,14 @@ namespace Hatchat.Logica
         public byte[] ImageToByteArray(Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, ImageFormat.Jpeg);
+            ImageFormat imf = imageIn.RawFormat;
+            imageIn.Save(ms, imf);
             return ms.ToArray();
         }
         public bool VerficarCedula(string ci)
         {
             int[] nCedula = new int[8];
-            int[] numerosVer = { 2,9,8,7,6,3,4 };
+            int[] numerosVer = { 2, 9, 8, 7, 6, 3, 4 };
             int guion = 0;
             int aux = 0;
             int suma = 0;
@@ -248,6 +250,11 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectDocentesDictandoAAlumno(ci);
+        }
+        public List<Agenda> SelectAgendasPorCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAgendasPorCi(ci);
         }
     }
 }

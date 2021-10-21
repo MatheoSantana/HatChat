@@ -53,11 +53,36 @@ namespace Hatchat.Logica
             get { return ci; }
             set { ci = value; }
         }
+        public int StringAId(string cadena)
+        {
+            char[] aConvertir = cadena.ToCharArray();
+
+            string preId = "";
+            for (int x = 0; x < aConvertir.Length; x++)
+            {
+                if (aConvertir[x] == '0' || aConvertir[x] == '1' || aConvertir[x] == '2' || aConvertir[x] == '3' || aConvertir[x] == '4' || aConvertir[x] == '5' || aConvertir[x] == '6' || aConvertir[x] == '7' || aConvertir[x] == '8' || aConvertir[x] == '9')
+                {
+                    preId += aConvertir[x];
+                }
+            }
+            return Convert.ToInt32(preId);
+
+        }
+        public List<Agenda> SelectAgendasPorCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAgendasPorCi(ci);
+        }
 
         public Agenda SelectAgendaConCi(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAgendaConCi(ci);
         }
-    }
+        public Agenda SelectAgendaPorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAgendaPorId(id);
+        }
+        }
 }

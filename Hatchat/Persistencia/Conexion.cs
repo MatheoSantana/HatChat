@@ -18,7 +18,7 @@ namespace Hatchat.Persistencia
 
         static string server = "Server = localhost; ";
         static string port = "Port = 3306; ";
-        static string database = "Database = Hatchat; ";
+        static string database = "Database = Hatchat1; ";
         static string uid = "Uid = root; ";
         static string pwd = "Pwd = math2002;";
         static string connection = server + port + database + uid + pwd;
@@ -1012,7 +1012,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into ChateaAl values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + chatea.HoraEnvio.ToString("HH") + ":" + chatea.HoraEnvio.ToString("mm") + ":" + chatea.HoraEnvio.ToString("ss") + "','"+chatea.Contenido+"');", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into ChateaAl values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + chatea.HoraEnvio.ToString("HH") + ":" + chatea.HoraEnvio.ToString("mm") + ":" + chatea.HoraEnvio.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1028,11 +1028,11 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateEstado = new MySqlCommand("update Chat set activo = false where idChat="+chat.IdChat+";", conexion);
+            MySqlCommand updateEstado = new MySqlCommand("update Chat set activo = false where idChat=" + chat.IdChat + ";", conexion);
             updateEstado.ExecuteNonQuery();
-            MySqlCommand updateHoraFin = new MySqlCommand("update Chat set horaFin = '"+ chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm") + ":" + chat.HoraFin.ToString("ss") + "' where idChat=" + chat.IdChat + ";", conexion);
+            MySqlCommand updateHoraFin = new MySqlCommand("update Chat set horaFin = '" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm") + ":" + chat.HoraFin.ToString("ss") + "' where idChat=" + chat.IdChat + ";", conexion);
             updateHoraFin.ExecuteNonQuery();
-            MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo = '"+chat.Titulo+"' where idChat=" + chat.IdChat + ";", conexion);
+            MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo = '" + chat.Titulo + "' where idChat=" + chat.IdChat + ";", conexion);
             updateTitulo.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1048,11 +1048,11 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo ='"+chat.Titulo+"' where idChat=" + chat.IdChat + ";", conexion);
+            MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo ='" + chat.Titulo + "' where idChat=" + chat.IdChat + ";", conexion);
             updateTitulo.ExecuteNonQuery();
             conexion.Close();
         }
-        
+
         public List<SolicitudClaseAl> SelectSolicitudesClaseAl()
         {
             List<SolicitudClaseAl> solicitudesClaseAl = new List<SolicitudClaseAl>();
@@ -1147,7 +1147,7 @@ namespace Hatchat.Persistencia
             List<ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<ClaseSolicitudClaseAl>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from claseSolicitudClaseAl where idSolicitudClaseAl = "+idSolicitudClaseAl+"; ", conexion);
+            MySqlCommand select = new MySqlCommand("select * from claseSolicitudClaseAl where idSolicitudClaseAl = " + idSolicitudClaseAl + "; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1204,7 +1204,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =true where idSolicitudClaseAl=" + id + " and idAsignatura='"+asig+"';", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =true where idSolicitudClaseAl=" + id + " and idAsignatura='" + asig + "';", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1294,7 +1294,7 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return asignaturaSolicitudesClaseDo;
         }
-        
+
         public void AceptarSolicitudClaseDoPorIdYAdmin(int id, string ci)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
@@ -1342,7 +1342,7 @@ namespace Hatchat.Persistencia
             {
                 while (reader.Read())
                 {
-                    soli.IdSolicitudModif = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+                    soli.IdSolicitudModif = Convert.ToInt32(reader.GetString("idSolicitudModif"));
                     soli.FechaHora = soli.StringADateTime(reader.GetString("fechaHora"));
                     soli.ContraNueva = reader.GetString("contraNueva");
                     soli.Pendiente = true;
@@ -1352,7 +1352,7 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return soli;
         }
-        
+
         public void AceptarSolicitudModifPorSoliYAdmin(SolicitudModif soli, string ci, bool aceptar)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
@@ -1374,7 +1374,7 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            string query = "select * from Orientacion where id="+ id +";";
+            string query = "select * from Orientacion where id=" + id + ";";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
             Orientacion ori = new Orientacion();
@@ -1383,7 +1383,7 @@ namespace Hatchat.Persistencia
                 while (reader.Read())
                 {
                     ori.Id = Convert.ToInt32(reader.GetString("id"));
-                    ori.Nombre =reader.GetString("nombre");
+                    ori.Nombre = reader.GetString("nombre");
                     ori.Activo = false;
                     if (reader.GetString("activo") == "True")
                     {
@@ -1393,6 +1393,54 @@ namespace Hatchat.Persistencia
             }
             conexion.Close();
             return ori;
+        }
+
+        public List<Agenda> SelectAgendasPorCi(string ci)
+        {
+            List<Agenda> agendas = new List<Agenda>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from Agenda where ci = '" + ci + "'; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Agenda agenda = new Agenda();
+
+                agenda.IdAgenda = Convert.ToInt32(data.Rows[x][0].ToString());
+                agenda.NomDia = data.Rows[x][1].ToString();
+                agenda.HoraInicio = data.Rows[x][2].ToString();
+                agenda.HoraFin = data.Rows[x][3].ToString();
+                agenda.Ci = data.Rows[x][4].ToString();
+
+                agendas.Add(agenda);
+            }
+            conexion.Close();
+            return agendas;
+        }
+        public Agenda SelectAgendaPorId(int id)
+        {
+            Agenda agenda = new Agenda();
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Agenda where idAgenda='" + id + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    agenda.IdAgenda = Convert.ToInt32(reader.GetString("idAgenda"));
+                    agenda.NomDia = reader.GetString("nomDia");
+                    agenda.HoraInicio = reader.GetString("horaInicio");
+                    agenda.HoraFin = reader.GetString("horaFin");
+                    agenda.Ci = reader.GetString("ci");
+                }
+            }
+            conexion.Close();
+            return agenda;
         }
     }
 }

@@ -107,7 +107,7 @@ namespace Hatchat.Presentacion
         private void lblCambiarFoto_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofdFoto = new OpenFileDialog();
-            ofdFoto.Filter = "Imagenes|*.jpeg";
+            ofdFoto.Filter = "Imagenes|*.jpeg;*.jpg;*.png";
             ofdFoto.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             ofdFoto.Title = "Seleccionar imagen";
             if (ofdFoto.ShowDialog() == DialogResult.OK)

@@ -137,6 +137,7 @@ namespace Hatchat.Presentacion
             xchbx = 50;
 
             asigs.AddRange(new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cbxClases.SelectedItem.ToString(), Convert.ToInt32(cbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id));
+            claseSeleccionada = new Logica.Clase();
             claseSeleccionada.Anio = Convert.ToInt32(cbxAnio.SelectedItem.ToString());
             claseSeleccionada.Orientacion = orientacionSeleccionada.Id;
             claseSeleccionada.Nombre = cbxClases.SelectedItem.ToString();
@@ -202,7 +203,6 @@ namespace Hatchat.Presentacion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
             panelAgregadas.AutoScrollPosition = Point.Empty;
             panelAsignaturas.AutoScrollPosition = Point.Empty;
             Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl = new Logica.ClaseSolicitudClaseAl(claseSeleccionada.IdClase, orientacionSeleccionada.Id);

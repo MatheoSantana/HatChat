@@ -13,7 +13,7 @@ namespace Hatchat.Presentacion
 {
     public partial class PrincipalSolicitudesAdmin : Form
     {
-        public Form login;
+        
         List<Logica.ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
         Logica.SolicitudClaseAl soliAl = new Logica.SolicitudClaseAl();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
@@ -25,41 +25,76 @@ namespace Hatchat.Presentacion
         List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
 
         Logica.SolicitudModif soliMo = new Logica.SolicitudModif();
+
+        public Form login;
+        public Form abmAlumnoAdmin;
+        public Form abmDocenteAdmin;
+        public Form abmGruposAdmin;
+        public Form historialSolicitudes;
+
         public PrincipalSolicitudesAdmin()
         {
             
             InitializeComponent();
             panelSolicitud.Visible = false;
-        }
+            try
+            {
+                Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+                pbxSolicitudesNav.Image = Image.FromFile("solicitudes admin blanco.png");
+                pbxABMAlumnoNav.Image = Image.FromFile("abm alumno gris.png");
+                pbxABMDocenteNav.Image = Image.FromFile("abm docente gris.png");
+                pbxABMGruposNav.Image = Image.FromFile("abm grupos gris.png");
+                pbxHistorialSolicitudesNav.Image = Image.FromFile("historial gris.png");
+                pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+            }
+            catch (System.IO.FileNotFoundException ex)
+            {
+                MessageBox.Show("archivo faltante (" + ex.Message + ") comuníquese con el administrador.", "Error");
 
-        private void pbxSolicitudesNav_Click(object sender, EventArgs e)
-        {
-
+            }
+            pbxFotoPerfilNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxABMAlumnoNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxABMDocenteNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxABMGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void pbxABMAlumnoNav_Click(object sender, EventArgs e)
         {
-
+            abmAlumnoAdmin.Show();
+            this.Hide();
         }
 
         private void pbxABMDocenteNav_Click(object sender, EventArgs e)
         {
-
+            abmDocenteAdmin.Show();
+            this.Hide();
         }
 
         private void pbxABMGruposNav_Click(object sender, EventArgs e)
         {
-
+            abmGruposAdmin.Show();
+            this.Hide();
         }
 
         private void pbxHistorialSolicitudesNav_Click(object sender, EventArgs e)
         {
-
+            historialSolicitudes.Show();
+            this.Hide();
         }
 
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
+            {
+                Login.encontrado = new Logica.Usuario();
+                login.Show();
+                this.Dispose();
+            }
         }
 
         private void PrincipalSolicitudesAdmin_Load(object sender, EventArgs e)

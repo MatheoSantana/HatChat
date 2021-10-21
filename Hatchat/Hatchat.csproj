@@ -76,6 +76,18 @@
     <Compile Include="Logica\SolicitudModif.cs" />
     <Compile Include="Logica\Usuario.cs" />
     <Compile Include="Persistencia\Conexion.cs" />
+    <Compile Include="Presentacion\ABMDocenteAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\ABMDocenteAdmin.Designer.cs">
+      <DependentUpon>ABMDocenteAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\ABMAlumnoAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\ABMAlumnoAdmin.Designer.cs">
+      <DependentUpon>ABMAlumnoAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\PrincipalSolicitudesAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +179,12 @@
       <DependentUpon>RegisterDocente.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentacion\ABMDocenteAdmin.resx">
+      <DependentUpon>ABMDocenteAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\ABMAlumnoAdmin.resx">
+      <DependentUpon>ABMAlumnoAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\PrincipalSolicitudesAdmin.resx">
       <DependentUpon>PrincipalSolicitudesAdmin.cs</DependentUpon>
     </EmbeddedResource>
