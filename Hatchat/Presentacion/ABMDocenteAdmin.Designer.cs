@@ -853,9 +853,9 @@ namespace Hatchat.Presentacion
             this.panelAgregarAgenda.Controls.Add(this.cmbxMinutoInicio);
             this.panelAgregarAgenda.Controls.Add(this.cmbxHoraInicio);
             this.panelAgregarAgenda.Controls.Add(this.lblInicio);
-            this.panelAgregarAgenda.Location = new System.Drawing.Point(134, 209);
+            this.panelAgregarAgenda.Location = new System.Drawing.Point(131, 83);
             this.panelAgregarAgenda.Name = "panelAgregarAgenda";
-            this.panelAgregarAgenda.Size = new System.Drawing.Size(599, 251);
+            this.panelAgregarAgenda.Size = new System.Drawing.Size(629, 261);
             this.panelAgregarAgenda.TabIndex = 27;
             this.panelAgregarAgenda.Visible = false;
             // 
@@ -1053,7 +1053,6 @@ namespace Hatchat.Presentacion
             this.panelHorariosPorDia.Name = "panelHorariosPorDia";
             this.panelHorariosPorDia.Size = new System.Drawing.Size(263, 135);
             this.panelHorariosPorDia.TabIndex = 25;
-            this.panelHorariosPorDia.Visible = false;
             // 
             // btnBuscarAgenda
             // 
@@ -1095,8 +1094,8 @@ namespace Hatchat.Presentacion
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.panelAgenda);
             this.Controls.Add(this.btnAgenda);
+            this.Controls.Add(this.panelAgenda);
             this.Controls.Add(this.lblABMAlumno);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnBaja);

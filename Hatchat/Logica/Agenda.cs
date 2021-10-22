@@ -37,7 +37,7 @@ namespace Hatchat.Logica
             get { return nomDia; }
             set { nomDia = value; }
         }
-        
+
         public string HoraInicio
         {
             get { return horaInicio; }
@@ -84,5 +84,15 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAgendaPorId(id);
         }
+        public void EliminarAgendaPorId(int id)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EliminarAgendaPorId(id);
         }
+        public void AgregarAgenda()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AgregarAgenda(this);
+        }
+    }
 }

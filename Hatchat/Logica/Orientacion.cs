@@ -46,5 +46,20 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectOrientacioPorId(id);
         }
+        public bool SelectExisteNombreOrientacion(string nombre)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectExisteNombreOrientacion(nombre);
+        }
+        public void AltaOrientacion(string nombre)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AltaOrientacion(nombre);
+        }
+        public Orientacion SelectOrientacionPorNombre(string nombre)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectOrientacionPorNombre(nombre);
+        }
     }
 }

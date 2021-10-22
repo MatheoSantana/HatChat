@@ -1442,5 +1442,105 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return agenda;
         }
+        public void EliminarAgendaPorId(int id)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand deleteAgenda = new MySqlCommand("delete from Agenda where idAgenda =" + id + ";", conexion);
+            deleteAgenda.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+        public void AgregarAgenda(Agenda agenda)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Agenda (nomDia,horaInicio,horaFin,ci) values('" + agenda.NomDia + "','" + agenda.HoraInicio + "','" + agenda.HoraFin + "','" + agenda.Ci + "');", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+
+        public List<Asignatura> SelectAsignaturas()
+        {
+            List<Asignatura> asignaturas = new List<Asignatura>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from Asignatura where activo=true;", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Asignatura asignatura = new Asignatura();
+
+                asignatura.Id = data.Rows[x][0].ToString();
+                asignatura.Nombre = data.Rows[x][1].ToString();
+                asignatura.Anio = Convert.ToInt32(data.Rows[x][2].ToString());
+                asignatura.Activo = true;
+                asignaturas.Add(asignatura);
+            }
+            conexion.Close();
+            return asignaturas;
+        }
+        public bool SelectExisteNombreOrientacion(string nombre)
+        {
+            bool existe = false;
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Orientacion where nombre='" + nombre + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+        public void AltaOrientacion(string nombre)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Orientacion (nombre,activo) values('" + nombre + ",'true');", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public Orientacion SelectOrientacionPorNombre(string nombre)
+        {
+            Orientacion ori = new Orientacion();
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Orientacion where nombre='" + nombre + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    ori.Id = Convert.ToInt32(reader.GetString("id"));
+                    ori.Nombre = reader.GetString("nombre");
+                    ori.Activo = false;
+                    if(reader.GetString("activo")== "True")
+                    {
+                        ori.Activo = true;
+                    }
+                }
+            }
+            conexion.Close();
+            return ori;
+        }
+        public void AltaContiene(Contiene cont)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Contiene (idAsig,idOri) values('" + cont.Asignatura + ","+cont.Orientacion+");", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
     }
 }

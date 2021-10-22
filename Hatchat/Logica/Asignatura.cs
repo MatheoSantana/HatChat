@@ -64,6 +64,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAsignaturasPorCi(ci);
         }
-        
+        public List<Asignatura> SelectAsignaturas()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturas();
+        }
     }
 }

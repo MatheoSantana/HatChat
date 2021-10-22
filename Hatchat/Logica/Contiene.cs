@@ -6,20 +6,20 @@ namespace Hatchat.Logica
 {
     public class Contiene
     {
-        private int asignatura;
+        private string asignatura;
         private int orientacion;
 
         public Contiene()
         {
 
         }
-        public Contiene(int asignatura, int orientacion)
+        public Contiene(string asignatura, int orientacion)
         {
             this.orientacion = orientacion;
             this.asignatura = asignatura;
         }
 
-        public int Asignatura
+        public string Asignatura
         {
             get { return asignatura; }
             set { asignatura = value; }
@@ -29,7 +29,11 @@ namespace Hatchat.Logica
             get { return orientacion; }
             set { orientacion = value; }
         }
-    
+        public void AltaContiene()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AltaContiene(this);
+        }
     }
 
 }

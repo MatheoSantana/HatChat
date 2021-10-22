@@ -71,6 +71,10 @@ namespace Hatchat.Presentacion
             cmbxOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbxClase.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbxPreguntaSeg.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxHoraInicio.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxHoraCierre.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxMinutoCierre.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxMinutoInicio.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
                 cmbxPreguntaSeg.Items.Add(preg.Pregunta);               
@@ -82,7 +86,16 @@ namespace Hatchat.Presentacion
             cmbxPreguntaSeg.SelectedIndex = 0;
             txtPassword.UseSystemPasswordChar = true;
             txtConfirmarPassword.UseSystemPasswordChar = true;
-
+            for (int x = 0; x < 24; x++) 
+            {
+                cmbxHoraInicio.Items.Add(x);
+                cmbxHoraCierre.Items.Add(x);
+            }
+            for (int x = 0; x < 60; x++)
+            {
+                cmbxMinutoCierre.Items.Add(x);
+                cmbxMinutoInicio.Items.Add(x);
+            }
         }
         private void ABMAlumnoAdmin_Load(object sender, EventArgs e)
         {
@@ -490,60 +503,141 @@ namespace Hatchat.Presentacion
             btnMiercoles.BackColor= SystemColors.Control;
             btnJueves.BackColor = SystemColors.Control;
             btnViernes.BackColor = SystemColors.Control;
-            RecargarAgendaDelDia();
+            RecargarAgendaDelDia("Lunes");
         }
-        private void RecargarAgendaDelDia()
+        
+
+        private void btnMartes_Click(object sender, EventArgs e)
+        {
+            btnLunes.BackColor = SystemColors.Control;
+            btnMartes.BackColor = Color.Orange;
+            btnMiercoles.BackColor = SystemColors.Control;
+            btnJueves.BackColor = SystemColors.Control;
+            btnViernes.BackColor = SystemColors.Control;
+            RecargarAgendaDelDia("Martes");
+        }
+
+        private void btnMiercoles_Click(object sender, EventArgs e)
+        {
+            btnLunes.BackColor = SystemColors.Control;
+            btnMartes.BackColor = SystemColors.Control;
+            btnMiercoles.BackColor = Color.Orange;
+            btnJueves.BackColor = SystemColors.Control;
+            btnViernes.BackColor = SystemColors.Control;
+            RecargarAgendaDelDia("Miercoles");
+        }
+
+        private void btnJueves_Click(object sender, EventArgs e)
+        {
+            btnLunes.BackColor = SystemColors.Control;
+            btnMartes.BackColor = SystemColors.Control;
+            btnMiercoles.BackColor = SystemColors.Control;
+            btnJueves.BackColor = Color.Orange;
+            btnViernes.BackColor = SystemColors.Control;
+            RecargarAgendaDelDia("Jueves");
+        }
+
+        private void btnViernes_Click(object sender, EventArgs e)
+        {
+            btnLunes.BackColor = SystemColors.Control;
+            btnMartes.BackColor = SystemColors.Control;
+            btnMiercoles.BackColor = SystemColors.Control;
+            btnJueves.BackColor = SystemColors.Control;
+            btnViernes.BackColor = Color.Orange;
+            RecargarAgendaDelDia("Viernes");
+        }
+
+        private void RecargarAgendaDelDia(string dia)
         {
             int y = 5;
+            panelHorariosPorDia.Controls.Clear();
             foreach (Logica.Agenda agenda in agendas)
             {
-                Label dina = new Label();
-                dina.Height = 46;
-                dina.Width = 150;
-                dina.Location = new Point(25, y);
-                y += 50;
-                dina.Name = "lblAdendaDelDia" + agenda.IdAgenda.ToString();
-                dina.Text = agenda.HoraInicio + " - " + agenda.HoraFin + " (click para eliminar)";
-                dina.BorderStyle = BorderStyle.FixedSingle;
-                dina.Click += new EventHandler(EliminarAgenda);
-                panelHorariosPorDia.Controls.Add(dina);
+                if (agenda.NomDia == dia)
+                {
+                    Label dina = new Label();
+                    dina.Height = 46;
+                    dina.Width = 150;
+                    dina.Location = new Point(25, y);
+                    y += 50;
+                    dina.Name = "lblAdendaDelDia" + agenda.IdAgenda.ToString();
+                    dina.Text = agenda.HoraInicio + " - " + agenda.HoraFin + " (click para eliminar)";
+                    dina.BorderStyle = BorderStyle.FixedSingle;
+                    dina.Click += new EventHandler(EliminarAgenda);
+                    panelHorariosPorDia.Controls.Add(dina);
+                }
             }
         }
 
         private void EliminarAgenda(object sender, EventArgs e)
         {
-            Logica.Agenda age = new Logica.Agenda().SelectAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
-
-        }
-
-        private void btnMartes_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMiercoles_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnJueves_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnViernes_Click(object sender, EventArgs e)
-        {
-
+            new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
+            MessageBox.Show("Se ha eliminado la agenda");
         }
 
         private void btnNuevaAgenda_Click(object sender, EventArgs e)
         {
-
+            panelAgregarAgenda.Visible = true;
+            panelDiasYHorarios.Visible = false;
         }
 
         private void btnAgregarNuevaAgenda_Click(object sender, EventArgs e)
         {
-
+            if (!chbxLunes.Checked && !chbxMartes.Checked && !chbxMiercoles.Checked && !chbxJueves.Checked && !chbxViernes.Checked)
+            {
+                MessageBox.Show("No se ha seleccionado ningun dia");
+            }
+            else
+            {
+                if (chbxLunes.Checked)
+                {
+                    Logica.Agenda agenda = new Logica.Agenda();
+                    agenda.Ci = doAgenda.Ci;
+                    agenda.HoraInicio = cmbxHoraInicio.SelectedItem.ToString() + ":" + cmbxMinutoInicio.SelectedItem.ToString() + ":00";
+                    agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
+                    agenda.NomDia = "Lunes";
+                    agenda.AgregarAgenda();
+                }
+                if (chbxMartes.Checked)
+                {
+                    Logica.Agenda agenda = new Logica.Agenda();
+                    agenda.Ci = doAgenda.Ci;
+                    agenda.HoraInicio = cmbxHoraInicio.SelectedItem.ToString()+":"+cmbxMinutoInicio.SelectedItem.ToString()+":00";
+                    agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
+                    agenda.NomDia = "Martes";
+                    agenda.AgregarAgenda();
+                }
+                if (chbxMiercoles.Checked)
+                {
+                    Logica.Agenda agenda = new Logica.Agenda();
+                    agenda.Ci = doAgenda.Ci;
+                    agenda.HoraInicio = cmbxHoraInicio.SelectedItem.ToString() + ":" + cmbxMinutoInicio.SelectedItem.ToString() + ":00";
+                    agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
+                    agenda.NomDia = "Miercoles";
+                    agenda.AgregarAgenda();
+                }
+                if (chbxJueves.Checked)
+                {
+                    Logica.Agenda agenda = new Logica.Agenda();
+                    agenda.Ci = doAgenda.Ci;
+                    agenda.HoraInicio = cmbxHoraInicio.SelectedItem.ToString() + ":" + cmbxMinutoInicio.SelectedItem.ToString() + ":00";
+                    agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
+                    agenda.NomDia = "Jueves";
+                    agenda.AgregarAgenda();
+                }
+                if (chbxViernes.Checked)
+                {
+                    Logica.Agenda agenda = new Logica.Agenda();
+                    agenda.Ci = doAgenda.Ci;
+                    agenda.HoraInicio = cmbxHoraInicio.SelectedItem.ToString() + ":" + cmbxMinutoInicio.SelectedItem.ToString() + ":00";
+                    agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
+                    agenda.NomDia = "Viernes";
+                    agenda.AgregarAgenda();
+                }
+                MessageBox.Show("Se ha agendado correctamente");
+                panelAgregarAgenda.Visible = false;
+                panelDiasYHorarios.Visible = true;
+            }
         }
     }
 }

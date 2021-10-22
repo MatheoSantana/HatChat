@@ -26,7 +26,8 @@ namespace Hatchat.Presentacion
 
         static PrincipalSolicitudesAdmin principalSolicitudesAdmin;
         static ABMAlumnoAdmin abmAlumnoAdmin;
-        
+        static ABMDocenteAdmin abmDocenteAdmin;
+
 
 
         string usuarioNoEncontrado;
@@ -189,12 +190,21 @@ namespace Hatchat.Presentacion
                         txtPassword.Text = "";
                         principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
                         abmAlumnoAdmin = new ABMAlumnoAdmin();
+                        abmDocenteAdmin = new ABMDocenteAdmin();
 
                         principalSolicitudesAdmin.login = this;
                         principalSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
+                        principalSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                        
 
                         abmAlumnoAdmin.login = this;
                         abmAlumnoAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                        abmAlumnoAdmin.abmDocenteAdmin = abmDocenteAdmin;
+
+                        abmDocenteAdmin.login = this;
+                        abmDocenteAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                        abmDocenteAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
+
                         principalSolicitudesAdmin.Show();
                         this.Hide();
                     }
