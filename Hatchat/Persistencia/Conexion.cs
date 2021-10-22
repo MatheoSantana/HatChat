@@ -1538,7 +1538,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into Contiene (idAsig,idOri) values('" + cont.Asignatura + ","+cont.Orientacion+");", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into Contiene (idAsig,idOri,activo) values('" + cont.Asignatura + ","+cont.Orientacion+",true);", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
         }

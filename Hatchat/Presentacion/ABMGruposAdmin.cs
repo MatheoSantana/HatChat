@@ -15,6 +15,7 @@ namespace Hatchat.Presentacion
         private int ychbx = 50, xchbx = 50, xlbl = 50, ylbl = 50;
         private List<Logica.Asignatura> AsignaturasAltaOrientacion = new List<Logica.Asignatura>();
         private List<Logica.Contiene> contieneAltaOrientacion = new List<Logica.Contiene>();
+        private List<Logica.Orientacion> orientacionesBajaOrientacion = new List<Logica.Orientacion>();
 
         public Form login;
         public Form principalSolicitudesAdmin;
@@ -50,6 +51,7 @@ namespace Hatchat.Presentacion
             pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            cmbxNombreBajaOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
     
@@ -107,6 +109,20 @@ namespace Hatchat.Presentacion
 
         private void btnAltaOrientacion_Click(object sender, EventArgs e)
         {
+            panelABMOrientacion.Visible = false;
+
+            panelAltaOrientacion.Visible = !panelAltaOrientacion.Visible;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
+
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
+
             AsignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
             foreach (Logica.Asignatura asig in AsignaturasAltaOrientacion)
             {
@@ -179,16 +195,52 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                MessageBox.Show("Ese nombre ya existe, ponga otro");
+                MessageBox.Show("Ese nombre ya existe, pruebe con otro");
             }
         }
         private void btnBajaOrientacion_Click(object sender, EventArgs e)
         {
+            panelABMOrientacion.Visible = false;
 
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = !panelBajaOrientacion.Visible;
+            panelModificarOrientacion.Visible = false;
+
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
+
+            orientacionesBajaOrientacion = new Logica.Orientacion().SelectOrientaciones();
+            foreach(Logica.Orientacion orientacion in orientacionesBajaOrientacion)
+            {
+                cmbxNombreBajaOrientacion.Items.Add(orientacion.Nombre);
+            }
+            
+        }
+        private void btnEliminarBajaOrientacion_Click(object sender, EventArgs e)
+        {
+            orientacionesBajaOrientacion[cmbxNombreBajaOrientacion.SelectedIndex].
         }
 
         private void btnModificarOrientacion_Click(object sender, EventArgs e)
         {
+            panelABMOrientacion.Visible = false;
+
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = !panelModificarOrientacion.Visible;
+
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
 
         }
 
@@ -201,17 +253,47 @@ namespace Hatchat.Presentacion
 
         private void btnAltaAsignatura_Click(object sender, EventArgs e)
         {
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
 
+            panelAltaAsignatura.Visible = !panelAltaAsignatura.Visible;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
         }
 
         private void btnBajaAsignatura_Click(object sender, EventArgs e)
         {
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
 
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = !panelBajaAsignatura.Visible;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
         }
 
         private void btnModificarAsignatura_Click(object sender, EventArgs e)
         {
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
 
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = !panelModificarAsignatura.Visible;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
         }
 
         private void btnClase_Click(object sender, EventArgs e)
@@ -223,17 +305,47 @@ namespace Hatchat.Presentacion
 
         private void btnAltaClase_Click(object sender, EventArgs e)
         {
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
 
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = !panelAltaClase.Visible;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = false;
         }
 
         private void btnBajaClase_Click(object sender, EventArgs e)
         {
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
 
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = !panelBajaClase.Visible;
+            panelModificarClase.Visible = false;
         }
 
         private void btnModificarClase_Click(object sender, EventArgs e)
         {
+            panelAltaOrientacion.Visible = false;
+            panelBajaOrientacion.Visible = false;
+            panelModificarOrientacion.Visible = false;
 
+            panelAltaAsignatura.Visible = false;
+            panelBajaAsignatura.Visible = false;
+            panelModificarAsignatura.Visible = false;
+
+            panelAltaClase.Visible = false;
+            panelBajaClase.Visible = false;
+            panelModificarClase.Visible = !panelModificarClase.Visible;
         }
     }
 }

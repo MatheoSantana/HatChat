@@ -45,7 +45,7 @@ namespace Hatchat.Presentacion
             this.txtNombreAltaOrientacion = new System.Windows.Forms.TextBox();
             this.lblNombreAltaOrientacion = new System.Windows.Forms.Label();
             this.btnDarAltaOrientacion = new System.Windows.Forms.Button();
-            this.panelAltaModificacion = new System.Windows.Forms.Panel();
+            this.panelAltaOrientacion = new System.Windows.Forms.Panel();
             this.panelAltaOrientacionAsignaturas = new System.Windows.Forms.Panel();
             this.panelABMOrientacion = new System.Windows.Forms.Panel();
             this.btnModificarOrientacion = new System.Windows.Forms.Button();
@@ -59,6 +59,17 @@ namespace Hatchat.Presentacion
             this.btnModificarClase = new System.Windows.Forms.Button();
             this.btnBajaClase = new System.Windows.Forms.Button();
             this.btnAltaClase = new System.Windows.Forms.Button();
+            this.panelBajaOrientacion = new System.Windows.Forms.Panel();
+            this.panelModificarOrientacion = new System.Windows.Forms.Panel();
+            this.panelBajaAsignatura = new System.Windows.Forms.Panel();
+            this.panelAltaAsignatura = new System.Windows.Forms.Panel();
+            this.panelModificarClase = new System.Windows.Forms.Panel();
+            this.panelAltaClase = new System.Windows.Forms.Panel();
+            this.panelBajaClase = new System.Windows.Forms.Panel();
+            this.panelModificarAsignatura = new System.Windows.Forms.Panel();
+            this.lblBajaOrientacion = new System.Windows.Forms.Label();
+            this.cmbxNombreBajaOrientacion = new System.Windows.Forms.ComboBox();
+            this.btnEliminarBajaOrientacion = new System.Windows.Forms.Button();
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -67,10 +78,11 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMAlumnoNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSolicitudesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
-            this.panelAltaModificacion.SuspendLayout();
+            this.panelAltaOrientacion.SuspendLayout();
             this.panelABMOrientacion.SuspendLayout();
             this.panelABMAsignatura.SuspendLayout();
             this.panelABMClase.SuspendLayout();
+            this.panelBajaOrientacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNav
@@ -222,19 +234,19 @@ namespace Hatchat.Presentacion
             this.btnDarAltaOrientacion.UseVisualStyleBackColor = true;
             this.btnDarAltaOrientacion.Click += new System.EventHandler(this.btnDarAltaOrientacion_Click);
             // 
-            // panelAltaModificacion
+            // panelAltaOrientacion
             // 
-            this.panelAltaModificacion.AutoScroll = true;
-            this.panelAltaModificacion.Controls.Add(this.panelAltaOrientacionAsignaturas);
-            this.panelAltaModificacion.Controls.Add(this.btnDarAltaOrientacion);
-            this.panelAltaModificacion.Controls.Add(this.lblNombreAltaOrientacion);
-            this.panelAltaModificacion.Controls.Add(this.txtNombreAltaOrientacion);
-            this.panelAltaModificacion.Controls.Add(this.lblAltarOrientacion);
-            this.panelAltaModificacion.Location = new System.Drawing.Point(314, 140);
-            this.panelAltaModificacion.Name = "panelAltaModificacion";
-            this.panelAltaModificacion.Size = new System.Drawing.Size(842, 529);
-            this.panelAltaModificacion.TabIndex = 30;
-            this.panelAltaModificacion.Visible = false;
+            this.panelAltaOrientacion.AutoScroll = true;
+            this.panelAltaOrientacion.Controls.Add(this.panelAltaOrientacionAsignaturas);
+            this.panelAltaOrientacion.Controls.Add(this.btnDarAltaOrientacion);
+            this.panelAltaOrientacion.Controls.Add(this.lblNombreAltaOrientacion);
+            this.panelAltaOrientacion.Controls.Add(this.txtNombreAltaOrientacion);
+            this.panelAltaOrientacion.Controls.Add(this.lblAltarOrientacion);
+            this.panelAltaOrientacion.Location = new System.Drawing.Point(314, 140);
+            this.panelAltaOrientacion.Name = "panelAltaOrientacion";
+            this.panelAltaOrientacion.Size = new System.Drawing.Size(842, 529);
+            this.panelAltaOrientacion.TabIndex = 30;
+            this.panelAltaOrientacion.Visible = false;
             // 
             // panelAltaOrientacionAsignaturas
             // 
@@ -248,7 +260,7 @@ namespace Hatchat.Presentacion
             this.panelABMOrientacion.Controls.Add(this.btnModificarOrientacion);
             this.panelABMOrientacion.Controls.Add(this.btnBajaOrientacion);
             this.panelABMOrientacion.Controls.Add(this.btnAltaOrientacion);
-            this.panelABMOrientacion.Location = new System.Drawing.Point(235, 164);
+            this.panelABMOrientacion.Location = new System.Drawing.Point(37, 430);
             this.panelABMOrientacion.Name = "panelABMOrientacion";
             this.panelABMOrientacion.Size = new System.Drawing.Size(200, 79);
             this.panelABMOrientacion.TabIndex = 32;
@@ -289,7 +301,7 @@ namespace Hatchat.Presentacion
             this.panelABMAsignatura.Controls.Add(this.btnModificarAsignatura);
             this.panelABMAsignatura.Controls.Add(this.btnBajaAsignatura);
             this.panelABMAsignatura.Controls.Add(this.btnAltaAsignatura);
-            this.panelABMAsignatura.Location = new System.Drawing.Point(235, 258);
+            this.panelABMAsignatura.Location = new System.Drawing.Point(37, 524);
             this.panelABMAsignatura.Name = "panelABMAsignatura";
             this.panelABMAsignatura.Size = new System.Drawing.Size(200, 79);
             this.panelABMAsignatura.TabIndex = 33;
@@ -330,7 +342,7 @@ namespace Hatchat.Presentacion
             this.panelABMClase.Controls.Add(this.btnModificarClase);
             this.panelABMClase.Controls.Add(this.btnBajaClase);
             this.panelABMClase.Controls.Add(this.btnAltaClase);
-            this.panelABMClase.Location = new System.Drawing.Point(235, 345);
+            this.panelABMClase.Location = new System.Drawing.Point(37, 611);
             this.panelABMClase.Name = "panelABMClase";
             this.panelABMClase.Size = new System.Drawing.Size(200, 79);
             this.panelABMClase.TabIndex = 34;
@@ -366,20 +378,122 @@ namespace Hatchat.Presentacion
             this.btnAltaClase.UseVisualStyleBackColor = true;
             this.btnAltaClase.Click += new System.EventHandler(this.btnAltaClase_Click);
             // 
+            // panelBajaOrientacion
+            // 
+            this.panelBajaOrientacion.Controls.Add(this.btnEliminarBajaOrientacion);
+            this.panelBajaOrientacion.Controls.Add(this.cmbxNombreBajaOrientacion);
+            this.panelBajaOrientacion.Controls.Add(this.lblBajaOrientacion);
+            this.panelBajaOrientacion.Location = new System.Drawing.Point(314, 140);
+            this.panelBajaOrientacion.Name = "panelBajaOrientacion";
+            this.panelBajaOrientacion.Size = new System.Drawing.Size(842, 529);
+            this.panelBajaOrientacion.TabIndex = 35;
+            this.panelBajaOrientacion.Visible = false;
+            // 
+            // panelModificarOrientacion
+            // 
+            this.panelModificarOrientacion.Location = new System.Drawing.Point(108, 249);
+            this.panelModificarOrientacion.Name = "panelModificarOrientacion";
+            this.panelModificarOrientacion.Size = new System.Drawing.Size(200, 100);
+            this.panelModificarOrientacion.TabIndex = 36;
+            this.panelModificarOrientacion.Visible = false;
+            // 
+            // panelBajaAsignatura
+            // 
+            this.panelBajaAsignatura.Location = new System.Drawing.Point(108, 350);
+            this.panelBajaAsignatura.Name = "panelBajaAsignatura";
+            this.panelBajaAsignatura.Size = new System.Drawing.Size(200, 100);
+            this.panelBajaAsignatura.TabIndex = 38;
+            this.panelBajaAsignatura.Visible = false;
+            // 
+            // panelAltaAsignatura
+            // 
+            this.panelAltaAsignatura.Location = new System.Drawing.Point(-109, 350);
+            this.panelAltaAsignatura.Name = "panelAltaAsignatura";
+            this.panelAltaAsignatura.Size = new System.Drawing.Size(200, 100);
+            this.panelAltaAsignatura.TabIndex = 37;
+            this.panelAltaAsignatura.Visible = false;
+            // 
+            // panelModificarClase
+            // 
+            this.panelModificarClase.Location = new System.Drawing.Point(108, 557);
+            this.panelModificarClase.Name = "panelModificarClase";
+            this.panelModificarClase.Size = new System.Drawing.Size(200, 100);
+            this.panelModificarClase.TabIndex = 42;
+            this.panelModificarClase.Visible = false;
+            // 
+            // panelAltaClase
+            // 
+            this.panelAltaClase.Location = new System.Drawing.Point(108, 456);
+            this.panelAltaClase.Name = "panelAltaClase";
+            this.panelAltaClase.Size = new System.Drawing.Size(200, 100);
+            this.panelAltaClase.TabIndex = 40;
+            this.panelAltaClase.Visible = false;
+            // 
+            // panelBajaClase
+            // 
+            this.panelBajaClase.Location = new System.Drawing.Point(-109, 557);
+            this.panelBajaClase.Name = "panelBajaClase";
+            this.panelBajaClase.Size = new System.Drawing.Size(200, 100);
+            this.panelBajaClase.TabIndex = 41;
+            this.panelBajaClase.Visible = false;
+            // 
+            // panelModificarAsignatura
+            // 
+            this.panelModificarAsignatura.Location = new System.Drawing.Point(-109, 456);
+            this.panelModificarAsignatura.Name = "panelModificarAsignatura";
+            this.panelModificarAsignatura.Size = new System.Drawing.Size(200, 100);
+            this.panelModificarAsignatura.TabIndex = 39;
+            this.panelModificarAsignatura.Visible = false;
+            // 
+            // lblBajaOrientacion
+            // 
+            this.lblBajaOrientacion.AutoSize = true;
+            this.lblBajaOrientacion.Location = new System.Drawing.Point(369, 34);
+            this.lblBajaOrientacion.Name = "lblBajaOrientacion";
+            this.lblBajaOrientacion.Size = new System.Drawing.Size(100, 13);
+            this.lblBajaOrientacion.TabIndex = 0;
+            this.lblBajaOrientacion.Text = "Eliminar Orientacion";
+            // 
+            // cmbxNombreBajaOrientacion
+            // 
+            this.cmbxNombreBajaOrientacion.FormattingEnabled = true;
+            this.cmbxNombreBajaOrientacion.Location = new System.Drawing.Point(304, 72);
+            this.cmbxNombreBajaOrientacion.Name = "cmbxNombreBajaOrientacion";
+            this.cmbxNombreBajaOrientacion.Size = new System.Drawing.Size(211, 21);
+            this.cmbxNombreBajaOrientacion.TabIndex = 1;
+            // 
+            // btnEliminarBajaOrientacion
+            // 
+            this.btnEliminarBajaOrientacion.Location = new System.Drawing.Point(284, 259);
+            this.btnEliminarBajaOrientacion.Name = "btnEliminarBajaOrientacion";
+            this.btnEliminarBajaOrientacion.Size = new System.Drawing.Size(259, 68);
+            this.btnEliminarBajaOrientacion.TabIndex = 2;
+            this.btnEliminarBajaOrientacion.Text = "button1";
+            this.btnEliminarBajaOrientacion.UseVisualStyleBackColor = true;
+            this.btnEliminarBajaOrientacion.Click += new System.EventHandler(this.btnEliminarBajaOrientacion_Click);
+            // 
             // ABMGruposAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelBajaOrientacion);
+            this.Controls.Add(this.panelModificarClase);
             this.Controls.Add(this.panelABMClase);
+            this.Controls.Add(this.panelBajaAsignatura);
             this.Controls.Add(this.panelABMAsignatura);
+            this.Controls.Add(this.panelAltaClase);
             this.Controls.Add(this.panelABMOrientacion);
+            this.Controls.Add(this.panelModificarOrientacion);
             this.Controls.Add(this.lblABMAlumno);
+            this.Controls.Add(this.panelBajaClase);
             this.Controls.Add(this.btnClase);
+            this.Controls.Add(this.panelAltaAsignatura);
             this.Controls.Add(this.btnAsignatura);
+            this.Controls.Add(this.panelModificarAsignatura);
             this.Controls.Add(this.btnOrientacion);
             this.Controls.Add(this.panelNav);
-            this.Controls.Add(this.panelAltaModificacion);
+            this.Controls.Add(this.panelAltaOrientacion);
             this.Name = "ABMGruposAdmin";
             this.Text = "AMBAlumnoAdmin";
             this.Load += new System.EventHandler(this.ABMAlumnoAdmin_Load);
@@ -391,11 +505,13 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMAlumnoNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSolicitudesNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).EndInit();
-            this.panelAltaModificacion.ResumeLayout(false);
-            this.panelAltaModificacion.PerformLayout();
+            this.panelAltaOrientacion.ResumeLayout(false);
+            this.panelAltaOrientacion.PerformLayout();
             this.panelABMOrientacion.ResumeLayout(false);
             this.panelABMAsignatura.ResumeLayout(false);
             this.panelABMClase.ResumeLayout(false);
+            this.panelBajaOrientacion.ResumeLayout(false);
+            this.panelBajaOrientacion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,7 +535,7 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.TextBox txtNombreAltaOrientacion;
         private System.Windows.Forms.Label lblNombreAltaOrientacion;
         private System.Windows.Forms.Button btnDarAltaOrientacion;
-        private System.Windows.Forms.Panel panelAltaModificacion;
+        private System.Windows.Forms.Panel panelAltaOrientacion;
         private System.Windows.Forms.Panel panelABMOrientacion;
         private System.Windows.Forms.Button btnAltaOrientacion;
         private System.Windows.Forms.Button btnModificarOrientacion;
@@ -433,5 +549,16 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Button btnBajaClase;
         private System.Windows.Forms.Button btnAltaClase;
         private System.Windows.Forms.Panel panelAltaOrientacionAsignaturas;
+        private System.Windows.Forms.Panel panelBajaOrientacion;
+        private System.Windows.Forms.Panel panelModificarClase;
+        private System.Windows.Forms.Panel panelBajaAsignatura;
+        private System.Windows.Forms.Panel panelAltaClase;
+        private System.Windows.Forms.Panel panelModificarOrientacion;
+        private System.Windows.Forms.Panel panelBajaClase;
+        private System.Windows.Forms.Panel panelAltaAsignatura;
+        private System.Windows.Forms.Panel panelModificarAsignatura;
+        private System.Windows.Forms.ComboBox cmbxNombreBajaOrientacion;
+        private System.Windows.Forms.Label lblBajaOrientacion;
+        private System.Windows.Forms.Button btnEliminarBajaOrientacion;
     }
 }
