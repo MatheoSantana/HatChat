@@ -286,19 +286,18 @@ namespace Hatchat.Presentacion
             lblSolIngre.Name = "lblSolIngre";
             lblSolIngre.Text = us.Primer_apellido + " envio solicitud para ingresar a:";
             panelContenido.Controls.Add(lblSolIngre);
-
+            asignaturaSolicitudesClaseAl.AddRange(new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturaSolicitudClaseAl(soliAl.IdSolicitudClaseAl));
             int xchbxAsig = 5, ychbxAsig = 100, xlblClase=5;
             foreach (Logica.ClaseSolicitudClaseAl claseSoli in claseSolicitudesClaseAl)
             {
                 Label lblClase = new Label();
-                lblSolIngre.Height = 46;
-                lblSolIngre.Width = 150;
-                lblSolIngre.Location = new Point(xlblClase, 50);
-                lblSolIngre.Name = "lblClase"+claseSoli.IdClase;
+                lblClase.Height = 46;
+                lblClase.Width = 150;
+                lblClase.Location = new Point(xlblClase, 50);
+                lblClase.Name = "lblClase"+claseSoli.IdClase;
                 Logica.Clase clas = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
-                lblSolIngre.Text =  clas.Anio+"°"+clas.Nombre+"\n"+new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
+                lblClase.Text =  clas.Anio+"°"+clas.Nombre+"\n"+new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
-                asignaturaSolicitudesClaseAl.AddRange(new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturaSolicitudClaseAl(soliAl.IdSolicitudClaseAl));
                 xlblClase += 160;
                 foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAl in asignaturaSolicitudesClaseAl)
                 {
@@ -309,7 +308,7 @@ namespace Hatchat.Presentacion
                         dina.Width = 150;
                         dina.Location = new Point(xchbxAsig, ychbxAsig);
                         ychbxAsig += 25;
-                        dina.Name = "chbxAsig" + asigSoliAl.IdAsignatura;
+                        dina.Name = "chbxAsig" + asigSoliAl.IdAsignatura + "Cl" + asigSoliAl.IdClaseAsig;
                         dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliAl.IdAsignatura).Nombre;
 
                         dina.CheckedChanged += new EventHandler(AsignaturaCambiadaAl);
@@ -326,7 +325,7 @@ namespace Hatchat.Presentacion
                 foreach (Logica.AsignaturaSolicitudClaseAl asig in asignaturaSolicitudesClaseAl)
                 {
 
-                    if (((CheckBox)sender).Name == "chbxAsig" + asig.IdAsignatura)
+                    if (((CheckBox)sender).Name == "chbxAsig" + asig.IdAsignatura + "Cl" + asig.IdClaseAsig)
                     {
                         asignaturaSolicitudesClaseAlAceptadas.Add(asig);
                     }
@@ -338,7 +337,7 @@ namespace Hatchat.Presentacion
 
                 foreach (Logica.AsignaturaSolicitudClaseAl soliAsi in asignaturaSolicitudesClaseAl)
                 {
-                    if (((CheckBox)sender).Name == "chbxAsig" + soliAsi.IdAsignatura)
+                    if (((CheckBox)sender).Name == "chbxAsig" + soliAsi.IdAsignatura + "Cl" + soliAsi.IdClaseAsig)
                     {
                         asignaturaSolicitudesClaseAlAceptadas.Remove(soliAsi);
                     }
@@ -374,34 +373,36 @@ namespace Hatchat.Presentacion
             panelContenido.Controls.Add(lblSolIngre);
 
             int xchbxAsig = 5, ychbxAsig = 100, xlblClase = 5;
+            asignaturaSolicitudesClaseDo.AddRange(new Logica.AsignaturaSolicitudClaseDo().SelectAsignaturaSolicitudClaseDo(soliDo.IdSolicitudClaseDo));
             foreach (Logica.ClaseSolicitudClaseDo claseSoli in claseSolicitudesClaseDo)
             {
                 Label lblClase = new Label();
-                lblSolIngre.Height = 46;
-                lblSolIngre.Width = 150;
-                lblSolIngre.Location = new Point(xlblClase, 50);
-                lblSolIngre.Name = "lblClase" + claseSoli.IdClase;
+                lblClase.Height = 46;
+                lblClase.Width = 150;
+                lblClase.Location = new Point(xlblClase, 55);
+                lblClase.Name = "lblClase" + claseSoli.IdClase;
                 Logica.Clase clas = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
-                lblSolIngre.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
+                lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
-                asignaturaSolicitudesClaseDo.AddRange(new Logica.AsignaturaSolicitudClaseDo().SelectAsignaturaSolicitudClaseDo(soliDo.IdSolicitudClaseDo));
+                
                 xlblClase += 160;
                 foreach (Logica.AsignaturaSolicitudClaseDo asigSoliDo in asignaturaSolicitudesClaseDo)
                 {
-                    if (claseSoli.IdClase == asigSoliDo.IdClaseAsig)
+                    if (asigSoliDo.IdClaseAsig == claseSoli.IdClase)
                     {
                         CheckBox dina = new CheckBox();
                         dina.Height = 23;
                         dina.Width = 150;
                         dina.Location = new Point(xchbxAsig, ychbxAsig);
                         ychbxAsig += 25;
-                        dina.Name = "chbxAsig" + asigSoliDo.IdAsignatura;
+                        dina.Name = "chbxAsig" + asigSoliDo.IdAsignatura+"Cl"+asigSoliDo.IdClaseAsig;
                         dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliDo.IdAsignatura).Nombre;
 
                         dina.CheckedChanged += new EventHandler(AsignaturaCambiadaDo);
                         panelContenido.Controls.Add(dina);
                     }
                 }
+                ychbxAsig = 100;
                 xchbxAsig += 160;
             }
         }
@@ -412,7 +413,7 @@ namespace Hatchat.Presentacion
                 foreach (Logica.AsignaturaSolicitudClaseDo asig in asignaturaSolicitudesClaseDo)
                 {
 
-                    if (((CheckBox)sender).Name == "chbxAsig" + asig.IdAsignatura)
+                    if (((CheckBox)sender).Name == "chbxAsig" + asig.IdAsignatura + "Cl" + asig.IdClaseAsig)
                     {
                         asignaturaSolicitudesClaseDoAceptadas.Add(asig);
                     }
@@ -424,7 +425,7 @@ namespace Hatchat.Presentacion
 
                 foreach (Logica.AsignaturaSolicitudClaseDo soliAsi in asignaturaSolicitudesClaseDo)
                 {
-                    if (((CheckBox)sender).Name == "chbxAsig" + soliAsi.IdAsignatura)
+                    if (((CheckBox)sender).Name == "chbxAsig" + soliAsi.IdAsignatura + "Cl" + soliAsi.IdClaseAsig)
                     {
                         asignaturaSolicitudesClaseDoAceptadas.Remove(soliAsi);
                     }
@@ -452,8 +453,8 @@ namespace Hatchat.Presentacion
 
             Label lblSolIngre = new Label();
             lblSolIngre.Height = 46;
-            lblSolIngre.Width = 150;
-            lblSolIngre.Location = new Point(25, 10);
+            lblSolIngre.Width = 250;
+            lblSolIngre.Location = new Point(25, 50);
             lblSolIngre.Name = "lblSolMo";
             lblSolIngre.Text = us.Primer_apellido + " ha enviado una soliciutd para\nreestablecer su contraseña.\nSu preguntas de seguridad concuerda.";
             panelContenido.Controls.Add(lblSolIngre);

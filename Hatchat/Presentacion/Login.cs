@@ -27,6 +27,7 @@ namespace Hatchat.Presentacion
         static PrincipalSolicitudesAdmin principalSolicitudesAdmin;
         static ABMAlumnoAdmin abmAlumnoAdmin;
         static ABMDocenteAdmin abmDocenteAdmin;
+        static ABMGruposAdmin abmGruposAdmin;
 
 
 
@@ -127,11 +128,11 @@ namespace Hatchat.Presentacion
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
 
-            encontrado = encontrado.SelectUsuarioCi(txtCedula.Text/*"52848682"*/);
+            encontrado = encontrado.SelectUsuarioCi("00000000");
             
             if (encontrado.Ci != "")
             {
-                if (encontrado.Password == txtPassword.Text/*"matheo1234"*/)
+                if (encontrado.Password == "L2tpbGwgQG1l")
                 {
                     if (encontrado.SelectDocente())
                     {
@@ -191,19 +192,29 @@ namespace Hatchat.Presentacion
                         principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
                         abmAlumnoAdmin = new ABMAlumnoAdmin();
                         abmDocenteAdmin = new ABMDocenteAdmin();
+                        abmGruposAdmin = new ABMGruposAdmin();
 
                         principalSolicitudesAdmin.login = this;
                         principalSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
                         principalSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
-                        
+                        principalSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
+
+
 
                         abmAlumnoAdmin.login = this;
                         abmAlumnoAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
                         abmAlumnoAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                        abmAlumnoAdmin.abmGruposAdmin = abmGruposAdmin;
 
                         abmDocenteAdmin.login = this;
                         abmDocenteAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
                         abmDocenteAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
+                        abmDocenteAdmin.abmGruposAdmin = abmGruposAdmin;
+
+                        abmGruposAdmin.login = this;
+                        abmGruposAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                        abmGruposAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
+                        abmGruposAdmin.abmDocenteAdmin = abmDocenteAdmin;
 
                         principalSolicitudesAdmin.Show();
                         this.Hide();

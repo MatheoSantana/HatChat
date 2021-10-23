@@ -1229,7 +1229,7 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            string query = "select * from SolicitudClaseAl where idSolicitudClaseDo=" + id + ";";
+            string query = "select * from SolicitudClaseDo where idSolicitudClaseDo=" + id + ";";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
             SolicitudClaseDo soli = new SolicitudClaseDo();
@@ -1237,7 +1237,7 @@ namespace Hatchat.Persistencia
             {
                 while (reader.Read())
                 {
-                    soli.IdSolicitudClaseDo = Convert.ToInt32(reader.GetString("idSolicitudClaseAl"));
+                    soli.IdSolicitudClaseDo = Convert.ToInt32(reader.GetString("idSolicitudClaseDo"));
                     soli.FechaHora = soli.StringADateTime(reader.GetString("fechaHora"));
                     soli.Pendiente = true;
                     soli.Docente = reader.GetString("docente");
@@ -1246,12 +1246,12 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return soli;
         }
-        public List<ClaseSolicitudClaseDo> SelectClaseSolicitudClaseDo(int idSolicitudClaseAl)
+        public List<ClaseSolicitudClaseDo> SelectClaseSolicitudClaseDo(int idSolicitudClaseDo)
         {
             List<ClaseSolicitudClaseDo> claseSolicitudesClaseDo = new List<ClaseSolicitudClaseDo>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from claseSolicitudesClaseAl where idSolicitudClaseAl = " + idSolicitudClaseAl + "; ", conexion);
+            MySqlCommand select = new MySqlCommand("select * from claseSolicitudClaseDo where idSolicitudClaseDo = " + idSolicitudClaseDo + "; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1272,7 +1272,7 @@ namespace Hatchat.Persistencia
             List<AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDo = new List<AsignaturaSolicitudClaseDo>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from asignaturaSolicitudClaseAl where idSolicitudClaseAl = " + idSolicitudClaseAl + "; ", conexion);
+            MySqlCommand select = new MySqlCommand("select * from asignaturaSolicitudClaseDo where idSolicitudClaseDo = " + idSolicitudClaseAl + "; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1540,6 +1540,76 @@ namespace Hatchat.Persistencia
             conexion.Open();
             MySqlCommand insert = new MySqlCommand("insert into Contiene (idAsig,idOri,activo) values('" + cont.Asignatura + ","+cont.Orientacion+",true);", conexion);
             insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void BajaOrientacion(Orientacion ori)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Orientacion set activo =false where id=" + ori.Id + ";", conexion);
+            update.ExecuteNonQuery();
+            update = new MySqlCommand("update Contiene set activo =false where idOri=" + ori.Id + ";", conexion);
+            update.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void BajaContiene(Contiene con)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Contiene set activo =false where idOri=" + con.Orientacion + ";", conexion);
+            update.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public List<Contiene> SelectContienePorOrientacion(int id)
+        {
+            List<Contiene> conts = new List<Contiene>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from contiene where idOri="+id+" and activo=true;", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Contiene cont = new Contiene();
+
+                cont.Asignatura = data.Rows[x][0].ToString();
+                cont.Orientacion = Convert.ToInt32(data.Rows[x][1].ToString());
+                cont.Activo = true;
+                conts.Add(cont);
+            }
+            conexion.Close();
+            return conts;
+        }
+        public void ModificarOrientacion(Orientacion ori, List<Contiene> contienes)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Orientacion set nombre ='"+ori.Nombre+"' where id=" + ori.Id + ";", conexion);
+            update.ExecuteNonQuery();
+            update = new MySqlCommand("update Contiene set activo =false where idOri=" + ori.Id + ";", conexion);
+            update.ExecuteNonQuery();
+            foreach (Contiene cont in contienes)
+            {
+                MySqlDataReader reader = null;
+                string query = "select * from Contiene where idOri=" + ori.Id + " and idAsig='"+cont.Asignatura+"';";
+                MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+                reader = select.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        update = new MySqlCommand("update Contiene set activo =true where idOri=" + ori.Id + ";", conexion);
+                        update.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    MySqlCommand insert = new MySqlCommand("insert into Contiene values('"+cont.Asignatura+"',"+cont.Orientacion+",true);", conexion);
+                    insert.ExecuteNonQuery();
+                }
+                
+            }
             conexion.Close();
         }
     }
