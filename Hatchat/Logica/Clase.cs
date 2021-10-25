@@ -94,6 +94,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.BajaClase(this);
         }
-
+        public void ModificarClase()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.ModificarClase(this);
+        }
     }
 }

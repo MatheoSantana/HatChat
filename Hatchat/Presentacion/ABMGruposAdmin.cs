@@ -33,6 +33,11 @@ namespace Hatchat.Presentacion
         private List<Logica.Orientacion> orientacionesBajaClase = new List<Logica.Orientacion>();
         private List<Logica.Clase> ClasesBajaClase = new List<Logica.Clase>();
 
+        private List<Logica.Orientacion> orientacionesModificarClase = new List<Logica.Orientacion>();
+        private List<Logica.Clase> ClasesModificarClase = new List<Logica.Clase>();
+        private List<Logica.Orientacion> NuevasOrientacionesModificarClase = new List<Logica.Orientacion>();
+        private List<Logica.Clase> NuevasClasesModificarClase = new List<Logica.Clase>();
+
         public Form login;
         public Form principalSolicitudesAdmin;
         public Form abmDAlumnoAdmin;
@@ -98,6 +103,18 @@ namespace Hatchat.Presentacion
             cmbxAnioBajaClase.Items.Add(2);
             cmbxAnioBajaClase.Items.Add(3);
             cmbxNombreBajaClase.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            cmbxAnioModificarClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioModificarClase.Items.Add(1);
+            cmbxAnioModificarClase.Items.Add(2);
+            cmbxAnioModificarClase.Items.Add(3);
+            cmbxOrientacionModificarClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxNombreModificarClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxNuevoAnioModificarClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxNuevoAnioModificarClase.Items.Add(1);
+            cmbxNuevoAnioModificarClase.Items.Add(2);
+            cmbxNuevoAnioModificarClase.Items.Add(3);
+            cmbxNuevaOrientacionModificarClase.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
@@ -633,6 +650,9 @@ namespace Hatchat.Presentacion
             ClasesBajaClase.Clear();
             orientacionesBajaClase.Clear();
             cmbxOrientacionBajaClase.Items.Clear();
+            cmbxNombreBajaClase.Items.Clear();
+            cmbxNombreBajaClase.Enabled = false;
+
             ClasesBajaClase.AddRange(new Logica.Clase().SelectClasesPorAnio(Convert.ToInt32(cmbxAnioBajaClase.SelectedItem)));
             foreach (Logica.Clase cla in ClasesBajaClase)
             {
@@ -671,19 +691,26 @@ namespace Hatchat.Presentacion
         }
         private void btnDarBajaClase_Click(object sender, EventArgs e)
         {
+            bool error = true;
             foreach(Logica.Clase cla in ClasesBajaClase)
             {
                 if (orientacionesBajaClase[cmbxOrientacionBajaClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreBajaClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioBajaClase.SelectedItem.ToString()) == cla.Anio)
                 {
                     cla.BajaClase();
                     MessageBox.Show("Eliminado");
+                    error = false;
                 }
+                
+            }
+            if (error)
+            {
+                MessageBox.Show("No se borro");
             }
 
         }
 
         private void btnModificarClase_Click(object sender, EventArgs e)
-        {
+        { 
             panelABMClase.Visible = false;
 
             panelAltaOrientacion.Visible = false;
@@ -697,6 +724,164 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = !panelModificarClase.Visible;
+
+            cmbxOrientacionModificarClase.Enabled = false;
+            cmbxNombreModificarClase.Enabled = false;
+            cmbxNuevoAnioModificarClase.Enabled = false;
+            cmbxNuevaOrientacionModificarClase.Enabled = false;
+            txtNuevoNombreModificarClase.Enabled = false;
+
+            cmbxOrientacionModificarClase.Items.Clear();
+            cmbxNombreModificarClase.Items.Clear();
+            cmbxNuevaOrientacionModificarClase.Items.Clear();
+            txtNuevoNombreModificarClase.Text = "";
+
+            cmbxAnioModificarClase.SelectedIndex = -1;
+            cmbxOrientacionModificarClase.SelectedIndex = -1;
+            cmbxNombreModificarClase.SelectedIndex = -1;
+            cmbxNuevoAnioModificarClase.SelectedIndex = -1;
+            cmbxNuevaOrientacionModificarClase.SelectedIndex = -1;
+
+            orientacionesModificarClase.Clear();
+            ClasesModificarClase.Clear();
+            NuevasOrientacionesModificarClase.Clear();
+            NuevasClasesModificarClase.Clear();
+
+
+        }
+
+        private void cmbxAnioModificarClase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClasesModificarClase.Clear();
+            orientacionesModificarClase.Clear();
+            NuevasClasesModificarClase.Clear();
+            NuevasOrientacionesModificarClase.Clear();
+
+            cmbxOrientacionModificarClase.Items.Clear();
+            cmbxNombreModificarClase.Items.Clear();
+            cmbxNuevaOrientacionModificarClase.Items.Clear();
+            txtNuevoNombreModificarClase.Text = "";
+
+            cmbxOrientacionModificarClase.Enabled = false;
+            cmbxNombreModificarClase.Enabled = false;
+            cmbxNuevoAnioModificarClase.Enabled = false;
+            cmbxNuevaOrientacionModificarClase.Enabled = false;
+            txtNuevoNombreModificarClase.Enabled = false;
+
+            cmbxNuevoAnioModificarClase.SelectedIndex = -1;
+            ClasesModificarClase.AddRange(new Logica.Clase().SelectClasesPorAnio(Convert.ToInt32(cmbxAnioModificarClase.SelectedItem)));
+            foreach (Logica.Clase cla in ClasesModificarClase)
+            {
+                Logica.Orientacion ori = new Logica.Orientacion().SelectOrientacioPorId(cla.Orientacion);
+                bool encontrado = false;
+                foreach (Logica.Orientacion orient in orientacionesModificarClase)
+                {
+                    if (orient.Id == cla.Orientacion)
+                    {
+                        encontrado = true;
+                    }
+                }
+                if (!encontrado)
+                {
+                    orientacionesModificarClase.Add(ori);
+                }
+            }
+            foreach (Logica.Orientacion ori in orientacionesModificarClase)
+            {
+                cmbxOrientacionModificarClase.Items.Add(ori.Nombre);
+            }
+            cmbxOrientacionModificarClase.Enabled = true;
+        }
+
+        private void cmbxOrientacionModificarClase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NuevasClasesModificarClase.Clear();
+            NuevasOrientacionesModificarClase.Clear();
+
+            cmbxNombreModificarClase.Items.Clear();
+            cmbxNuevaOrientacionModificarClase.Items.Clear();
+            txtNuevoNombreModificarClase.Text = "";
+
+            cmbxNuevoAnioModificarClase.Enabled = false;
+            cmbxNuevaOrientacionModificarClase.Enabled = false;
+            txtNuevoNombreModificarClase.Enabled = false;
+
+            cmbxNuevoAnioModificarClase.SelectedIndex = -1;
+            foreach (Logica.Clase cla in ClasesModificarClase)
+            {
+                if (orientacionesModificarClase[cmbxOrientacionModificarClase.SelectedIndex].Id == cla.Orientacion)
+                {
+                    cmbxNombreModificarClase.Items.Add(cla.Nombre);
+                }
+            }
+            cmbxNombreModificarClase.Enabled = true; 
+        }
+        private void cmbxNombreModificarClase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NuevasClasesModificarClase.Clear();
+            NuevasOrientacionesModificarClase.Clear();
+
+            cmbxNombreModificarClase.Items.Clear();
+            cmbxNuevaOrientacionModificarClase.Items.Clear();
+            txtNuevoNombreModificarClase.Text = "";
+
+            cmbxNuevoAnioModificarClase.Enabled = true;
+            txtNuevoNombreModificarClase.Enabled = true;
+
+            cmbxNuevoAnioModificarClase.SelectedIndex = -1;
+        }
+
+        private void cmbxNuevoAnioModificarClase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NuevasClasesModificarClase.Clear();
+            NuevasOrientacionesModificarClase.Clear();
+            cmbxNuevaOrientacionModificarClase.Items.Clear();
+            txtNuevoNombreModificarClase.Text = "";
+
+            NuevasClasesModificarClase.AddRange(new Logica.Clase().SelectClasesPorAnio(Convert.ToInt32(cmbxNuevoAnioModificarClase.SelectedItem)));
+            foreach (Logica.Clase cla in NuevasClasesModificarClase)
+            {
+                Logica.Orientacion ori = new Logica.Orientacion().SelectOrientacioPorId(cla.Orientacion);
+                bool encontrado = false;
+                foreach (Logica.Orientacion orient in NuevasOrientacionesModificarClase)
+                {
+                    if (orient.Id == cla.Orientacion)
+                    {
+                        encontrado = true;
+                    }
+                }
+                if (!encontrado)
+                {
+                    NuevasOrientacionesModificarClase.Add(ori);
+                }
+            }
+            foreach (Logica.Orientacion ori in NuevasOrientacionesModificarClase)
+            {
+                cmbxNuevaOrientacionModificarClase.Items.Add(ori.Nombre);
+            }
+            cmbxNuevaOrientacionModificarClase.Enabled = true;
+        }
+
+        private void btnDarModificacionClase_Click(object sender, EventArgs e)
+        {
+            bool error = true;
+            foreach (Logica.Clase cla in ClasesModificarClase)
+            {
+                if (orientacionesModificarClase[cmbxOrientacionModificarClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreModificarClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioModificarClase.SelectedItem.ToString()) == cla.Anio)
+                {
+
+                    cla.Orientacion = NuevasOrientacionesModificarClase[cmbxNuevaOrientacionModificarClase.SelectedIndex].Id;
+                    cla.Nombre = txtNuevoNombreModificarClase.Text;
+                    cla.Anio = Convert.ToInt32(cmbxNuevoAnioModificarClase.SelectedItem.ToString());
+                    cla.ModificarClase();
+                    MessageBox.Show("Modificada");
+                    error = false;
+                }
+                if (error)
+                {
+                    MessageBox.Show("No se modifico");
+                }
+            }
         }
 
         

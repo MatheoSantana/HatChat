@@ -18,7 +18,7 @@ namespace Hatchat.Persistencia
 
         static string server = "Server = localhost; ";
         static string port = "Port = 3306; ";
-        static string database = "Database = Hatchat2; ";
+        static string database = "Database = Hatchat; ";
         static string uid = "Uid = root; ";
         static string pwd = "Pwd = math2002;";
         static string connection = server + port + database + uid + pwd;
@@ -410,7 +410,7 @@ namespace Hatchat.Persistencia
             List<Orientacion> orientaciones = new List<Orientacion>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from Orientacion ;", conexion);
+            MySqlCommand select = new MySqlCommand("select * from Orientacion where activo=true;", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1688,6 +1688,18 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlCommand update = new MySqlCommand("update Clase set Activo=false where idClase=" + cla.IdClase + ";", conexion);
+            update.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void ModificarClase(Clase cla)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Clase set nombre='" + cla.Nombre + "' where idClase=" + cla.IdClase + ";", conexion);
+            update.ExecuteNonQuery();
+            update = new MySqlCommand("update Clase set anio=" + cla.Anio + " where idClase=" + cla.IdClase + ";", conexion);
+            update.ExecuteNonQuery();
+            update = new MySqlCommand("update Clase set orientacion=" + cla.Orientacion + " where idClase=" + cla.IdClase + ";", conexion);
             update.ExecuteNonQuery();
             conexion.Close();
         }

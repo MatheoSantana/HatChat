@@ -94,6 +94,12 @@
     <Compile Include="Presentacion\ABMAlumnoAdmin.Designer.cs">
       <DependentUpon>ABMAlumnoAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\HistorialSolicitudesAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\HistorialSolicitudesAdmin.Designer.cs">
+      <DependentUpon>HistorialSolicitudesAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\PrincipalSolicitudesAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\ABMAlumnoAdmin.resx">
       <DependentUpon>ABMAlumnoAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\HistorialSolicitudesAdmin.resx">
+      <DependentUpon>HistorialSolicitudesAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\PrincipalSolicitudesAdmin.resx">
       <DependentUpon>PrincipalSolicitudesAdmin.cs</DependentUpon>
