@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Hatchat.Logica
@@ -68,6 +69,26 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAsignaturas();
+        }
+        public DataTable SelectAsignaturasGrilla()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturasGrilla();
+        }
+        public void AltaAsignatura()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AltaAsignatura(this);
+        }
+        public void BajaAsignatura()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.BajaAsignatura(this);
+        }
+        public void ModificarAsignatura()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.ModificarAsignatura(this);
         }
     }
 }

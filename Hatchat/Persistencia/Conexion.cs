@@ -18,7 +18,7 @@ namespace Hatchat.Persistencia
 
         static string server = "Server = localhost; ";
         static string port = "Port = 3306; ";
-        static string database = "Database = Hatchat1; ";
+        static string database = "Database = Hatchat2; ";
         static string uid = "Uid = root; ";
         static string pwd = "Pwd = math2002;";
         static string connection = server + port + database + uid + pwd;
@@ -1465,7 +1465,7 @@ namespace Hatchat.Persistencia
             List<Asignatura> asignaturas = new List<Asignatura>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from Asignatura where activo=true;", conexion);
+            MySqlCommand select = new MySqlCommand("select * from Asignatura where activo=true order by anio;", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1610,6 +1610,85 @@ namespace Hatchat.Persistencia
                 }
                 
             }
+            conexion.Close();
+        }
+        public DataTable SelectAsignaturasGrilla()
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select id,nombre,anio from Asignatura where activo=true order by anio;", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            conexion.Close();
+            return data;
+        }
+
+        public void AltaAsignatura(Asignatura asig)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Asignatura values('" + asig.Id + "','" + asig.Nombre + "',"+asig.Anio+",true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void BajaAsignatura(Asignatura asig)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Asignatura set Activo=false where id='" + asig.Id + "';", conexion);
+            update.ExecuteNonQuery();
+            update=new MySqlCommand("update Contiene set Activo=false where idAsig='" + asig.Id + "';", conexion);
+            update.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void ModificarAsignatura(Asignatura asig)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Asignatura set nombre='"+asig.Nombre+"' where id='" + asig.Id + "';", conexion);
+            update.ExecuteNonQuery();
+            update = new MySqlCommand("update Asignatura set anio="+asig.Anio+ " where id='" + asig.Id + "';", conexion);
+            update.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void AltaClase(Clase clase)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into Clase(nombre,anio,orientacion,activo) values('" + clase.Nombre + "'," + clase.Anio + "," + clase.Orientacion + ",true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public List<Clase> SelectClasesPorAnio(int anio)
+        {
+            List<Clase> clases = new List<Clase>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select * from Clase where anio=" + anio + " and activo=true;", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Clase clase = new Clase();
+
+                clase.IdClase = Convert.ToInt32(data.Rows[x][0].ToString());
+                clase.Nombre = data.Rows[x][1].ToString();
+                clase.Anio = Convert.ToInt32(data.Rows[x][2].ToString());
+                clase.Orientacion = Convert.ToInt32(data.Rows[x][3].ToString());
+                clase.Activo = true;
+                clases.Add(clase);
+            }
+            conexion.Close();
+            return clases;
+        }
+        public void BajaClase(Clase cla)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update Clase set Activo=false where idClase=" + cla.IdClase + ";", conexion);
+            update.ExecuteNonQuery();
             conexion.Close();
         }
     }

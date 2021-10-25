@@ -73,19 +73,51 @@ namespace Hatchat.Presentacion
             this.cmbxModificarOrientacion = new System.Windows.Forms.ComboBox();
             this.lblModifcarOrientacion = new System.Windows.Forms.Label();
             this.panelBajaAsignatura = new System.Windows.Forms.Panel();
+            this.cmbxAnioBajaAsignatura = new System.Windows.Forms.ComboBox();
+            this.lblAnioBajaAsignatura = new System.Windows.Forms.Label();
+            this.btnEliminarBajaAsignatura = new System.Windows.Forms.Button();
+            this.cmbxAsignaturaBajaAsignatura = new System.Windows.Forms.ComboBox();
+            this.lblAsignaturaBajaAsignatura = new System.Windows.Forms.Label();
+            this.lblBajaAsignatura = new System.Windows.Forms.Label();
             this.panelAltaAsignatura = new System.Windows.Forms.Panel();
+            this.dgvAsignaturasAltaAsignatura = new System.Windows.Forms.DataGridView();
+            this.lblIdAltaAsignatura = new System.Windows.Forms.Label();
+            this.lblAnioAltaAsignatura = new System.Windows.Forms.Label();
+            this.lblNombreAltaAsignatura = new System.Windows.Forms.Label();
             this.btnAgregarAsignaturaAltaAsignatura = new System.Windows.Forms.Button();
-            this.panelAsignaturasExistentesAltaAsignaturas = new System.Windows.Forms.Panel();
             this.lblAsignaturasExistentesAltaAsignatura = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.txt = new System.Windows.Forms.TextBox();
+            this.cmbxAnioAltaAsignatura = new System.Windows.Forms.ComboBox();
+            this.txtIdAltaAsignatura = new System.Windows.Forms.TextBox();
+            this.txtNombreAltaAsignatura = new System.Windows.Forms.TextBox();
             this.lblAltaAsignatura = new System.Windows.Forms.Label();
             this.panelModificarClase = new System.Windows.Forms.Panel();
             this.panelAltaClase = new System.Windows.Forms.Panel();
             this.panelBajaClase = new System.Windows.Forms.Panel();
             this.panelModificarAsignatura = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txtNombreModificarAsignatura = new System.Windows.Forms.TextBox();
+            this.lblNombreModificarAsignatura = new System.Windows.Forms.Label();
+            this.cmbxAnioModifcarAsignatura = new System.Windows.Forms.ComboBox();
+            this.lblAnioModificarAsignatura = new System.Windows.Forms.Label();
+            this.btnAlterarModificarAsignatura = new System.Windows.Forms.Button();
+            this.cmbxAsignaturaModificarAsignatura = new System.Windows.Forms.ComboBox();
+            this.lblAsignaturaModificarAsignatura = new System.Windows.Forms.Label();
+            this.lblModificarAsignatura = new System.Windows.Forms.Label();
+            this.txtNombreAltaClase = new System.Windows.Forms.TextBox();
+            this.lblNombreAltaClase = new System.Windows.Forms.Label();
+            this.cmbxOrientacionAltaClase = new System.Windows.Forms.ComboBox();
+            this.lblOrientacionAltaClase = new System.Windows.Forms.Label();
+            this.btnDarAltaClase = new System.Windows.Forms.Button();
+            this.cmbxAnioAltaClase = new System.Windows.Forms.ComboBox();
+            this.lblAnioAltaClase = new System.Windows.Forms.Label();
+            this.lblAltaClase = new System.Windows.Forms.Label();
+            this.lblNombreBajaClase = new System.Windows.Forms.Label();
+            this.cmbxOrientacionBajaClase = new System.Windows.Forms.ComboBox();
+            this.lblOrientacionBajaClase = new System.Windows.Forms.Label();
+            this.btnDarBajaClase = new System.Windows.Forms.Button();
+            this.cmbxAnioBajaClase = new System.Windows.Forms.ComboBox();
+            this.lblAnioBajaOrientacion = new System.Windows.Forms.Label();
+            this.lblBajaClase = new System.Windows.Forms.Label();
+            this.cmbxNombreBajaClase = new System.Windows.Forms.ComboBox();
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -100,7 +132,12 @@ namespace Hatchat.Presentacion
             this.panelABMClase.SuspendLayout();
             this.panelBajaOrientacion.SuspendLayout();
             this.panelModificarOrientacion.SuspendLayout();
+            this.panelBajaAsignatura.SuspendLayout();
             this.panelAltaAsignatura.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAsignaturasAltaAsignatura)).BeginInit();
+            this.panelAltaClase.SuspendLayout();
+            this.panelBajaClase.SuspendLayout();
+            this.panelModificarAsignatura.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNav
@@ -523,27 +560,132 @@ namespace Hatchat.Presentacion
             // 
             // panelBajaAsignatura
             // 
-            this.panelBajaAsignatura.Location = new System.Drawing.Point(108, 350);
+            this.panelBajaAsignatura.Controls.Add(this.cmbxAnioBajaAsignatura);
+            this.panelBajaAsignatura.Controls.Add(this.lblAnioBajaAsignatura);
+            this.panelBajaAsignatura.Controls.Add(this.btnEliminarBajaAsignatura);
+            this.panelBajaAsignatura.Controls.Add(this.cmbxAsignaturaBajaAsignatura);
+            this.panelBajaAsignatura.Controls.Add(this.lblAsignaturaBajaAsignatura);
+            this.panelBajaAsignatura.Controls.Add(this.lblBajaAsignatura);
+            this.panelBajaAsignatura.Location = new System.Drawing.Point(314, 140);
             this.panelBajaAsignatura.Name = "panelBajaAsignatura";
-            this.panelBajaAsignatura.Size = new System.Drawing.Size(200, 100);
+            this.panelBajaAsignatura.Size = new System.Drawing.Size(842, 529);
             this.panelBajaAsignatura.TabIndex = 38;
             this.panelBajaAsignatura.Visible = false;
             // 
+            // cmbxAnioBajaAsignatura
+            // 
+            this.cmbxAnioBajaAsignatura.FormattingEnabled = true;
+            this.cmbxAnioBajaAsignatura.Location = new System.Drawing.Point(202, 143);
+            this.cmbxAnioBajaAsignatura.Name = "cmbxAnioBajaAsignatura";
+            this.cmbxAnioBajaAsignatura.Size = new System.Drawing.Size(286, 21);
+            this.cmbxAnioBajaAsignatura.TabIndex = 5;
+            this.cmbxAnioBajaAsignatura.SelectedIndexChanged += new System.EventHandler(this.cmbxAnioBajaAsignatura_SelectedIndexChanged);
+            // 
+            // lblAnioBajaAsignatura
+            // 
+            this.lblAnioBajaAsignatura.AutoSize = true;
+            this.lblAnioBajaAsignatura.Location = new System.Drawing.Point(132, 146);
+            this.lblAnioBajaAsignatura.Name = "lblAnioBajaAsignatura";
+            this.lblAnioBajaAsignatura.Size = new System.Drawing.Size(26, 13);
+            this.lblAnioBajaAsignatura.TabIndex = 4;
+            this.lblAnioBajaAsignatura.Text = "Año";
+            // 
+            // btnEliminarBajaAsignatura
+            // 
+            this.btnEliminarBajaAsignatura.Location = new System.Drawing.Point(321, 477);
+            this.btnEliminarBajaAsignatura.Name = "btnEliminarBajaAsignatura";
+            this.btnEliminarBajaAsignatura.Size = new System.Drawing.Size(222, 23);
+            this.btnEliminarBajaAsignatura.TabIndex = 3;
+            this.btnEliminarBajaAsignatura.Text = "Eliminar";
+            this.btnEliminarBajaAsignatura.UseVisualStyleBackColor = true;
+            this.btnEliminarBajaAsignatura.Click += new System.EventHandler(this.btnEliminarBajaAsignatura_Click);
+            // 
+            // cmbxAsignaturaBajaAsignatura
+            // 
+            this.cmbxAsignaturaBajaAsignatura.FormattingEnabled = true;
+            this.cmbxAsignaturaBajaAsignatura.Location = new System.Drawing.Point(201, 169);
+            this.cmbxAsignaturaBajaAsignatura.Name = "cmbxAsignaturaBajaAsignatura";
+            this.cmbxAsignaturaBajaAsignatura.Size = new System.Drawing.Size(287, 21);
+            this.cmbxAsignaturaBajaAsignatura.TabIndex = 2;
+            // 
+            // lblAsignaturaBajaAsignatura
+            // 
+            this.lblAsignaturaBajaAsignatura.AutoSize = true;
+            this.lblAsignaturaBajaAsignatura.Location = new System.Drawing.Point(127, 171);
+            this.lblAsignaturaBajaAsignatura.Name = "lblAsignaturaBajaAsignatura";
+            this.lblAsignaturaBajaAsignatura.Size = new System.Drawing.Size(57, 13);
+            this.lblAsignaturaBajaAsignatura.TabIndex = 1;
+            this.lblAsignaturaBajaAsignatura.Text = "Asignatura";
+            // 
+            // lblBajaAsignatura
+            // 
+            this.lblBajaAsignatura.AutoSize = true;
+            this.lblBajaAsignatura.Location = new System.Drawing.Point(356, 47);
+            this.lblBajaAsignatura.Name = "lblBajaAsignatura";
+            this.lblBajaAsignatura.Size = new System.Drawing.Size(81, 13);
+            this.lblBajaAsignatura.TabIndex = 0;
+            this.lblBajaAsignatura.Text = "Baja Asignatura";
+            // 
             // panelAltaAsignatura
             // 
-            this.panelAltaAsignatura.Controls.Add(this.label1);
+            this.panelAltaAsignatura.Controls.Add(this.dgvAsignaturasAltaAsignatura);
+            this.panelAltaAsignatura.Controls.Add(this.lblIdAltaAsignatura);
+            this.panelAltaAsignatura.Controls.Add(this.lblAnioAltaAsignatura);
+            this.panelAltaAsignatura.Controls.Add(this.lblNombreAltaAsignatura);
             this.panelAltaAsignatura.Controls.Add(this.btnAgregarAsignaturaAltaAsignatura);
-            this.panelAltaAsignatura.Controls.Add(this.panelAsignaturasExistentesAltaAsignaturas);
             this.panelAltaAsignatura.Controls.Add(this.lblAsignaturasExistentesAltaAsignatura);
-            this.panelAltaAsignatura.Controls.Add(this.comboBox1);
-            this.panelAltaAsignatura.Controls.Add(this.textBox2);
-            this.panelAltaAsignatura.Controls.Add(this.txt);
+            this.panelAltaAsignatura.Controls.Add(this.cmbxAnioAltaAsignatura);
+            this.panelAltaAsignatura.Controls.Add(this.txtIdAltaAsignatura);
+            this.panelAltaAsignatura.Controls.Add(this.txtNombreAltaAsignatura);
             this.panelAltaAsignatura.Controls.Add(this.lblAltaAsignatura);
             this.panelAltaAsignatura.Location = new System.Drawing.Point(314, 140);
             this.panelAltaAsignatura.Name = "panelAltaAsignatura";
             this.panelAltaAsignatura.Size = new System.Drawing.Size(842, 529);
             this.panelAltaAsignatura.TabIndex = 37;
             this.panelAltaAsignatura.Visible = false;
+            // 
+            // dgvAsignaturasAltaAsignatura
+            // 
+            this.dgvAsignaturasAltaAsignatura.AllowUserToAddRows = false;
+            this.dgvAsignaturasAltaAsignatura.AllowUserToDeleteRows = false;
+            this.dgvAsignaturasAltaAsignatura.AllowUserToResizeColumns = false;
+            this.dgvAsignaturasAltaAsignatura.AllowUserToResizeRows = false;
+            this.dgvAsignaturasAltaAsignatura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAsignaturasAltaAsignatura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAsignaturasAltaAsignatura.Location = new System.Drawing.Point(244, 230);
+            this.dgvAsignaturasAltaAsignatura.Name = "dgvAsignaturasAltaAsignatura";
+            this.dgvAsignaturasAltaAsignatura.ReadOnly = true;
+            this.dgvAsignaturasAltaAsignatura.Size = new System.Drawing.Size(402, 172);
+            this.dgvAsignaturasAltaAsignatura.TabIndex = 10;
+            // 
+            // lblIdAltaAsignatura
+            // 
+            this.lblIdAltaAsignatura.AutoSize = true;
+            this.lblIdAltaAsignatura.Location = new System.Drawing.Point(69, 187);
+            this.lblIdAltaAsignatura.Name = "lblIdAltaAsignatura";
+            this.lblIdAltaAsignatura.Size = new System.Drawing.Size(16, 13);
+            this.lblIdAltaAsignatura.TabIndex = 9;
+            this.lblIdAltaAsignatura.Text = "Id";
+            // 
+            // lblAnioAltaAsignatura
+            // 
+            this.lblAnioAltaAsignatura.AutoSize = true;
+            this.lblAnioAltaAsignatura.Location = new System.Drawing.Point(66, 141);
+            this.lblAnioAltaAsignatura.Name = "lblAnioAltaAsignatura";
+            this.lblAnioAltaAsignatura.Size = new System.Drawing.Size(26, 13);
+            this.lblAnioAltaAsignatura.TabIndex = 8;
+            this.lblAnioAltaAsignatura.Text = "Año";
+            // 
+            // lblNombreAltaAsignatura
+            // 
+            this.lblNombreAltaAsignatura.AutoSize = true;
+            this.lblNombreAltaAsignatura.Location = new System.Drawing.Point(66, 106);
+            this.lblNombreAltaAsignatura.Name = "lblNombreAltaAsignatura";
+            this.lblNombreAltaAsignatura.Size = new System.Drawing.Size(44, 13);
+            this.lblNombreAltaAsignatura.TabIndex = 7;
+            this.lblNombreAltaAsignatura.Text = "Nombre";
             // 
             // btnAgregarAsignaturaAltaAsignatura
             // 
@@ -553,13 +695,7 @@ namespace Hatchat.Presentacion
             this.btnAgregarAsignaturaAltaAsignatura.TabIndex = 6;
             this.btnAgregarAsignaturaAltaAsignatura.Text = "Agregar asignatura";
             this.btnAgregarAsignaturaAltaAsignatura.UseVisualStyleBackColor = true;
-            // 
-            // panelAsignaturasExistentesAltaAsignaturas
-            // 
-            this.panelAsignaturasExistentesAltaAsignaturas.Location = new System.Drawing.Point(244, 243);
-            this.panelAsignaturasExistentesAltaAsignaturas.Name = "panelAsignaturasExistentesAltaAsignaturas";
-            this.panelAsignaturasExistentesAltaAsignaturas.Size = new System.Drawing.Size(401, 220);
-            this.panelAsignaturasExistentesAltaAsignaturas.TabIndex = 5;
+            this.btnAgregarAsignaturaAltaAsignatura.Click += new System.EventHandler(this.btnAgregarAsignaturaAltaAsignatura_Click);
             // 
             // lblAsignaturasExistentesAltaAsignatura
             // 
@@ -570,27 +706,27 @@ namespace Hatchat.Presentacion
             this.lblAsignaturasExistentesAltaAsignatura.TabIndex = 4;
             this.lblAsignaturasExistentesAltaAsignatura.Text = "Asignaturas existentes";
             // 
-            // comboBox1
+            // cmbxAnioAltaAsignatura
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(121, 138);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(129, 21);
-            this.comboBox1.TabIndex = 3;
+            this.cmbxAnioAltaAsignatura.FormattingEnabled = true;
+            this.cmbxAnioAltaAsignatura.Location = new System.Drawing.Point(121, 138);
+            this.cmbxAnioAltaAsignatura.Name = "cmbxAnioAltaAsignatura";
+            this.cmbxAnioAltaAsignatura.Size = new System.Drawing.Size(129, 21);
+            this.cmbxAnioAltaAsignatura.TabIndex = 3;
             // 
-            // textBox2
+            // txtIdAltaAsignatura
             // 
-            this.textBox2.Location = new System.Drawing.Point(121, 177);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 2;
+            this.txtIdAltaAsignatura.Location = new System.Drawing.Point(121, 184);
+            this.txtIdAltaAsignatura.Name = "txtIdAltaAsignatura";
+            this.txtIdAltaAsignatura.Size = new System.Drawing.Size(100, 20);
+            this.txtIdAltaAsignatura.TabIndex = 2;
             // 
-            // txt
+            // txtNombreAltaAsignatura
             // 
-            this.txt.Location = new System.Drawing.Point(121, 103);
-            this.txt.Name = "txt";
-            this.txt.Size = new System.Drawing.Size(100, 20);
-            this.txt.TabIndex = 1;
+            this.txtNombreAltaAsignatura.Location = new System.Drawing.Point(121, 103);
+            this.txtNombreAltaAsignatura.Name = "txtNombreAltaAsignatura";
+            this.txtNombreAltaAsignatura.Size = new System.Drawing.Size(100, 20);
+            this.txtNombreAltaAsignatura.TabIndex = 1;
             // 
             // lblAltaAsignatura
             // 
@@ -611,54 +747,280 @@ namespace Hatchat.Presentacion
             // 
             // panelAltaClase
             // 
-            this.panelAltaClase.Location = new System.Drawing.Point(108, 456);
+            this.panelAltaClase.Controls.Add(this.txtNombreAltaClase);
+            this.panelAltaClase.Controls.Add(this.lblNombreAltaClase);
+            this.panelAltaClase.Controls.Add(this.cmbxOrientacionAltaClase);
+            this.panelAltaClase.Controls.Add(this.lblOrientacionAltaClase);
+            this.panelAltaClase.Controls.Add(this.btnDarAltaClase);
+            this.panelAltaClase.Controls.Add(this.cmbxAnioAltaClase);
+            this.panelAltaClase.Controls.Add(this.lblAnioAltaClase);
+            this.panelAltaClase.Controls.Add(this.lblAltaClase);
+            this.panelAltaClase.Location = new System.Drawing.Point(314, 140);
             this.panelAltaClase.Name = "panelAltaClase";
-            this.panelAltaClase.Size = new System.Drawing.Size(200, 100);
+            this.panelAltaClase.Size = new System.Drawing.Size(842, 529);
             this.panelAltaClase.TabIndex = 40;
             this.panelAltaClase.Visible = false;
             // 
             // panelBajaClase
             // 
-            this.panelBajaClase.Location = new System.Drawing.Point(-109, 557);
+            this.panelBajaClase.Controls.Add(this.cmbxNombreBajaClase);
+            this.panelBajaClase.Controls.Add(this.lblNombreBajaClase);
+            this.panelBajaClase.Controls.Add(this.cmbxOrientacionBajaClase);
+            this.panelBajaClase.Controls.Add(this.lblOrientacionBajaClase);
+            this.panelBajaClase.Controls.Add(this.btnDarBajaClase);
+            this.panelBajaClase.Controls.Add(this.cmbxAnioBajaClase);
+            this.panelBajaClase.Controls.Add(this.lblAnioBajaOrientacion);
+            this.panelBajaClase.Controls.Add(this.lblBajaClase);
+            this.panelBajaClase.Location = new System.Drawing.Point(314, 140);
             this.panelBajaClase.Name = "panelBajaClase";
-            this.panelBajaClase.Size = new System.Drawing.Size(200, 100);
+            this.panelBajaClase.Size = new System.Drawing.Size(842, 529);
             this.panelBajaClase.TabIndex = 41;
             this.panelBajaClase.Visible = false;
             // 
             // panelModificarAsignatura
             // 
-            this.panelModificarAsignatura.Location = new System.Drawing.Point(-109, 456);
+            this.panelModificarAsignatura.Controls.Add(this.txtNombreModificarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.lblNombreModificarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.cmbxAnioModifcarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.lblAnioModificarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.btnAlterarModificarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.cmbxAsignaturaModificarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.lblAsignaturaModificarAsignatura);
+            this.panelModificarAsignatura.Controls.Add(this.lblModificarAsignatura);
+            this.panelModificarAsignatura.Location = new System.Drawing.Point(314, 140);
             this.panelModificarAsignatura.Name = "panelModificarAsignatura";
-            this.panelModificarAsignatura.Size = new System.Drawing.Size(200, 100);
+            this.panelModificarAsignatura.Size = new System.Drawing.Size(842, 529);
             this.panelModificarAsignatura.TabIndex = 39;
             this.panelModificarAsignatura.Visible = false;
             // 
-            // label1
+            // txtNombreModificarAsignatura
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 106);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
+            this.txtNombreModificarAsignatura.Location = new System.Drawing.Point(289, 180);
+            this.txtNombreModificarAsignatura.Name = "txtNombreModificarAsignatura";
+            this.txtNombreModificarAsignatura.Size = new System.Drawing.Size(285, 20);
+            this.txtNombreModificarAsignatura.TabIndex = 13;
+            // 
+            // lblNombreModificarAsignatura
+            // 
+            this.lblNombreModificarAsignatura.AutoSize = true;
+            this.lblNombreModificarAsignatura.Location = new System.Drawing.Point(213, 184);
+            this.lblNombreModificarAsignatura.Name = "lblNombreModificarAsignatura";
+            this.lblNombreModificarAsignatura.Size = new System.Drawing.Size(44, 13);
+            this.lblNombreModificarAsignatura.TabIndex = 12;
+            this.lblNombreModificarAsignatura.Text = "Nombre";
+            // 
+            // cmbxAnioModifcarAsignatura
+            // 
+            this.cmbxAnioModifcarAsignatura.FormattingEnabled = true;
+            this.cmbxAnioModifcarAsignatura.Location = new System.Drawing.Point(289, 144);
+            this.cmbxAnioModifcarAsignatura.Name = "cmbxAnioModifcarAsignatura";
+            this.cmbxAnioModifcarAsignatura.Size = new System.Drawing.Size(286, 21);
+            this.cmbxAnioModifcarAsignatura.TabIndex = 11;
+            // 
+            // lblAnioModificarAsignatura
+            // 
+            this.lblAnioModificarAsignatura.AutoSize = true;
+            this.lblAnioModificarAsignatura.Location = new System.Drawing.Point(219, 147);
+            this.lblAnioModificarAsignatura.Name = "lblAnioModificarAsignatura";
+            this.lblAnioModificarAsignatura.Size = new System.Drawing.Size(26, 13);
+            this.lblAnioModificarAsignatura.TabIndex = 10;
+            this.lblAnioModificarAsignatura.Text = "Año";
+            // 
+            // btnAlterarModificarAsignatura
+            // 
+            this.btnAlterarModificarAsignatura.Location = new System.Drawing.Point(321, 461);
+            this.btnAlterarModificarAsignatura.Name = "btnAlterarModificarAsignatura";
+            this.btnAlterarModificarAsignatura.Size = new System.Drawing.Size(222, 23);
+            this.btnAlterarModificarAsignatura.TabIndex = 9;
+            this.btnAlterarModificarAsignatura.Text = "Modificar";
+            this.btnAlterarModificarAsignatura.UseVisualStyleBackColor = true;
+            this.btnAlterarModificarAsignatura.Click += new System.EventHandler(this.btnAlterarModificarAsignatura_Click);
+            // 
+            // cmbxAsignaturaModificarAsignatura
+            // 
+            this.cmbxAsignaturaModificarAsignatura.FormattingEnabled = true;
+            this.cmbxAsignaturaModificarAsignatura.Location = new System.Drawing.Point(287, 114);
+            this.cmbxAsignaturaModificarAsignatura.Name = "cmbxAsignaturaModificarAsignatura";
+            this.cmbxAsignaturaModificarAsignatura.Size = new System.Drawing.Size(287, 21);
+            this.cmbxAsignaturaModificarAsignatura.TabIndex = 8;
+            this.cmbxAsignaturaModificarAsignatura.SelectedIndexChanged += new System.EventHandler(this.cmbxAsignaturaModificarAsignatura_SelectedIndexChanged);
+            // 
+            // lblAsignaturaModificarAsignatura
+            // 
+            this.lblAsignaturaModificarAsignatura.AutoSize = true;
+            this.lblAsignaturaModificarAsignatura.Location = new System.Drawing.Point(213, 116);
+            this.lblAsignaturaModificarAsignatura.Name = "lblAsignaturaModificarAsignatura";
+            this.lblAsignaturaModificarAsignatura.Size = new System.Drawing.Size(57, 13);
+            this.lblAsignaturaModificarAsignatura.TabIndex = 7;
+            this.lblAsignaturaModificarAsignatura.Text = "Asignatura";
+            // 
+            // lblModificarAsignatura
+            // 
+            this.lblModificarAsignatura.AutoSize = true;
+            this.lblModificarAsignatura.Location = new System.Drawing.Point(442, 38);
+            this.lblModificarAsignatura.Name = "lblModificarAsignatura";
+            this.lblModificarAsignatura.Size = new System.Drawing.Size(103, 13);
+            this.lblModificarAsignatura.TabIndex = 6;
+            this.lblModificarAsignatura.Text = "Modificar Asignatura";
+            // 
+            // txtNombreAltaClase
+            // 
+            this.txtNombreAltaClase.Location = new System.Drawing.Point(316, 183);
+            this.txtNombreAltaClase.Name = "txtNombreAltaClase";
+            this.txtNombreAltaClase.Size = new System.Drawing.Size(285, 20);
+            this.txtNombreAltaClase.TabIndex = 21;
+            // 
+            // lblNombreAltaClase
+            // 
+            this.lblNombreAltaClase.AutoSize = true;
+            this.lblNombreAltaClase.Location = new System.Drawing.Point(240, 187);
+            this.lblNombreAltaClase.Name = "lblNombreAltaClase";
+            this.lblNombreAltaClase.Size = new System.Drawing.Size(44, 13);
+            this.lblNombreAltaClase.TabIndex = 20;
+            this.lblNombreAltaClase.Text = "Nombre";
+            // 
+            // cmbxOrientacionAltaClase
+            // 
+            this.cmbxOrientacionAltaClase.FormattingEnabled = true;
+            this.cmbxOrientacionAltaClase.Location = new System.Drawing.Point(316, 147);
+            this.cmbxOrientacionAltaClase.Name = "cmbxOrientacionAltaClase";
+            this.cmbxOrientacionAltaClase.Size = new System.Drawing.Size(286, 21);
+            this.cmbxOrientacionAltaClase.TabIndex = 19;
+            // 
+            // lblOrientacionAltaClase
+            // 
+            this.lblOrientacionAltaClase.AutoSize = true;
+            this.lblOrientacionAltaClase.Location = new System.Drawing.Point(246, 150);
+            this.lblOrientacionAltaClase.Name = "lblOrientacionAltaClase";
+            this.lblOrientacionAltaClase.Size = new System.Drawing.Size(61, 13);
+            this.lblOrientacionAltaClase.TabIndex = 18;
+            this.lblOrientacionAltaClase.Text = "Orientacion";
+            // 
+            // btnDarAltaClase
+            // 
+            this.btnDarAltaClase.Location = new System.Drawing.Point(348, 464);
+            this.btnDarAltaClase.Name = "btnDarAltaClase";
+            this.btnDarAltaClase.Size = new System.Drawing.Size(222, 23);
+            this.btnDarAltaClase.TabIndex = 17;
+            this.btnDarAltaClase.Text = "Crear";
+            this.btnDarAltaClase.UseVisualStyleBackColor = true;
+            this.btnDarAltaClase.Click += new System.EventHandler(this.btnDarAltaClase_Click);
+            // 
+            // cmbxAnioAltaClase
+            // 
+            this.cmbxAnioAltaClase.FormattingEnabled = true;
+            this.cmbxAnioAltaClase.Location = new System.Drawing.Point(314, 117);
+            this.cmbxAnioAltaClase.Name = "cmbxAnioAltaClase";
+            this.cmbxAnioAltaClase.Size = new System.Drawing.Size(287, 21);
+            this.cmbxAnioAltaClase.TabIndex = 16;
+            // 
+            // lblAnioAltaClase
+            // 
+            this.lblAnioAltaClase.AutoSize = true;
+            this.lblAnioAltaClase.Location = new System.Drawing.Point(240, 119);
+            this.lblAnioAltaClase.Name = "lblAnioAltaClase";
+            this.lblAnioAltaClase.Size = new System.Drawing.Size(26, 13);
+            this.lblAnioAltaClase.TabIndex = 15;
+            this.lblAnioAltaClase.Text = "Año";
+            // 
+            // lblAltaClase
+            // 
+            this.lblAltaClase.AutoSize = true;
+            this.lblAltaClase.Location = new System.Drawing.Point(469, 41);
+            this.lblAltaClase.Name = "lblAltaClase";
+            this.lblAltaClase.Size = new System.Drawing.Size(54, 13);
+            this.lblAltaClase.TabIndex = 14;
+            this.lblAltaClase.Text = "Alta Clase";
+            // 
+            // lblNombreBajaClase
+            // 
+            this.lblNombreBajaClase.AutoSize = true;
+            this.lblNombreBajaClase.Location = new System.Drawing.Point(240, 187);
+            this.lblNombreBajaClase.Name = "lblNombreBajaClase";
+            this.lblNombreBajaClase.Size = new System.Drawing.Size(44, 13);
+            this.lblNombreBajaClase.TabIndex = 28;
+            this.lblNombreBajaClase.Text = "Nombre";
+            // 
+            // cmbxOrientacionBajaClase
+            // 
+            this.cmbxOrientacionBajaClase.FormattingEnabled = true;
+            this.cmbxOrientacionBajaClase.Location = new System.Drawing.Point(316, 147);
+            this.cmbxOrientacionBajaClase.Name = "cmbxOrientacionBajaClase";
+            this.cmbxOrientacionBajaClase.Size = new System.Drawing.Size(286, 21);
+            this.cmbxOrientacionBajaClase.TabIndex = 27;
+            this.cmbxOrientacionBajaClase.SelectedIndexChanged += new System.EventHandler(this.cmbxOrientacionBajaClase_SelectedIndexChanged);
+            // 
+            // lblOrientacionBajaClase
+            // 
+            this.lblOrientacionBajaClase.AutoSize = true;
+            this.lblOrientacionBajaClase.Location = new System.Drawing.Point(246, 150);
+            this.lblOrientacionBajaClase.Name = "lblOrientacionBajaClase";
+            this.lblOrientacionBajaClase.Size = new System.Drawing.Size(61, 13);
+            this.lblOrientacionBajaClase.TabIndex = 26;
+            this.lblOrientacionBajaClase.Text = "Orientacion";
+            // 
+            // btnDarBajaClase
+            // 
+            this.btnDarBajaClase.Location = new System.Drawing.Point(348, 464);
+            this.btnDarBajaClase.Name = "btnDarBajaClase";
+            this.btnDarBajaClase.Size = new System.Drawing.Size(222, 23);
+            this.btnDarBajaClase.TabIndex = 25;
+            this.btnDarBajaClase.Text = "Crear";
+            this.btnDarBajaClase.UseVisualStyleBackColor = true;
+            this.btnDarBajaClase.Click += new System.EventHandler(this.btnDarBajaClase_Click);
+            // 
+            // cmbxAnioBajaClase
+            // 
+            this.cmbxAnioBajaClase.FormattingEnabled = true;
+            this.cmbxAnioBajaClase.Location = new System.Drawing.Point(314, 117);
+            this.cmbxAnioBajaClase.Name = "cmbxAnioBajaClase";
+            this.cmbxAnioBajaClase.Size = new System.Drawing.Size(287, 21);
+            this.cmbxAnioBajaClase.TabIndex = 24;
+            this.cmbxAnioBajaClase.SelectedIndexChanged += new System.EventHandler(this.cmbxAnioBajaClase_SelectedIndexChanged);
+            // 
+            // lblAnioBajaOrientacion
+            // 
+            this.lblAnioBajaOrientacion.AutoSize = true;
+            this.lblAnioBajaOrientacion.Location = new System.Drawing.Point(240, 119);
+            this.lblAnioBajaOrientacion.Name = "lblAnioBajaOrientacion";
+            this.lblAnioBajaOrientacion.Size = new System.Drawing.Size(26, 13);
+            this.lblAnioBajaOrientacion.TabIndex = 23;
+            this.lblAnioBajaOrientacion.Text = "Año";
+            // 
+            // lblBajaClase
+            // 
+            this.lblBajaClase.AutoSize = true;
+            this.lblBajaClase.Location = new System.Drawing.Point(469, 41);
+            this.lblBajaClase.Name = "lblBajaClase";
+            this.lblBajaClase.Size = new System.Drawing.Size(57, 13);
+            this.lblBajaClase.TabIndex = 22;
+            this.lblBajaClase.Text = "Baja Clase";
+            // 
+            // cmbxNombreBajaClase
+            // 
+            this.cmbxNombreBajaClase.FormattingEnabled = true;
+            this.cmbxNombreBajaClase.Location = new System.Drawing.Point(314, 187);
+            this.cmbxNombreBajaClase.Name = "cmbxNombreBajaClase";
+            this.cmbxNombreBajaClase.Size = new System.Drawing.Size(286, 21);
+            this.cmbxNombreBajaClase.TabIndex = 29;
             // 
             // ABMGruposAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelBajaClase);
+            this.Controls.Add(this.panelAltaClase);
+            this.Controls.Add(this.panelModificarAsignatura);
             this.Controls.Add(this.panelModificarClase);
             this.Controls.Add(this.panelABMClase);
             this.Controls.Add(this.panelBajaAsignatura);
             this.Controls.Add(this.panelABMAsignatura);
-            this.Controls.Add(this.panelAltaClase);
             this.Controls.Add(this.panelABMOrientacion);
             this.Controls.Add(this.lblABMAlumno);
-            this.Controls.Add(this.panelBajaClase);
             this.Controls.Add(this.btnClase);
             this.Controls.Add(this.panelAltaAsignatura);
             this.Controls.Add(this.btnAsignatura);
-            this.Controls.Add(this.panelModificarAsignatura);
             this.Controls.Add(this.btnOrientacion);
             this.Controls.Add(this.panelNav);
             this.Controls.Add(this.panelModificarOrientacion);
@@ -684,8 +1046,17 @@ namespace Hatchat.Presentacion
             this.panelBajaOrientacion.PerformLayout();
             this.panelModificarOrientacion.ResumeLayout(false);
             this.panelModificarOrientacion.PerformLayout();
+            this.panelBajaAsignatura.ResumeLayout(false);
+            this.panelBajaAsignatura.PerformLayout();
             this.panelAltaAsignatura.ResumeLayout(false);
             this.panelAltaAsignatura.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAsignaturasAltaAsignatura)).EndInit();
+            this.panelAltaClase.ResumeLayout(false);
+            this.panelAltaClase.PerformLayout();
+            this.panelBajaClase.ResumeLayout(false);
+            this.panelBajaClase.PerformLayout();
+            this.panelModificarAsignatura.ResumeLayout(false);
+            this.panelModificarAsignatura.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -743,12 +1114,44 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblNuevoNombreModificarOrientacion;
         private System.Windows.Forms.Label lblOrientacionModificarOrientacion;
         private System.Windows.Forms.Button btnAgregarAsignaturaAltaAsignatura;
-        private System.Windows.Forms.Panel panelAsignaturasExistentesAltaAsignaturas;
         private System.Windows.Forms.Label lblAsignaturasExistentesAltaAsignatura;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox txt;
+        private System.Windows.Forms.ComboBox cmbxAnioAltaAsignatura;
+        private System.Windows.Forms.TextBox txtIdAltaAsignatura;
+        private System.Windows.Forms.TextBox txtNombreAltaAsignatura;
         private System.Windows.Forms.Label lblAltaAsignatura;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblNombreAltaAsignatura;
+        private System.Windows.Forms.Label lblIdAltaAsignatura;
+        private System.Windows.Forms.Label lblAnioAltaAsignatura;
+        private System.Windows.Forms.DataGridView dgvAsignaturasAltaAsignatura;
+        private System.Windows.Forms.Button btnEliminarBajaAsignatura;
+        private System.Windows.Forms.ComboBox cmbxAsignaturaBajaAsignatura;
+        private System.Windows.Forms.Label lblAsignaturaBajaAsignatura;
+        private System.Windows.Forms.Label lblBajaAsignatura;
+        private System.Windows.Forms.ComboBox cmbxAnioBajaAsignatura;
+        private System.Windows.Forms.Label lblAnioBajaAsignatura;
+        private System.Windows.Forms.ComboBox cmbxAnioModifcarAsignatura;
+        private System.Windows.Forms.Label lblAnioModificarAsignatura;
+        private System.Windows.Forms.Button btnAlterarModificarAsignatura;
+        private System.Windows.Forms.ComboBox cmbxAsignaturaModificarAsignatura;
+        private System.Windows.Forms.Label lblAsignaturaModificarAsignatura;
+        private System.Windows.Forms.Label lblModificarAsignatura;
+        private System.Windows.Forms.TextBox txtNombreModificarAsignatura;
+        private System.Windows.Forms.Label lblNombreModificarAsignatura;
+        private System.Windows.Forms.TextBox txtNombreAltaClase;
+        private System.Windows.Forms.Label lblNombreAltaClase;
+        private System.Windows.Forms.ComboBox cmbxOrientacionAltaClase;
+        private System.Windows.Forms.Label lblOrientacionAltaClase;
+        private System.Windows.Forms.Button btnDarAltaClase;
+        private System.Windows.Forms.ComboBox cmbxAnioAltaClase;
+        private System.Windows.Forms.Label lblAnioAltaClase;
+        private System.Windows.Forms.Label lblAltaClase;
+        private System.Windows.Forms.ComboBox cmbxNombreBajaClase;
+        private System.Windows.Forms.Label lblNombreBajaClase;
+        private System.Windows.Forms.ComboBox cmbxOrientacionBajaClase;
+        private System.Windows.Forms.Label lblOrientacionBajaClase;
+        private System.Windows.Forms.Button btnDarBajaClase;
+        private System.Windows.Forms.ComboBox cmbxAnioBajaClase;
+        private System.Windows.Forms.Label lblAnioBajaOrientacion;
+        private System.Windows.Forms.Label lblBajaClase;
     }
 }

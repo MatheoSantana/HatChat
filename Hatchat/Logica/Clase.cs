@@ -58,7 +58,8 @@ namespace Hatchat.Logica
             return anio + nombre + " - " + orientacion;
         }
 
-        public void SelectIdClasePorPorNombreAnioYorientacion() {
+        public void SelectIdClasePorPorNombreAnioYorientacion()
+        {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             idClase = conexion.SelectIdClasePorPorNombreAnioYorientacion(nombre, anio, orientacion);
         }
@@ -78,5 +79,21 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectClasePorId(id);
         }
+        public void AltaClase()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AltaClase(this);
+        }
+        public List<Clase> SelectClasesPorAnio(int anio)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectClasesPorAnio(anio);
+        }
+        public void BajaClase()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.BajaClase(this);
+        }
+
     }
 }

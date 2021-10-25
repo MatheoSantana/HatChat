@@ -13,12 +13,25 @@ namespace Hatchat.Presentacion
     public partial class ABMGruposAdmin : Form
     {
 
-        private List<Logica.Asignatura> AsignaturasAltaOrientacion = new List<Logica.Asignatura>();
+        private List<Logica.Asignatura> asignaturasAltaOrientacion = new List<Logica.Asignatura>();
         private List<Logica.Contiene> contieneAltaOrientacion = new List<Logica.Contiene>();
+
         private List<Logica.Orientacion> orientacionesBajaOrientacion = new List<Logica.Orientacion>();
+
         private List<Logica.Orientacion> orientacionesModificarOrientacion = new List<Logica.Orientacion>();
-        private List<Logica.Asignatura> AsignaturasModificarOrientacion = new List<Logica.Asignatura>();
+        private List<Logica.Asignatura> asignaturasModificarOrientacion = new List<Logica.Asignatura>();
         private List<Logica.Contiene> contienesModificarOrientacion = new List<Logica.Contiene>();
+
+        private List<Logica.Asignatura> asignaturasAltaAsignatura = new List<Logica.Asignatura>();
+
+        private List<Logica.Asignatura> asignaturasBajaAsignatura = new List<Logica.Asignatura>();
+
+        private List<Logica.Asignatura> asignaturasModificarAsignatura = new List<Logica.Asignatura>();
+
+        private List<Logica.Orientacion> orientacionesAltaClase = new List<Logica.Orientacion>();
+
+        private List<Logica.Orientacion> orientacionesBajaClase = new List<Logica.Orientacion>();
+        private List<Logica.Clase> ClasesBajaClase = new List<Logica.Clase>();
 
         public Form login;
         public Form principalSolicitudesAdmin;
@@ -56,6 +69,35 @@ namespace Hatchat.Presentacion
 
             cmbxNombreBajaOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbxModificarOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioAltaAsignatura.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioAltaAsignatura.Items.Add(1);
+            cmbxAnioAltaAsignatura.Items.Add(2);
+            cmbxAnioAltaAsignatura.Items.Add(3);
+
+            cmbxAsignaturaBajaAsignatura.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioBajaAsignatura.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioBajaAsignatura.Items.Add(1);
+            cmbxAnioBajaAsignatura.Items.Add(2);
+            cmbxAnioBajaAsignatura.Items.Add(3);
+
+            cmbxAsignaturaModificarAsignatura.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioModifcarAsignatura.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioModifcarAsignatura.Items.Add(1);
+            cmbxAnioModifcarAsignatura.Items.Add(2);
+            cmbxAnioModifcarAsignatura.Items.Add(3);
+
+            cmbxOrientacionAltaClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioAltaClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioAltaClase.Items.Add(1);
+            cmbxAnioAltaClase.Items.Add(2);
+            cmbxAnioAltaClase.Items.Add(3);
+
+            cmbxOrientacionBajaClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioBajaClase.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAnioBajaClase.Items.Add(1);
+            cmbxAnioBajaClase.Items.Add(2);
+            cmbxAnioBajaClase.Items.Add(3);
+            cmbxNombreBajaClase.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
@@ -127,10 +169,10 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
-            AsignaturasAltaOrientacion.Clear();
+            asignaturasAltaOrientacion.Clear();
             panelAltaOrientacionAsignaturas.Controls.Clear();
-            AsignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
-            foreach (Logica.Asignatura asig in AsignaturasAltaOrientacion)
+            asignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
+            foreach (Logica.Asignatura asig in asignaturasAltaOrientacion)
             {
                 CheckBox dina = new CheckBox();
 
@@ -157,7 +199,7 @@ namespace Hatchat.Presentacion
         {
             if (((CheckBox)sender).Checked)
             {
-                foreach (Logica.Asignatura asig in AsignaturasAltaOrientacion)
+                foreach (Logica.Asignatura asig in asignaturasAltaOrientacion)
                 {
 
                     if (((CheckBox)sender).Name == "chbx" + asig.Id)
@@ -172,7 +214,7 @@ namespace Hatchat.Presentacion
             else
             {
                 Logica.Contiene encontrado = new Logica.Contiene();
-                foreach (Logica.Asignatura asig in AsignaturasAltaOrientacion)
+                foreach (Logica.Asignatura asig in asignaturasAltaOrientacion)
                 {
                     foreach (Logica.Contiene contiene in contieneAltaOrientacion)
                     {
@@ -263,7 +305,7 @@ namespace Hatchat.Presentacion
                 cmbxModificarOrientacion.Items.Add(ori.Nombre);
             }
 
-            AsignaturasModificarOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
+            asignaturasModificarOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
         }
         private void cmbxModificarOrientacion_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -271,7 +313,7 @@ namespace Hatchat.Presentacion
             contienesModificarOrientacion.Clear();
             panelModificarOrientacionAsignaturas.Controls.Clear();
             contienesModificarOrientacion.AddRange(new Logica.Contiene().SelectContienePorOrientacion(orientacionesModificarOrientacion[cmbxModificarOrientacion.SelectedIndex].Id));
-            foreach (Logica.Asignatura asig in AsignaturasModificarOrientacion)
+            foreach (Logica.Asignatura asig in asignaturasModificarOrientacion)
             {
 
                 CheckBox dina = new CheckBox();
@@ -307,7 +349,7 @@ namespace Hatchat.Presentacion
         {
             if (((CheckBox)sender).Checked)
             {
-                foreach (Logica.Asignatura asig in AsignaturasModificarOrientacion)
+                foreach (Logica.Asignatura asig in asignaturasModificarOrientacion)
                 {
 
                     if (((CheckBox)sender).Name == "chbx" + asig.Id)
@@ -322,7 +364,7 @@ namespace Hatchat.Presentacion
             else
             {
                 Logica.Contiene encontrado = new Logica.Contiene();
-                foreach (Logica.Asignatura asig in AsignaturasModificarOrientacion)
+                foreach (Logica.Asignatura asig in asignaturasModificarOrientacion)
                 {
                     foreach (Logica.Contiene contiene in contienesModificarOrientacion)
                     {
@@ -331,13 +373,14 @@ namespace Hatchat.Presentacion
                             encontrado = contiene;
                         }
                     }
+
                 }
                 contieneAltaOrientacion.Remove(encontrado);
             }
         }
         private void btnModificarModificarOrientacion_Click(object sender, EventArgs e)
         {
-            if (!(new Logica.Orientacion().SelectExisteNombreOrientacion(txtModificarOrientacionNombre.Text)) || txtModificarOrientacionNombre.Text==cmbxModificarOrientacion.SelectedItem.ToString())
+            if (!(new Logica.Orientacion().SelectExisteNombreOrientacion(txtModificarOrientacionNombre.Text)) || txtModificarOrientacionNombre.Text == cmbxModificarOrientacion.SelectedItem.ToString())
             {
                 Logica.Orientacion ori = orientacionesModificarOrientacion[cmbxModificarOrientacion.SelectedIndex];
                 ori.Nombre = txtModificarOrientacionNombre.Text;
@@ -354,12 +397,14 @@ namespace Hatchat.Presentacion
         private void btnAsignatura_Click(object sender, EventArgs e)
         {
             panelABMOrientacion.Visible = false;
-            panelABMClase.Visible = !panelABMClase.Visible;
-            panelABMAsignatura.Visible = false;
+            panelABMAsignatura.Visible = !panelABMAsignatura.Visible;
+            panelABMClase.Visible = false;
         }
 
         private void btnAltaAsignatura_Click(object sender, EventArgs e)
         {
+            panelABMAsignatura.Visible = false;
+
             panelAltaOrientacion.Visible = false;
             panelBajaOrientacion.Visible = false;
             panelModificarOrientacion.Visible = false;
@@ -371,10 +416,38 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
+
+
+            asignaturasAltaAsignatura.Clear();
+            asignaturasAltaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+            dgvAsignaturasAltaAsignatura.DataSource = new Logica.Asignatura().SelectAsignaturasGrilla();
+        }
+        private void btnAgregarAsignaturaAltaAsignatura_Click(object sender, EventArgs e)
+        {
+            bool hacer = true;
+            foreach (Logica.Asignatura asig in asignaturasAltaAsignatura)
+            {
+                if (asig.Id == txtIdAltaAsignatura.Text)
+                {
+                    hacer = false;
+                }
+            }
+            if (hacer)
+            {
+                Logica.Asignatura asig = new Logica.Asignatura(txtIdAltaAsignatura.Text, txtNombreAltaAsignatura.Text, Convert.ToInt32(cmbxAnioAltaAsignatura.SelectedItem), true);
+                asig.AltaAsignatura();
+                MessageBox.Show("Se ha creado correctamente la asignatura");
+            }
+            else
+            {
+                MessageBox.Show("Esa id ya existe");
+            }
         }
 
         private void btnBajaAsignatura_Click(object sender, EventArgs e)
         {
+            panelABMAsignatura.Visible = false;
+
             panelAltaOrientacion.Visible = false;
             panelBajaOrientacion.Visible = false;
             panelModificarOrientacion.Visible = false;
@@ -386,10 +459,39 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
+
+            cmbxAsignaturaBajaAsignatura.Items.Clear();
+            asignaturasBajaAsignatura.Clear();
+
+        }
+        private void cmbxAnioBajaAsignatura_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbxAsignaturaBajaAsignatura.Items.Clear();
+            asignaturasBajaAsignatura.Clear();
+            asignaturasBajaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+            foreach (Logica.Asignatura asig in asignaturasBajaAsignatura)
+            {
+                if (asig.Anio == Convert.ToInt32(cmbxAnioBajaAsignatura.SelectedItem))
+                {
+                    cmbxAsignaturaBajaAsignatura.Items.Add(asig.Id + " - " + asig.Nombre);
+                }
+            }
         }
 
+        private void btnEliminarBajaAsignatura_Click(object sender, EventArgs e)
+        {
+            foreach (Logica.Asignatura asig in asignaturasBajaAsignatura)
+            {
+                if (asig.Id + " - " + asig.Nombre == cmbxAnioBajaAsignatura.SelectedItem.ToString())
+                {
+                    asig.BajaAsignatura();
+                }
+            }
+        }
         private void btnModificarAsignatura_Click(object sender, EventArgs e)
         {
+            panelABMAsignatura.Visible = false;
+
             panelAltaOrientacion.Visible = false;
             panelBajaOrientacion.Visible = false;
             panelModificarOrientacion.Visible = false;
@@ -402,20 +504,61 @@ namespace Hatchat.Presentacion
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
 
+            cmbxAsignaturaModificarAsignatura.SelectedIndex = -1;
+            cmbxAnioModifcarAsignatura.SelectedIndex = -1;
+            cmbxAnioModifcarAsignatura.Enabled = false;
+            txtNombreModificarAsignatura.Enabled = false;
+            txtNombreModificarAsignatura.Text = "";
+
+            asignaturasModificarAsignatura.Clear();
+            cmbxAsignaturaModificarAsignatura.Items.Clear();
+            asignaturasModificarAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+
+            foreach (Logica.Asignatura asig in asignaturasModificarAsignatura)
+            {
+                cmbxAsignaturaModificarAsignatura.Items.Add(asig.Id + " - " + asig.Nombre + " - " + asig.Anio + "°");
+            }
+        }
+        private void cmbxAsignaturaModificarAsignatura_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbxAnioModifcarAsignatura.Enabled = true;
+            txtNombreModificarAsignatura.Enabled = true;
         }
 
+        private void btnAlterarModificarAsignatura_Click(object sender, EventArgs e)
+        {
+            Logica.Asignatura asig = asignaturasModificarAsignatura[cmbxAsignaturaModificarAsignatura.SelectedIndex];
+            asig.Anio = Convert.ToInt32(cmbxAnioModifcarAsignatura.SelectedItem);
+            asig.Nombre = txtNombreModificarAsignatura.Text;
+            asig.ModificarAsignatura();
+            MessageBox.Show("Se ha modificado la asignatura correctamente");
+            cmbxAnioModifcarAsignatura.SelectedIndex = -1;
+            cmbxAnioModifcarAsignatura.Enabled = false;
+            txtNombreModificarAsignatura.Text = "";
+            txtNombreModificarAsignatura.Enabled = false;
+            cmbxAsignaturaModificarAsignatura.Items.Clear();
+            asignaturasModificarAsignatura.Clear();
+            asignaturasModificarAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+            foreach (Logica.Asignatura asi in asignaturasModificarAsignatura)
+            {
+                cmbxAsignaturaModificarAsignatura.Items.Add(asi.Id + " - " + asi.Nombre + " - " + asi.Anio + "°");
+            }
+            cmbxAsignaturaModificarAsignatura.SelectedIndex = -1;
+        }
 
         private void btnClase_Click(object sender, EventArgs e)
         {
             panelABMOrientacion.Visible = false;
-            panelABMClase.Visible = false;
-            panelABMAsignatura.Visible = !panelABMAsignatura.Visible;
-        }
+            panelABMAsignatura.Visible = false;
+            panelABMClase.Visible = !panelABMClase.Visible;
 
+        }
 
 
         private void btnAltaClase_Click(object sender, EventArgs e)
         {
+            panelABMClase.Visible = false;
+
             panelAltaOrientacion.Visible = false;
             panelBajaOrientacion.Visible = false;
             panelModificarOrientacion.Visible = false;
@@ -427,10 +570,42 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = !panelAltaClase.Visible;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
+
+            cmbxOrientacionAltaClase.Items.Clear();
+            orientacionesAltaClase.Clear();
+            orientacionesAltaClase.AddRange(new Logica.Orientacion().SelectOrientaciones());
+            foreach(Logica.Orientacion ori in orientacionesAltaClase)
+            {
+                cmbxOrientacionAltaClase.Items.Add(ori.Nombre);
+            }
+            cmbxOrientacionAltaClase.SelectedIndex = -1;
+
+        }
+
+        private void btnDarAltaClase_Click(object sender, EventArgs e)
+        {
+            Logica.Clase cla = new Logica.Clase();
+            cla.Nombre = txtNombreAltaClase.Text;
+            cla.Anio = Convert.ToInt32(cmbxAnioAltaClase.SelectedItem);
+            cla.Activo = true;
+            cla.Orientacion = orientacionesAltaClase[cmbxOrientacionAltaClase.SelectedIndex].Id;
+            cla.AltaClase();
+            MessageBox.Show("Clase creada");
+            cmbxAnioAltaClase.SelectedIndex = -1;
+            orientacionesAltaClase.Clear();
+            orientacionesAltaClase.AddRange(new Logica.Orientacion().SelectOrientaciones());
+            cmbxOrientacionAltaClase.Items.Clear();
+            foreach(Logica.Orientacion ori in orientacionesAltaClase)
+            {
+                cmbxOrientacionAltaClase.Items.Add(ori.Nombre);
+            }
+            cmbxOrientacionAltaClase.SelectedIndex = -1;
         }
 
         private void btnBajaClase_Click(object sender, EventArgs e)
         {
+            panelABMClase.Visible = false;
+
             panelAltaOrientacion.Visible = false;
             panelBajaOrientacion.Visible = false;
             panelModificarOrientacion.Visible = false;
@@ -442,10 +617,75 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = !panelBajaClase.Visible;
             panelModificarClase.Visible = false;
+
+            cmbxAnioBajaClase.SelectedIndex = -1;
+            cmbxOrientacionBajaClase.Enabled = false;
+            cmbxOrientacionBajaClase.Items.Clear();
+            cmbxOrientacionBajaClase.SelectedIndex= - 1;
+            orientacionesBajaClase.Clear();
+            ClasesBajaClase.Clear();
+            cmbxNombreBajaClase.Enabled = false;
+            cmbxNombreBajaClase.Items.Clear();
+            cmbxNombreBajaClase.SelectedIndex = -1;
+        }
+        private void cmbxAnioBajaClase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClasesBajaClase.Clear();
+            orientacionesBajaClase.Clear();
+            cmbxOrientacionBajaClase.Items.Clear();
+            ClasesBajaClase.AddRange(new Logica.Clase().SelectClasesPorAnio(Convert.ToInt32(cmbxAnioBajaClase.SelectedItem)));
+            foreach (Logica.Clase cla in ClasesBajaClase)
+            {
+                Logica.Orientacion ori = new Logica.Orientacion().SelectOrientacioPorId(cla.Orientacion);
+                bool encontrado = false;
+                foreach(Logica.Orientacion orient in orientacionesBajaClase) 
+                {
+                    if(orient.Id == cla.Orientacion)
+                    {
+                        encontrado = true;
+                    }
+                }
+                if (!encontrado)
+                {
+                    orientacionesBajaClase.Add(ori);
+                }
+            }
+            foreach (Logica.Orientacion ori in orientacionesBajaClase)
+            {
+                cmbxOrientacionBajaClase.Items.Add(ori.Nombre);
+            }
+            cmbxOrientacionBajaClase.Enabled = true;
+        }
+
+        private void cmbxOrientacionBajaClase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbxNombreBajaClase.Items.Clear();
+            foreach (Logica.Clase cla in ClasesBajaClase)
+            {
+                if (orientacionesBajaClase[cmbxOrientacionBajaClase.SelectedIndex].Id == cla.Orientacion)
+                {
+                    cmbxNombreBajaClase.Items.Add(cla.Nombre);
+                }
+            }
+            cmbxNombreBajaClase.Enabled = true;
+        }
+        private void btnDarBajaClase_Click(object sender, EventArgs e)
+        {
+            foreach(Logica.Clase cla in ClasesBajaClase)
+            {
+                if (orientacionesBajaClase[cmbxOrientacionBajaClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreBajaClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioBajaClase.SelectedItem.ToString()) == cla.Anio)
+                {
+                    cla.BajaClase();
+                    MessageBox.Show("Eliminado");
+                }
+            }
+
         }
 
         private void btnModificarClase_Click(object sender, EventArgs e)
         {
+            panelABMClase.Visible = false;
+
             panelAltaOrientacion.Visible = false;
             panelBajaOrientacion.Visible = false;
             panelModificarOrientacion.Visible = false;
@@ -458,5 +698,7 @@ namespace Hatchat.Presentacion
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = !panelModificarClase.Visible;
         }
+
+        
     }
 }
