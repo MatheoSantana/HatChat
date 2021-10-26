@@ -42,7 +42,7 @@ namespace Hatchat.Presentacion
         public Form principalSolicitudesAdmin;
         public Form abmDAlumnoAdmin;
         public Form abmDocenteAdmin;
-        public Form historialSolicitudes;
+        public Form historialSolicitudesAdmin;
         public ABMGruposAdmin()
         {
             InitializeComponent();
@@ -54,8 +54,8 @@ namespace Hatchat.Presentacion
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxSolicitudesNav.Image = Image.FromFile("solicitudes admin gris.png");
                 pbxABMAlumnoNav.Image = Image.FromFile("abm alumno gris.png");
-                pbxABMDocenteNav.Image = Image.FromFile("abm docente blanco.png");
-                pbxABMGruposNav.Image = Image.FromFile("abm grupos gris.png");
+                pbxABMDocenteNav.Image = Image.FromFile("abm docente gris.png");
+                pbxABMGruposNav.Image = Image.FromFile("abm grupos blanco.png");
                 pbxHistorialSolicitudesNav.Image = Image.FromFile("historial gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
@@ -146,7 +146,7 @@ namespace Hatchat.Presentacion
 
         private void pbxHistorialSolicitudesNav_Click(object sender, EventArgs e)
         {
-            historialSolicitudes.Show();
+            historialSolicitudesAdmin.Show();
             this.Hide();
         }
 

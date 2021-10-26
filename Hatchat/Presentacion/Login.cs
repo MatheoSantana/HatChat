@@ -18,6 +18,7 @@ namespace Hatchat.Presentacion
         static MensajesDocente mensajesDocente;
         static PerfilDocente perfilDocente;
         static RegisterDocente registerDocente;
+        HistorialMensajesDocente
 
         static PrincipalChatAlumno principalChatAlumno;
         static MensajesAlumno mensajesAlumno;
@@ -28,6 +29,7 @@ namespace Hatchat.Presentacion
         static ABMAlumnoAdmin abmAlumnoAdmin;
         static ABMDocenteAdmin abmDocenteAdmin;
         static ABMGruposAdmin abmGruposAdmin;
+        static HistorialSolicitudesAdmin historialSolicitudesAdmin;
 
 
 
@@ -128,11 +130,11 @@ namespace Hatchat.Presentacion
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
 
-            encontrado = encontrado.SelectUsuarioCi("00000000");
+            encontrado = encontrado.SelectUsuarioCi(txtCedula.Text);
             
             if (encontrado.Ci != "")
             {
-                if (encontrado.Password == "L2tpbGwgQG1l")
+                if (encontrado.Password == txtPassword.Text)
                 {
                     if (encontrado.SelectDocente())
                     {
@@ -193,28 +195,41 @@ namespace Hatchat.Presentacion
                         abmAlumnoAdmin = new ABMAlumnoAdmin();
                         abmDocenteAdmin = new ABMDocenteAdmin();
                         abmGruposAdmin = new ABMGruposAdmin();
+                        historialSolicitudesAdmin = new HistorialSolicitudesAdmin();
 
                         principalSolicitudesAdmin.login = this;
                         principalSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
                         principalSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
                         principalSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
-
-
+                        principalSolicitudesAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
 
                         abmAlumnoAdmin.login = this;
                         abmAlumnoAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
                         abmAlumnoAdmin.abmDocenteAdmin = abmDocenteAdmin;
                         abmAlumnoAdmin.abmGruposAdmin = abmGruposAdmin;
+                        abmAlumnoAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
 
                         abmDocenteAdmin.login = this;
                         abmDocenteAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
                         abmDocenteAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
                         abmDocenteAdmin.abmGruposAdmin = abmGruposAdmin;
+                        abmDocenteAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
 
                         abmGruposAdmin.login = this;
                         abmGruposAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
                         abmGruposAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
                         abmGruposAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                        abmGruposAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
+
+                        historialSolicitudesAdmin.login = this;
+                        historialSolicitudesAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                        historialSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
+                        historialSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                        historialSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
+
+
+
+
 
                         principalSolicitudesAdmin.Show();
                         this.Hide();

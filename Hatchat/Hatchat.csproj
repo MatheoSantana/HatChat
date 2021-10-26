@@ -112,12 +112,6 @@
     <Compile Include="Presentacion\Titulo.Designer.cs">
       <DependentUpon>Titulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\HistorialMensajesDocente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Presentacion\HistorialMensajesDocente.designer.cs">
-      <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
-    </Compile>
     <Compile Include="Presentacion\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,9 +202,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Titulo.resx">
       <DependentUpon>Titulo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\HistorialMensajesDocente.resx">
-      <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

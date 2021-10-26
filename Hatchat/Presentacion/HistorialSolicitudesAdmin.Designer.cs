@@ -39,16 +39,15 @@ namespace Hatchat.Presentacion
             this.pbxABMAlumnoNav = new System.Windows.Forms.PictureBox();
             this.pbxSolicitudesNav = new System.Windows.Forms.PictureBox();
             this.lblSolicitudes = new System.Windows.Forms.Label();
-            this.PanelSolicitudesPendientes = new System.Windows.Forms.Panel();
+            this.PanelSolicitudesResueltas = new System.Windows.Forms.Panel();
             this.panelSolicitud = new System.Windows.Forms.Panel();
+            this.lblNombreApellidoSolicitud = new System.Windows.Forms.Label();
             this.panelContenido = new System.Windows.Forms.Panel();
             this.lblCedula = new System.Windows.Forms.Label();
             this.lblInformacion = new System.Windows.Forms.Label();
             this.tmrSolicitudes = new System.Windows.Forms.Timer(this.components);
             this.dtpFiltroFecha = new System.Windows.Forms.DateTimePicker();
-            this.lblNombreApellidoSolicitud = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.btnDenegar = new System.Windows.Forms.Button();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
@@ -107,7 +106,6 @@ namespace Hatchat.Presentacion
             this.pbxHistorialSolicitudesNav.Size = new System.Drawing.Size(81, 81);
             this.pbxHistorialSolicitudesNav.TabIndex = 4;
             this.pbxHistorialSolicitudesNav.TabStop = false;
-            this.pbxHistorialSolicitudesNav.Click += new System.EventHandler(this.pbxHistorialSolicitudesNav_Click);
             // 
             // pbxABMDocenteNav
             // 
@@ -134,6 +132,7 @@ namespace Hatchat.Presentacion
             this.pbxSolicitudesNav.Size = new System.Drawing.Size(81, 81);
             this.pbxSolicitudesNav.TabIndex = 1;
             this.pbxSolicitudesNav.TabStop = false;
+            this.pbxSolicitudesNav.Click += new System.EventHandler(this.pbxPrincipalSolicitudesAdminNav_Click);
             // 
             // lblSolicitudes
             // 
@@ -144,19 +143,17 @@ namespace Hatchat.Presentacion
             this.lblSolicitudes.TabIndex = 3;
             this.lblSolicitudes.Text = "Solicitudes";
             // 
-            // PanelSolicitudesPendientes
+            // PanelSolicitudesResueltas
             // 
-            this.PanelSolicitudesPendientes.AutoScroll = true;
-            this.PanelSolicitudesPendientes.Location = new System.Drawing.Point(15, 220);
-            this.PanelSolicitudesPendientes.Name = "PanelSolicitudesPendientes";
-            this.PanelSolicitudesPendientes.Size = new System.Drawing.Size(228, 358);
-            this.PanelSolicitudesPendientes.TabIndex = 4;
+            this.PanelSolicitudesResueltas.AutoScroll = true;
+            this.PanelSolicitudesResueltas.Location = new System.Drawing.Point(15, 220);
+            this.PanelSolicitudesResueltas.Name = "PanelSolicitudesResueltas";
+            this.PanelSolicitudesResueltas.Size = new System.Drawing.Size(228, 358);
+            this.PanelSolicitudesResueltas.TabIndex = 4;
             // 
             // panelSolicitud
             // 
-            this.panelSolicitud.Controls.Add(this.btnDenegar);
             this.panelSolicitud.Controls.Add(this.lblNombreApellidoSolicitud);
-            this.panelSolicitud.Controls.Add(this.btnAceptar);
             this.panelSolicitud.Controls.Add(this.panelContenido);
             this.panelSolicitud.Controls.Add(this.lblCedula);
             this.panelSolicitud.Controls.Add(this.lblInformacion);
@@ -164,6 +161,16 @@ namespace Hatchat.Presentacion
             this.panelSolicitud.Name = "panelSolicitud";
             this.panelSolicitud.Size = new System.Drawing.Size(826, 465);
             this.panelSolicitud.TabIndex = 5;
+            // 
+            // lblNombreApellidoSolicitud
+            // 
+            this.lblNombreApellidoSolicitud.AutoSize = true;
+            this.lblNombreApellidoSolicitud.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreApellidoSolicitud.Location = new System.Drawing.Point(28, 20);
+            this.lblNombreApellidoSolicitud.Name = "lblNombreApellidoSolicitud";
+            this.lblNombreApellidoSolicitud.Size = new System.Drawing.Size(671, 40);
+            this.lblNombreApellidoSolicitud.TabIndex = 0;
+            this.lblNombreApellidoSolicitud.Text = "Matheo Santana desea ingresar a un grupo";
             // 
             // panelContenido
             // 
@@ -201,47 +208,30 @@ namespace Hatchat.Presentacion
             // 
             // dtpFiltroFecha
             // 
-            this.dtpFiltroFecha.Location = new System.Drawing.Point(32, 162);
+            this.dtpFiltroFecha.Location = new System.Drawing.Point(32, 135);
             this.dtpFiltroFecha.Name = "dtpFiltroFecha";
             this.dtpFiltroFecha.Size = new System.Drawing.Size(200, 20);
             this.dtpFiltroFecha.TabIndex = 6;
             // 
-            // lblNombreApellidoSolicitud
+            // btnFiltrar
             // 
-            this.lblNombreApellidoSolicitud.AutoSize = true;
-            this.lblNombreApellidoSolicitud.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreApellidoSolicitud.Location = new System.Drawing.Point(28, 20);
-            this.lblNombreApellidoSolicitud.Name = "lblNombreApellidoSolicitud";
-            this.lblNombreApellidoSolicitud.Size = new System.Drawing.Size(671, 40);
-            this.lblNombreApellidoSolicitud.TabIndex = 0;
-            this.lblNombreApellidoSolicitud.Text = "Matheo Santana desea ingresar a un grupo";
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(3, 433);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 0;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            // 
-            // btnDenegar
-            // 
-            this.btnDenegar.Location = new System.Drawing.Point(92, 433);
-            this.btnDenegar.Name = "btnDenegar";
-            this.btnDenegar.Size = new System.Drawing.Size(75, 23);
-            this.btnDenegar.TabIndex = 1;
-            this.btnDenegar.Text = "denegar";
-            this.btnDenegar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Location = new System.Drawing.Point(32, 160);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(200, 23);
+            this.btnFiltrar.TabIndex = 7;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // HistorialSolicitudesAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 590);
+            this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.dtpFiltroFecha);
             this.Controls.Add(this.panelSolicitud);
-            this.Controls.Add(this.PanelSolicitudesPendientes);
+            this.Controls.Add(this.PanelSolicitudesResueltas);
             this.Controls.Add(this.lblSolicitudes);
             this.Controls.Add(this.panelNav);
             this.Name = "HistorialSolicitudesAdmin";
@@ -273,7 +263,7 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pbxABMAlumnoNav;
         private System.Windows.Forms.PictureBox pbxSolicitudesNav;
         private System.Windows.Forms.Label lblSolicitudes;
-        private System.Windows.Forms.Panel PanelSolicitudesPendientes;
+        private System.Windows.Forms.Panel PanelSolicitudesResueltas;
         private System.Windows.Forms.Panel panelSolicitud;
         private System.Windows.Forms.Panel panelContenido;
         private System.Windows.Forms.Label lblCedula;
@@ -281,7 +271,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Timer tmrSolicitudes;
         private System.Windows.Forms.Label lblNombreApellidoSolicitud;
         private System.Windows.Forms.DateTimePicker dtpFiltroFecha;
-        private System.Windows.Forms.Button btnDenegar;
-        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnFiltrar;
     }
 }

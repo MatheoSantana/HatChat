@@ -26,11 +26,15 @@ namespace Hatchat.Presentacion
 
         Logica.SolicitudModif soliMo = new Logica.SolicitudModif();
 
+        List<Logica.SolicitudClaseAl> solicitudesClaseAl = new List<Logica.SolicitudClaseAl>();
+        List<Logica.SolicitudClaseDo> solicitudesClaseDo = new List<Logica.SolicitudClaseDo>();
+        List<Logica.SolicitudModif> solicitudesModif = new List<Logica.SolicitudModif>();
+
         public Form login;
         public Form abmAlumnoAdmin;
         public Form abmDocenteAdmin;
         public Form abmGruposAdmin;
-        public Form historialSolicitudes;
+        public Form historialSolicitudesAdmin;
 
         public PrincipalSolicitudesAdmin()
         {
@@ -82,7 +86,7 @@ namespace Hatchat.Presentacion
 
         private void pbxHistorialSolicitudesNav_Click(object sender, EventArgs e)
         {
-            historialSolicitudes.Show();
+            historialSolicitudesAdmin.Show();
             this.Hide();
         }
 
@@ -111,153 +115,187 @@ namespace Hatchat.Presentacion
             List<Logica.SolicitudClaseAl> solicitudesClaseAl = new Logica.SolicitudClaseAl().SelectSolicitudesClaseAl();
             List<Logica.SolicitudClaseDo> solicitudesClaseDo = new Logica.SolicitudClaseDo().SelectSolicitudesClaseDo();
             List<Logica.SolicitudModif> solicitudesModif = new Logica.SolicitudModif().SelectSolicitudesModif();
-            ArrayList solicitudesDesordenadas = new ArrayList();
-            int y;
-
-
-            ArrayList solicitudesOrdenadas = new ArrayList();
-            if (solicitudesClaseAl.Count() > 0)
+            bool iguales = true;
+            if (solicitudesClaseAl.Count() == this.solicitudesClaseAl.Count() || solicitudesClaseDo.Count() == this.solicitudesClaseDo.Count() || solicitudesModif.Count() == this.solicitudesModif.Count())
             {
-                foreach (Logica.SolicitudClaseAl soliAl in solicitudesClaseAl)
+                for (int x = 0; x < solicitudesModif.Count(); x++)
                 {
-                    if (solicitudesClaseDo.Count() > 0)
+                    if (!(solicitudesModif[x].IdSolicitudModif == this.solicitudesModif[x].IdSolicitudModif))
                     {
-                        foreach (Logica.SolicitudClaseDo soliDo in solicitudesClaseDo)
-                        {
-                            if (!solicitudesDesordenadas.Contains(soliDo))
-                            {
-                                if (soliDo.FechaHora > soliAl.FechaHora)
-                                {
-                                    solicitudesDesordenadas.Add(soliDo);
-                                }
-                                else if (!solicitudesDesordenadas.Contains(soliAl))
-                                {
-                                    solicitudesDesordenadas.Add(soliAl);
-                                }
-                            }
-                        }
+                        iguales = false;
                     }
-                    else
+                }
+                for (int x = 0; x < solicitudesClaseDo.Count(); x++)
+                {
+                    if (!(solicitudesClaseDo[x].IdSolicitudClaseDo == this.solicitudesClaseDo[x].IdSolicitudClaseDo))
                     {
-                        solicitudesDesordenadas.Add(soliAl);
+                        iguales = false;
+                    }
+                }
+                for (int x = 0; x < solicitudesClaseAl.Count(); x++)
+                {
+                    if (!(solicitudesClaseAl[x].IdSolicitudClaseAl == this.solicitudesClaseAl[x].IdSolicitudClaseAl))
+                    {
+                        iguales = false;
                     }
                 }
             }
             else
             {
-                solicitudesDesordenadas.AddRange(solicitudesClaseDo);
+                iguales = false;
             }
-
-            foreach (Logica.SolicitudModif soliMo in solicitudesModif)
+            if (!iguales)
             {
+                this.solicitudesClaseAl = solicitudesClaseAl;
+                this.solicitudesClaseDo = solicitudesClaseDo;
+                this.solicitudesModif = solicitudesModif;
+                ArrayList solicitudesDesordenadas = new ArrayList();
+                int y;
+
+
+                ArrayList solicitudesOrdenadas = new ArrayList();
+                if (solicitudesClaseAl.Count() > 0)
+                {
+                    foreach (Logica.SolicitudClaseAl soliAl in solicitudesClaseAl)
+                    {
+                        if (solicitudesClaseDo.Count() > 0)
+                        {
+                            foreach (Logica.SolicitudClaseDo soliDo in solicitudesClaseDo)
+                            {
+                                if (!solicitudesDesordenadas.Contains(soliDo))
+                                {
+                                    if (soliDo.FechaHora > soliAl.FechaHora)
+                                    {
+                                        solicitudesDesordenadas.Add(soliDo);
+                                    }
+                                    else if (!solicitudesDesordenadas.Contains(soliAl))
+                                    {
+                                        solicitudesDesordenadas.Add(soliAl);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            solicitudesDesordenadas.Add(soliAl);
+                        }
+                    }
+                }
+                else
+                {
+                    solicitudesDesordenadas.AddRange(solicitudesClaseDo);
+                }
+
+                foreach (Logica.SolicitudModif soliMo in solicitudesModif)
+                {
+                    for (int x = 0; x < solicitudesDesordenadas.Count; x++)
+                    {
+                        if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
+                        {
+                            Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
+                            if (!solicitudesOrdenadas.Contains(soliMo))
+                            {
+                                if (soliMo.FechaHora > soli.FechaHora)
+                                {
+                                    solicitudesOrdenadas.Add(soliMo);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
+                            if (!solicitudesOrdenadas.Contains(soliMo))
+                            {
+                                if (soliMo.FechaHora > soli.FechaHora)
+                                {
+                                    solicitudesOrdenadas.Add(soliMo);
+                                }
+                            }
+                        }
+                    }
+
+                }
+                foreach (Logica.SolicitudModif soliMo in solicitudesModif)
+                {
+                    if (!solicitudesOrdenadas.Contains(soliMo))
+                    {
+                        solicitudesOrdenadas.Add(soliMo);
+                    }
+                }
                 for (int x = 0; x < solicitudesDesordenadas.Count; x++)
                 {
                     if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
                     {
                         Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
-                        if (!solicitudesOrdenadas.Contains(soliMo))
+                        if (!solicitudesOrdenadas.Contains(soli))
                         {
-                            if (soliMo.FechaHora > soli.FechaHora)
-                            {
-                                solicitudesOrdenadas.Add(soliMo);
-                            }
+                            solicitudesOrdenadas.Add(soli);
                         }
                     }
                     else
                     {
                         Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
-                        if (!solicitudesOrdenadas.Contains(soliMo))
+                        if (!solicitudesOrdenadas.Contains(soli))
                         {
-                            if (soliMo.FechaHora > soli.FechaHora)
-                            {
-                                solicitudesOrdenadas.Add(soliMo);
-                            }
+                            solicitudesOrdenadas.Add(soli);
                         }
                     }
                 }
 
-            }
-            foreach (Logica.SolicitudModif soliMo in solicitudesModif)
-            {
-                if (!solicitudesOrdenadas.Contains(soliMo))
+
+                y = 5;
+                PanelSolicitudesPendientes.Controls.Clear();
+
+                for (int x = 0; x < solicitudesOrdenadas.Count; x++)
                 {
-                    solicitudesOrdenadas.Add(soliMo);
-                }
-            }
-            for (int x = 0; x < solicitudesDesordenadas.Count; x++)
-            {
-                if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
-                {
-                    Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
-                    if (!solicitudesOrdenadas.Contains(soli))
+                    if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
                     {
-                        solicitudesOrdenadas.Add(soli);
+                        Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesOrdenadas[x];
+                        Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Alumno);
+                        Label dina = new Label();
+                        dina.Height = 46;
+                        dina.Width = 150;
+                        dina.Location = new Point(25, y);
+                        y += 50;
+                        dina.Name = "lblSoliAl" + soli.IdSolicitudClaseAl.ToString();
+                        dina.Text = us.Nombre + " " + us.Primer_apellido + "\nDesea entrar a un grupo" + "\n" + soli.FechaHora.ToString();
+                        dina.BorderStyle = BorderStyle.FixedSingle;
+                        dina.Click += new EventHandler(AbrirSolicitudClaseAl);
+                        PanelSolicitudesPendientes.Controls.Add(dina);
                     }
-                }
-                else
-                {
-                    Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
-                    if (!solicitudesOrdenadas.Contains(soli))
+                    else if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseDo")
                     {
-                        solicitudesOrdenadas.Add(soli);
+                        Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesOrdenadas[x];
+                        Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Docente);
+                        Label dina = new Label();
+                        dina.Height = 46;
+                        dina.Width = 150;
+                        dina.Location = new Point(25, y);
+                        y += 50;
+                        dina.Name = "lblSoliDo" + soli.IdSolicitudClaseDo.ToString();
+                        dina.Text = us.Nombre + " " + us.Primer_apellido + "\nDesea entrar a un grupo" + "\n" + soli.FechaHora.ToString();
+                        dina.BorderStyle = BorderStyle.FixedSingle;
+                        dina.Click += new EventHandler(AbrirSolicitudClaseDo);
+                        PanelSolicitudesPendientes.Controls.Add(dina);
                     }
+                    else
+                    {
+                        Logica.SolicitudModif soli = (Logica.SolicitudModif)solicitudesOrdenadas[x];
+                        Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Usuario);
+                        Label dina = new Label();
+                        dina.Height = 46;
+                        dina.Width = 150;
+                        dina.Location = new Point(25, y);
+                        y += 50;
+                        dina.Name = "lblSoliMod" + soli.IdSolicitudModif.ToString();
+                        dina.Text = us.Nombre + " " + us.Primer_apellido + "\nPerdio el acceso a su cuenta" + "\n" + soli.FechaHora.ToString();
+                        dina.BorderStyle = BorderStyle.FixedSingle;
+                        dina.Click += new EventHandler(AbrirSolicitudModif);
+                        PanelSolicitudesPendientes.Controls.Add(dina);
+                    }
+
                 }
             }
-
-
-            y = 5;
-            PanelSolicitudesPendientes.Controls.Clear();
-
-            for (int x = 0; x < solicitudesOrdenadas.Count; x++)
-            {
-                if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
-                {
-                    Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesOrdenadas[x];
-                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Alumno);
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblSoliAl" + soli.IdSolicitudClaseAl.ToString();
-                    dina.Text = us.Nombre + " " + us.Primer_apellido + "\nDesea entrar a un grupo" + "\n" + soli.FechaHora.ToString();
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(AbrirSolicitudClaseAl);
-                    PanelSolicitudesPendientes.Controls.Add(dina);
-                }
-                else if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseDo")
-                {
-                    Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesOrdenadas[x];
-                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Docente);
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblSoliDo" + soli.IdSolicitudClaseDo.ToString();
-                    dina.Text = us.Nombre + " " + us.Primer_apellido + "\nDesea entrar a un grupo" + "\n" + soli.FechaHora.ToString();
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(AbrirSolicitudClaseDo);
-                    PanelSolicitudesPendientes.Controls.Add(dina);
-                }
-                else
-                {
-                    Logica.SolicitudModif soli = (Logica.SolicitudModif)solicitudesOrdenadas[x];
-                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Usuario);
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblSoliMod" + soli.IdSolicitudModif.ToString();
-                    dina.Text = us.Nombre + " " + us.Primer_apellido + "\nPerdio el acceso a su cuenta" + "\n" + soli.FechaHora.ToString();
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(AbrirSolicitudModif);
-                    PanelSolicitudesPendientes.Controls.Add(dina);
-                }
-
-            }
-
         }
 
         private void AbrirSolicitudClaseAl(object sender, EventArgs e)
@@ -505,6 +543,7 @@ namespace Hatchat.Presentacion
 
             if (soliMo.IdSolicitudModif != 0)
             {
+                soliMo.Aceptada = true;
                 soliMo.AceptarSolicitudModifPorSoliYAdmin(Login.encontrado.Ci, true);
             }
             soliMo = new Logica.SolicitudModif();
@@ -534,6 +573,7 @@ namespace Hatchat.Presentacion
 
             if (soliMo.IdSolicitudModif != 0)
             {
+                soliMo.Aceptada = false;
                 soliMo.AceptarSolicitudModifPorSoliYAdmin(Login.encontrado.Ci, true);
             }
             soliMo = new Logica.SolicitudModif();

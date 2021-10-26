@@ -130,5 +130,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.AceptarSolicitudClaseAlPorIdYAdmin(id, ci);
         }
+        public List<SolicitudClaseAl> SelectSolicitudesClaseAlResueltas(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectSolicitudesClaseAlResueltas(ci);
+        }
     }
 }

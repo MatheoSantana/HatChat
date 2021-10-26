@@ -12,19 +12,21 @@ namespace Hatchat.Logica
         private DateTime fechaHora;
         private string contraNueva;
         private bool pendiente;
+        private bool aceptada;
         private string usuario;
 
         public SolicitudModif()
         {
 
         }
-        public SolicitudModif(int idSolicitudModif, DateTime fechaHora, string contraNueva, bool pendiente, string usuario)
+        public SolicitudModif(int idSolicitudModif, DateTime fechaHora, string contraNueva, bool pendiente, bool aceptada, string usuario)
         {
             this.idSolicitudModif = idSolicitudModif;
             this.fechaHora = fechaHora;
             this.contraNueva = contraNueva;
             this.pendiente = pendiente;
             this.usuario = usuario;
+            this.aceptada = aceptada;
         }
 
         public int IdSolicitudModif
@@ -46,6 +48,11 @@ namespace Hatchat.Logica
         {
             set { pendiente = value; }
             get { return pendiente; }
+        }
+        public bool Aceptada
+        {
+            set { aceptada = value; }
+            get { return aceptada; }
         }
         public string Usuario
         {
@@ -104,6 +111,11 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.AceptarSolicitudModifPorSoliYAdmin(this, ci, aceptar);
+        }
+        public List<SolicitudModif> SelectSolicitudesModifResueltas(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectSolicitudesModifResueltas(ci);
         }
     }
 }

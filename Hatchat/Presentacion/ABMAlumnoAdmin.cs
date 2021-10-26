@@ -27,7 +27,7 @@ namespace Hatchat.Presentacion
         public Form principalSolicitudesAdmin;
         public Form abmDocenteAdmin;
         public Form abmGruposAdmin;
-        public Form historialSolicitudes;
+        public Form historialSolicitudesAdmin;
         public ABMAlumnoAdmin()
         {
             InitializeComponent();
@@ -109,7 +109,7 @@ namespace Hatchat.Presentacion
 
         private void pbxHistorialSolicitudesNav_Click(object sender, EventArgs e)
         {
-            historialSolicitudes.Show();
+            historialSolicitudesAdmin.Show();
             this.Hide();
         }
 
