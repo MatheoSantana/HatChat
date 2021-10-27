@@ -1,7 +1,7 @@
 ﻿
 namespace Hatchat.Presentacion
 {
-    partial class MensajesAlumno
+    partial class HistorialMensajesAlumno
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,6 @@ namespace Hatchat.Presentacion
             this.pbxMensajeNav = new System.Windows.Forms.PictureBox();
             this.pbxChatNav = new System.Windows.Forms.PictureBox();
             this.pbxFotoPerfilNav = new System.Windows.Forms.PictureBox();
-            this.btnNuevoChat = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelNavMensajes = new System.Windows.Forms.Panel();
             this.panelContenedor = new System.Windows.Forms.Panel();
@@ -54,16 +53,11 @@ namespace Hatchat.Presentacion
             this.lblConsultaDocente = new System.Windows.Forms.Label();
             this.pbxDocente = new System.Windows.Forms.PictureBox();
             this.lblNombreDocente = new System.Windows.Forms.Label();
-            this.panelEnviarMensaje = new System.Windows.Forms.Panel();
-            this.rtbxMensajeAEnviar = new System.Windows.Forms.RichTextBox();
-            this.txtAsunto = new System.Windows.Forms.TextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnEnviar = new System.Windows.Forms.Button();
-            this.lblMensaje = new System.Windows.Forms.Label();
-            this.lblAsunto = new System.Windows.Forms.Label();
-            this.cbxDestinatario = new System.Windows.Forms.ComboBox();
-            this.lblDestinatario = new System.Windows.Forms.Label();
-            this.timerMensajes = new System.Windows.Forms.Timer(this.components);
+            this.cmbxDocentes = new System.Windows.Forms.ComboBox();
+            this.dtpFiltro = new System.Windows.Forms.DateTimePicker();
+            this.timerHistorialMensajes = new System.Windows.Forms.Timer(this.components);
+            this.btnFiltrarDocente = new System.Windows.Forms.Button();
+            this.btnFiltrarFecha = new System.Windows.Forms.Button();
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -75,7 +69,6 @@ namespace Hatchat.Presentacion
             this.panelContenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlumno)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDocente)).BeginInit();
-            this.panelEnviarMensaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNav
@@ -99,6 +92,7 @@ namespace Hatchat.Presentacion
             this.pbxGruposNav.Size = new System.Drawing.Size(81, 81);
             this.pbxGruposNav.TabIndex = 6;
             this.pbxGruposNav.TabStop = false;
+            this.pbxGruposNav.Click += new System.EventHandler(this.pbxGruposNav_Click);
             // 
             // pbxCerrarSesionNav
             // 
@@ -134,6 +128,7 @@ namespace Hatchat.Presentacion
             this.pbxMensajeNav.Size = new System.Drawing.Size(81, 81);
             this.pbxMensajeNav.TabIndex = 2;
             this.pbxMensajeNav.TabStop = false;
+            this.pbxMensajeNav.Click += new System.EventHandler(this.pbxMensajeNav_Click);
             // 
             // pbxChatNav
             // 
@@ -152,16 +147,6 @@ namespace Hatchat.Presentacion
             this.pbxFotoPerfilNav.TabIndex = 0;
             this.pbxFotoPerfilNav.TabStop = false;
             // 
-            // btnNuevoChat
-            // 
-            this.btnNuevoChat.Location = new System.Drawing.Point(13, 129);
-            this.btnNuevoChat.Name = "btnNuevoChat";
-            this.btnNuevoChat.Size = new System.Drawing.Size(238, 20);
-            this.btnNuevoChat.TabIndex = 4;
-            this.btnNuevoChat.Text = "Nuevo Mensaje";
-            this.btnNuevoChat.UseVisualStyleBackColor = true;
-            this.btnNuevoChat.Click += new System.EventHandler(this.btnNuevoChat_Click);
-            // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
@@ -174,9 +159,9 @@ namespace Hatchat.Presentacion
             // panelNavMensajes
             // 
             this.panelNavMensajes.AutoScroll = true;
-            this.panelNavMensajes.Location = new System.Drawing.Point(13, 156);
+            this.panelNavMensajes.Location = new System.Drawing.Point(13, 234);
             this.panelNavMensajes.Name = "panelNavMensajes";
-            this.panelNavMensajes.Size = new System.Drawing.Size(238, 424);
+            this.panelNavMensajes.Size = new System.Drawing.Size(238, 346);
             this.panelNavMensajes.TabIndex = 6;
             // 
             // panelContenedor
@@ -305,109 +290,62 @@ namespace Hatchat.Presentacion
             this.lblNombreDocente.TabIndex = 0;
             this.lblNombreDocente.Text = "Docente:";
             // 
-            // panelEnviarMensaje
+            // cmbxDocentes
             // 
-            this.panelEnviarMensaje.Controls.Add(this.rtbxMensajeAEnviar);
-            this.panelEnviarMensaje.Controls.Add(this.txtAsunto);
-            this.panelEnviarMensaje.Controls.Add(this.btnCancelar);
-            this.panelEnviarMensaje.Controls.Add(this.btnEnviar);
-            this.panelEnviarMensaje.Controls.Add(this.lblMensaje);
-            this.panelEnviarMensaje.Controls.Add(this.lblAsunto);
-            this.panelEnviarMensaje.Controls.Add(this.cbxDestinatario);
-            this.panelEnviarMensaje.Controls.Add(this.lblDestinatario);
-            this.panelEnviarMensaje.Location = new System.Drawing.Point(333, 129);
-            this.panelEnviarMensaje.Name = "panelEnviarMensaje";
-            this.panelEnviarMensaje.Size = new System.Drawing.Size(682, 451);
-            this.panelEnviarMensaje.TabIndex = 8;
+            this.cmbxDocentes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxDocentes.FormattingEnabled = true;
+            this.cmbxDocentes.Location = new System.Drawing.Point(13, 129);
+            this.cmbxDocentes.Name = "cmbxDocentes";
+            this.cmbxDocentes.Size = new System.Drawing.Size(238, 21);
+            this.cmbxDocentes.TabIndex = 9;
             // 
-            // rtbxMensajeAEnviar
+            // dtpFiltro
             // 
-            this.rtbxMensajeAEnviar.Location = new System.Drawing.Point(114, 135);
-            this.rtbxMensajeAEnviar.Name = "rtbxMensajeAEnviar";
-            this.rtbxMensajeAEnviar.Size = new System.Drawing.Size(461, 147);
-            this.rtbxMensajeAEnviar.TabIndex = 17;
-            this.rtbxMensajeAEnviar.Text = "";
+            this.dtpFiltro.Location = new System.Drawing.Point(13, 184);
+            this.dtpFiltro.Name = "dtpFiltro";
+            this.dtpFiltro.Size = new System.Drawing.Size(238, 20);
+            this.dtpFiltro.TabIndex = 10;
             // 
-            // txtAsunto
+            // timerHistorialMensajes
             // 
-            this.txtAsunto.Location = new System.Drawing.Point(114, 80);
-            this.txtAsunto.Name = "txtAsunto";
-            this.txtAsunto.Size = new System.Drawing.Size(461, 20);
-            this.txtAsunto.TabIndex = 16;
+            this.timerHistorialMensajes.Enabled = true;
+            this.timerHistorialMensajes.Interval = 500;
+            this.timerHistorialMensajes.Tick += new System.EventHandler(this.timerHistorialMensajes_Tick);
             // 
-            // btnCancelar
+            // btnFiltrarDocente
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(63, 367);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(64, 20);
-            this.btnCancelar.TabIndex = 15;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnFiltrarDocente.Location = new System.Drawing.Point(13, 156);
+            this.btnFiltrarDocente.Name = "btnFiltrarDocente";
+            this.btnFiltrarDocente.Size = new System.Drawing.Size(238, 20);
+            this.btnFiltrarDocente.TabIndex = 4;
+            this.btnFiltrarDocente.Text = "Filtrar Docente";
+            this.btnFiltrarDocente.UseVisualStyleBackColor = true;
+            this.btnFiltrarDocente.Click += new System.EventHandler(this.btnFiltrarDocente_Click);
             // 
-            // btnEnviar
+            // btnFiltrarFecha
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(599, 367);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(64, 20);
-            this.btnEnviar.TabIndex = 14;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
+            this.btnFiltrarFecha.Location = new System.Drawing.Point(13, 207);
+            this.btnFiltrarFecha.Name = "btnFiltrarFecha";
+            this.btnFiltrarFecha.Size = new System.Drawing.Size(238, 20);
+            this.btnFiltrarFecha.TabIndex = 11;
+            this.btnFiltrarFecha.Text = "Filtrar Fecha";
+            this.btnFiltrarFecha.UseVisualStyleBackColor = true;
+            this.btnFiltrarFecha.Click += new System.EventHandler(this.btnFiltrarFecha_Click);
             // 
-            // lblMensaje
-            // 
-            this.lblMensaje.AutoSize = true;
-            this.lblMensaje.Location = new System.Drawing.Point(63, 135);
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(50, 13);
-            this.lblMensaje.TabIndex = 13;
-            this.lblMensaje.Text = "Mensaje:";
-            // 
-            // lblAsunto
-            // 
-            this.lblAsunto.AutoSize = true;
-            this.lblAsunto.Location = new System.Drawing.Point(63, 82);
-            this.lblAsunto.Name = "lblAsunto";
-            this.lblAsunto.Size = new System.Drawing.Size(43, 13);
-            this.lblAsunto.TabIndex = 12;
-            this.lblAsunto.Text = "Asunto:";
-            // 
-            // cbxDestinatario
-            // 
-            this.cbxDestinatario.FormattingEnabled = true;
-            this.cbxDestinatario.Location = new System.Drawing.Point(114, 53);
-            this.cbxDestinatario.Name = "cbxDestinatario";
-            this.cbxDestinatario.Size = new System.Drawing.Size(461, 21);
-            this.cbxDestinatario.TabIndex = 11;
-            // 
-            // lblDestinatario
-            // 
-            this.lblDestinatario.AutoSize = true;
-            this.lblDestinatario.Location = new System.Drawing.Point(63, 55);
-            this.lblDestinatario.Name = "lblDestinatario";
-            this.lblDestinatario.Size = new System.Drawing.Size(32, 13);
-            this.lblDestinatario.TabIndex = 10;
-            this.lblDestinatario.Text = "Para:";
-            // 
-            // timerMensajes
-            // 
-            this.timerMensajes.Enabled = true;
-            this.timerMensajes.Interval = 500;
-            this.timerMensajes.Tick += new System.EventHandler(this.timerMensajes_Tick);
-            // 
-            // MensajesAlumno
+            // HistorialMensajesAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 590);
+            this.Controls.Add(this.btnFiltrarFecha);
+            this.Controls.Add(this.dtpFiltro);
+            this.Controls.Add(this.cmbxDocentes);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.btnNuevoChat);
+            this.Controls.Add(this.panelContenedor);
+            this.Controls.Add(this.btnFiltrarDocente);
             this.Controls.Add(this.panelNavMensajes);
             this.Controls.Add(this.panelNav);
-            this.Controls.Add(this.panelEnviarMensaje);
-            this.Controls.Add(this.panelContenedor);
-            this.Name = "MensajesAlumno";
+            this.Name = "HistorialMensajesAlumno";
             this.Text = "MensajesAlumno";
             this.Load += new System.EventHandler(this.MensajesAlumno_Load);
             this.panelNav.ResumeLayout(false);
@@ -422,8 +360,6 @@ namespace Hatchat.Presentacion
             this.panelContenedor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlumno)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDocente)).EndInit();
-            this.panelEnviarMensaje.ResumeLayout(false);
-            this.panelEnviarMensaje.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -439,7 +375,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pbxMensajeNav;
         private System.Windows.Forms.PictureBox pbxChatNav;
         private System.Windows.Forms.PictureBox pbxFotoPerfilNav;
-        private System.Windows.Forms.Button btnNuevoChat;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panelNavMensajes;
         private System.Windows.Forms.Panel panelContenedor;
@@ -453,17 +388,12 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pbxAlumno;
         private System.Windows.Forms.Label lblFechaAlumno;
         private System.Windows.Forms.Label lblHoraAlumno;
-        private System.Windows.Forms.Panel panelEnviarMensaje;
-        private System.Windows.Forms.RichTextBox rtbxMensajeAEnviar;
-        private System.Windows.Forms.TextBox txtAsunto;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnEnviar;
-        private System.Windows.Forms.Label lblMensaje;
-        private System.Windows.Forms.Label lblAsunto;
-        private System.Windows.Forms.ComboBox cbxDestinatario;
-        private System.Windows.Forms.Label lblDestinatario;
         private System.Windows.Forms.Label lblRespuestaDocente;
         private System.Windows.Forms.Label lblMensajeAlumno;
-        private System.Windows.Forms.Timer timerMensajes;
+        private System.Windows.Forms.ComboBox cmbxDocentes;
+        private System.Windows.Forms.DateTimePicker dtpFiltro;
+        private System.Windows.Forms.Timer timerHistorialMensajes;
+        private System.Windows.Forms.Button btnFiltrarDocente;
+        private System.Windows.Forms.Button btnFiltrarFecha;
     }
 }

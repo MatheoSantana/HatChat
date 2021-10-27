@@ -108,7 +108,6 @@ C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\bin\Debug\Sys
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\bin\Debug\MySql.Data.xml
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.csproj.AssemblyReference.cache
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.Titulo.resources
-C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialMensajesDocente.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.Login.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesAlumno.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.MensajesDocente.resources
@@ -173,3 +172,4 @@ C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatcha
 C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatchat.Presentacion.ABMGruposAdmin.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.ABMGruposAdmin.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialSolicitudesAdmin.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialMensajesAlumno.resources

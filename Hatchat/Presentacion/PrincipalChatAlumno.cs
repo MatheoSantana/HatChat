@@ -14,7 +14,11 @@ namespace Hatchat.Presentacion
     {
         public Form login;
         public Form mensajesAlumno;
+        public Form gruposAlumno;
         public Form perfilAlumno;
+        public Form historialChatsAlumno;
+        public Form historialMensajesAlumno;
+
         int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
@@ -40,6 +44,8 @@ namespace Hatchat.Presentacion
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
+                pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -55,6 +61,8 @@ namespace Hatchat.Presentacion
             pbxGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxHistorialChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
             cmbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
         }
@@ -68,6 +76,7 @@ namespace Hatchat.Presentacion
         private void CerrarForm(object sender, EventArgs e)
         {
             login.Dispose();
+            
         }
 
         private void pbxMensajeNav_Click(object sender, EventArgs e)
@@ -85,7 +94,8 @@ namespace Hatchat.Presentacion
 
         private void pbxGruposNav_Click(object sender, EventArgs e)
         {
-
+            gruposAlumno.Show();
+            this.Hide();
         }
 
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
@@ -389,6 +399,25 @@ namespace Hatchat.Presentacion
                     MessageBox.Show("Este chat a sido cerrado");
                 }
             }
+        }
+
+        private void pbxHistorialNav_MouseEnter(object sender, EventArgs e)
+        {
+            panelHistoriales.Visible = true;
+        }
+        private void pbxHistorialNav_MouseDown(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pcbxHistorialMensajesNav_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

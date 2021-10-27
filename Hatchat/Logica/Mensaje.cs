@@ -90,11 +90,11 @@ namespace Hatchat.Logica
         public int StringAId(string cadena)
         {
             char[] aConvertir = cadena.ToCharArray();
-            
+
             string preId = "";
-            for(int x=0; x < aConvertir.Length; x++)
+            for (int x = 0; x < aConvertir.Length; x++)
             {
-                if(aConvertir[x] == '0' || aConvertir[x] == '1' || aConvertir[x] == '2' || aConvertir[x] == '3' || aConvertir[x] == '4' || aConvertir[x] == '5' || aConvertir[x] == '6' || aConvertir[x] == '7' || aConvertir[x] == '8' || aConvertir[x] == '9')
+                if (aConvertir[x] == '0' || aConvertir[x] == '1' || aConvertir[x] == '2' || aConvertir[x] == '3' || aConvertir[x] == '4' || aConvertir[x] == '5' || aConvertir[x] == '6' || aConvertir[x] == '7' || aConvertir[x] == '8' || aConvertir[x] == '9')
                 {
                     preId += aConvertir[x];
                 }
@@ -104,16 +104,17 @@ namespace Hatchat.Logica
 
         public DateTime StringADateTime(string fechaHora)
         {
-            char[] dateTime= fechaHora.ToCharArray();
-            
+            char[] dateTime = fechaHora.ToCharArray();
+
             string year = "", month = "", day = "", minute = "", hour = "", second = "";
-            for(int x = 0; x < dateTime.Length; x++)
+            for (int x = 0; x < dateTime.Length; x++)
             {
-                if((x==0 || x == 1) && (fechaHora[x] != ':' && fechaHora[x] !=' ' && fechaHora[x]!='/'))
+                if ((x == 0 || x == 1) && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
                     day += fechaHora[x];
-                    
-                }else if(x==3 || x == 4 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
+
+                }
+                else if (x == 3 || x == 4 && (fechaHora[x] != ':' && fechaHora[x] != ' ' && fechaHora[x] != '/'))
                 {
                     month += fechaHora[x];
                 }
@@ -133,9 +134,9 @@ namespace Hatchat.Logica
                 {
                     second += fechaHora[x];
                 }
-                
+
             }
-            
+
             DateTime fh = new DateTime(Convert.ToInt32(year), Convert.ToInt32(month), Convert.ToInt32(day), Convert.ToInt32(hour), Convert.ToInt32(minute), Convert.ToInt32(second));
             return fh;
         }
@@ -144,10 +145,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectCargarMensajesDo(docente);
         }
-        public List<Mensaje> SelectCargarMensajesAl(string alumno)
+        public List<Mensaje> SelectMensajesAl(string alumno)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectCargarMensajesAl(alumno);
+            return conexion.SelectMensajesAl(alumno);
         }
         public Mensaje SelectAbrirMensaje(string idMensaje)
         {
@@ -163,6 +164,16 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.EnviarMensajeDocente(this);
+        }
+        public List<Mensaje> SelectMensajesRecibidosAl(string alumno)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectMensajesRecibidosAl(alumno);
+        }
+        public void AbrirMensaje()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.AbrirMensaje(this);
         }
     }
 }

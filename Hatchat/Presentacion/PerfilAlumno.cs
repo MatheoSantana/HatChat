@@ -11,8 +11,11 @@ namespace Hatchat.Presentacion
     public partial class PerfilAlumno : Form
     {
         public Form login;
-        public Form mensajesAlumno;
         public Form principalChatAlumno;
+        public Form mensajesAlumno;
+        public Form gruposAlumno;
+        public Form historialChatsAlumno;
+        public Form historialMensajesAlumno;
         public PerfilAlumno()
         {
             InitializeComponent();
@@ -137,6 +140,12 @@ namespace Hatchat.Presentacion
             Login.encontrado = new Logica.Usuario();
             login.Show();
             this.Dispose();
+        }
+
+        private void pbxHistorialNav_Click(object sender, EventArgs e)
+        {
+            historialMensajesAlumno.Show();
+            this.Hide();
         }
     }
 }

@@ -18,12 +18,14 @@ namespace Hatchat.Presentacion
         static MensajesDocente mensajesDocente;
         static PerfilDocente perfilDocente;
         static RegisterDocente registerDocente;
-        HistorialMensajesDocente
+        
 
         static PrincipalChatAlumno principalChatAlumno;
         static MensajesAlumno mensajesAlumno;
         static PerfilAlumno perfilAlumno;
         static RegisterAlumno registerAlumno;
+        static HistorialMensajesAlumno historialMensajesAlumno;
+
 
         static PrincipalSolicitudesAdmin principalSolicitudesAdmin;
         static ABMAlumnoAdmin abmAlumnoAdmin;
@@ -170,6 +172,7 @@ namespace Hatchat.Presentacion
                         principalChatAlumno = new PrincipalChatAlumno();
                         mensajesAlumno = new MensajesAlumno();
                         perfilAlumno = new PerfilAlumno();
+                        historialMensajesAlumno = new HistorialMensajesAlumno();
 
 
                         principalChatAlumno.Show();
@@ -178,14 +181,22 @@ namespace Hatchat.Presentacion
                         principalChatAlumno.login = this;
                         principalChatAlumno.mensajesAlumno = mensajesAlumno;
                         principalChatAlumno.perfilAlumno = perfilAlumno;
+                        principalChatAlumno.historialMensajesAlumno = historialMensajesAlumno;
 
                         mensajesAlumno.login = this;
                         mensajesAlumno.principalChatAlumno = principalChatAlumno;
                         mensajesAlumno.perfilAlumno = perfilAlumno;
+                        mensajesAlumno.historialMensajesAlumno = historialMensajesAlumno;
 
                         perfilAlumno.login = this;
                         perfilAlumno.principalChatAlumno = principalChatAlumno;
                         perfilAlumno.mensajesAlumno = mensajesAlumno;
+                        perfilAlumno.historialMensajesAlumno = historialMensajesAlumno;
+
+                        historialMensajesAlumno.login = this;
+                        historialMensajesAlumno.principalChatAlumno = principalChatAlumno;
+                        historialMensajesAlumno.mensajesAlumno = mensajesAlumno;
+                        historialMensajesAlumno.perfilAlumno = perfilAlumno;
                     }
                     else if(encontrado.SelectAdministrador())
                     {

@@ -79,58 +79,59 @@ namespace Hatchat.Presentacion
             this.panel1.Controls.Add(this.pbxMensajeNav);
             this.panel1.Controls.Add(this.pbxChatNav);
             this.panel1.Controls.Add(this.pbxFotoPerfilNav);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1240, 100);
+            this.panel1.Size = new System.Drawing.Size(1063, 87);
             this.panel1.TabIndex = 3;
             // 
             // pbxGruposNav
             // 
-            this.pbxGruposNav.Location = new System.Drawing.Point(666, 3);
+            this.pbxGruposNav.Location = new System.Drawing.Point(571, 3);
             this.pbxGruposNav.Name = "pbxGruposNav";
-            this.pbxGruposNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxGruposNav.Size = new System.Drawing.Size(81, 81);
             this.pbxGruposNav.TabIndex = 6;
             this.pbxGruposNav.TabStop = false;
             // 
             // pbxCerrarSesionNav
             // 
-            this.pbxCerrarSesionNav.Location = new System.Drawing.Point(1143, 3);
+            this.pbxCerrarSesionNav.Location = new System.Drawing.Point(980, 3);
             this.pbxCerrarSesionNav.Name = "pbxCerrarSesionNav";
-            this.pbxCerrarSesionNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxCerrarSesionNav.Size = new System.Drawing.Size(81, 81);
             this.pbxCerrarSesionNav.TabIndex = 5;
             this.pbxCerrarSesionNav.TabStop = false;
             this.pbxCerrarSesionNav.Click += new System.EventHandler(this.pbxCerrarSesionNav_Click);
             // 
             // pbxHistorialNav
             // 
-            this.pbxHistorialNav.Location = new System.Drawing.Point(783, 3);
+            this.pbxHistorialNav.Location = new System.Drawing.Point(671, 3);
             this.pbxHistorialNav.Name = "pbxHistorialNav";
-            this.pbxHistorialNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxHistorialNav.Size = new System.Drawing.Size(81, 81);
             this.pbxHistorialNav.TabIndex = 4;
             this.pbxHistorialNav.TabStop = false;
+            this.pbxHistorialNav.Click += new System.EventHandler(this.pbxHistorialNav_Click);
             // 
             // pbxPerfilNav
             // 
-            this.pbxPerfilNav.Location = new System.Drawing.Point(550, 3);
+            this.pbxPerfilNav.Location = new System.Drawing.Point(471, 3);
             this.pbxPerfilNav.Name = "pbxPerfilNav";
-            this.pbxPerfilNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxPerfilNav.Size = new System.Drawing.Size(81, 81);
             this.pbxPerfilNav.TabIndex = 3;
             this.pbxPerfilNav.TabStop = false;
             // 
             // pbxMensajeNav
             // 
-            this.pbxMensajeNav.Location = new System.Drawing.Point(433, 3);
+            this.pbxMensajeNav.Location = new System.Drawing.Point(371, 3);
             this.pbxMensajeNav.Name = "pbxMensajeNav";
-            this.pbxMensajeNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxMensajeNav.Size = new System.Drawing.Size(81, 81);
             this.pbxMensajeNav.TabIndex = 2;
             this.pbxMensajeNav.TabStop = false;
             this.pbxMensajeNav.Click += new System.EventHandler(this.pbxMensajeNav_Click);
             // 
             // pbxChatNav
             // 
-            this.pbxChatNav.Location = new System.Drawing.Point(317, 3);
+            this.pbxChatNav.Location = new System.Drawing.Point(272, 3);
             this.pbxChatNav.Name = "pbxChatNav";
-            this.pbxChatNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxChatNav.Size = new System.Drawing.Size(81, 81);
             this.pbxChatNav.TabIndex = 1;
             this.pbxChatNav.TabStop = false;
             this.pbxChatNav.Click += new System.EventHandler(this.pbxChatNav_Click);
@@ -139,16 +140,16 @@ namespace Hatchat.Presentacion
             // 
             this.pbxFotoPerfilNav.Location = new System.Drawing.Point(3, 3);
             this.pbxFotoPerfilNav.Name = "pbxFotoPerfilNav";
-            this.pbxFotoPerfilNav.Size = new System.Drawing.Size(94, 94);
+            this.pbxFotoPerfilNav.Size = new System.Drawing.Size(81, 81);
             this.pbxFotoPerfilNav.TabIndex = 0;
             this.pbxFotoPerfilNav.TabStop = false;
             // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(59, 162);
+            this.lblTitulo.Location = new System.Drawing.Point(51, 140);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(34, 15);
+            this.lblTitulo.Size = new System.Drawing.Size(30, 13);
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "Perfil";
             // 
@@ -172,16 +173,16 @@ namespace Hatchat.Presentacion
             this.panelPerfil.Controls.Add(this.lblNombre);
             this.panelPerfil.Controls.Add(this.lblCambiarFoto);
             this.panelPerfil.Controls.Add(this.pbxFoto);
-            this.panelPerfil.Location = new System.Drawing.Point(383, 153);
+            this.panelPerfil.Location = new System.Drawing.Point(328, 133);
             this.panelPerfil.Name = "panelPerfil";
-            this.panelPerfil.Size = new System.Drawing.Size(837, 505);
+            this.panelPerfil.Size = new System.Drawing.Size(717, 438);
             this.panelPerfil.TabIndex = 5;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(547, 479);
+            this.btnEliminar.Location = new System.Drawing.Point(469, 415);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(116, 23);
+            this.btnEliminar.Size = new System.Drawing.Size(99, 20);
             this.btnEliminar.TabIndex = 17;
             this.btnEliminar.Text = "Eliminar Cuenta";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -189,9 +190,9 @@ namespace Hatchat.Presentacion
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(669, 479);
+            this.btnModificar.Location = new System.Drawing.Point(573, 415);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(116, 23);
+            this.btnModificar.Size = new System.Drawing.Size(99, 20);
             this.btnModificar.TabIndex = 16;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -199,137 +200,137 @@ namespace Hatchat.Presentacion
             // 
             // txtRespuesta
             // 
-            this.txtRespuesta.Location = new System.Drawing.Point(179, 405);
+            this.txtRespuesta.Location = new System.Drawing.Point(153, 351);
             this.txtRespuesta.Name = "txtRespuesta";
-            this.txtRespuesta.Size = new System.Drawing.Size(260, 23);
+            this.txtRespuesta.Size = new System.Drawing.Size(223, 20);
             this.txtRespuesta.TabIndex = 15;
             // 
             // lblRespuesta
             // 
             this.lblRespuesta.AutoSize = true;
-            this.lblRespuesta.Location = new System.Drawing.Point(179, 387);
+            this.lblRespuesta.Location = new System.Drawing.Point(153, 335);
             this.lblRespuesta.Name = "lblRespuesta";
-            this.lblRespuesta.Size = new System.Drawing.Size(60, 15);
+            this.lblRespuesta.Size = new System.Drawing.Size(58, 13);
             this.lblRespuesta.TabIndex = 14;
             this.lblRespuesta.Text = "Respuesta";
             // 
             // lblPregs
             // 
             this.lblPregs.AutoSize = true;
-            this.lblPregs.Location = new System.Drawing.Point(179, 343);
+            this.lblPregs.Location = new System.Drawing.Point(153, 297);
             this.lblPregs.Name = "lblPregs";
-            this.lblPregs.Size = new System.Drawing.Size(126, 15);
+            this.lblPregs.Size = new System.Drawing.Size(114, 13);
             this.lblPregs.TabIndex = 13;
             this.lblPregs.Text = "Pregunta de seguridad";
             // 
             // cbxPregs
             // 
             this.cbxPregs.FormattingEnabled = true;
-            this.cbxPregs.Location = new System.Drawing.Point(179, 361);
+            this.cbxPregs.Location = new System.Drawing.Point(153, 313);
             this.cbxPregs.Name = "cbxPregs";
-            this.cbxPregs.Size = new System.Drawing.Size(260, 23);
+            this.cbxPregs.Size = new System.Drawing.Size(223, 21);
             this.cbxPregs.TabIndex = 12;
             // 
             // txtPasswordCon
             // 
-            this.txtPasswordCon.Location = new System.Drawing.Point(179, 317);
+            this.txtPasswordCon.Location = new System.Drawing.Point(153, 275);
             this.txtPasswordCon.Name = "txtPasswordCon";
-            this.txtPasswordCon.Size = new System.Drawing.Size(260, 23);
+            this.txtPasswordCon.Size = new System.Drawing.Size(223, 20);
             this.txtPasswordCon.TabIndex = 11;
             this.txtPasswordCon.UseSystemPasswordChar = true;
             // 
             // lblPasswordCon
             // 
             this.lblPasswordCon.AutoSize = true;
-            this.lblPasswordCon.Location = new System.Drawing.Point(179, 299);
+            this.lblPasswordCon.Location = new System.Drawing.Point(153, 259);
             this.lblPasswordCon.Name = "lblPasswordCon";
-            this.lblPasswordCon.Size = new System.Drawing.Size(122, 15);
+            this.lblPasswordCon.Size = new System.Drawing.Size(107, 13);
             this.lblPasswordCon.TabIndex = 10;
             this.lblPasswordCon.Text = "Confirmar contraseña";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(179, 273);
+            this.txtPassword.Location = new System.Drawing.Point(153, 237);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(260, 23);
+            this.txtPassword.Size = new System.Drawing.Size(223, 20);
             this.txtPassword.TabIndex = 9;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(179, 255);
+            this.lblPassword.Location = new System.Drawing.Point(153, 221);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(67, 15);
+            this.lblPassword.Size = new System.Drawing.Size(61, 13);
             this.lblPassword.TabIndex = 8;
             this.lblPassword.Text = "Contraseña";
             // 
             // txtApodo
             // 
-            this.txtApodo.Location = new System.Drawing.Point(179, 229);
+            this.txtApodo.Location = new System.Drawing.Point(153, 198);
             this.txtApodo.Name = "txtApodo";
-            this.txtApodo.Size = new System.Drawing.Size(260, 23);
+            this.txtApodo.Size = new System.Drawing.Size(223, 20);
             this.txtApodo.TabIndex = 7;
             // 
             // lblApodo
             // 
             this.lblApodo.AutoSize = true;
-            this.lblApodo.Location = new System.Drawing.Point(179, 211);
+            this.lblApodo.Location = new System.Drawing.Point(153, 183);
             this.lblApodo.Name = "lblApodo";
-            this.lblApodo.Size = new System.Drawing.Size(43, 15);
+            this.lblApodo.Size = new System.Drawing.Size(38, 13);
             this.lblApodo.TabIndex = 6;
             this.lblApodo.Text = "Apodo";
             // 
             // lblInformacion
             // 
             this.lblInformacion.AutoSize = true;
-            this.lblInformacion.Location = new System.Drawing.Point(179, 186);
+            this.lblInformacion.Location = new System.Drawing.Point(153, 161);
             this.lblInformacion.Name = "lblInformacion";
-            this.lblInformacion.Size = new System.Drawing.Size(89, 15);
+            this.lblInformacion.Size = new System.Drawing.Size(75, 13);
             this.lblInformacion.TabIndex = 5;
             this.lblInformacion.Text = "Mi informacion";
             // 
             // lblEstudiante
             // 
             this.lblEstudiante.AutoSize = true;
-            this.lblEstudiante.Location = new System.Drawing.Point(179, 55);
+            this.lblEstudiante.Location = new System.Drawing.Point(153, 48);
             this.lblEstudiante.Name = "lblEstudiante";
-            this.lblEstudiante.Size = new System.Drawing.Size(62, 15);
+            this.lblEstudiante.Size = new System.Drawing.Size(57, 13);
             this.lblEstudiante.TabIndex = 4;
             this.lblEstudiante.Text = "Estudiante";
             // 
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(179, 40);
+            this.lblCedula.Location = new System.Drawing.Point(153, 35);
             this.lblCedula.Name = "lblCedula";
-            this.lblCedula.Size = new System.Drawing.Size(50, 15);
+            this.lblCedula.Size = new System.Drawing.Size(46, 13);
             this.lblCedula.TabIndex = 3;
             this.lblCedula.Text = "Cedula: ";
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(179, 25);
+            this.lblNombre.Location = new System.Drawing.Point(153, 22);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(57, 15);
+            this.lblNombre.Size = new System.Drawing.Size(50, 13);
             this.lblNombre.TabIndex = 2;
             this.lblNombre.Text = "Nombre: ";
             // 
             // lblCambiarFoto
             // 
             this.lblCambiarFoto.AutoSize = true;
-            this.lblCambiarFoto.Location = new System.Drawing.Point(12, 128);
+            this.lblCambiarFoto.Location = new System.Drawing.Point(10, 111);
             this.lblCambiarFoto.Name = "lblCambiarFoto";
-            this.lblCambiarFoto.Size = new System.Drawing.Size(123, 15);
+            this.lblCambiarFoto.Size = new System.Drawing.Size(106, 13);
             this.lblCambiarFoto.TabIndex = 1;
             this.lblCambiarFoto.Text = "Cambiar foto de perfil";
             this.lblCambiarFoto.Click += new System.EventHandler(this.lblCambiarFoto_Click);
             // 
             // pbxFoto
             // 
-            this.pbxFoto.Location = new System.Drawing.Point(24, 25);
+            this.pbxFoto.Location = new System.Drawing.Point(21, 22);
             this.pbxFoto.Name = "pbxFoto";
-            this.pbxFoto.Size = new System.Drawing.Size(100, 100);
+            this.pbxFoto.Size = new System.Drawing.Size(86, 87);
             this.pbxFoto.TabIndex = 0;
             this.pbxFoto.TabStop = false;
             // 
@@ -339,9 +340,9 @@ namespace Hatchat.Presentacion
             // 
             // PerfilAlumno
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.ClientSize = new System.Drawing.Size(1083, 590);
             this.Controls.Add(this.panelPerfil);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panel1);
