@@ -698,7 +698,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Chat.idChat, Chat.idClase, Chat.oriClase, Chat.asignatura, Chat.fecha, Chat.horaInico, Chat.horaFin, Chat.titulo, Chat.activo from Chat, asignaturaDictada where asignaturaDictada.asignaturaDictada=Chat.asignatura and asignaturaDictada.idClase=Chat.idClase and asignaturaDictada.orientacion=Chat.oriClase and Chat.activo=true and asignaturaDictada.ci='" + ci + "'; ", conexion);
+            MySqlCommand select = new MySqlCommand("select Chat.* from Chat, asignaturaDictada where asignaturaDictada.asignaturaDictada=Chat.asignatura and asignaturaDictada.idClase=Chat.idClase and asignaturaDictada.orientacion=Chat.oriClase and Chat.activo=true and asignaturaDictada.ci='" + ci + "'; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -1051,7 +1051,7 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             DateTime fechaHora = DateTime.Now;
-            MySqlCommand insert = new MySqlCommand("insert into Chat (idClase,oriClase,asignatura,fecha,horaInico,activo) values(" + soli.IdClase + "," + soli.OriClase + ",'" + soli.Asignatura + "','" + fechaHora.ToString("yyyy") + "-" + fechaHora.ToString("MM") + "-" + fechaHora.ToString("dd") + "','" + fechaHora.ToString("HH") + ":" + fechaHora.ToString("mm") + ":" + fechaHora.ToString("ss") + "',true);", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into Chat (idClase,oriClase,asignatura,fecha,horaInicio,activo) values(" + soli.IdClase + "," + soli.OriClase + ",'" + soli.Asignatura + "','" + fechaHora.ToString("yyyy") + "-" + fechaHora.ToString("MM") + "-" + fechaHora.ToString("dd") + "','" + fechaHora.ToString("HH") + ":" + fechaHora.ToString("mm") + ":" + fechaHora.ToString("ss") + "',true);", conexion);
             insert.ExecuteNonQuery();
             MySqlCommand update = new MySqlCommand("update SolicitaChat set pendiente = false where ciAlumno='" + soli.CiAlumno + "' and ciDocente='" + soli.CiDocente + "' and idClase=" + soli.IdClase + " and oriClase=" + soli.OriClase + " and asignatura='" + soli.Asignatura + "' and fechaHora='" + fechaHora.ToString("yyyy") + "-" + fechaHora.ToString("MM") + "-" + fechaHora.ToString("dd") + "T" + fechaHora.ToString("HH") + ":" + fechaHora.ToString("mm") + ":" + fechaHora.ToString("ss") + "';", conexion);
             update.ExecuteNonQuery();
@@ -1067,7 +1067,7 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            string query = "select idChat from Chat where idClase=" + soli.IdClase + " and oriClase=" + soli.OriClase + " and fecha='" + fechaHora.ToString("yyyy") + "-" + fechaHora.ToString("MM") + "-" + fechaHora.ToString("dd") + "' and horaInico='" + fechaHora.ToString("HH") + ":" + fechaHora.ToString("mm") + ":" + fechaHora.ToString("ss") + "' and asignatura='" + soli.Asignatura + "';";
+            string query = "select idChat from Chat where idClase=" + soli.IdClase + " and oriClase=" + soli.OriClase + " and fecha='" + fechaHora.ToString("yyyy") + "-" + fechaHora.ToString("MM") + "-" + fechaHora.ToString("dd") + "' and horaInicio='" + fechaHora.ToString("HH") + ":" + fechaHora.ToString("mm") + ":" + fechaHora.ToString("ss") + "' and asignatura='" + soli.Asignatura + "';";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
             int id = 0;

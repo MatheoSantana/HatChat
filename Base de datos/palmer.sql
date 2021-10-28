@@ -2,6 +2,7 @@
 /*------------------------------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------DDL-------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------------------*/
+drop database hatchat;
 create database Hatchat;
 use Hatchat;
 
@@ -240,7 +241,7 @@ asignatura varchar(10) not null,
 fecha date not null,
 horaInicio time not null,
 horaFin time,
-titulo varchar(60) not null,
+titulo varchar(60),
 activo boolean not null,
 primary key(idChat),
 foreign key(idClase) references SolicitaChat(idClase),

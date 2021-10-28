@@ -21,6 +21,7 @@ namespace Hatchat.Presentacion
 
         int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
+        private List<Logica.Chat> posiblesChats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
         public static Logica.Chat abierto = new Logica.Chat();
         Logica.Clase seleccionada = new Logica.Clase();
@@ -210,7 +211,22 @@ namespace Hatchat.Presentacion
         }
         private void AbrirChat(object sender, EventArgs e)
         {
+            panelChat.Visible = true;
+            pcbxMaterialDatosClase.Image = null;
+            lblMateriaClaseChat.Text = "";
+            lblHoras.Text = "";
+            panelCharla.Controls.Clear();
+            txtMensajeChat.Text = "";
 
+            Logica.Chat chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
+            Logica.Agenda agenda = new Logica.Agenda().SelectAgendaConCi(Login.encontrado.Ci);
+            lblMateriaClaseChat.Text = ((Label)sender).Text;
+            lblHoras.Text += agenda.HoraInicio + " " + agenda.HoraFin;
+
+            pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
+            abierto = chat;
+            tmrCargChat.Enabled = true;
+            mensajs.Clear();
         }
         public void CargarChat()
         {
@@ -347,7 +363,6 @@ namespace Hatchat.Presentacion
             CargarChat();
             CerrarChat();
             
-
         }
 
         private void btnNuevoChat_Click(object sender, EventArgs e)
@@ -371,10 +386,53 @@ namespace Hatchat.Presentacion
             panelIngresarChat.Visible = !panelIngresarChat.Visible;
             panelNuevoChat.Visible = false;
 
+            List<Logica.Chat> posiblesChats = new Logica.Chat().SelectChatsAIngresarPorCedulaAlumno(Login.encontrado.Ci);
+            bool iguales = true;
+            if (this.posiblesChats.Count == posiblesChats.Count)
+            {
+                for (int x = 0; x < posiblesChats.Count; x++)
+                {
+                    if (!(posiblesChats[x].IdChat == this.posiblesChats[x].IdChat) || posiblesChats[x].Titulo != this.posiblesChats[x].Titulo)
+                    {
+                        iguales = false;
+                    }
+                }
+            }
+            else
+            {
+                iguales = false;
+            }
+            if (!iguales)
+            {
+                this.posiblesChats = posiblesChats;
+                y = 5;
+                panelChatsAIngresar.Controls.Clear();
+
+                foreach (Logica.Chat chat in posiblesChats)
+                {
+                    Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
+                    Logica.Clase clase = new Logica.Clase().SelectClasePorId(chat.IdClase);
+                    Label dina = new Label();
+                    dina.Height = 46;
+                    dina.Width = 150;
+                    dina.Location = new Point(25, y);
+                    y += 50;
+                    dina.Name = "lblC" + chat.IdChat.ToString();
+                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
+                    dina.BorderStyle = BorderStyle.FixedSingle;
+                    dina.Click += new EventHandler(IngresarChat);
+                    panelChatsAIngresar.Controls.Add(dina);
+                }
+            }
 
         }
+        private void IngresarChat(object sender, EventArgs e)
+        {
+            new Logica.ChateaAl(Login.encontrado.Ci, new Logica.Chat().StringAId(((Label)sender).Text), DateTime.Now, "¡ "+Login.encontrado.Apodo+" ha ingresado al chat !").InsertChateaAl();
+            txtMensajeChat.Text = "";
+        }
 
-        private void btnRealizarNuevoChat_Click(object sender, EventArgs e)
+            private void btnRealizarNuevoChat_Click(object sender, EventArgs e)
         {
             
             if (cmbxMateria.SelectedIndex!=-1)

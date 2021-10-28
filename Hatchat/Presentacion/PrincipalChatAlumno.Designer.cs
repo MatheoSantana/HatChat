@@ -68,6 +68,7 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialMensajesNav = new System.Windows.Forms.PictureBox();
             this.pcbxHistorialChatNav = new System.Windows.Forms.PictureBox();
             this.timerHistorialNav = new System.Windows.Forms.Timer(this.components);
+            this.panelChatsAIngresar = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -210,7 +211,7 @@ namespace Hatchat.Presentacion
             this.panelNuevoChat.Controls.Add(this.lblNuevoChat);
             this.panelNuevoChat.Location = new System.Drawing.Point(13, 162);
             this.panelNuevoChat.Name = "panelNuevoChat";
-            this.panelNuevoChat.Size = new System.Drawing.Size(199, 205);
+            this.panelNuevoChat.Size = new System.Drawing.Size(199, 271);
             this.panelNuevoChat.TabIndex = 6;
             // 
             // btnRealizarNuevoChat
@@ -253,11 +254,12 @@ namespace Hatchat.Presentacion
             // 
             this.panelIngresarChat.AutoScroll = true;
             this.panelIngresarChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelIngresarChat.Controls.Add(this.panelChatsAIngresar);
             this.panelIngresarChat.Controls.Add(this.lblChatsIngresarChats);
             this.panelIngresarChat.Controls.Add(this.lblIngresarChat);
             this.panelIngresarChat.Location = new System.Drawing.Point(13, 162);
             this.panelIngresarChat.Name = "panelIngresarChat";
-            this.panelIngresarChat.Size = new System.Drawing.Size(199, 193);
+            this.panelIngresarChat.Size = new System.Drawing.Size(199, 256);
             this.panelIngresarChat.TabIndex = 7;
             // 
             // lblChatsIngresarChats
@@ -440,6 +442,13 @@ namespace Hatchat.Presentacion
             this.timerHistorialNav.Enabled = true;
             this.timerHistorialNav.Tick += new System.EventHandler(this.timerHistorialNav_Tick);
             // 
+            // panelChatsAIngresar
+            // 
+            this.panelChatsAIngresar.Location = new System.Drawing.Point(3, 54);
+            this.panelChatsAIngresar.Name = "panelChatsAIngresar";
+            this.panelChatsAIngresar.Size = new System.Drawing.Size(191, 197);
+            this.panelChatsAIngresar.TabIndex = 3;
+            // 
             // PrincipalChatAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,5 +532,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pcbxHistorialMensajesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialChatNav;
         private System.Windows.Forms.Timer timerHistorialNav;
+        private System.Windows.Forms.Panel panelChatsAIngresar;
     }
 }
