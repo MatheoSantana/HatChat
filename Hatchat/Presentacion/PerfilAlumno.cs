@@ -16,6 +16,7 @@ namespace Hatchat.Presentacion
         public Form gruposAlumno;
         public Form historialChatsAlumno;
         public Form historialMensajesAlumno;
+        private bool enHistorial = false, enPanel = false, enHistorialChat, enHistorialMensaje = false;
         public PerfilAlumno()
         {
             InitializeComponent();
@@ -37,6 +38,8 @@ namespace Hatchat.Presentacion
                 pbxPerfilNav.Image = Image.FromFile("perfil blanco.png");
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
+                pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -51,6 +54,8 @@ namespace Hatchat.Presentacion
             pbxPerfilNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxHistorialChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
 
             txtPassword.UseSystemPasswordChar = true;
@@ -83,8 +88,6 @@ namespace Hatchat.Presentacion
             login.Dispose();
         }
 
-
-
         private void pbxChatNav_Click(object sender, EventArgs e)
         {
             principalChatAlumno.Show();
@@ -95,6 +98,63 @@ namespace Hatchat.Presentacion
         {
             mensajesAlumno.Show();
             this.Hide();
+        }
+        private void pbxGruposNav_Click(object sender, EventArgs e)
+        {
+            gruposAlumno.Show();
+            this.Hide();
+        }
+        private void pbxHistorialNav_MouseEnter(object sender, EventArgs e)
+        {
+            enHistorial = true;
+            panelHistorialesNav.Visible = true;
+        }
+        private void panelHistorialesNav_MouseEnter(object sender, EventArgs e)
+        {
+            enPanel = true;
+        }
+        private void pcbxHistorialChatNav_MouseEnter(object sender, EventArgs e)
+        {
+            enHistorialChat = true;
+        }
+        private void pcbxHistorialMensajesNav_MouseEnter(object sender, EventArgs e)
+        {
+            enHistorialMensaje = true;
+        }
+        private void pbxHistorialNav_MouseLeave(object sender, EventArgs e)
+        {
+            enHistorial = false;
+        }
+
+        private void panelHistorialesNav_MouseLeave(object sender, EventArgs e)
+        {
+            enPanel = false;
+        }
+        private void pcbxHistorialChatNav_MouseLeave(object sender, EventArgs e)
+        {
+            enHistorialChat = false;
+        }
+        private void pcbxHistorialMensajesNav_MouseLeave(object sender, EventArgs e)
+        {
+            enHistorialMensaje = false;
+        }
+
+        private void pcbxHistorialMensajesNav_Click(object sender, EventArgs e)
+        {
+            historialMensajesAlumno.Show();
+            this.Hide();
+        }
+        private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
+        {
+            historialChatsAlumno.Show();
+            this.Hide();
+        }
+        private void timerHistorialNav_Tick(object sender, EventArgs e)
+        {
+            if (!enPanel && !enHistorial && !enHistorialChat && !enHistorialMensaje)
+            {
+                panelHistorialesNav.Visible = false;
+            }
         }
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
@@ -141,11 +201,6 @@ namespace Hatchat.Presentacion
             login.Show();
             this.Dispose();
         }
-
-        private void pbxHistorialNav_Click(object sender, EventArgs e)
-        {
-            historialMensajesAlumno.Show();
-            this.Hide();
-        }
+        
     }
 }

@@ -106,6 +106,12 @@
     <Compile Include="Presentacion\HistorialMensajesAlumno.designer.cs">
       <DependentUpon>HistorialMensajesAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\HistorialChatAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\HistorialChatAlumno.designer.cs">
+      <DependentUpon>HistorialChatAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\PrincipalSolicitudesAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\HistorialMensajesAlumno.resx">
       <DependentUpon>HistorialMensajesAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\HistorialChatAlumno.resx">
+      <DependentUpon>HistorialChatAlumno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\PrincipalSolicitudesAdmin.resx">
       <DependentUpon>PrincipalSolicitudesAdmin.cs</DependentUpon>

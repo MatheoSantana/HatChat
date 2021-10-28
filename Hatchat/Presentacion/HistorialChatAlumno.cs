@@ -10,13 +10,13 @@ using System.Threading;
 
 namespace Hatchat.Presentacion
 {
-    public partial class PrincipalChatAlumno : Form
+    public partial class HistorialChatAlumno : Form
     {
         public Form login;
+        public Form principalChatsAlumno;
         public Form mensajesAlumno;
         public Form gruposAlumno;
         public Form perfilAlumno;
-        public Form historialChatsAlumno;
         public Form historialMensajesAlumno;
 
         int y = 200;
@@ -28,26 +28,24 @@ namespace Hatchat.Presentacion
 
         bool enHistorial = false, enPanel = false, enHistorialChat=false, enHistorialMensaje=false;
 
-        public PrincipalChatAlumno()
+        public HistorialChatAlumno()
         {
             InitializeComponent();
             Text = "Chat";
 
             ClientSize = new Size(1280, 720);
             panelChat.Visible = false;
-            panelIngresarChat.Visible = false;
-            panelNuevoChat.Visible = false;
             StartPosition = FormStartPosition.CenterScreen;
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-                pbxChatNav.Image = Image.FromFile("chat blanco.png");
+                pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
-                pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
+                pcbxHistorialChatNav.Image = Image.FromFile("historial chat blanco.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
@@ -67,7 +65,7 @@ namespace Hatchat.Presentacion
             pcbxHistorialChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
-            cmbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxAsignaturas.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
@@ -80,6 +78,11 @@ namespace Hatchat.Presentacion
         {
             login.Dispose();
             
+        }
+        private void pcbxChatNav_Click(object sender, EventArgs e)
+        {
+            principalChatsAlumno.Show();
+            this.Hide();
         }
 
         private void pbxMensajeNav_Click(object sender, EventArgs e)
@@ -140,11 +143,7 @@ namespace Hatchat.Presentacion
             historialMensajesAlumno.Show();
             this.Hide();
         }
-        private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
-        {
-            historialChatsAlumno.Show();
-            this.Hide();
-        }
+        
         private void timerHistorialNav_Tick(object sender, EventArgs e)
         {
             if (!enPanel && !enHistorial && !enHistorialChat && !enHistorialMensaje)
@@ -345,92 +344,10 @@ namespace Hatchat.Presentacion
         private void tmrCargChat_Tick(object sender, EventArgs e)
         {
             CargarChat();
-            CerrarChat();
-            
-
-        }
-
-        private void btnNuevoChat_Click(object sender, EventArgs e)
-        {
-            panelNuevoChat.Visible = !panelNuevoChat.Visible;
-            panelIngresarChat.Visible = false;
-            
-            asignaturas = new Logica.Asignatura().SelectAsignaturasPorCi(Login.encontrado.Ci);
-            cmbxMateria.Items.Clear();
-            foreach (Logica.Asignatura asignatura in asignaturas)
-            {
-                Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignatura.Id, Login.encontrado.Ci);
-                Logica.Clase clase = new Logica.Clase().SelectClasePorId(asignaturaCursada.IdClase);
-                cmbxMateria.Items.Add(asignatura.Nombre + " " + clase.Anio+clase.Nombre);
-            }
             
         }
-
-        private void btnIngresarChat_Click(object sender, EventArgs e)
-        {
-            panelIngresarChat.Visible = !panelIngresarChat.Visible;
-            panelNuevoChat.Visible = false;
-
-
-        }
-
-        private void btnRealizarNuevoChat_Click(object sender, EventArgs e)
-        {
-            
-            if (cmbxMateria.SelectedIndex!=-1)
-            {
-                Logica.SolicitaChat solicitaChat = new Logica.SolicitaChat();
-                solicitaChat.CiAlumno = Login.encontrado.Ci;
-                solicitaChat.Asignatura = asignaturas[cmbxMateria.SelectedIndex].Id;
-                Logica.AsignaturaCursa asignaturaCursa = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignaturas[cmbxMateria.SelectedIndex].Id, Login.encontrado.Ci);
-                solicitaChat.IdClase = asignaturaCursa.IdClase;
-                solicitaChat.FechaHora = DateTime.Now;
-                solicitaChat.Pendiente = true;
-                solicitaChat.OriClase = asignaturaCursa.Orientacion;
-                solicitaChat.CiDocente =new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(asignaturaCursa.AsignaturaCursada, asignaturaCursa.IdClase);
-                solicitaChat.EnviarSolicitudChat();
-                MessageBox.Show("Solicitud enviada");
-                panelNuevoChat.Visible = false;
-            }
-        }
-
-        private void btnEnviar_Click(object sender, EventArgs e)
-        {
-            new Logica.ChateaAl(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaAl();
-            txtMensajeChat.Text = "";
-        }
-
-        private void btnCerrarChat_Click(object sender, EventArgs e)
-        {
-            abierto.Activo = false;
-            abierto.HoraFin = DateTime.Now;
-            Titulo titulo = new Titulo(true);
-            titulo.principalChatAlumno = this;
-            this.Enabled = false;
-            titulo.Show();
-        }
-        private void CerrarChat()
-        {
-
-            if (!(abierto == new Logica.Chat()))
-            {
-                bool cerrar = true;
-                foreach (Logica.Chat chat in chats)
-                {
-                    if (chat.IdChat == abierto.IdChat)
-                    {
-                        cerrar = false;
-                    }
-                }
-                if (cerrar)
-                {
-                    panelChat.Visible = false;
-                    tmrCargChat.Enabled = false;
-                    MessageBox.Show("Este chat a sido cerrado");
-                }
-            }
-        }
-
+ 
         
+
     }
 }

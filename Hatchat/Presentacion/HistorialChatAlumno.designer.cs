@@ -1,7 +1,7 @@
 ﻿
 namespace Hatchat.Presentacion
 {
-    partial class PrincipalChatAlumno
+    partial class HistorialChatAlumno
     {
         /// <summary>
         /// Required designer variable.
@@ -38,25 +38,12 @@ namespace Hatchat.Presentacion
             this.pbxMensajeNav = new System.Windows.Forms.PictureBox();
             this.pbxChatNav = new System.Windows.Forms.PictureBox();
             this.pbxFotoPerfilNav = new System.Windows.Forms.PictureBox();
-            this.lblChats = new System.Windows.Forms.Label();
-            this.btnNuevoChat = new System.Windows.Forms.Button();
-            this.btnIngresarChat = new System.Windows.Forms.Button();
+            this.lblHistorialChats = new System.Windows.Forms.Label();
             this.panelChatsActivos = new System.Windows.Forms.Panel();
-            this.panelNuevoChat = new System.Windows.Forms.Panel();
-            this.btnRealizarNuevoChat = new System.Windows.Forms.Button();
-            this.cmbxMateria = new System.Windows.Forms.ComboBox();
-            this.lblMateriaNuevoChat = new System.Windows.Forms.Label();
-            this.lblNuevoChat = new System.Windows.Forms.Label();
-            this.panelIngresarChat = new System.Windows.Forms.Panel();
-            this.lblChatsIngresarChats = new System.Windows.Forms.Label();
-            this.lblIngresarChat = new System.Windows.Forms.Label();
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.panelChat = new System.Windows.Forms.Panel();
-            this.btnEnviar = new System.Windows.Forms.Button();
             this.panelCharla = new System.Windows.Forms.Panel();
-            this.txtMensajeChat = new System.Windows.Forms.TextBox();
             this.panelDatosClase = new System.Windows.Forms.Panel();
-            this.btnCerrarChat = new System.Windows.Forms.Button();
             this.btnParticipantes = new System.Windows.Forms.Button();
             this.lblHoras = new System.Windows.Forms.Label();
             this.pcbxMaterialDatosClase = new System.Windows.Forms.PictureBox();
@@ -68,6 +55,10 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialMensajesNav = new System.Windows.Forms.PictureBox();
             this.pcbxHistorialChatNav = new System.Windows.Forms.PictureBox();
             this.timerHistorialNav = new System.Windows.Forms.Timer(this.components);
+            this.btnFiltrarFecha = new System.Windows.Forms.Button();
+            this.dtpFiltro = new System.Windows.Forms.DateTimePicker();
+            this.cmbxAsignaturas = new System.Windows.Forms.ComboBox();
+            this.btnFiltrarAsignatura = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -76,8 +67,6 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxMensajeNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxChatNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
-            this.panelNuevoChat.SuspendLayout();
-            this.panelIngresarChat.SuspendLayout();
             this.panelChat.SuspendLayout();
             this.panelDatosClase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxMaterialDatosClase)).BeginInit();
@@ -153,6 +142,7 @@ namespace Hatchat.Presentacion
             this.pbxChatNav.Size = new System.Drawing.Size(81, 81);
             this.pbxChatNav.TabIndex = 1;
             this.pbxChatNav.TabStop = false;
+            this.pbxChatNav.Click += new System.EventHandler(this.pcbxChatNav_Click);
             // 
             // pbxFotoPerfilNav
             // 
@@ -162,121 +152,23 @@ namespace Hatchat.Presentacion
             this.pbxFotoPerfilNav.TabIndex = 0;
             this.pbxFotoPerfilNav.TabStop = false;
             // 
-            // lblChats
+            // lblHistorialChats
             // 
-            this.lblChats.AutoSize = true;
-            this.lblChats.Location = new System.Drawing.Point(102, 100);
-            this.lblChats.Name = "lblChats";
-            this.lblChats.Size = new System.Drawing.Size(34, 13);
-            this.lblChats.TabIndex = 2;
-            this.lblChats.Text = "Chats";
-            // 
-            // btnNuevoChat
-            // 
-            this.btnNuevoChat.Location = new System.Drawing.Point(13, 133);
-            this.btnNuevoChat.Name = "btnNuevoChat";
-            this.btnNuevoChat.Size = new System.Drawing.Size(101, 23);
-            this.btnNuevoChat.TabIndex = 3;
-            this.btnNuevoChat.Text = "Nuevo Chat";
-            this.btnNuevoChat.UseVisualStyleBackColor = true;
-            this.btnNuevoChat.Click += new System.EventHandler(this.btnNuevoChat_Click);
-            // 
-            // btnIngresarChat
-            // 
-            this.btnIngresarChat.Location = new System.Drawing.Point(120, 133);
-            this.btnIngresarChat.Name = "btnIngresarChat";
-            this.btnIngresarChat.Size = new System.Drawing.Size(92, 23);
-            this.btnIngresarChat.TabIndex = 4;
-            this.btnIngresarChat.Text = "Ingresar Chat";
-            this.btnIngresarChat.UseVisualStyleBackColor = true;
-            this.btnIngresarChat.Click += new System.EventHandler(this.btnIngresarChat_Click);
+            this.lblHistorialChats.AutoSize = true;
+            this.lblHistorialChats.Location = new System.Drawing.Point(75, 106);
+            this.lblHistorialChats.Name = "lblHistorialChats";
+            this.lblHistorialChats.Size = new System.Drawing.Size(74, 13);
+            this.lblHistorialChats.TabIndex = 2;
+            this.lblHistorialChats.Text = "Historial Chats";
             // 
             // panelChatsActivos
             // 
             this.panelChatsActivos.AutoScroll = true;
             this.panelChatsActivos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChatsActivos.Location = new System.Drawing.Point(13, 162);
+            this.panelChatsActivos.Location = new System.Drawing.Point(13, 225);
             this.panelChatsActivos.Name = "panelChatsActivos";
-            this.panelChatsActivos.Size = new System.Drawing.Size(199, 416);
+            this.panelChatsActivos.Size = new System.Drawing.Size(199, 353);
             this.panelChatsActivos.TabIndex = 5;
-            // 
-            // panelNuevoChat
-            // 
-            this.panelNuevoChat.AutoScroll = true;
-            this.panelNuevoChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelNuevoChat.Controls.Add(this.btnRealizarNuevoChat);
-            this.panelNuevoChat.Controls.Add(this.cmbxMateria);
-            this.panelNuevoChat.Controls.Add(this.lblMateriaNuevoChat);
-            this.panelNuevoChat.Controls.Add(this.lblNuevoChat);
-            this.panelNuevoChat.Location = new System.Drawing.Point(13, 162);
-            this.panelNuevoChat.Name = "panelNuevoChat";
-            this.panelNuevoChat.Size = new System.Drawing.Size(199, 205);
-            this.panelNuevoChat.TabIndex = 6;
-            // 
-            // btnRealizarNuevoChat
-            // 
-            this.btnRealizarNuevoChat.Location = new System.Drawing.Point(106, 165);
-            this.btnRealizarNuevoChat.Name = "btnRealizarNuevoChat";
-            this.btnRealizarNuevoChat.Size = new System.Drawing.Size(75, 23);
-            this.btnRealizarNuevoChat.TabIndex = 5;
-            this.btnRealizarNuevoChat.Text = "Realizar";
-            this.btnRealizarNuevoChat.UseVisualStyleBackColor = true;
-            this.btnRealizarNuevoChat.Click += new System.EventHandler(this.btnRealizarNuevoChat_Click);
-            // 
-            // cmbxMateria
-            // 
-            this.cmbxMateria.FormattingEnabled = true;
-            this.cmbxMateria.Location = new System.Drawing.Point(21, 76);
-            this.cmbxMateria.Name = "cmbxMateria";
-            this.cmbxMateria.Size = new System.Drawing.Size(160, 21);
-            this.cmbxMateria.TabIndex = 4;
-            // 
-            // lblMateriaNuevoChat
-            // 
-            this.lblMateriaNuevoChat.AutoSize = true;
-            this.lblMateriaNuevoChat.Location = new System.Drawing.Point(21, 46);
-            this.lblMateriaNuevoChat.Name = "lblMateriaNuevoChat";
-            this.lblMateriaNuevoChat.Size = new System.Drawing.Size(79, 13);
-            this.lblMateriaNuevoChat.TabIndex = 3;
-            this.lblMateriaNuevoChat.Text = "Ingrese materia";
-            // 
-            // lblNuevoChat
-            // 
-            this.lblNuevoChat.AutoSize = true;
-            this.lblNuevoChat.Location = new System.Drawing.Point(71, 11);
-            this.lblNuevoChat.Name = "lblNuevoChat";
-            this.lblNuevoChat.Size = new System.Drawing.Size(64, 13);
-            this.lblNuevoChat.TabIndex = 0;
-            this.lblNuevoChat.Text = "Nuevo Chat";
-            // 
-            // panelIngresarChat
-            // 
-            this.panelIngresarChat.AutoScroll = true;
-            this.panelIngresarChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelIngresarChat.Controls.Add(this.lblChatsIngresarChats);
-            this.panelIngresarChat.Controls.Add(this.lblIngresarChat);
-            this.panelIngresarChat.Location = new System.Drawing.Point(13, 162);
-            this.panelIngresarChat.Name = "panelIngresarChat";
-            this.panelIngresarChat.Size = new System.Drawing.Size(199, 193);
-            this.panelIngresarChat.TabIndex = 7;
-            // 
-            // lblChatsIngresarChats
-            // 
-            this.lblChatsIngresarChats.AutoSize = true;
-            this.lblChatsIngresarChats.Location = new System.Drawing.Point(16, 33);
-            this.lblChatsIngresarChats.Name = "lblChatsIngresarChats";
-            this.lblChatsIngresarChats.Size = new System.Drawing.Size(37, 13);
-            this.lblChatsIngresarChats.TabIndex = 2;
-            this.lblChatsIngresarChats.Text = "Chats:";
-            // 
-            // lblIngresarChat
-            // 
-            this.lblIngresarChat.AutoSize = true;
-            this.lblIngresarChat.Location = new System.Drawing.Point(27, 11);
-            this.lblIngresarChat.Name = "lblIngresarChat";
-            this.lblIngresarChat.Size = new System.Drawing.Size(152, 13);
-            this.lblIngresarChat.TabIndex = 0;
-            this.lblIngresarChat.Text = "Ingresar a un chat en progreso";
             // 
             // lblBienvenido
             // 
@@ -289,24 +181,12 @@ namespace Hatchat.Presentacion
             // 
             // panelChat
             // 
-            this.panelChat.Controls.Add(this.btnEnviar);
             this.panelChat.Controls.Add(this.panelCharla);
-            this.panelChat.Controls.Add(this.txtMensajeChat);
             this.panelChat.Controls.Add(this.panelDatosClase);
             this.panelChat.Location = new System.Drawing.Point(218, 100);
             this.panelChat.Name = "panelChat";
             this.panelChat.Size = new System.Drawing.Size(863, 488);
             this.panelChat.TabIndex = 7;
-            // 
-            // btnEnviar
-            // 
-            this.btnEnviar.Location = new System.Drawing.Point(785, 455);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(75, 23);
-            this.btnEnviar.TabIndex = 1;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // panelCharla
             // 
@@ -316,16 +196,8 @@ namespace Hatchat.Presentacion
             this.panelCharla.Size = new System.Drawing.Size(849, 343);
             this.panelCharla.TabIndex = 11;
             // 
-            // txtMensajeChat
-            // 
-            this.txtMensajeChat.Location = new System.Drawing.Point(7, 458);
-            this.txtMensajeChat.Name = "txtMensajeChat";
-            this.txtMensajeChat.Size = new System.Drawing.Size(772, 20);
-            this.txtMensajeChat.TabIndex = 0;
-            // 
             // panelDatosClase
             // 
-            this.panelDatosClase.Controls.Add(this.btnCerrarChat);
             this.panelDatosClase.Controls.Add(this.btnParticipantes);
             this.panelDatosClase.Controls.Add(this.lblHoras);
             this.panelDatosClase.Controls.Add(this.pcbxMaterialDatosClase);
@@ -335,16 +207,6 @@ namespace Hatchat.Presentacion
             this.panelDatosClase.Name = "panelDatosClase";
             this.panelDatosClase.Size = new System.Drawing.Size(857, 100);
             this.panelDatosClase.TabIndex = 10;
-            // 
-            // btnCerrarChat
-            // 
-            this.btnCerrarChat.Location = new System.Drawing.Point(662, 71);
-            this.btnCerrarChat.Name = "btnCerrarChat";
-            this.btnCerrarChat.Size = new System.Drawing.Size(92, 23);
-            this.btnCerrarChat.TabIndex = 12;
-            this.btnCerrarChat.Text = "Cerrar Chat";
-            this.btnCerrarChat.UseVisualStyleBackColor = true;
-            this.btnCerrarChat.Click += new System.EventHandler(this.btnCerrarChat_Click);
             // 
             // btnParticipantes
             // 
@@ -431,7 +293,6 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialChatNav.Size = new System.Drawing.Size(81, 81);
             this.pcbxHistorialChatNav.TabIndex = 7;
             this.pcbxHistorialChatNav.TabStop = false;
-            this.pcbxHistorialChatNav.Click += new System.EventHandler(this.pcbxHistorialChatNav_Click);
             this.pcbxHistorialChatNav.MouseEnter += new System.EventHandler(this.pcbxHistorialChatNav_MouseEnter);
             this.pcbxHistorialChatNav.MouseLeave += new System.EventHandler(this.pcbxHistorialChatNav_MouseLeave);
             // 
@@ -440,22 +301,56 @@ namespace Hatchat.Presentacion
             this.timerHistorialNav.Enabled = true;
             this.timerHistorialNav.Tick += new System.EventHandler(this.timerHistorialNav_Tick);
             // 
-            // PrincipalChatAlumno
+            // btnFiltrarFecha
+            // 
+            this.btnFiltrarFecha.Location = new System.Drawing.Point(13, 202);
+            this.btnFiltrarFecha.Name = "btnFiltrarFecha";
+            this.btnFiltrarFecha.Size = new System.Drawing.Size(199, 20);
+            this.btnFiltrarFecha.TabIndex = 17;
+            this.btnFiltrarFecha.Text = "Filtrar Fecha";
+            this.btnFiltrarFecha.UseVisualStyleBackColor = true;
+            // 
+            // dtpFiltro
+            // 
+            this.dtpFiltro.Location = new System.Drawing.Point(13, 179);
+            this.dtpFiltro.Name = "dtpFiltro";
+            this.dtpFiltro.Size = new System.Drawing.Size(199, 20);
+            this.dtpFiltro.TabIndex = 16;
+            // 
+            // cmbxAsignaturas
+            // 
+            this.cmbxAsignaturas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxAsignaturas.FormattingEnabled = true;
+            this.cmbxAsignaturas.Location = new System.Drawing.Point(13, 124);
+            this.cmbxAsignaturas.Name = "cmbxAsignaturas";
+            this.cmbxAsignaturas.Size = new System.Drawing.Size(199, 21);
+            this.cmbxAsignaturas.TabIndex = 15;
+            // 
+            // btnFiltrarAsignatura
+            // 
+            this.btnFiltrarAsignatura.Location = new System.Drawing.Point(13, 151);
+            this.btnFiltrarAsignatura.Name = "btnFiltrarAsignatura";
+            this.btnFiltrarAsignatura.Size = new System.Drawing.Size(199, 20);
+            this.btnFiltrarAsignatura.TabIndex = 14;
+            this.btnFiltrarAsignatura.Text = "Filtrar Asignatura";
+            this.btnFiltrarAsignatura.UseVisualStyleBackColor = true;
+            // 
+            // HistorialChatAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 590);
+            this.Controls.Add(this.btnFiltrarFecha);
+            this.Controls.Add(this.dtpFiltro);
+            this.Controls.Add(this.cmbxAsignaturas);
+            this.Controls.Add(this.btnFiltrarAsignatura);
             this.Controls.Add(this.panelHistorialesNav);
-            this.Controls.Add(this.panelIngresarChat);
-            this.Controls.Add(this.panelNuevoChat);
             this.Controls.Add(this.panelChat);
             this.Controls.Add(this.lblBienvenido);
             this.Controls.Add(this.panelChatsActivos);
-            this.Controls.Add(this.btnIngresarChat);
-            this.Controls.Add(this.btnNuevoChat);
-            this.Controls.Add(this.lblChats);
+            this.Controls.Add(this.lblHistorialChats);
             this.Controls.Add(this.panel1);
-            this.Name = "PrincipalChatAlumno";
+            this.Name = "HistorialChatAlumno";
             this.Text = "PrincipalChatAlumno";
             this.Load += new System.EventHandler(this.PrincipalChatAlumno_Load);
             this.panel1.ResumeLayout(false);
@@ -466,12 +361,7 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxMensajeNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxChatNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).EndInit();
-            this.panelNuevoChat.ResumeLayout(false);
-            this.panelNuevoChat.PerformLayout();
-            this.panelIngresarChat.ResumeLayout(false);
-            this.panelIngresarChat.PerformLayout();
             this.panelChat.ResumeLayout(false);
-            this.panelChat.PerformLayout();
             this.panelDatosClase.ResumeLayout(false);
             this.panelDatosClase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxMaterialDatosClase)).EndInit();
@@ -493,19 +383,9 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pbxFotoPerfilNav;
         private System.Windows.Forms.PictureBox pbxGruposNav;
         private System.Windows.Forms.PictureBox pbxHistorialNav;
-        private System.Windows.Forms.Label lblChats;
-        private System.Windows.Forms.Button btnNuevoChat;
-        private System.Windows.Forms.Button btnIngresarChat;
+        private System.Windows.Forms.Label lblHistorialChats;
         private System.Windows.Forms.Panel panelChatsActivos;
         private System.Windows.Forms.Label lblBienvenido;
-        private System.Windows.Forms.Panel panelNuevoChat;
-        private System.Windows.Forms.Label lblMateriaNuevoChat;
-        private System.Windows.Forms.Label lblNuevoChat;
-        private System.Windows.Forms.Button btnRealizarNuevoChat;
-        private System.Windows.Forms.ComboBox cmbxMateria;
-        private System.Windows.Forms.Panel panelIngresarChat;
-        private System.Windows.Forms.Label lblChatsIngresarChats;
-        private System.Windows.Forms.Label lblIngresarChat;
         private System.Windows.Forms.Panel panelChat;
         private System.Windows.Forms.Label lblMateriaClaseChat;
         private System.Windows.Forms.PictureBox pcbxMaterialDatosClase;
@@ -513,15 +393,16 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelDatosClase;
         private System.Windows.Forms.Label lblHoras;
         private System.Windows.Forms.Label lblHorario;
-        private System.Windows.Forms.Button btnEnviar;
-        private System.Windows.Forms.TextBox txtMensajeChat;
         private System.Windows.Forms.Button btnParticipantes;
-        private System.Windows.Forms.Button btnCerrarChat;
         private System.Windows.Forms.Timer tmrCargChats;
         private System.Windows.Forms.Timer tmrCargChat;
         private System.Windows.Forms.Panel panelHistorialesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialMensajesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialChatNav;
         private System.Windows.Forms.Timer timerHistorialNav;
+        private System.Windows.Forms.Button btnFiltrarFecha;
+        private System.Windows.Forms.DateTimePicker dtpFiltro;
+        private System.Windows.Forms.ComboBox cmbxAsignaturas;
+        private System.Windows.Forms.Button btnFiltrarAsignatura;
     }
 }

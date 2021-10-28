@@ -596,7 +596,75 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Chat.idChat, Chat.idClase, Chat.oriClase, Chat.asignatura, Chat.fecha, Chat.horaInicio, Chat.horaFin, Chat.titulo, Chat.activo from Chat, asignaturaCursa where asignaturaCursa.asignaturaCursada=Chat.asignatura and asignaturaCursa.idClase=Chat.idClase and asignaturaCursa.orientacion=Chat.oriClase and Chat.activo=true and asignaturaCursa.ci='" + ci + "'; ", conexion);
+            MySqlCommand select = new MySqlCommand("select Chat.* from Chat, chateaAl where chateaAl.idChat=Chat.idChat and Chat.activo=true and chateaAl.ci='" + ci + "' group by chat.idChat; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            List<Chat> chats = new List<Chat>();
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Chat chat = new Chat();
+
+                chat.IdChat = Convert.ToInt32(data.Rows[x][0].ToString());
+                chat.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                chat.OriClase = Convert.ToInt32(data.Rows[x][2].ToString());
+                chat.Asignatura = data.Rows[x][3].ToString();
+                chat.Fecha = chat.StringADateTime(data.Rows[x][4].ToString());
+                chat.HoraInicio = chat.StringADateTime(data.Rows[x][5].ToString());
+                if (!(data.Rows[x][6].ToString() == ""))
+                {
+                    chat.HoraFin = chat.StringADateTime(data.Rows[x][6].ToString());
+                }
+                chat.Titulo = data.Rows[x][7].ToString();
+                chat.Activo = false;
+                if (data.Rows[x][8].ToString() == "True")
+                {
+                    chat.Activo = true;
+                }
+                chats.Add(chat);
+            }
+            conexion.Close();
+            return chats;
+        }
+        public List<Chat> SelectChatsAIngresarPorCedulaAlumno(string ci)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Chat.* from Chat, asignaturaCursa where asignaturaCursa.asignaturaCursada=Chat.asignatura and asignaturaCursa.idClase=Chat.idClase and asignaturaCursa.orientacion=Chat.oriClase and Chat.activo=true and asignaturaCursa.cursando=true and asignaturaCursa.ci='"+ci+"' and Chat.idChat not in(select idChat from chateaAl where ci='"+ci+"') group by chat.idChat;", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            List<Chat> chats = new List<Chat>();
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Chat chat = new Chat();
+
+                chat.IdChat = Convert.ToInt32(data.Rows[x][0].ToString());
+                chat.IdClase = Convert.ToInt32(data.Rows[x][1].ToString());
+                chat.OriClase = Convert.ToInt32(data.Rows[x][2].ToString());
+                chat.Asignatura = data.Rows[x][3].ToString();
+                chat.Fecha = chat.StringADateTime(data.Rows[x][4].ToString());
+                chat.HoraInicio = chat.StringADateTime(data.Rows[x][5].ToString());
+                if (!(data.Rows[x][6].ToString() == ""))
+                {
+                    chat.HoraFin = chat.StringADateTime(data.Rows[x][6].ToString());
+                }
+                chat.Titulo = data.Rows[x][7].ToString();
+                chat.Activo = false;
+                if (data.Rows[x][8].ToString() == "True")
+                {
+                    chat.Activo = true;
+                }
+                chats.Add(chat);
+            }
+            conexion.Close();
+            return chats;
+        }
+        public List<Chat> SelectHistorialChatsPorCedulaAlumno(string ci)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Chat.* from Chat, chateaAl where chateaAl.idChat=Chat.idChat and Chat.activo=false and chateaAl.ci='" + ci + "' group by chat.idChat; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);

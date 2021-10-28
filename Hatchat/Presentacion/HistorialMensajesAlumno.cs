@@ -19,6 +19,7 @@ namespace Hatchat.Presentacion
         public Form gruposAlumno;
         public Form perfilAlumno;
         public Form historialChatsAlumno;
+        bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
 
         int y = 50;
         bool filtroDocente = false;
@@ -45,6 +46,8 @@ namespace Hatchat.Presentacion
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
+                pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje blanco.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -59,6 +62,8 @@ namespace Hatchat.Presentacion
             pbxPerfilNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxHistorialChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxDocente.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxAlumno.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -150,10 +155,53 @@ namespace Hatchat.Presentacion
             this.Hide();
         }
 
-        private void pbxHistorialNav_Click(object sender, EventArgs e)
+        private void pbxHistorialNav_MouseEnter(object sender, EventArgs e)
+        {
+            enHistorial = true;
+            panelHistorialesNav.Visible = true;
+        }
+        private void panelHistorialesNav_MouseEnter(object sender, EventArgs e)
+        {
+            enPanel = true;
+        }
+        private void pcbxHistorialChatNav_MouseEnter(object sender, EventArgs e)
+        {
+            enHistorialChat = true;
+        }
+        private void pcbxHistorialMensajesNav_MouseEnter(object sender, EventArgs e)
+        {
+            enHistorialMensaje = true;
+        }
+        private void pbxHistorialNav_MouseLeave(object sender, EventArgs e)
+        {
+            enHistorial = false;
+        }
+
+        private void panelHistorialesNav_MouseLeave(object sender, EventArgs e)
+        {
+            enPanel = false;
+        }
+        private void pcbxHistorialChatNav_MouseLeave(object sender, EventArgs e)
+        {
+            enHistorialChat = false;
+        }
+        private void pcbxHistorialMensajesNav_MouseLeave(object sender, EventArgs e)
+        {
+            enHistorialMensaje = false;
+        }
+
+        private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
         {
             historialChatsAlumno.Show();
             this.Hide();
+        }
+        
+        private void timerHistorialNav_Tick(object sender, EventArgs e)
+        {
+            if (!enPanel && !enHistorial && !enHistorialChat && !enHistorialMensaje)
+            {
+                panelHistorialesNav.Visible = false;
+            }
         }
         private void CerrarForm(object sender, EventArgs e)
         {
