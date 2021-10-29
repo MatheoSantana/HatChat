@@ -177,3 +177,4 @@ C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatcha
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialChatAlumno.resources
 C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialChatAlumno.resources
 C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatchat.Presentacion.GruposAlumno.resources
+C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.GruposAlumno.resources
