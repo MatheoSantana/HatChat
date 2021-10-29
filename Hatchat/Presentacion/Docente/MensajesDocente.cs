@@ -99,7 +99,7 @@ namespace Hatchat.Presentacion
             mensajes = new Logica.Mensaje().SelectCargarMensajesDo(Login.encontrado.Ci);
             foreach (Logica.Mensaje men in mensajes)
             {
-                Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+                Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
                 Logica.Alumno alumno = new Logica.Alumno();
 
                 alumno.Ci = usuario.Ci;

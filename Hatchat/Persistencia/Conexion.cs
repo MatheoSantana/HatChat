@@ -151,6 +151,37 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return us;
         }
+        public Usuario SelectUsuarioCiActivo(string ci)
+        {
+            Usuario us = new Usuario();
+            MySqlDataReader reader;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Usuario where ci='" + ci + "' and activo=true;";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    us.Ci = reader.GetString("ci");
+                    us.Apodo = reader.GetString("apodo");
+                    us.Nombre = reader.GetString("nombre");
+                    us.Password = reader.GetString(3);
+                    us.Primer_apellido = reader.GetString("apellido");
+                    us.Segundo_apellido = reader.GetString("segApellido");
+                    us.Respuesta_seguridad = reader.GetString("resSeguridad");
+                    if (!(reader["foto"].ToString() == ""))
+                    {
+                        us.FotoDePerfil = (byte[])reader["foto"];
+                    }
+                    us.Activo = (bool)reader["activo"];
+                    us.Preguta_seguridad = Convert.ToInt32(reader.GetString("id"));
+                }
+            }
+            conexion.Close();
+            return us;
+        }
         public bool SelectAlumno(string ci)
         {
             bool encontrado = false;
@@ -810,8 +841,13 @@ namespace Hatchat.Persistencia
                     chat.HoraInicio = chat.StringADateTime(reader.GetString("horaInicio"));
                     try
                     {
-                        chat.HoraFin = chat.StringADateTime(reader.GetString("horaFin"));
                         chat.Titulo = reader.GetString("titulo");
+                    }
+                    catch (Exception ex) { }
+                    try
+                    {
+                        chat.HoraFin = chat.StringADateTime(reader.GetString("horaFin"));
+                        
                     }
                     catch (Exception ex) { }
                     chat.Activo = false;
@@ -1056,8 +1092,8 @@ namespace Hatchat.Persistencia
             MySqlCommand update = new MySqlCommand("update SolicitaChat set pendiente = false where ciAlumno='" + soli.CiAlumno + "' and ciDocente='" + soli.CiDocente + "' and idClase=" + soli.IdClase + " and oriClase=" + soli.OriClase + " and asignatura='" + soli.Asignatura + "' and fechaHora='" + fechaHora.ToString("yyyy") + "-" + fechaHora.ToString("MM") + "-" + fechaHora.ToString("dd") + "T" + fechaHora.ToString("HH") + ":" + fechaHora.ToString("mm") + ":" + fechaHora.ToString("ss") + "';", conexion);
             update.ExecuteNonQuery();
             int idChat = SelectIdChatPorSolicituaChatYfechaHora(soli, fechaHora);
-            string apodoAl = SelectUsuarioCi(soli.CiAlumno).Apodo;
-            string apodoDo = SelectUsuarioCi(soli.CiDocente).Apodo;
+            string apodoAl = SelectUsuarioCiActivo(soli.CiAlumno).Apodo;
+            string apodoDo = SelectUsuarioCiActivo(soli.CiDocente).Apodo;
             InsertChateaAl(new ChateaAl(soli.CiAlumno, idChat, fechaHora, "¡ " + apodoAl + " ha ingresado al chat !"));
             InsertChateaDo(new ChateaDo(soli.CiDocente, idChat, fechaHora.AddSeconds(1), "¡ " + apodoDo + " ha ingresado al chat !"));
             conexion.Close();
@@ -1908,6 +1944,86 @@ namespace Hatchat.Persistencia
 
             conexion.Close();
             return mensajes;
+        }
+
+        public bool SelectDocenteDisponible(string asig, string ci, int clase)
+        {
+            bool disponible = true;
+            MySqlDataReader reader = null;
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            string query = "select * from Chat, ChateaDo where Chat.idChat=ChateaDo.idChat and chat.activo=true and chat.idClase="+clase+ " and chateaDo.ci='"+ci+"' and chat.asignatura='"+asig+"';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    disponible = false;
+                }
+            }
+            conexion.Close();
+            return disponible;
+        }
+        public List<Usuario> SelectParticipantes(int chat)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Nombre, apellido from Usuario, ChateaAl where Usuario.ci = ChateaAl.ci and ChateaAl.idChat = " + chat + " group by Usuario.ci order by horaEnvioAl; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Usuario usuario = new Usuario();
+
+                usuario.Nombre = data.Rows[x][0].ToString();
+                usuario.Primer_apellido = data.Rows[x][1].ToString();
+                usuarios.Add(usuario);
+            }
+            select = new MySqlCommand("select Nombre, apellido from Usuario, ChateaDo where Usuario.ci = ChateaDo.ci and ChateaDo.idChat = " + chat + " group by Usuario.ci order by horaEnvioDo; ", conexion);
+            adapter = new MySqlDataAdapter(select);
+            data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Usuario usuario = new Usuario();
+
+                usuario.Nombre = data.Rows[x][0].ToString();
+                usuario.Primer_apellido = data.Rows[x][1].ToString();
+                usuarios.Insert(1, usuario);
+            }
+            conexion.Close();
+            return usuarios;
+        }
+        public List<Usuario> SelectParticipantesGrupo(AsignaturaCursa asig)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand select = new MySqlCommand("select Nombre, apellido from Usuario, AsignaturaCursa where Usuario.ci = AsignaturaCursa.ci and AsignaturaCursa.idClase="+asig.IdClase+ " and AsignaturaCursa.orientacion="+asig.Orientacion+ " and AsignaturaCursa.anio="+asig.Anio+ " and AsignaturaCursa.asignaturaCursada='"+asig.AsignaturaCursada+ "' and cursando=true order by apellido; ", conexion);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(select);
+            DataTable data = new DataTable();
+            adapter.Fill(data);
+            for (int x = 0; x < data.Rows.Count; x++)
+            {
+                Usuario usuario = new Usuario();
+
+                usuario.Nombre = data.Rows[x][0].ToString();
+                usuario.Primer_apellido = data.Rows[x][1].ToString();
+                usuarios.Add(usuario);
+            }
+            conexion.Close();
+            return usuarios;
+        }
+        public void BajaGrupo(AsignaturaCursa asig)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand update = new MySqlCommand("update asignaturaCursa set cursando=false where ci ='" + asig.Ci+"' and idClase=" + asig.IdClase + " and orientacion=" + asig.Orientacion + " and anio=" + asig.Anio + " and asignaturaCursada='" + asig.AsignaturaCursada + "';", conexion);
+            update.ExecuteNonQuery();
+            conexion.Close();
         }
     }
 

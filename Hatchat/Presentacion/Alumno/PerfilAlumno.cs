@@ -181,25 +181,43 @@ namespace Hatchat.Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Login.encontrado.Apodo = txtApodo.Text;
-            Login.encontrado.Password = txtPassword.Text;
-            Login.encontrado.Respuesta_seguridad = txtRespuesta.Text;
-            Login.encontrado.Preguta_seguridad = (cbxPregs.SelectedIndex+1);
-            Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
-            Login.encontrado.UpdatePerfil();
-            MessageBox.Show("Se cerrará la sesion para recargar los datos");
-            Login.encontrado = new Logica.Usuario();
-            login.Show();
-            this.Dispose();
+            DialogResult modificarCuenta = MessageBox.Show("¿Desea modificar su perfil?", "Modificar perfil", MessageBoxButtons.YesNo);
+            if (modificarCuenta == DialogResult.Yes)
+            {
+                Login.encontrado.Apodo = txtApodo.Text;
+                Login.encontrado.Password = txtPassword.Text;
+                Login.encontrado.Respuesta_seguridad = txtRespuesta.Text;
+                Login.encontrado.Preguta_seguridad = (cbxPregs.SelectedIndex + 1);
+                Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
+                Login.encontrado.UpdatePerfil();
+                MessageBox.Show("Se han modificado sus datos");
+
+                pbxFoto.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+                pbxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                txtApodo.Text = Login.encontrado.Apodo;
+                txtPassword.Text = Login.encontrado.Password;
+                txtPasswordCon.Text = Login.encontrado.Password;
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+                foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
+                {
+                    cbxPregs.Items.Add(preg.Pregunta);
+                }
+                cbxPregs.SelectedIndex = (Login.encontrado.SelectPreguntaSeguridad().Id - 1);
+                txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Login.encontrado.Activo = false;
-            Login.encontrado.RemoveUsuario();
-            Login.encontrado = new Logica.Usuario();
-            login.Show();
-            this.Dispose();
+            DialogResult borrarCuenta = MessageBox.Show("¿Desea borrar su perfil?", "Borrar perfil", MessageBoxButtons.YesNo);
+            if (borrarCuenta == DialogResult.Yes)
+            {
+                Login.encontrado.Activo = false;
+                Login.encontrado.RemoveUsuario();
+                Login.encontrado = new Logica.Usuario();
+                login.Show();
+                this.Dispose();
+            }
         }
         
     }

@@ -76,52 +76,52 @@
     <Compile Include="Logica\SolicitudModif.cs" />
     <Compile Include="Logica\Usuario.cs" />
     <Compile Include="Persistencia\Conexion.cs" />
-    <Compile Include="Presentacion\ABMGruposAdmin.cs">
+    <Compile Include="Presentacion\Admin\ABMGruposAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\ABMGruposAdmin.Designer.cs">
+    <Compile Include="Presentacion\Admin\ABMGruposAdmin.Designer.cs">
       <DependentUpon>ABMGruposAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\ABMDocenteAdmin.cs">
+    <Compile Include="Presentacion\Admin\ABMDocenteAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\ABMDocenteAdmin.Designer.cs">
+    <Compile Include="Presentacion\Admin\ABMDocenteAdmin.Designer.cs">
       <DependentUpon>ABMDocenteAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\ABMAlumnoAdmin.cs">
+    <Compile Include="Presentacion\Admin\ABMAlumnoAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\ABMAlumnoAdmin.Designer.cs">
+    <Compile Include="Presentacion\Admin\ABMAlumnoAdmin.Designer.cs">
       <DependentUpon>ABMAlumnoAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\HistorialSolicitudesAdmin.cs">
+    <Compile Include="Presentacion\Admin\HistorialSolicitudesAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\HistorialSolicitudesAdmin.Designer.cs">
+    <Compile Include="Presentacion\Admin\HistorialSolicitudesAdmin.Designer.cs">
       <DependentUpon>HistorialSolicitudesAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\HistorialMensajesAlumno.cs">
+    <Compile Include="Presentacion\Alumno\HistorialMensajesAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\HistorialMensajesAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\HistorialMensajesAlumno.designer.cs">
       <DependentUpon>HistorialMensajesAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\HistorialChatAlumno.cs">
+    <Compile Include="Presentacion\Alumno\HistorialChatAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\HistorialChatAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\HistorialChatAlumno.designer.cs">
       <DependentUpon>HistorialChatAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\PrincipalSolicitudesAdmin.cs">
+    <Compile Include="Presentacion\Admin\PrincipalSolicitudesAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\PrincipalSolicitudesAdmin.Designer.cs">
+    <Compile Include="Presentacion\Admin\PrincipalSolicitudesAdmin.Designer.cs">
       <DependentUpon>PrincipalSolicitudesAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\Titulo.cs">
+    <Compile Include="Presentacion\Alumno\Titulo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\Titulo.Designer.cs">
+    <Compile Include="Presentacion\Alumno\Titulo.Designer.cs">
       <DependentUpon>Titulo.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Login.cs">
@@ -130,41 +130,47 @@
     <Compile Include="Presentacion\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\MensajesAlumno.cs">
+    <Compile Include="Presentacion\Alumno\MensajesAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\MensajesAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\MensajesAlumno.designer.cs">
       <DependentUpon>MensajesAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\MensajesDocente.cs">
+    <Compile Include="Presentacion\Docente\MensajesDocente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\MensajesDocente.designer.cs">
+    <Compile Include="Presentacion\Docente\MensajesDocente.designer.cs">
       <DependentUpon>MensajesDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\PerfilAlumno.cs">
+    <Compile Include="Presentacion\Alumno\PerfilAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\PerfilAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\PerfilAlumno.designer.cs">
       <DependentUpon>PerfilAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\PerfilDocente.cs">
+    <Compile Include="Presentacion\Docente\PerfilDocente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\PerfilDocente.designer.cs">
+    <Compile Include="Presentacion\Docente\PerfilDocente.designer.cs">
       <DependentUpon>PerfilDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\PrincipalChatAlumno.cs">
+    <Compile Include="Presentacion\Alumno\PrincipalChatAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\PrincipalChatAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\PrincipalChatAlumno.designer.cs">
       <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\PrincipalChatDocente.cs">
+    <Compile Include="Presentacion\Docente\PrincipalChatDocente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\PrincipalChatDocente.designer.cs">
+    <Compile Include="Presentacion\Docente\PrincipalChatDocente.designer.cs">
       <DependentUpon>PrincipalChatDocente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\GruposAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\GruposAlumno.Designer.cs">
+      <DependentUpon>GruposAlumno.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Register.cs">
       <SubType>Form</SubType>
@@ -172,89 +178,92 @@
     <Compile Include="Presentacion\Register.designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\RegisterAlumno.cs">
+    <Compile Include="Presentacion\Alumno\RegisterAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\RegisterAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\RegisterAlumno.designer.cs">
       <DependentUpon>RegisterAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\RegisterClasesAlumno.cs">
+    <Compile Include="Presentacion\Alumno\RegisterClasesAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\RegisterClasesAlumno.designer.cs">
+    <Compile Include="Presentacion\Alumno\RegisterClasesAlumno.designer.cs">
       <DependentUpon>RegisterClasesAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\RegisterClasesDocente.cs">
+    <Compile Include="Presentacion\Docente\RegisterClasesDocente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\RegisterClasesDocente.designer.cs">
+    <Compile Include="Presentacion\Docente\RegisterClasesDocente.designer.cs">
       <DependentUpon>RegisterClasesDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\RegisterDocente.cs">
+    <Compile Include="Presentacion\Docente\RegisterDocente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\RegisterDocente.designer.cs">
+    <Compile Include="Presentacion\Docente\RegisterDocente.designer.cs">
       <DependentUpon>RegisterDocente.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Presentacion\ABMGruposAdmin.resx">
+    <EmbeddedResource Include="Presentacion\Admin\ABMGruposAdmin.resx">
       <DependentUpon>ABMGruposAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\ABMDocenteAdmin.resx">
+    <EmbeddedResource Include="Presentacion\Admin\ABMDocenteAdmin.resx">
       <DependentUpon>ABMDocenteAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\ABMAlumnoAdmin.resx">
+    <EmbeddedResource Include="Presentacion\Admin\ABMAlumnoAdmin.resx">
       <DependentUpon>ABMAlumnoAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\HistorialSolicitudesAdmin.resx">
+    <EmbeddedResource Include="Presentacion\Admin\HistorialSolicitudesAdmin.resx">
       <DependentUpon>HistorialSolicitudesAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\HistorialMensajesAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\HistorialMensajesAlumno.resx">
       <DependentUpon>HistorialMensajesAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\HistorialChatAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\HistorialChatAlumno.resx">
       <DependentUpon>HistorialChatAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\PrincipalSolicitudesAdmin.resx">
+    <EmbeddedResource Include="Presentacion\Admin\PrincipalSolicitudesAdmin.resx">
       <DependentUpon>PrincipalSolicitudesAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\Titulo.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\Titulo.resx">
       <DependentUpon>Titulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\MensajesAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\MensajesAlumno.resx">
       <DependentUpon>MensajesAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\MensajesDocente.resx">
+    <EmbeddedResource Include="Presentacion\Docente\MensajesDocente.resx">
       <DependentUpon>MensajesDocente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\PerfilAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\PerfilAlumno.resx">
       <DependentUpon>PerfilAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\PerfilDocente.resx">
+    <EmbeddedResource Include="Presentacion\Docente\PerfilDocente.resx">
       <DependentUpon>PerfilDocente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\PrincipalChatAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\PrincipalChatAlumno.resx">
       <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\PrincipalChatDocente.resx">
+    <EmbeddedResource Include="Presentacion\Docente\PrincipalChatDocente.resx">
       <DependentUpon>PrincipalChatDocente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\GruposAlumno.resx">
+      <DependentUpon>GruposAlumno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\RegisterAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\RegisterAlumno.resx">
       <DependentUpon>RegisterAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\RegisterClasesAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\RegisterClasesAlumno.resx">
       <DependentUpon>RegisterClasesAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\RegisterClasesDocente.resx">
+    <EmbeddedResource Include="Presentacion\Docente\RegisterClasesDocente.resx">
       <DependentUpon>RegisterClasesDocente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\RegisterDocente.resx">
+    <EmbeddedResource Include="Presentacion\Docente\RegisterDocente.resx">
       <DependentUpon>RegisterDocente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

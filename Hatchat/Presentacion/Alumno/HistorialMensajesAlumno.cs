@@ -223,26 +223,7 @@ namespace Hatchat.Presentacion
         private void CargarMensajes()
         {
             List<Logica.Mensaje> mensajes = new Logica.Mensaje().SelectMensajesRecibidosAl(Login.encontrado.Ci);
-            cmbxDocentes.Items.Clear();
-            docentes.Clear();
-            foreach (Logica.Mensaje men in mensajes)
-            {
-                bool agregar = true;
-                Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
-                foreach(Logica.Docente doce in docentes)
-                {
-                    if (doce.Ci == us.Ci)
-                    {
-                        agregar = false;
-                    }
-                }
-                if (agregar)
-                {
-                    Logica.Docente doc = new Logica.Docente(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
-                    docentes.Add(doc);
-                    cmbxDocentes.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
-                }
-            }
+            
             y = 50;
             bool iguales = true;
             if (mensajes.Count == this.mensajes.Count)
@@ -261,6 +242,26 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
+                cmbxDocentes.Items.Clear();
+                docentes.Clear();
+                foreach (Logica.Mensaje men in mensajes)
+                {
+                    bool agregar = true;
+                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+                    foreach (Logica.Docente doce in docentes)
+                    {
+                        if (doce.Ci == us.Ci)
+                        {
+                            agregar = false;
+                        }
+                    }
+                    if (agregar)
+                    {
+                        Logica.Docente doc = new Logica.Docente(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
+                        docentes.Add(doc);
+                        cmbxDocentes.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
+                    }
+                }
                 this.mensajes = mensajes;
                 panelNavMensajes.Controls.Clear();
             panelContenedor.Visible = false;
@@ -298,15 +299,7 @@ namespace Hatchat.Presentacion
         {
             List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
             List<Logica.Mensaje> mensTemp = new Logica.Mensaje().SelectMensajesRecibidosAl(Login.encontrado.Ci);
-            cmbxDocentes.Items.Clear();
-            docentes.Clear();
-            foreach (Logica.Mensaje men in mensTemp)
-            {
-                Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
-                Logica.Docente doc = new Logica.Docente(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
-                docentes.Add(doc);
-                cmbxDocentes.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
-            }
+            
             y = 50;
 
 
@@ -315,9 +308,14 @@ namespace Hatchat.Presentacion
                 bool agregado = false;
                 if (filtroDocente || filtroFecha)
                 {
+                    string ci = "";
+                    if (cmbxDocentes.SelectedIndex != -1)
+                    {
+                        ci = docentes[cmbxDocentes.SelectedIndex].Ci;
+                    }
                     if (filtroDocente && filtroFecha)
                     {
-                        if ((men.Docente == docentes[cmbxDocentes.SelectedIndex].Ci) && ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day)))
+                        if ((men.Docente == ci) && ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day)))
                         {
                             mensajes.Add(men);
                             agregado = true;
@@ -325,7 +323,7 @@ namespace Hatchat.Presentacion
                     }
                     if (filtroDocente && !agregado)
                     {
-                        if (men.Docente == docentes[cmbxDocentes.SelectedIndex].Ci)
+                        if (men.Docente == ci)
                         {
                             mensajes.Add(men);
                             agregado = true;
@@ -361,6 +359,15 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
+                cmbxDocentes.Items.Clear();
+                docentes.Clear();
+                foreach (Logica.Mensaje men in mensTemp)
+                {
+                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+                    Logica.Docente doc = new Logica.Docente(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
+                    docentes.Add(doc);
+                    cmbxDocentes.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
+                }
                 this.mensajes = mensajes;
                 panelNavMensajes.Controls.Clear();
                 panelContenedor.Visible = false;

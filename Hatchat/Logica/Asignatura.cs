@@ -44,10 +44,17 @@ namespace Hatchat.Logica
             get { return activo; }
             set { activo = value; }
         }
-        override
-        public string ToString()
+        public string StringAId(string cadena)
         {
-            return nombre + anio + " - " + id;
+            char[] aConvertir = cadena.ToCharArray();
+
+            string preId = "";
+            for (int x = 3; x < aConvertir.Length; x++)
+            {
+                    preId += aConvertir[x].ToString();
+            }
+            return preId;
+
         }
 
         public List<Asignatura> SelectAsignaturasPorClaseAnioYorientacion(string clase, int anio, int orientacion)

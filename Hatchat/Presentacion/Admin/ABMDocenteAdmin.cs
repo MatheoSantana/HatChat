@@ -407,7 +407,7 @@ namespace Hatchat.Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Logica.Usuario doce = new Logica.Usuario().SelectUsuarioCi(txtBajaCi.Text);
+            Logica.Usuario doce = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
             if(doce.Ci!="" && doce.SelectDocente())
             {
                 doce.RemoveUsuario();
@@ -433,7 +433,7 @@ namespace Hatchat.Presentacion
         {
             if (new Logica.Usuario().SelectDocente(txtCiModif.Text))
             {
-                doModif = new Logica.Usuario().SelectUsuarioCi(txtCiModif.Text);
+                doModif = new Logica.Usuario().SelectUsuarioCiActivo(txtCiModif.Text);
                 lblNombreCompleto.Text += doModif.Nombre + " " + doModif.Primer_apellido + " " + doModif.Segundo_apellido;
                 lblCedula.Text += doModif.Ci;
                 pbxFoto.Image = doModif.ByteArrayToImage(doModif.FotoDePerfil);
@@ -487,7 +487,7 @@ namespace Hatchat.Presentacion
         {
             if (new Logica.Usuario().SelectDocente(txtCedulaAgenda.Text))
             {
-                doAgenda = new Logica.Usuario().SelectUsuarioCi(txtCedulaAgenda.Text);
+                doAgenda = new Logica.Usuario().SelectUsuarioCiActivo(txtCedulaAgenda.Text);
                 panelDiasYHorarios.Visible = true;
                 agendas = new Logica.Agenda().SelectAgendasPorCi(txtCedulaAgenda.Text);
             }

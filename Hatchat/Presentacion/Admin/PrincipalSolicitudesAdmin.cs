@@ -245,7 +245,7 @@ namespace Hatchat.Presentacion
 
                 y = 5;
                 PanelSolicitudesPendientes.Controls.Clear();
-
+                
                 for (int x = 0; x < solicitudesOrdenadas.Count; x++)
                 {
                     if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
@@ -297,7 +297,7 @@ namespace Hatchat.Presentacion
                 }
             }
         }
-
+        
         private void AbrirSolicitudClaseAl(object sender, EventArgs e)
         {
             panelContenido.Controls.Clear();
@@ -384,7 +384,7 @@ namespace Hatchat.Presentacion
             }
         }
         private void AbrirSolicitudClaseDo(object sender, EventArgs e)
-        {
+        { 
             panelContenido.Controls.Clear();
             panelSolicitud.Visible = true;
             claseSolicitudesClaseDo = new List<Logica.ClaseSolicitudClaseDo>();

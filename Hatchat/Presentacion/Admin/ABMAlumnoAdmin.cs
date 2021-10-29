@@ -387,7 +387,7 @@ namespace Hatchat.Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Logica.Usuario al = new Logica.Usuario().SelectUsuarioCi(txtBajaCi.Text);
+            Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
             if(al.Ci!="" && al.SelectAlumno())
             {
                 al.RemoveUsuario();
@@ -411,7 +411,7 @@ namespace Hatchat.Presentacion
         {
             if (new Logica.Usuario().SelectAlumno(txtCiModif.Text))
             {
-                alModif = new Logica.Usuario().SelectUsuarioCi(txtCiModif.Text);
+                alModif = new Logica.Usuario().SelectUsuarioCiActivo(txtCiModif.Text);
                 lblNombreCompleto.Text += alModif.Nombre + " " + alModif.Primer_apellido + " " + alModif.Segundo_apellido;
                 lblCedula.Text += alModif.Ci;
                 pbxFoto.Image = alModif.ByteArrayToImage(alModif.FotoDePerfil);

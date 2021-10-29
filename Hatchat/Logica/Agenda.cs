@@ -68,6 +68,61 @@ namespace Hatchat.Logica
             return Convert.ToInt32(preId);
 
         }
+        public bool EnHora(Agenda ag)
+        {
+            bool enHora= false;
+            DateTime hoy = DateTime.Now;
+            string dia = "";
+            if (hoy.DayOfWeek.ToString() == "Monday")
+            {
+                dia = "Lunes";
+            }
+            else if (hoy.DayOfWeek.ToString() == "Tuesday")
+            {
+                dia = "Martes";
+            }
+            else if (hoy.DayOfWeek.ToString() == "Wednesday")
+            {
+                dia = "Miercoles";
+            }
+            else if (hoy.DayOfWeek.ToString() == "Thursday")
+            {
+                dia = "Jueves";
+            }
+            else if (hoy.DayOfWeek.ToString() == "Friday")
+            {
+                dia = "Viernes";
+            }
+            else if (hoy.DayOfWeek.ToString() == "Saturday")
+            {
+                dia = "Sabado";
+            }
+            else if (hoy.DayOfWeek.ToString() == "Sunday")
+            {
+                dia = "Domingo";
+            }
+            
+            string horaAgInicio = "";
+            horaAgInicio += ag.horaInicio[0].ToString() + ag.horaInicio[1].ToString();
+
+            string minutoAgInicio = "";
+            minutoAgInicio += ag.horaInicio[3].ToString() + ag.horaInicio[4].ToString();
+
+            string horaAgFin = "";
+            horaAgFin += ag.horaFin[0].ToString() + ag.horaFin[1].ToString();
+
+            string minutoAgFin = "";
+            minutoAgFin += ag.horaFin[3].ToString() + ag.horaFin[4].ToString();
+
+            DateTime agendaInicio = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(horaAgInicio), Convert.ToInt32(minutoAgInicio), 0);
+            DateTime agendaFin = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(horaAgFin), Convert.ToInt32(horaAgFin), 0);
+
+            if (ag.NomDia == dia && hoy>=agendaInicio && hoy < agendaFin)
+            {
+                enHora = true;
+            }
+            return enHora;
+        }
         public List<Agenda> SelectAgendasPorCi(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();

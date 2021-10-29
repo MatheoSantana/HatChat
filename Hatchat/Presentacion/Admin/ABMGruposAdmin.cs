@@ -690,7 +690,7 @@ namespace Hatchat.Presentacion
             cmbxNombreBajaClase.Enabled = true;
         }
         private void btnDarBajaClase_Click(object sender, EventArgs e)
-        {
+        { 
             bool error = true;
             foreach(Logica.Clase cla in ClasesBajaClase)
             {
@@ -863,7 +863,7 @@ namespace Hatchat.Presentacion
         }
 
         private void btnDarModificacionClase_Click(object sender, EventArgs e)
-        {
+        { 
             bool error = true;
             foreach (Logica.Clase cla in ClasesModificarClase)
             {

@@ -190,10 +190,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.AltaUsuario(this);
         }
-        public Usuario SelectUsuarioCi(string ci)
+        public Usuario SelectUsuarioCiActivo(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectUsuarioCi(ci);
+            return conexion.SelectUsuarioCiActivo(ci);
         }
         public bool ExisteUsuarioCi(string ci)
         {
@@ -255,6 +255,26 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAgendasPorCi(ci);
+        }
+        public bool SelectDocenteDisponible(string asig, string ci, int clase)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectDocenteDisponible(asig, ci, clase);
+        }
+        public List<Usuario> SelectParticipantes(int chat)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectParticipantes(chat);
+        }
+        public Usuario SelectUsuarioCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectUsuarioCi(ci);
+        }
+        public List<Usuario> SelectParticipantesGrupo(AsignaturaCursa asig)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectParticipantesGrupo(asig);
         }
     }
 }
