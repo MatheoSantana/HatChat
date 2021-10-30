@@ -18,12 +18,11 @@ namespace Hatchat.Presentacion
         public Form mensajesAlumno;
         public Form gruposAlumno;
         public Form perfilAlumno;
-        public Form historialChatsAlumno;
+        public Form historialchatsAlumno;
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
 
         int y = 50;
-        bool filtroDocente = false;
-        bool filtroFecha = false;
+        bool filtroDocente = false, filtroFecha = false;
 
         public HistorialMensajesAlumno()
         {
@@ -47,7 +46,7 @@ namespace Hatchat.Presentacion
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
-                pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje blanco.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje blanco.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -189,13 +188,11 @@ namespace Hatchat.Presentacion
         {
             enHistorialMensaje = false;
         }
-
         private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
         {
-            historialChatsAlumno.Show();
+            historialchatsAlumno.Show();
             this.Hide();
         }
-        
         private void timerHistorialNav_Tick(object sender, EventArgs e)
         {
             if (!enPanel && !enHistorial && !enHistorialChat && !enHistorialMensaje)
@@ -295,7 +292,13 @@ namespace Hatchat.Presentacion
                 }
             }
         }
-            private void CargarMensajesFiltro()
+
+        private void timerCargarFoto_Tick(object sender, EventArgs e)
+        {
+            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
+        private void CargarMensajesFiltro()
         {
             List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
             List<Logica.Mensaje> mensTemp = new Logica.Mensaje().SelectMensajesRecibidosAl(Login.encontrado.Ci);

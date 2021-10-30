@@ -39,7 +39,7 @@ namespace Hatchat.Presentacion
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
-                pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje gris.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -167,6 +167,11 @@ namespace Hatchat.Presentacion
             }
         }
 
+        private void timerCargarFoto_Tick(object sender, EventArgs e)
+        {
+            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
         private void lblCambiarFoto_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofdFoto = new OpenFileDialog();
@@ -181,29 +186,56 @@ namespace Hatchat.Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            DialogResult modificarCuenta = MessageBox.Show("¿Desea modificar su perfil?", "Modificar perfil", MessageBoxButtons.YesNo);
-            if (modificarCuenta == DialogResult.Yes)
-            {
-                Login.encontrado.Apodo = txtApodo.Text;
-                Login.encontrado.Password = txtPassword.Text;
-                Login.encontrado.Respuesta_seguridad = txtRespuesta.Text;
-                Login.encontrado.Preguta_seguridad = (cbxPregs.SelectedIndex + 1);
-                Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
-                Login.encontrado.UpdatePerfil();
-                MessageBox.Show("Se han modificado sus datos");
+            string error = "Cuidado: ";
+            bool aceptable = true;
 
-                pbxFoto.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-                pbxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
-                txtApodo.Text = Login.encontrado.Apodo;
-                txtPassword.Text = Login.encontrado.Password;
-                txtPasswordCon.Text = Login.encontrado.Password;
-                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-                foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
+            if (txtPassword.Text == "" || txtPasswordCon.Text == "" || txtRespuesta.Text == "" || txtApodo.Text == "") 
+            {
+                aceptable = false;
+                error += "\nDebe rellenar todos los campos";
+            }
+            
+            if (txtPassword.Text.Length < 8)
+            {
+                aceptable = false;
+                error += "\nLa contraseña es demaciado corta";
+            }
+            if (txtPasswordCon.Text != txtPassword.Text)
+            {
+                aceptable = false;
+                error += "\nLas contraseñas no son iguales";
+            }
+
+            if (!aceptable)
+            {
+                MessageBox.Show(error);
+            }
+            else
+            {
+                DialogResult modificarCuenta = MessageBox.Show("¿Desea modificar su perfil?", "Modificar perfil", MessageBoxButtons.YesNo);
+                if (modificarCuenta == DialogResult.Yes)
                 {
-                    cbxPregs.Items.Add(preg.Pregunta);
+                    Login.encontrado.Apodo = txtApodo.Text;
+                    Login.encontrado.Password = txtPassword.Text;
+                    Login.encontrado.Respuesta_seguridad = txtRespuesta.Text;
+                    Login.encontrado.Preguta_seguridad = (cbxPregs.SelectedIndex + 1);
+                    Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
+                    Login.encontrado.UpdatePerfil();
+                    MessageBox.Show("Se han modificado sus datos");
+
+                    pbxFoto.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+                    pbxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    txtApodo.Text = Login.encontrado.Apodo;
+                    txtPassword.Text = Login.encontrado.Password;
+                    txtPasswordCon.Text = Login.encontrado.Password;
+                    pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+                    foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
+                    {
+                        cbxPregs.Items.Add(preg.Pregunta);
+                    }
+                    cbxPregs.SelectedIndex = (Login.encontrado.SelectPreguntaSeguridad().Id - 1);
+                    txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
                 }
-                cbxPregs.SelectedIndex = (Login.encontrado.SelectPreguntaSeguridad().Id - 1);
-                txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
             }
         }
 

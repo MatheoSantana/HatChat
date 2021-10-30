@@ -276,5 +276,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectParticipantesGrupo(asig);
         }
+        public List<Usuario> SelectParticipantesGrupo(AsignaturaDictada asig)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectParticipantesGrupo(asig);
+        }
     }
 }

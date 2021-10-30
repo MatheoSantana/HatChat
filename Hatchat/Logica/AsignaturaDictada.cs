@@ -73,5 +73,15 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.InsertAsignaturaDictada(this);
         }
+        public List<AsignaturaDictada> SelectAsignaturasDictadasPorCi(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturasDictadasPorCi(ci);
+        }
+        public void BajaGrupo()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.InsertAsignaturaDictada(this);
+        }
     }
 }

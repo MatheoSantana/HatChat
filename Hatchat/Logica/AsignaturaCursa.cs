@@ -63,10 +63,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectAsignaturasCursadasPorCi(ci);
         }
-        public AsignaturaCursa SelectAsignaturaCursaPorAsignaturaYCi(string asignatura, string ci)
+        public AsignaturaCursa SelectAsignaturaCursandoPorAsignaturaYCi(string asignatura, string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectAsignaturaCursaPorAsignaturaYCi(asignatura, ci);
+            return conexion.SelectAsignaturaCursandoPorAsignaturaYCi(asignatura, ci);
         }
         public void InsertAsignaturaCursa()
         {
@@ -77,6 +77,11 @@ namespace Hatchat.Logica
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.BajaGrupo(this);
+        }
+        public AsignaturaCursa SelectAsignaturaCursaPorAsignaturaYCiInclusivo(string asignatura, string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectAsignaturaCursaPorAsignaturaYCiInclusivo(asignatura, ci);
         }
     }
 }

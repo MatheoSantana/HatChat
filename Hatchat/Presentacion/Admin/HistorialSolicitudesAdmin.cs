@@ -13,14 +13,14 @@ namespace Hatchat.Presentacion
 {
     public partial class HistorialSolicitudesAdmin : Form
     {
-        
+
         List<Logica.ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
         Logica.SolicitudClaseAl soliAl = new Logica.SolicitudClaseAl();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAlAceptadas = new List<Logica.AsignaturaSolicitudClaseAl>();
 
         List<Logica.ClaseSolicitudClaseDo> claseSolicitudesClaseDo = new List<Logica.ClaseSolicitudClaseDo>();
-        List<Logica.AsignaturaSolicitudClaseDo>asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
+        List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
         Logica.SolicitudClaseDo soliDo = new Logica.SolicitudClaseDo();
         List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
 
@@ -38,7 +38,7 @@ namespace Hatchat.Presentacion
 
         public HistorialSolicitudesAdmin()
         {
-            
+
             InitializeComponent();
             panelSolicitud.Visible = false;
             try
@@ -114,151 +114,171 @@ namespace Hatchat.Presentacion
             List<Logica.SolicitudClaseAl> solicitudesClaseAl = new Logica.SolicitudClaseAl().SelectSolicitudesClaseAlResueltas(Login.encontrado.Ci);
             List<Logica.SolicitudClaseDo> solicitudesClaseDo = new Logica.SolicitudClaseDo().SelectSolicitudesClaseDoResueltas(Login.encontrado.Ci);
             List<Logica.SolicitudModif> solicitudesModif = new Logica.SolicitudModif().SelectSolicitudesModifResueltas(Login.encontrado.Ci);
-            
-                ArrayList solicitudesDesordenadas = new ArrayList();
-                int y;
 
-                ArrayList solicitudesOrdenadas = new ArrayList();
-                if (solicitudesClaseAl.Count() > 0)
+            ArrayList solicitudesDesordenadas = new ArrayList();
+            int y;
+
+            ArrayList solicitudesOrdenadas = new ArrayList();
+            ////
+            if (solicitudesClaseAl.Count() > 0)
+            {
+                if (filtrar)
                 {
-                    foreach (Logica.SolicitudClaseAl soliAl in solicitudesClaseAl)
+                    foreach (Logica.SolicitudClaseAl soli in solicitudesClaseAl)
                     {
-                        if (solicitudesClaseDo.Count() > 0)
+                        if (soli.FechaHora.Year == dtpFiltroFecha.Value.Year && soli.FechaHora.Month == dtpFiltroFecha.Value.Month && soli.FechaHora.Day == dtpFiltroFecha.Value.Day)
                         {
-                            foreach (Logica.SolicitudClaseDo soliDo in solicitudesClaseDo)
-                            {
-                                if (!solicitudesDesordenadas.Contains(soliDo))
-                                {
-                                    if (soliDo.FechaHora > soliAl.FechaHora)
-                                    {
-                                        if (filtrar && soliDo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliDo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliDo.FechaHora.Day == dtpFiltroFecha.Value.Day)
-                                        {
-                                            solicitudesDesordenadas.Add(soliDo);
-                                        }
-                                        else if (!filtrar)
-                                        {
-                                            solicitudesDesordenadas.Add(soliDo);
-                                        }
-                                    }
-                                    else if (!solicitudesDesordenadas.Contains(soliAl))
-                                    {
-                                        if (filtrar && soliDo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliDo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliDo.FechaHora.Day == dtpFiltroFecha.Value.Day)
-                                        {
-                                            solicitudesDesordenadas.Add(soliAl);
-                                        }
-                                        else if (!filtrar)
-                                        {
-                                            solicitudesDesordenadas.Add(soliAl);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (filtrar && soliDo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliDo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliDo.FechaHora.Day == dtpFiltroFecha.Value.Day)
-                            {
-                                solicitudesDesordenadas.Add(soliAl);
-                            }
-                            else if (!filtrar)
-                            {
-                                solicitudesDesordenadas.Add(soliAl);
-                            }
+                            solicitudesDesordenadas.Add(soli);
                         }
                     }
                 }
                 else
                 {
-                    foreach (Logica.SolicitudClaseDo soli in solicitudesClaseDo)
-                    {
-                        if (filtrar && soli.FechaHora.Year == dtpFiltroFecha.Value.Year && soli.FechaHora.Month == dtpFiltroFecha.Value.Month && soli.FechaHora.Day == dtpFiltroFecha.Value.Day)
-                        {
-                            solicitudesDesordenadas.Add(soli);
-                        }
-                        else if (!filtrar)
-                        {
-                            solicitudesDesordenadas.Add(soli);
-                        }
-                    }
+                    solicitudesDesordenadas.AddRange(solicitudesClaseAl);
                 }
 
-                foreach (Logica.SolicitudModif soliMo in solicitudesModif)
+                foreach (Logica.SolicitudClaseDo soliDo in solicitudesClaseDo)
                 {
                     for (int x = 0; x < solicitudesDesordenadas.Count; x++)
                     {
-                        if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
+                        if (!solicitudesDesordenadas.Contains(soliDo))
                         {
-                            Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
-                            if (!solicitudesOrdenadas.Contains(soliMo))
+                            if (soliDo.FechaHora > solicitudesClaseAl[x].FechaHora)
                             {
-                                if (soliMo.FechaHora > soli.FechaHora)
+                                if (filtrar)
                                 {
-                                    if (filtrar && soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                                    if (soliDo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliDo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliDo.FechaHora.Day == dtpFiltroFecha.Value.Day)
                                     {
-                                        solicitudesOrdenadas.Add(soliMo);
+                                        solicitudesDesordenadas.Insert(x, soliDo);
                                     }
-                                    else if (!filtrar)
-                                    {
-                                        solicitudesOrdenadas.Add(soliMo);
-                                    }
-
                                 }
+                                else
+                                {
+                                    solicitudesDesordenadas.Insert(x, soliDo);
+                                }
+                            }
+                        }
+                    }
+                    if (!solicitudesDesordenadas.Contains(soliDo))
+                    {
+                        if (filtrar)
+                        {
+                            if (soliDo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliDo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliDo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                            {
+                                solicitudesDesordenadas.Add(soliDo);
                             }
                         }
                         else
                         {
-                            Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
-                            if (!solicitudesOrdenadas.Contains(soliMo))
+                            solicitudesDesordenadas.Add(soliDo);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (filtrar)
+                {
+                    foreach (Logica.SolicitudClaseDo soli in solicitudesClaseDo)
+                    {
+                        if (soli.FechaHora.Year == dtpFiltroFecha.Value.Year && soli.FechaHora.Month == dtpFiltroFecha.Value.Month && soli.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                        {
+                            solicitudesDesordenadas.Add(soli);
+                        }
+                    }
+                }
+                else
+                {
+                    solicitudesDesordenadas.AddRange(solicitudesClaseDo);
+                }
+                
+            }
+            solicitudesOrdenadas.AddRange(solicitudesDesordenadas);
+            foreach (Logica.SolicitudModif soliMo in solicitudesModif)
+            {
+                for (int x = 0; x < solicitudesOrdenadas.Count; x++)
+                {
+                    if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
+                    {
+                        Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesOrdenadas[x];
+                        if (!solicitudesOrdenadas.Contains(soliMo))
+                        {
+                            if (soliMo.FechaHora > soli.FechaHora)
                             {
-                                if (soliMo.FechaHora > soli.FechaHora)
+                                if (filtrar)
                                 {
-                                    if (filtrar && soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                                    if (soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
                                     {
-                                        solicitudesOrdenadas.Add(soliMo);
+                                        solicitudesOrdenadas.Insert(x, soliMo);
                                     }
-                                    else if (!filtrar)
-                                    {
-                                        solicitudesOrdenadas.Add(soliMo);
-                                    }
+                                }
+                                else
+                                {
+                                    solicitudesOrdenadas.Insert(x, soliMo);
                                 }
                             }
                         }
                     }
-
-                }
-                foreach (Logica.SolicitudModif soliMo in solicitudesModif)
-                {
-                    if (!solicitudesOrdenadas.Contains(soliMo))
+                    else if(solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseDo")
                     {
-                        if (filtrar && soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                        Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesOrdenadas[x];
+                        if (!solicitudesOrdenadas.Contains(soliMo))
                         {
-                            solicitudesOrdenadas.Add(soliMo);
-                        }
-                        else if (!filtrar)
-                        {
-                            solicitudesOrdenadas.Add(soliMo);
-                        }
-                    }
-                }
-                for (int x = 0; x < solicitudesDesordenadas.Count; x++)
-                {
-                    if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
-                    {
-                        Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
-                        if (!solicitudesOrdenadas.Contains(soli))
-                        {
-                            solicitudesOrdenadas.Add(soli);
+                            if (soliMo.FechaHora > soli.FechaHora)
+                            {
+                                if (filtrar)
+                                {
+                                    if (soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                                    {
+                                        solicitudesOrdenadas.Insert(x, soliMo);
+                                    }
+                                }
+                                else
+                                {
+                                    solicitudesOrdenadas.Insert(x, soliMo);
+                                }
+                            }
                         }
                     }
                     else
                     {
-                        Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
-                        if (!solicitudesOrdenadas.Contains(soli))
+                        Logica.SolicitudModif soli = (Logica.SolicitudModif)solicitudesOrdenadas[x];
+                        if (!solicitudesOrdenadas.Contains(soliMo))
                         {
-                            solicitudesOrdenadas.Add(soli);
+                            if (soliMo.FechaHora > soli.FechaHora)
+                            {
+                                if (filtrar)
+                                {
+                                    if (soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                                    {
+                                        solicitudesOrdenadas.Insert(x, soliMo);
+                                    }
+                                }
+                                else
+                                {
+                                    solicitudesOrdenadas.Insert(x, soliMo);
+                                }
+                            }
                         }
                     }
                 }
+                if (!solicitudesOrdenadas.Contains(soliMo))
+                {
+                    if (filtrar)
+                    {
+                        if (soliMo.FechaHora.Year == dtpFiltroFecha.Value.Year && soliMo.FechaHora.Month == dtpFiltroFecha.Value.Month && soliMo.FechaHora.Day == dtpFiltroFecha.Value.Day)
+                        {
+                            solicitudesOrdenadas.Add(soliMo);
+                        }
+                    }
+                    else
+                    {
+                        solicitudesOrdenadas.Add(soliMo);
+                    }
+                    
+                }
+            }
+            
             bool iguales = true;
             if (solicitudesOrdenadas.Count == this.solicitudesOrdenadas.Count)
             {
@@ -294,7 +314,7 @@ namespace Hatchat.Presentacion
                     }
                     if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
                     {
-                        if(this.solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
+                        if (this.solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
                         {
                             if (!(((Logica.SolicitudClaseAl)solicitudesOrdenadas[x]).IdSolicitudClaseAl == ((Logica.SolicitudClaseAl)this.solicitudesOrdenadas[x]).IdSolicitudClaseAl))
                             {
@@ -386,7 +406,7 @@ namespace Hatchat.Presentacion
             soliAl = new Logica.SolicitudClaseAl().SelectSolicitudClaseAlPorId(new Logica.SolicitudClaseAl().StringAId(((Label)sender).Name));
             Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soliAl.Alumno);
             claseSolicitudesClaseAl = new Logica.ClaseSolicitudClaseAl().SelectClaseSolicitudClaseAl(soliAl.IdSolicitudClaseAl);
-            lblNombreApellidoSolicitud.Text = us.Nombre+" "+us.Primer_apellido+" desea ingresar a los siguientes grupos:";
+            lblNombreApellidoSolicitud.Text = us.Nombre + " " + us.Primer_apellido + " desea ingresar a los siguientes grupos:";
             lblCedula.Text = us.Ci;
 
             Label lblSolIngre = new Label();
@@ -397,16 +417,16 @@ namespace Hatchat.Presentacion
             lblSolIngre.Text = us.Primer_apellido + " envio solicitud para ingresar a:";
             panelContenido.Controls.Add(lblSolIngre);
             asignaturaSolicitudesClaseAl.AddRange(new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturaSolicitudClaseAl(soliAl.IdSolicitudClaseAl));
-            int xlblAsig = 5, ylblAsig = 100, xlblClase=5;
+            int xlblAsig = 5, ylblAsig = 100, xlblClase = 5;
             foreach (Logica.ClaseSolicitudClaseAl claseSoli in claseSolicitudesClaseAl)
             {
                 Label lblClase = new Label();
                 lblClase.Height = 46;
                 lblClase.Width = 150;
                 lblClase.Location = new Point(xlblClase, 50);
-                lblClase.Name = "lblClase"+claseSoli.IdClase;
+                lblClase.Name = "lblClase" + claseSoli.IdClase;
                 Logica.Clase clas = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
-                lblClase.Text =  clas.Anio+"°"+clas.Nombre+"\n"+new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
+                lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
                 xlblClase += 160;
                 foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAl in asignaturaSolicitudesClaseAl)
@@ -419,7 +439,7 @@ namespace Hatchat.Presentacion
                         dina.Location = new Point(xlblAsig, ylblAsig);
                         ylblAsig += 25;
                         dina.Name = "lblAsig" + asigSoliAl.IdAsignatura + "Cl" + asigSoliAl.IdClaseAsig;
-                        dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliAl.IdAsignatura).Nombre +" (Denegada)";
+                        dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliAl.IdAsignatura).Nombre + " (Denegada)";
                         if (asigSoliAl.Aceptada)
                         {
                             dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliAl.IdAsignatura).Nombre + " (Aceptada)";
@@ -431,7 +451,7 @@ namespace Hatchat.Presentacion
                 xlblAsig += 160;
             }
         }
-        
+
         private void AbrirSolicitudClaseDo(object sender, EventArgs e)
         {
             panelContenido.Controls.Clear();
@@ -471,7 +491,7 @@ namespace Hatchat.Presentacion
                 Logica.Clase clas = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
                 lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
-                
+
                 xlblClase += 160;
                 foreach (Logica.AsignaturaSolicitudClaseDo asigSoliDo in asignaturaSolicitudesClaseDo)
                 {
@@ -482,7 +502,7 @@ namespace Hatchat.Presentacion
                         dina.Width = 150;
                         dina.Location = new Point(xlblAsig, ylblAsig);
                         ylblAsig += 25;
-                        dina.Name = "lblAsig" + asigSoliDo.IdAsignatura+"Cl"+asigSoliDo.IdClaseAsig;
+                        dina.Name = "lblAsig" + asigSoliDo.IdAsignatura + "Cl" + asigSoliDo.IdClaseAsig;
                         dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliDo.IdAsignatura).Nombre + " (Denegada)";
                         if (asigSoliDo.Aceptada)
                         {
@@ -495,7 +515,7 @@ namespace Hatchat.Presentacion
                 xlblAsig += 160;
             }
         }
-        
+
         private void AbrirSolicitudModif(object sender, EventArgs e)
         {
             panelContenido.Controls.Clear();
@@ -539,7 +559,7 @@ namespace Hatchat.Presentacion
             {
                 btnFiltrar.Text = "Dejar de filtrar";
             }
-            
+
         }
     }
 

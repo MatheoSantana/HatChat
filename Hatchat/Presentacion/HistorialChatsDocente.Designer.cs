@@ -1,7 +1,7 @@
 ﻿
 namespace Hatchat.Presentacion
 {
-    partial class HistorialChatAlumno
+    partial class HistorialChatsDocente
     {
         /// <summary>
         /// Required designer variable.
@@ -42,23 +42,31 @@ namespace Hatchat.Presentacion
             this.panelChatsActivos = new System.Windows.Forms.Panel();
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.panelChat = new System.Windows.Forms.Panel();
-            this.panelCharla = new System.Windows.Forms.Panel();
             this.panelDatosClase = new System.Windows.Forms.Panel();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.btnParticipantes = new System.Windows.Forms.Button();
             this.lblHoras = new System.Windows.Forms.Label();
             this.pcbxMaterialDatosClase = new System.Windows.Forms.PictureBox();
             this.lblHorario = new System.Windows.Forms.Label();
             this.lblMateriaClaseChat = new System.Windows.Forms.Label();
+            this.panelCharla = new System.Windows.Forms.Panel();
             this.tmrCargChats = new System.Windows.Forms.Timer(this.components);
             this.tmrCargChat = new System.Windows.Forms.Timer(this.components);
             this.panelHistorialesNav = new System.Windows.Forms.Panel();
             this.pcbxHistorialMensajesNav = new System.Windows.Forms.PictureBox();
             this.pcbxHistorialChatNav = new System.Windows.Forms.PictureBox();
             this.timerHistorialNav = new System.Windows.Forms.Timer(this.components);
+            this.lblDocenteParticipantes = new System.Windows.Forms.Label();
+            this.lblHostParticipantes = new System.Windows.Forms.Label();
+            this.panelParticipantesOrdinarios = new System.Windows.Forms.Panel();
+            this.panelParticipantes = new System.Windows.Forms.Panel();
+            this.lblParticipantes = new System.Windows.Forms.Label();
             this.btnFiltrarFecha = new System.Windows.Forms.Button();
             this.dtpFiltro = new System.Windows.Forms.DateTimePicker();
-            this.cmbxAsignaturas = new System.Windows.Forms.ComboBox();
+            this.cmbxAsignatura = new System.Windows.Forms.ComboBox();
             this.btnFiltrarAsignatura = new System.Windows.Forms.Button();
+            this.timerHistorialChats = new System.Windows.Forms.Timer(this.components);
+            this.timerCargarFoto = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -73,6 +81,7 @@ namespace Hatchat.Presentacion
             this.panelHistorialesNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).BeginInit();
+            this.panelParticipantes.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -142,7 +151,7 @@ namespace Hatchat.Presentacion
             this.pbxChatNav.Size = new System.Drawing.Size(81, 81);
             this.pbxChatNav.TabIndex = 1;
             this.pbxChatNav.TabStop = false;
-            this.pbxChatNav.Click += new System.EventHandler(this.pcbxChatNav_Click);
+            this.pbxChatNav.Click += new System.EventHandler(this.pcbxPrincipalChatNav_Click);
             // 
             // pbxFotoPerfilNav
             // 
@@ -155,7 +164,7 @@ namespace Hatchat.Presentacion
             // lblHistorialChats
             // 
             this.lblHistorialChats.AutoSize = true;
-            this.lblHistorialChats.Location = new System.Drawing.Point(75, 106);
+            this.lblHistorialChats.Location = new System.Drawing.Point(74, 106);
             this.lblHistorialChats.Name = "lblHistorialChats";
             this.lblHistorialChats.Size = new System.Drawing.Size(74, 13);
             this.lblHistorialChats.TabIndex = 2;
@@ -165,9 +174,9 @@ namespace Hatchat.Presentacion
             // 
             this.panelChatsActivos.AutoScroll = true;
             this.panelChatsActivos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChatsActivos.Location = new System.Drawing.Point(13, 225);
+            this.panelChatsActivos.Location = new System.Drawing.Point(13, 230);
             this.panelChatsActivos.Name = "panelChatsActivos";
-            this.panelChatsActivos.Size = new System.Drawing.Size(199, 353);
+            this.panelChatsActivos.Size = new System.Drawing.Size(199, 348);
             this.panelChatsActivos.TabIndex = 5;
             // 
             // lblBienvenido
@@ -181,23 +190,16 @@ namespace Hatchat.Presentacion
             // 
             // panelChat
             // 
-            this.panelChat.Controls.Add(this.panelCharla);
             this.panelChat.Controls.Add(this.panelDatosClase);
+            this.panelChat.Controls.Add(this.panelCharla);
             this.panelChat.Location = new System.Drawing.Point(218, 100);
             this.panelChat.Name = "panelChat";
             this.panelChat.Size = new System.Drawing.Size(863, 488);
             this.panelChat.TabIndex = 7;
             // 
-            // panelCharla
-            // 
-            this.panelCharla.AutoScroll = true;
-            this.panelCharla.Location = new System.Drawing.Point(7, 109);
-            this.panelCharla.Name = "panelCharla";
-            this.panelCharla.Size = new System.Drawing.Size(849, 343);
-            this.panelCharla.TabIndex = 11;
-            // 
             // panelDatosClase
             // 
+            this.panelDatosClase.Controls.Add(this.lblTitulo);
             this.panelDatosClase.Controls.Add(this.btnParticipantes);
             this.panelDatosClase.Controls.Add(this.lblHoras);
             this.panelDatosClase.Controls.Add(this.pcbxMaterialDatosClase);
@@ -208,6 +210,15 @@ namespace Hatchat.Presentacion
             this.panelDatosClase.Size = new System.Drawing.Size(857, 100);
             this.panelDatosClase.TabIndex = 10;
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(90, 71);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(29, 13);
+            this.lblTitulo.TabIndex = 13;
+            this.lblTitulo.Text = "titulo";
+            // 
             // btnParticipantes
             // 
             this.btnParticipantes.Location = new System.Drawing.Point(760, 71);
@@ -216,6 +227,7 @@ namespace Hatchat.Presentacion
             this.btnParticipantes.TabIndex = 11;
             this.btnParticipantes.Text = "Participantes";
             this.btnParticipantes.UseVisualStyleBackColor = true;
+            this.btnParticipantes.Click += new System.EventHandler(this.btnParticipantes_Click);
             // 
             // lblHoras
             // 
@@ -252,11 +264,18 @@ namespace Hatchat.Presentacion
             this.lblMateriaClaseChat.TabIndex = 8;
             this.lblMateriaClaseChat.Text = "Materia Año Clase";
             // 
+            // panelCharla
+            // 
+            this.panelCharla.AutoScroll = true;
+            this.panelCharla.Location = new System.Drawing.Point(7, 109);
+            this.panelCharla.Name = "panelCharla";
+            this.panelCharla.Size = new System.Drawing.Size(849, 369);
+            this.panelCharla.TabIndex = 11;
+            // 
             // tmrCargChats
             // 
             this.tmrCargChats.Enabled = true;
             this.tmrCargChats.Interval = 500;
-            this.tmrCargChats.Tick += new System.EventHandler(this.tmrActChats_Tick);
             // 
             // tmrCargChat
             // 
@@ -301,56 +320,118 @@ namespace Hatchat.Presentacion
             this.timerHistorialNav.Enabled = true;
             this.timerHistorialNav.Tick += new System.EventHandler(this.timerHistorialNav_Tick);
             // 
+            // lblDocenteParticipantes
+            // 
+            this.lblDocenteParticipantes.AutoSize = true;
+            this.lblDocenteParticipantes.Location = new System.Drawing.Point(16, 32);
+            this.lblDocenteParticipantes.Name = "lblDocenteParticipantes";
+            this.lblDocenteParticipantes.Size = new System.Drawing.Size(51, 13);
+            this.lblDocenteParticipantes.TabIndex = 0;
+            this.lblDocenteParticipantes.Text = "Docente:";
+            // 
+            // lblHostParticipantes
+            // 
+            this.lblHostParticipantes.AutoSize = true;
+            this.lblHostParticipantes.Location = new System.Drawing.Point(19, 77);
+            this.lblHostParticipantes.Name = "lblHostParticipantes";
+            this.lblHostParticipantes.Size = new System.Drawing.Size(32, 13);
+            this.lblHostParticipantes.TabIndex = 1;
+            this.lblHostParticipantes.Text = "Host:";
+            // 
+            // panelParticipantesOrdinarios
+            // 
+            this.panelParticipantesOrdinarios.AutoScroll = true;
+            this.panelParticipantesOrdinarios.Location = new System.Drawing.Point(3, 130);
+            this.panelParticipantesOrdinarios.Name = "panelParticipantesOrdinarios";
+            this.panelParticipantesOrdinarios.Size = new System.Drawing.Size(319, 206);
+            this.panelParticipantesOrdinarios.TabIndex = 2;
+            // 
+            // panelParticipantes
+            // 
+            this.panelParticipantes.BackColor = System.Drawing.Color.Yellow;
+            this.panelParticipantes.Controls.Add(this.lblParticipantes);
+            this.panelParticipantes.Controls.Add(this.panelParticipantesOrdinarios);
+            this.panelParticipantes.Controls.Add(this.lblHostParticipantes);
+            this.panelParticipantes.Controls.Add(this.lblDocenteParticipantes);
+            this.panelParticipantes.Location = new System.Drawing.Point(649, 198);
+            this.panelParticipantes.Name = "panelParticipantes";
+            this.panelParticipantes.Size = new System.Drawing.Size(325, 339);
+            this.panelParticipantes.TabIndex = 0;
+            this.panelParticipantes.Visible = false;
+            // 
+            // lblParticipantes
+            // 
+            this.lblParticipantes.AutoSize = true;
+            this.lblParticipantes.Location = new System.Drawing.Point(19, 114);
+            this.lblParticipantes.Name = "lblParticipantes";
+            this.lblParticipantes.Size = new System.Drawing.Size(74, 13);
+            this.lblParticipantes.TabIndex = 3;
+            this.lblParticipantes.Text = "Participantes: ";
+            // 
             // btnFiltrarFecha
             // 
-            this.btnFiltrarFecha.Location = new System.Drawing.Point(13, 202);
+            this.btnFiltrarFecha.Location = new System.Drawing.Point(13, 207);
             this.btnFiltrarFecha.Name = "btnFiltrarFecha";
             this.btnFiltrarFecha.Size = new System.Drawing.Size(199, 20);
             this.btnFiltrarFecha.TabIndex = 17;
             this.btnFiltrarFecha.Text = "Filtrar Fecha";
             this.btnFiltrarFecha.UseVisualStyleBackColor = true;
+            this.btnFiltrarFecha.Click += new System.EventHandler(this.btnFiltrarFecha_Click);
             // 
             // dtpFiltro
             // 
-            this.dtpFiltro.Location = new System.Drawing.Point(13, 179);
+            this.dtpFiltro.Location = new System.Drawing.Point(13, 184);
             this.dtpFiltro.Name = "dtpFiltro";
             this.dtpFiltro.Size = new System.Drawing.Size(199, 20);
             this.dtpFiltro.TabIndex = 16;
             // 
-            // cmbxAsignaturas
+            // cmbxAsignatura
             // 
-            this.cmbxAsignaturas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxAsignaturas.FormattingEnabled = true;
-            this.cmbxAsignaturas.Location = new System.Drawing.Point(13, 124);
-            this.cmbxAsignaturas.Name = "cmbxAsignaturas";
-            this.cmbxAsignaturas.Size = new System.Drawing.Size(199, 21);
-            this.cmbxAsignaturas.TabIndex = 15;
+            this.cmbxAsignatura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxAsignatura.FormattingEnabled = true;
+            this.cmbxAsignatura.Location = new System.Drawing.Point(13, 129);
+            this.cmbxAsignatura.Name = "cmbxAsignatura";
+            this.cmbxAsignatura.Size = new System.Drawing.Size(199, 21);
+            this.cmbxAsignatura.TabIndex = 15;
             // 
             // btnFiltrarAsignatura
             // 
-            this.btnFiltrarAsignatura.Location = new System.Drawing.Point(13, 151);
+            this.btnFiltrarAsignatura.Location = new System.Drawing.Point(13, 156);
             this.btnFiltrarAsignatura.Name = "btnFiltrarAsignatura";
             this.btnFiltrarAsignatura.Size = new System.Drawing.Size(199, 20);
             this.btnFiltrarAsignatura.TabIndex = 14;
             this.btnFiltrarAsignatura.Text = "Filtrar Asignatura";
             this.btnFiltrarAsignatura.UseVisualStyleBackColor = true;
+            this.btnFiltrarAsignatura.Click += new System.EventHandler(this.btnFiltrarAsignatura_Click);
             // 
-            // HistorialChatAlumno
+            // timerHistorialChats
+            // 
+            this.timerHistorialChats.Enabled = true;
+            this.timerHistorialChats.Interval = 500;
+            this.timerHistorialChats.Tick += new System.EventHandler(this.timerHistorialChats_Tick);
+            // 
+            // timerCargarFoto
+            // 
+            this.timerCargarFoto.Interval = 5000;
+            this.timerCargarFoto.Tick += new System.EventHandler(this.timerCargarFoto_Tick);
+            // 
+            // HistorialChatsAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 590);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.btnFiltrarFecha);
             this.Controls.Add(this.dtpFiltro);
-            this.Controls.Add(this.cmbxAsignaturas);
+            this.Controls.Add(this.cmbxAsignatura);
             this.Controls.Add(this.btnFiltrarAsignatura);
             this.Controls.Add(this.panelHistorialesNav);
-            this.Controls.Add(this.panelChat);
-            this.Controls.Add(this.lblBienvenido);
+            this.Controls.Add(this.panelParticipantes);
             this.Controls.Add(this.panelChatsActivos);
             this.Controls.Add(this.lblHistorialChats);
             this.Controls.Add(this.panel1);
-            this.Name = "HistorialChatAlumno";
+            this.Controls.Add(this.panelChat);
+            this.Controls.Add(this.lblBienvenido);
+            this.Name = "HistorialChatsAlumno";
             this.Text = "PrincipalChatAlumno";
             this.Load += new System.EventHandler(this.PrincipalChatAlumno_Load);
             this.panel1.ResumeLayout(false);
@@ -368,6 +449,8 @@ namespace Hatchat.Presentacion
             this.panelHistorialesNav.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).EndInit();
+            this.panelParticipantes.ResumeLayout(false);
+            this.panelParticipantes.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,9 +483,17 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pcbxHistorialMensajesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialChatNav;
         private System.Windows.Forms.Timer timerHistorialNav;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Label lblDocenteParticipantes;
+        private System.Windows.Forms.Label lblHostParticipantes;
+        private System.Windows.Forms.Panel panelParticipantesOrdinarios;
+        private System.Windows.Forms.Panel panelParticipantes;
+        private System.Windows.Forms.Label lblParticipantes;
         private System.Windows.Forms.Button btnFiltrarFecha;
         private System.Windows.Forms.DateTimePicker dtpFiltro;
-        private System.Windows.Forms.ComboBox cmbxAsignaturas;
+        private System.Windows.Forms.ComboBox cmbxAsignatura;
         private System.Windows.Forms.Button btnFiltrarAsignatura;
+        private System.Windows.Forms.Timer timerHistorialChats;
+        private System.Windows.Forms.Timer timerCargarFoto;
     }
 }

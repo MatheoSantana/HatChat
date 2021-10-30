@@ -39,7 +39,6 @@ namespace Hatchat.Presentacion
             this.pbxChatNav = new System.Windows.Forms.PictureBox();
             this.pbxFotoPerfilNav = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.ofdFoto = new System.Windows.Forms.OpenFileDialog();
             this.panelHistorialesNav = new System.Windows.Forms.Panel();
             this.pcbxHistorialMensajesNav = new System.Windows.Forms.PictureBox();
             this.pcbxHistorialChatNav = new System.Windows.Forms.PictureBox();
@@ -75,6 +74,7 @@ namespace Hatchat.Presentacion
             this.btnSalirGrupo = new System.Windows.Forms.Button();
             this.lblAsignatura = new System.Windows.Forms.Label();
             this.timerGrupos = new System.Windows.Forms.Timer(this.components);
+            this.timerCargarFoto = new System.Windows.Forms.Timer(this.components);
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -178,10 +178,6 @@ namespace Hatchat.Presentacion
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "Grupos";
             // 
-            // ofdFoto
-            // 
-            this.ofdFoto.FileName = "openFileDialog1";
-            // 
             // panelHistorialesNav
             // 
             this.panelHistorialesNav.Controls.Add(this.pcbxHistorialMensajesNav);
@@ -273,6 +269,7 @@ namespace Hatchat.Presentacion
             this.btnRealizar.TabIndex = 7;
             this.btnRealizar.Text = "Realizar";
             this.btnRealizar.UseVisualStyleBackColor = true;
+            this.btnRealizar.Click += new System.EventHandler(this.btnRealizar_Click);
             // 
             // panelAsignaturas
             // 
@@ -532,6 +529,12 @@ namespace Hatchat.Presentacion
             this.timerGrupos.Interval = 500;
             this.timerGrupos.Tick += new System.EventHandler(this.timerGrupos_Tick);
             // 
+            // timerCargarFoto
+            // 
+            this.timerCargarFoto.Enabled = true;
+            this.timerCargarFoto.Interval = 5000;
+            this.timerCargarFoto.Tick += new System.EventHandler(this.timerCargarFoto_Tick);
+            // 
             // GruposAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -583,7 +586,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pbxChatNav;
         private System.Windows.Forms.PictureBox pbxFotoPerfilNav;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.OpenFileDialog ofdFoto;
         private System.Windows.Forms.Panel panelHistorialesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialMensajesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialChatNav;
@@ -619,5 +621,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelHorariosPorDia;
         private System.Windows.Forms.Label lblOrientacion;
         private System.Windows.Forms.ComboBox cmbxOrientacion;
+        private System.Windows.Forms.Timer timerCargarFoto;
     }
 }

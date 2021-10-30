@@ -12,15 +12,16 @@ namespace Hatchat.Presentacion
     {
         public Form login;
         public Form registerAlumno;
-        private int ychbx = 50, xchbx = 50, xlbl = 50, ylbl = 50;
-        
-        private Logica.Clase claseSeleccionada = new Logica.Clase();
-        private List<Logica.ClaseSolicitudClaseAl> solicitudClases = new List<Logica.ClaseSolicitudClaseAl>();
-        private List<Logica.Asignatura> asigs = new List<Logica.Asignatura>();
-        private List<Logica.AsignaturaSolicitudClaseAl> soliAsigs = new List<Logica.AsignaturaSolicitudClaseAl>();
-        private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>( new Logica.Orientacion().SelectOrientaciones());
+        private int xlbl = 50, ylbl = 50;
+
+        Logica.SolicitudClaseAl solicitudClaseAl = new Logica.SolicitudClaseAl();
+        List<Logica.ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
+        List<Logica.AsignaturaSolicitudClaseAl> asignaturasSolicitudClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
+        List<Logica.AsignaturaSolicitudClaseAl> asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
+        Logica.Clase claseSeleccionada = new Logica.Clase();
+        List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>();
+        List<Logica.Asignatura> nuevasAsignaturas = new List<Logica.Asignatura>();
         private Logica.Alumno alumno = new Logica.Alumno();
-        private Logica.Orientacion orientacionSeleccionada = new Logica.Orientacion();
 
 
         public RegisterClasesAlumno()
@@ -50,10 +51,30 @@ namespace Hatchat.Presentacion
             panelAsignaturas.AutoScroll = true;
             panelAgregadas.AutoScroll = true;
 
+            cbxAnio.Items.Clear();
+            cbxClases.Items.Clear();
+            cbxOrientacion.Items.Clear();
+            panelAsignaturas.Controls.Clear();
+
+            cbxAnio.Enabled = false;
+            cbxClases.Enabled = false;
+            btnAgregar.Enabled = false;
+            btnRegistrar.Enabled = false;
+
+            solicitudClaseAl = new Logica.SolicitudClaseAl();
+            claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
+            asignaturasSolicitudClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
+            asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
+            claseSeleccionada = new Logica.Clase();
+            orientaciones = new List<Logica.Orientacion>();
+            nuevasAsignaturas = new List<Logica.Asignatura>();
+
+            orientaciones = new Logica.Orientacion().SelectOrientaciones();
             foreach (Logica.Orientacion ori in orientaciones)
             {
                 cbxOrientacion.Items.Add(ori.Nombre);
             }
+
         }
         public Logica.Alumno Alumno
         {
@@ -78,13 +99,34 @@ namespace Hatchat.Presentacion
 
         private void cbxOrientacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            panelAsignaturas.Controls.Clear();
-            ychbx = 50;
-            xchbx = 50;
+            if (btnAgregar.Enabled)
+            {
+                List<Logica.AsignaturaSolicitudClaseAl> encontradas = new List<Logica.AsignaturaSolicitudClaseAl>();
+                foreach (Logica.AsignaturaSolicitudClaseAl asigSolicita in asignaturasSolicitudClaseAlPre)
+                {
+                    if (claseSeleccionada.IdClase == asigSolicita.IdClaseAsig && claseSeleccionada.Orientacion == asigSolicita.OriClaseAsig)
+                    {
+                        encontradas.Add(asigSolicita);
+                    }
+                }
+                foreach (Logica.AsignaturaSolicitudClaseAl asigEncontrada in encontradas)
+                {
+                    asignaturasSolicitudClaseAl.Remove(asigEncontrada);
+                }
+            }
+
             cbxAnio.Items.Clear();
             cbxClases.Items.Clear();
-            orientacionSeleccionada = orientaciones[cbxOrientacion.SelectedIndex];
-            foreach (int anio in new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientacionSeleccionada.Id)))
+            panelAsignaturas.Controls.Clear();
+            cbxAnio.Enabled = true;
+            cbxClases.Enabled = false;
+            btnAgregar.Enabled = false;
+
+            claseSeleccionada = new Logica.Clase();
+            nuevasAsignaturas = new List<Logica.Asignatura>();
+            asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
+
+            foreach (int anio in new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientaciones[cbxOrientacion.SelectedIndex].Id)))
             {
                 cbxAnio.Items.Add(anio.ToString());
             }
@@ -92,61 +134,92 @@ namespace Hatchat.Presentacion
 
         private void cbxAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            panelAsignaturas.Controls.Clear();
-            ychbx = 50;
-            xchbx = 50;
-            cbxClases.Items.Clear();
-            List<string> clase = new List<string>();
+            if (btnAgregar.Enabled)
+            {
+                List<Logica.AsignaturaSolicitudClaseAl> encontradas = new List<Logica.AsignaturaSolicitudClaseAl>();
+                foreach (Logica.AsignaturaSolicitudClaseAl asigSolicita in asignaturasSolicitudClaseAlPre)
+                {
+                    if (claseSeleccionada.IdClase == asigSolicita.IdClaseAsig && claseSeleccionada.Orientacion == asigSolicita.OriClaseAsig)
+                    {
+                        encontradas.Add(asigSolicita);
+                    }
+                }
+                foreach (Logica.AsignaturaSolicitudClaseAl asigEncontrada in encontradas)
+                {
+                    asignaturasSolicitudClaseAl.Remove(asigEncontrada);
+                }
+            }
 
-            foreach (string cla in new List<string>(new Logica.Clase().SelectNombreClasePorAnioYorientacion(Convert.ToInt32(cbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id)))
+            cbxClases.Items.Clear();
+            panelAsignaturas.Controls.Clear();
+            cbxClases.Enabled = true;
+            btnAgregar.Enabled = false;
+
+            claseSeleccionada = new Logica.Clase();
+            nuevasAsignaturas = new List<Logica.Asignatura>();
+            asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
+
+            List<Logica.Clase> clases = new Logica.Clase().SelectClasesPorAnio(Convert.ToInt32(cbxAnio.SelectedItem.ToString()));
+
+            foreach (Logica.Clase cla in clases)
             {
                 cbxClases.Items.Add(cla);
             }
         }
-
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            alumno.FotoDePerfil = alumno.ImageToByteArray(Image.FromFile("alumno.png"));
-            alumno.AltaUsuario();
-            Logica.SolicitudClaseAl solicitudClaseAl = new Logica.SolicitudClaseAl(DateTime.Now, true,alumno.Ci);
-            solicitudClaseAl.EnviarSolicitudClaseAl();
-            solicitudClaseAl.SelectIdSolicitudClaseAl();
-            foreach (Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl in solicitudClases)
-            {
-                claseSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
-                claseSolicitudClaseAl.EnviarClaseSolicitudClaseAl();
-            }
-            foreach (Logica.AsignaturaSolicitudClaseAl soliAsig in soliAsigs)
-            {
-                soliAsig.IdSolicitudClaseAl=solicitudClaseAl.IdSolicitudClaseAl;
-                soliAsig.Aceptada = true;
-                soliAsig.EnviarAsignaturaSolicitudClaseAl();
-            }
-            
-            
-            MessageBox.Show("Se ha creado el alumno correctamente\nVolviendo al Login");
-            login.Show();
-            this.Dispose();
-        }
-
         private void cbxClases_SelectedIndexChanged(object sender, EventArgs e)
         {
-            panelAsignaturas.Controls.Clear();
-            asigs.Clear();
-            ychbx = 50;
-            xchbx = 50;
+            if (btnAgregar.Enabled)
+            {
+                List<Logica.AsignaturaSolicitudClaseAl> encontradas = new List<Logica.AsignaturaSolicitudClaseAl>();
+                foreach (Logica.AsignaturaSolicitudClaseAl asigSolicita in asignaturasSolicitudClaseAlPre)
+                {
+                    if (claseSeleccionada.IdClase == asigSolicita.IdClaseAsig && claseSeleccionada.Orientacion == asigSolicita.OriClaseAsig)
+                    {
+                        encontradas.Add(asigSolicita);
+                    }
+                }
+                foreach (Logica.AsignaturaSolicitudClaseAl asigEncontrada in encontradas)
+                {
+                    asignaturasSolicitudClaseAl.Remove(asigEncontrada);
+                }
 
-            asigs.AddRange(new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cbxClases.SelectedItem.ToString(), Convert.ToInt32(cbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id));
+            }
+            panelAsignaturas.Controls.Clear();
+            btnAgregar.Enabled = true;
+
             claseSeleccionada = new Logica.Clase();
-            claseSeleccionada.Anio = Convert.ToInt32(cbxAnio.SelectedItem.ToString());
-            claseSeleccionada.Orientacion = orientacionSeleccionada.Id;
+            nuevasAsignaturas = new List<Logica.Asignatura>();
+            asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
+
+            nuevasAsignaturas = new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cbxClases.SelectedItem.ToString(), Convert.ToInt32(cbxAnio.SelectedItem.ToString()), orientaciones[cbxOrientacion.SelectedIndex].Id);
+
             claseSeleccionada.Nombre = cbxClases.SelectedItem.ToString();
+            claseSeleccionada.Anio = Convert.ToInt32(cbxAnio.SelectedItem.ToString());
+            claseSeleccionada.Orientacion = orientaciones[cbxOrientacion.SelectedIndex].Id;
             claseSeleccionada.SelectIdClasePorPorNombreAnioYorientacion();
 
-            foreach (Logica.Asignatura asig in asigs)
+            int ychbx = 50, xchbx = 50;
+            foreach (Logica.Asignatura asig in nuevasAsignaturas)
+            {
+                Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl = new Logica.AsignaturaSolicitudClaseAl();
+                asignaturaSolicitudClaseAl.IdAsignatura = asig.Id;
+                asignaturaSolicitudClaseAl.IdClaseAsig = claseSeleccionada.IdClase;
+                asignaturaSolicitudClaseAl.OriClaseAsig = claseSeleccionada.Orientacion;
+                asignaturaSolicitudClaseAl.Aceptada = false;
+                asignaturasSolicitudClaseAlPre.Add(asignaturaSolicitudClaseAl);
+            }
+
+            foreach (Logica.Asignatura asig in nuevasAsignaturas)
             {
                 CheckBox dina = new CheckBox();
-
+                dina.Checked = false;
+                foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAlPre)
+                {
+                    if (asignaturaSolicitudClaseAl.IdAsignatura == asig.Id && asignaturaSolicitudClaseAl.IdClaseAsig == claseSeleccionada.IdClase && asignaturaSolicitudClaseAl.OriClaseAsig == claseSeleccionada.Orientacion)
+                    {
+                        dina.Checked = true;
+                    }
+                }
                 dina.Height = 23;
                 dina.Width = 150;
                 dina.Location = new Point(xchbx, ychbx);
@@ -164,22 +237,21 @@ namespace Hatchat.Presentacion
             }
         }
 
-
-
         private void AsignaturaCambiada(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Checked)
             {
-                foreach (Logica.Asignatura asig in asigs)
+                foreach (Logica.Asignatura asig in nuevasAsignaturas)
                 {
 
                     if (((CheckBox)sender).Name == "chbx" + asig.Id)
                     {
-                        Logica.AsignaturaSolicitudClaseAl soliAsig = new Logica.AsignaturaSolicitudClaseAl();
-                        soliAsig.IdAsignatura = asig.Id;
-                        soliAsig.IdClaseAsig =claseSeleccionada.IdClase;
-                        soliAsig.OriClaseAsig = orientacionSeleccionada.Id;
-                        soliAsigs.Add(soliAsig);
+                        Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl = new Logica.AsignaturaSolicitudClaseAl();
+                        asignaturaSolicitudClaseAl.IdAsignatura = asig.Id;
+                        asignaturaSolicitudClaseAl.IdClaseAsig = claseSeleccionada.IdClase;
+                        asignaturaSolicitudClaseAl.OriClaseAsig = claseSeleccionada.Orientacion;
+                        asignaturaSolicitudClaseAl.Aceptada = true;
+                        asignaturasSolicitudClaseAlPre.Add(asignaturaSolicitudClaseAl);
                     }
 
                 }
@@ -187,28 +259,125 @@ namespace Hatchat.Presentacion
             else
             {
                 Logica.AsignaturaSolicitudClaseAl encontrado = new Logica.AsignaturaSolicitudClaseAl();
-                foreach (Logica.Asignatura asig in asigs)
+                foreach (Logica.Asignatura asig in nuevasAsignaturas)
                 {
-                    foreach (Logica.AsignaturaSolicitudClaseAl soliAsi in soliAsigs)
+                    foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAlPre)
                     {
-                        if (((CheckBox)sender).Name == "chbx" + asig.Id && soliAsi.IdClaseAsig == claseSeleccionada.IdClase &&soliAsi.OriClaseAsig==orientacionSeleccionada.Id && soliAsi.IdAsignatura == asig.Id)
+                        if (((CheckBox)sender).Name == "chbx" + asig.Id && asignaturaSolicitudClaseAl.IdClaseAsig == claseSeleccionada.IdClase && asignaturaSolicitudClaseAl.OriClaseAsig == claseSeleccionada.Orientacion && asignaturaSolicitudClaseAl.IdAsignatura == asig.Id)
                         {
-                            encontrado = soliAsi;
+                            encontrado = asignaturaSolicitudClaseAl;
                         }
                     }
                 }
-                soliAsigs.Remove(encontrado);
+                asignaturasSolicitudClaseAlPre.Remove(encontrado);
             }
         }
-
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             panelAgregadas.AutoScrollPosition = Point.Empty;
-            panelAsignaturas.AutoScrollPosition = Point.Empty;
-            Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl = new Logica.ClaseSolicitudClaseAl(claseSeleccionada.IdClase, orientacionSeleccionada.Id);
-            if (!solicitudClases.Contains(claseSolicitudClaseAl))
-            {
 
+            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+            bool mandable = true;
+            foreach (Logica.AsignaturaSolicitudClaseAl asigPend in asignaturasSolicitudClaseAlPre)
+            {
+                foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAl)
+                {
+                    if (asigPend.IdClaseAsig == asignaturaSolicitudClaseAl.IdClaseAsig && asigPend.OriClaseAsig == asignaturaSolicitudClaseAl.OriClaseAsig && asigPend.IdAsignatura == asignaturaSolicitudClaseAl.IdAsignatura)
+                    {
+                        Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.IdAsignatura);
+                        error += "\n" + asi.Nombre;
+                        mandable = false;
+                    }
+                }
+            }
+            if (mandable)
+            {
+                asignaturasSolicitudClaseAl.AddRange(asignaturasSolicitudClaseAlPre);
+                Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl = new Logica.ClaseSolicitudClaseAl(claseSeleccionada.IdClase, orientaciones[cbxOrientacion.SelectedIndex].Id);
+                if (!claseSolicitudesClaseAl.Contains(claseSolicitudClaseAl))
+                {
+                    Label dina = new Label();
+                    dina.Height = 46;
+                    dina.Width = 150;
+                    dina.Location = new Point(xlbl, ylbl);
+                    if (xlbl == 100)
+                    {
+                        xlbl = -125;
+                        ylbl += 25;
+                    }
+                    xlbl += 175;
+                    dina.Name = "lblClase" + claseSeleccionada.IdClase;
+                    dina.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "\n" + orientaciones[cbxOrientacion.SelectedIndex].Nombre;
+                    foreach (Logica.Asignatura asig in nuevasAsignaturas)
+                    {
+
+                        dina.Text += "\n" + asig.Nombre;
+                        dina.Height += 23;
+
+                    }
+                    dina.Text += "\n(click para borrar)";
+                    dina.Click += new EventHandler(EliminarClase);
+                    panelAgregadas.Controls.Add(dina);
+                    claseSolicitudesClaseAl.Add(claseSolicitudClaseAl);
+                    btnRegistrar.Enabled = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show(error);
+            }
+            panelAsignaturas.Controls.Clear();
+            cbxAnio.Items.Clear();
+            cbxClases.Items.Clear();
+            cbxOrientacion.SelectedIndex = -1;
+
+            cbxAnio.Enabled = false;
+            cbxClases.Enabled = false;
+            btnAgregar.Enabled = false;
+
+            asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
+            claseSeleccionada = new Logica.Clase();
+            nuevasAsignaturas = new List<Logica.Asignatura>();
+
+        }
+        private void EliminarClase(object sender, EventArgs e)
+        {
+            List<Logica.AsignaturaSolicitudClaseAl> encontradas = new List<Logica.AsignaturaSolicitudClaseAl>();
+            foreach (Logica.AsignaturaSolicitudClaseAl asigSoli in asignaturasSolicitudClaseAl)
+            {
+                if (((Label)sender).Name == "lblClase" + asigSoli.IdClaseAsig)
+                {
+                    encontradas.Add(asigSoli);
+                }
+            }
+            foreach (Logica.AsignaturaSolicitudClaseAl asigSoli in asignaturasSolicitudClaseAl)
+            {
+                asignaturasSolicitudClaseAl.Remove(asigSoli);
+            }
+            Logica.ClaseSolicitudClaseAl encontrada = new Logica.ClaseSolicitudClaseAl();
+            foreach (Logica.ClaseSolicitudClaseAl claseSoli in claseSolicitudesClaseAl)
+            {
+                if (((Label)sender).Name == "lblClase" + claseSoli.IdClase)
+                {
+                    encontrada=claseSoli;
+                }
+            }
+            claseSolicitudesClaseAl.Remove(encontrada);
+            panelAgregadas.Controls.Clear();
+            xlbl=50;
+            ylbl=50;
+            foreach (Logica.ClaseSolicitudClaseAl claseSoli in claseSolicitudesClaseAl)
+            {
+                Logica.Clase clase = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
+                Logica.Orientacion orientacion = new Logica.Orientacion().SelectOrientacioPorId(clase.Orientacion);
+                List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
+                foreach (Logica.AsignaturaSolicitudClaseAl asigSoli in asignaturasSolicitudClaseAl)
+                {
+                    if (asigSoli.IdClaseAsig == clase.IdClase)
+                    {
+                        asignaturas.Add(new Logica.Asignatura().SelectAsignaturaPorId(asigSoli.IdAsignatura));
+                    }
+                }
                 Label dina = new Label();
                 dina.Height = 46;
                 dina.Width = 150;
@@ -219,35 +388,46 @@ namespace Hatchat.Presentacion
                     ylbl += 25;
                 }
                 xlbl += 175;
-                dina.Name = "lblClase" + claseSeleccionada.IdClase;
-                dina.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre;
-                foreach (Logica.Asignatura asig in asigs)
+                dina.Name = "lblClase" + clase.IdClase;
+                dina.Text = clase.Anio + "º" + clase.Nombre + "\n" + orientacion.Nombre;
+                foreach (Logica.Asignatura asig in asignaturas)
                 {
-                    foreach (Logica.AsignaturaSolicitudClaseAl soliAsi in soliAsigs)
-                    {
-                        if (soliAsi.IdClaseAsig == claseSeleccionada.IdClase && soliAsi.OriClaseAsig == orientacionSeleccionada.Id && soliAsi.IdAsignatura == asig.Id)
-                        {
-                            dina.Text += "\n" + asig.Nombre;
-                            dina.Height += 23;
-                        }
-                    }
+                    dina.Text += "\n" + asig.Nombre;
+                    dina.Height += 23;
                 }
-                dina.Text += "\n" + orientacionSeleccionada.Nombre;/* + "\n(click para borrar)";
-                dina.Click += new EventHandler(EliminarClase);*/
+                dina.Text += "\n(click para borrar)";
+                dina.Click += new EventHandler(EliminarClase);
                 panelAgregadas.Controls.Add(dina);
-                panelAsignaturas.Controls.Clear();
-                cbxOrientacion.SelectedItem = 0;
-                cbxAnio.Items.Clear();
-                cbxClases.Items.Clear();
-                solicitudClases.Add(claseSolicitudClaseAl);
-                claseSeleccionada = new Logica.Clase();
-                orientacionSeleccionada = new Logica.Orientacion();
+            }
+            btnRegistrar.Enabled = false;
+            if (claseSolicitudesClaseAl.Count > 0)
+            {
+                btnRegistrar.Enabled = true;
+            }
+        }
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            alumno.FotoDePerfil = alumno.ImageToByteArray(Image.FromFile("alumno.png"));
+            alumno.AltaUsuario();
+            Logica.SolicitudClaseAl solicitudClaseAl = new Logica.SolicitudClaseAl(DateTime.Now, true, alumno.Ci);
+            solicitudClaseAl.EnviarSolicitudClaseAl();
+            solicitudClaseAl.SelectIdSolicitudClaseAl();
+            foreach (Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl in claseSolicitudesClaseAl)
+            {
+                claseSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
+                claseSolicitudClaseAl.EnviarClaseSolicitudClaseAl();
+            }
+            foreach (Logica.AsignaturaSolicitudClaseAl soliAsig in asignaturasSolicitudClaseAl)
+            {
+                soliAsig.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
+                soliAsig.Aceptada = true;
+                soliAsig.EnviarAsignaturaSolicitudClaseAl();
             }
 
+            MessageBox.Show("Se ha creado el alumno correctamente\nVolviendo al Login");
+            login.Show();
+            this.Dispose();
         }
-        /*private void EliminarClase(object sender, EventArgs e)
-        {
-            clases.Remove()
-        }*/
+
     }
 }

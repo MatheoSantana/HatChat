@@ -30,12 +30,12 @@ namespace Hatchat.Presentacion
 
         private void btnListo_Click(object sender, EventArgs e)
         {
-            PrincipalChatAlumno.abierto.Titulo = txtTema.Text;
-            PrincipalChatAlumno.abierto.CambiarTitulo();
+            HistorialChatsAlumno.abierto.Titulo = txtTema.Text;
+            HistorialChatsAlumno.abierto.CambiarTitulo();
             if (cerrar)
             {
-                PrincipalChatAlumno.abierto.CerrarChat();
-                PrincipalChatAlumno.abierto = new Logica.Chat();
+                HistorialChatsAlumno.abierto.CerrarChat();
+                HistorialChatsAlumno.abierto = new Logica.Chat();
             }
             principalChatAlumno.Enabled = true;
             this.Dispose();

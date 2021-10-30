@@ -1,56 +1,58 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Hatchat.Presentacion
 {
-    public partial class PrincipalChatDocente : Form
+    public partial class HistorialChatsDocente : Form
     {
         public Form login;
-        public Form mensajesDocente;
-        public Form perfilDocente;
-        public Form gruposDocente;
-        public Form historialChatsDocente;
-        public Form historialMensajesDocente;
+        public Form mensajesAlumno;
+        public Form gruposAlumno;
+        public Form perfilAlumno;
+        public Form principalChatsAlumno;
+        public Form historialMensajesAlumno;
 
         int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
-        private List<Logica.SolicitaChat> solicitaChats = new List<Logica.SolicitaChat>();
+        private List<Logica.Chat> posiblesChats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
-        Logica.Chat abierto = new Logica.Chat();
+        public static Logica.Chat abierto = new Logica.Chat();
+        Logica.Clase seleccionada = new Logica.Clase();
         private List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
 
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
-        public PrincipalChatDocente()
+        bool filtroAsignatura = false, filtroFecha = false;
+        public HistorialChatsAlumno()
         {
             InitializeComponent();
-
             Text = "Chat";
 
             ClientSize = new Size(1280, 720);
             panelChat.Visible = false;
-            panelAceptarChat.Visible = false;
             StartPosition = FormStartPosition.CenterScreen;
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-                pbxChatNav.Image = Image.FromFile("chat blanco.png");
+                pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
-                pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
+                pcbxHistorialChatNav.Image = Image.FromFile("historial chat blanco.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show("archivo faltante (" + ex.Message + ") comuníquese con el administrador.", "Error");
 
             }
 
@@ -66,7 +68,8 @@ namespace Hatchat.Presentacion
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        private void PrincipalChatDocente_Load(object sender, EventArgs e)
+
+        private void PrincipalChatAlumno_Load(object sender, EventArgs e)
         {
             this.FormClosed += new FormClosedEventHandler(CerrarForm);
         }
@@ -74,23 +77,30 @@ namespace Hatchat.Presentacion
         private void CerrarForm(object sender, EventArgs e)
         {
             login.Dispose();
+
         }
 
+        private void pcbxPrincipalChatNav_Click(object sender, EventArgs e)
+        {
+            principalChatsAlumno.Show();
+            this.Hide();
+        }
         private void pbxMensajeNav_Click(object sender, EventArgs e)
         {
-            mensajesDocente.Show();
+
+            mensajesAlumno.Show();
             this.Hide();
         }
 
         private void pbxPerfilNav_Click(object sender, EventArgs e)
         {
-            perfilDocente.Show();
+            perfilAlumno.Show();
             this.Hide();
         }
 
         private void pbxGruposNav_Click(object sender, EventArgs e)
         {
-            gruposDocente.Show();
+            gruposAlumno.Show();
             this.Hide();
         }
         private void pbxHistorialNav_MouseEnter(object sender, EventArgs e)
@@ -130,14 +140,10 @@ namespace Hatchat.Presentacion
 
         private void pcbxHistorialMensajesNav_Click(object sender, EventArgs e)
         {
-            historialMensajesDocente.Show();
+            historialMensajesAlumno.Show();
             this.Hide();
         }
-        private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
-        {
-            historialChatsDocente.Show();
-            this.Hide();
-        }
+        
         private void timerHistorialNav_Tick(object sender, EventArgs e)
         {
             if (!enPanel && !enHistorial && !enHistorialChat && !enHistorialMensaje)
@@ -145,7 +151,6 @@ namespace Hatchat.Presentacion
                 panelHistorialesNav.Visible = false;
             }
         }
-
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
             DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
@@ -156,13 +161,51 @@ namespace Hatchat.Presentacion
                 this.Dispose();
             }
         }
-        private void tmrActChats_Tick(object sender, EventArgs e)
+
+        
+        private void cargarChatsFiltro()
         {
-            cargarChats();
-        }
-        private void cargarChats()
-        {
-            List<Logica.Chat> chats = new Logica.Chat().SelectChatsActivosPorCedulaDocente(Login.encontrado.Ci);
+            List<Logica.Chat> chats = new List<Logica.Chat>();
+            List<Logica.Chat> chatstemps = new Logica.Chat().SelectHistorialChatsPorCedulaAlumno(Login.encontrado.Ci);
+            foreach (Logica.Chat chat in chatstemps)
+            {
+                bool agregado = false;
+                if (filtroAsignatura || filtroFecha)
+                {
+                    string id = "";
+                    if (cmbxAsignatura.SelectedIndex != -1)
+                    {
+                        id = asignaturas[cmbxAsignatura.SelectedIndex].Id;
+                    }
+                    if (filtroAsignatura && filtroFecha)
+                    {
+                        if (chat.Asignatura == id && chat.Fecha.Year == dtpFiltro.Value.Year && chat.Fecha.Month == dtpFiltro.Value.Month && chat.Fecha.Day == dtpFiltro.Value.Day)
+                        {
+                            chats.Add(chat);
+                            agregado = true;
+                        }
+                    }
+                    if (filtroAsignatura && !agregado)
+                    {
+                        if (chat.Asignatura == id)
+                        {
+                            chats.Add(chat);
+                            agregado = true;
+                        }
+                    }
+                    if (filtroFecha && !agregado)
+                    {
+                        if (chat.Fecha.Year == dtpFiltro.Value.Year && chat.Fecha.Month == dtpFiltro.Value.Month && chat.Fecha.Day == dtpFiltro.Value.Day)
+                        {
+                            chats.Add(chat);
+                        }
+                    }
+                }
+                else
+                {
+                    chats.Add(chat);
+                }
+            }
             bool iguales = true;
             if (this.chats.Count == chats.Count)
             {
@@ -180,8 +223,28 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
+                cmbxAsignatura.Items.Clear();
+                asignaturas.Clear();
+                foreach (Logica.Chat chat in chats)
+                {
+                    bool agregar = true;
+                    Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
+                    foreach (Logica.Asignatura asig in asignaturas)
+                    {
+                        if (asi.Id == asig.Id)
+                        {
+                            agregar = false;
+                        }
+                    }
+                    if (agregar)
+                    {
+                        
+                        asignaturas.Add(asi);
+                        cmbxAsignatura.Items.Add(asi.Nombre);
+                    }
+                }
                 this.chats = chats;
-                int y = 5;
+                y = 5;
                 panelChatsActivos.Controls.Clear();
 
                 foreach (Logica.Chat chat in chats)
@@ -194,7 +257,68 @@ namespace Hatchat.Presentacion
                     dina.Location = new Point(25, y);
                     y += 50;
                     dina.Name = "lblC" + chat.IdChat.ToString();
-                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
+                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema:" + chat.Titulo;
+                    dina.BorderStyle = BorderStyle.FixedSingle;
+                    dina.Click += new EventHandler(AbrirChat);
+                    panelChatsActivos.Controls.Add(dina);
+                }
+            }
+        }
+        private void cargarChats()
+        {
+            List<Logica.Chat> chats = new Logica.Chat().SelectHistorialChatsPorCedulaAlumno(Login.encontrado.Ci);
+            bool iguales = true;
+            if (this.chats.Count == chats.Count)
+            {
+                for (int x = 0; x < chats.Count; x++)
+                {
+                    if (!(chats[x].IdChat == this.chats[x].IdChat))
+                    {
+                        iguales = false;
+                    }
+                }
+            }
+            else
+            {
+                iguales = false;
+            }
+            if (!iguales)
+            {
+                cmbxAsignatura.Items.Clear();
+                asignaturas.Clear();
+                foreach (Logica.Chat chat in chats)
+                {
+                    bool agregar = true;
+                    Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
+                    foreach (Logica.Asignatura asig in asignaturas)
+                    {
+                        if (asi.Id == asig.Id)
+                        {
+                            agregar = false;
+                        }
+                    }
+                    if (agregar)
+                    {
+
+                        asignaturas.Add(asi);
+                        cmbxAsignatura.Items.Add(asi.Nombre);
+                    }
+                }
+                this.chats = chats;
+                y = 5;
+                panelChatsActivos.Controls.Clear();
+
+                foreach (Logica.Chat chat in chats)
+                {
+                    Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
+                    Logica.Clase clase = new Logica.Clase().SelectClasePorId(chat.IdClase);
+                    Label dina = new Label();
+                    dina.Height = 46;
+                    dina.Width = 150;
+                    dina.Location = new Point(25, y);
+                    y += 50;
+                    dina.Name = "lblC" + chat.IdChat.ToString();
+                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema:" + chat.Titulo;
                     dina.BorderStyle = BorderStyle.FixedSingle;
                     dina.Click += new EventHandler(AbrirChat);
                     panelChatsActivos.Controls.Add(dina);
@@ -208,12 +332,12 @@ namespace Hatchat.Presentacion
             lblMateriaClaseChat.Text = "";
             lblHoras.Text = "";
             panelCharla.Controls.Clear();
-            txtMensajeChat.Text = "";
 
             Logica.Chat chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
 
-            Logica.AsignaturaDictada asignaturaDciatada = new Logica.AsignaturaDictada().SelectAsignaturaDictadaPorAsignaturaYCi(chat.Asignatura, Login.encontrado.Ci);
-            List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(Login.encontrado.Ci);
+            Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCiInclusivo(chat.Asignatura, Login.encontrado.Ci);
+            Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(chat.Asignatura, asignaturaCursada.IdClase));
+            List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(doc.Ci);
             foreach (Logica.Agenda ag in agendas)
             {
                 if (ag.EnHora(ag))
@@ -222,14 +346,59 @@ namespace Hatchat.Presentacion
                 }
             }
 
-            lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaDciatada.AsigDictada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
+            lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursada.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
+            List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
+            abierto = chat;
+            if (mensajesAl[0].Ci == Login.encontrado.Ci && chat.Titulo == null)
+            {
+                Titulo titulo = new Titulo(false);
+                titulo.principalChatAlumno = this;
+                this.Enabled = false;
+                titulo.Show();
+            }
 
             pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
-            abierto = chat;
             tmrCargChat.Enabled = true;
             mensajs.Clear();
-
         }
+
+        private void btnFiltrarAsignatura_Click(object sender, EventArgs e)
+        {
+            filtroAsignatura = !filtroAsignatura;
+            btnFiltrarAsignatura.Text = "Filtrar asignatura";
+            if (filtroAsignatura)
+            {
+                btnFiltrarAsignatura.Text = "Dejar de filtrar asignatura";
+            }
+        }
+
+        private void btnFiltrarFecha_Click(object sender, EventArgs e)
+        {
+            filtroFecha = !filtroFecha;
+            btnFiltrarFecha.Text = "Filtrar fecha";
+            if (filtroFecha)
+            {
+                btnFiltrarFecha.Text = "Dejar de filtrar fecha";
+            }
+        }
+
+        private void timerCargarFoto_Tick(object sender, EventArgs e)
+        {
+            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
+        private void timerHistorialChats_Tick(object sender, EventArgs e)
+        {
+            if (filtroAsignatura || filtroFecha)
+            {
+                cargarChatsFiltro();
+            }
+            else
+            {
+                cargarChats();
+            }
+        }
+
         public void CargarChat()
         {
             lblTitulo.Text = abierto.Titulo;
@@ -238,7 +407,6 @@ namespace Hatchat.Presentacion
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(abierto.IdChat, abierto.Fecha);
             List<Logica.ChateaDo> mensajesDo = new Logica.ChateaDo().SelectChateaDosPorIdChatMasFecha(abierto.IdChat, abierto.Fecha);
             mensajes.AddRange(mensajesAl);
-
             for (int x = 0; x < mensajes.Count; x++)
             {
                 for (int c = 0; c < mensajesDo.Count; c++)
@@ -358,124 +526,14 @@ namespace Hatchat.Presentacion
             }
 
         }
+
+
+
         private void tmrCargChat_Tick(object sender, EventArgs e)
         {
             CargarChat();
-            CerrarChat();
-        }
-        private void btnSolicitudes_Click(object sender, EventArgs e)
-        {
-            cargarSolicitudes();
-        }
-        private void cargarSolicitudes()
-        {
-            panelAceptarChat.Visible = !panelAceptarChat.Visible;
-            List<Logica.SolicitaChat> solicitaChats = new Logica.SolicitaChat().SelectSolicitaChats(Login.encontrado.Ci);
-            bool iguales = true;
-            if (this.solicitaChats.Count == solicitaChats.Count)
-            {
-                for (int x = 0; x < solicitaChats.Count; x++)
-                {
-                    if (!(solicitaChats[x] == this.solicitaChats[x]))
-                    {
-                        iguales = false;
-                    }
-                }
-            }
-            else
-            {
-                iguales = false;
-            }
-            if (!iguales)
-            {
-                int y=45;
-                panelAceptarChat.Controls.Clear();
-
-                Label lblIngresarChat = new Label();
-                lblIngresarChat.Height = 13;
-                lblIngresarChat.Width = 93;
-                lblIngresarChat.Location = new Point(27, 11);
-                lblIngresarChat.Name = "lblIngresarChat";
-                lblIngresarChat.Text = "Ingresar a un chat";
-                panelAceptarChat.Controls.Add(lblIngresarChat);
-
-                Label lblChatsIngresarChats = new Label();
-                lblChatsIngresarChats.Height = 13;
-                lblChatsIngresarChats.Width = 37;
-                lblChatsIngresarChats.Location = new Point(27, 27);
-                lblChatsIngresarChats.Name = "lblChatsIngresarChats";
-                lblChatsIngresarChats.Text = "Chats:";
-                panelAceptarChat.Controls.Add(lblChatsIngresarChats);
-                this.solicitaChats = solicitaChats;
-                int m = 0;
-                foreach (Logica.SolicitaChat solicitaChat in solicitaChats)
-                {
-                    if (panelAceptarChat.Controls.Count != solicitaChats.Count + 2)
-                    {
-                        Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(solicitaChat.Asignatura);
-                        asignaturas.Add(asignatura);
-                        Logica.Clase clase = new Logica.Clase().SelectClasePorId(solicitaChat.IdClase);
-                        Label dina = new Label();
-                        dina.Height = 46;
-                        dina.Width = 150;
-                        dina.Location = new Point(25, y);
-                        y += 50;
-                        dina.Name = "lblS" + m;
-                        dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "(Click para aceptar)";
-                        dina.BorderStyle = BorderStyle.FixedSingle;
-                        dina.Click += new EventHandler(AceptarSolicitud);
-                        panelAceptarChat.Controls.Add(dina);
-                        m++;
-                    }
-                }
-            }
-        }
-        private void AceptarSolicitud(object sender, EventArgs e)
-        {
-            
-                string id = "";
-                for(int x = 4; x < ((Label)sender).Name.Length; x++)
-                {
-                    if (!(((Label)sender).Name[x] == '-'))
-                    {
-                        id += ((Label)sender).Name[x];
-                    }
-                    else
-                    {
-                        x = ((Label)sender).Name.Length;
-                    }
-                }
-            solicitaChats[Convert.ToInt32(id)].AceptarChat();
-            new Logica.Chat().CrearChat(solicitaChats[Convert.ToInt32(id)]);
-            cargarSolicitudes();
         }
 
-        private void btnEnviar_Click(object sender, EventArgs e)
-        {
-            new Logica.ChateaDo(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaDo();
-            txtMensajeChat.Text = "";
-        }
-        private void CerrarChat()
-        {
-
-            if (!(abierto == new Logica.Chat()))
-            {
-                bool cerrar = true;
-                foreach (Logica.Chat chat in chats)
-                {
-                    if (chat.IdChat == abierto.IdChat)
-                    {
-                        cerrar = false;
-                    }
-                }
-                if (cerrar)
-                {
-                    panelChat.Visible = false;
-                    tmrCargChat.Enabled = false;
-                    MessageBox.Show("Este chat a sido cerrado");
-                }
-            }
-        }
         private void btnParticipantes_Click(object sender, EventArgs e)
         {
             panelParticipantes.Visible = !panelParticipantes.Visible;
@@ -485,7 +543,7 @@ namespace Hatchat.Presentacion
                 lblDocenteParticipantes.Text = "Docente: " + usuarios[1].Nombre + " " + usuarios[1].Primer_apellido;
                 lblHostParticipantes.Text = "Host: " + usuarios[0].Nombre + " " + usuarios[0].Primer_apellido;
                 int y = 5;
-                for (int x = 2; x < usuarios.Count; x++)
+                for(int x=2; x < usuarios.Count; x++)
                 {
                     Label dina = new Label();
                     dina.Height = 46;
@@ -498,10 +556,5 @@ namespace Hatchat.Presentacion
                 }
             }
         }
-        private void timerCargarFoto_Tick(object sender, EventArgs e)
-        {
-            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-        }
     }
 }
-

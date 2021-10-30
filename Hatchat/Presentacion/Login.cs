@@ -17,6 +17,10 @@ namespace Hatchat.Presentacion
         static PrincipalChatDocente principalChatDocente;
         static MensajesDocente mensajesDocente;
         static PerfilDocente perfilDocente;
+        static GruposDocente gruposDocente;
+
+        static HistorialMensajesDocente historialMensajesDocente;
+
         static RegisterDocente registerDocente;
         
 
@@ -26,6 +30,7 @@ namespace Hatchat.Presentacion
         static GruposAlumno gruposAlumno;
         static RegisterAlumno registerAlumno;
         static HistorialMensajesAlumno historialMensajesAlumno;
+        static HistorialChatsAlumno historialChatsAlumno;
 
 
         static PrincipalSolicitudesAdmin principalSolicitudesAdmin;
@@ -135,7 +140,7 @@ namespace Hatchat.Presentacion
 
             encontrado = encontrado.SelectUsuarioCiActivo(txtCedula.Text);
             
-            if (encontrado.Ci != "")
+            if (encontrado.Ci != null)
             {
                 if (encontrado.Password == txtPassword.Text)
                 {
@@ -146,7 +151,9 @@ namespace Hatchat.Presentacion
                         principalChatDocente = new PrincipalChatDocente();
                         mensajesDocente = new MensajesDocente();
                         perfilDocente = new PerfilDocente();
+                        gruposDocente = new GruposDocente();
 
+                        historialMensajesDocente = new HistorialMensajesDocente();
 
                         principalChatDocente.Show();
                         this.Hide();
@@ -154,15 +161,36 @@ namespace Hatchat.Presentacion
                         principalChatDocente.login = this;
                         principalChatDocente.mensajesDocente = mensajesDocente;
                         principalChatDocente.perfilDocente = perfilDocente;
+                        principalChatDocente.gruposDocente = gruposDocente;
+
+                        principalChatDocente.historialMensajesDocente = historialMensajesDocente;
 
                         mensajesDocente.login = this;
                         mensajesDocente.principalChatDocente = principalChatDocente;
                         mensajesDocente.perfilDocente = perfilDocente;
+                        mensajesDocente.gruposDocente = gruposDocente;
+
+                        mensajesDocente.historialMensajesDocente = historialMensajesDocente;
 
                         perfilDocente.login = this;
                         perfilDocente.principalChatDocente = principalChatDocente;
                         perfilDocente.mensajesDocente = mensajesDocente;
+                        perfilDocente.gruposDocente = gruposDocente;
 
+                        perfilDocente.historialMensajesDocente = historialMensajesDocente;
+
+                        gruposDocente.login = this;
+                        gruposDocente.principalChatDocente = principalChatDocente;
+                        gruposDocente.mensajesDocente = mensajesDocente;
+                        gruposDocente.perfilDocente=perfilDocente;
+
+                        gruposDocente.historialMensajesDocente = historialMensajesDocente;
+
+                        historialMensajesDocente.login = this;
+                        historialMensajesDocente.principalChatDocente = principalChatDocente;
+                        historialMensajesDocente.mensajesDocente = mensajesDocente;
+                        historialMensajesDocente.perfilDocente = perfilDocente;
+                        historialMensajesDocente.gruposDocente = gruposDocente;
 
 
                     }
@@ -175,6 +203,7 @@ namespace Hatchat.Presentacion
                         perfilAlumno = new PerfilAlumno();
                         gruposAlumno = new GruposAlumno();
                         historialMensajesAlumno = new HistorialMensajesAlumno();
+                        historialChatsAlumno = new HistorialChatsAlumno();
 
 
                         principalChatAlumno.Show();
@@ -183,32 +212,45 @@ namespace Hatchat.Presentacion
                         principalChatAlumno.login = this;
                         principalChatAlumno.mensajesAlumno = mensajesAlumno;
                         principalChatAlumno.perfilAlumno = perfilAlumno;
-                        principalChatAlumno.historialMensajesAlumno = historialMensajesAlumno;
                         principalChatAlumno.gruposAlumno = gruposAlumno;
+                        principalChatAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                        principalChatAlumno.historialChatsAlumno = historialChatsAlumno;
 
                         mensajesAlumno.login = this;
                         mensajesAlumno.principalChatAlumno = principalChatAlumno;
                         mensajesAlumno.perfilAlumno = perfilAlumno;
                         mensajesAlumno.historialMensajesAlumno = historialMensajesAlumno;
                         mensajesAlumno.gruposAlumno = gruposAlumno;
+                        mensajesAlumno.historialChatsAlumno = historialChatsAlumno;
 
                         perfilAlumno.login = this;
                         perfilAlumno.principalChatAlumno = principalChatAlumno;
                         perfilAlumno.mensajesAlumno = mensajesAlumno;
                         perfilAlumno.historialMensajesAlumno = historialMensajesAlumno;
                         perfilAlumno.gruposAlumno = gruposAlumno;
+                        perfilAlumno.historialChatsAlumno = historialChatsAlumno;
 
                         historialMensajesAlumno.login = this;
                         historialMensajesAlumno.principalChatAlumno = principalChatAlumno;
                         historialMensajesAlumno.mensajesAlumno = mensajesAlumno;
                         historialMensajesAlumno.perfilAlumno = perfilAlumno;
                         perfilAlumno.gruposAlumno = gruposAlumno;
+                        perfilAlumno.historialChatsAlumno = historialChatsAlumno;
 
                         gruposAlumno.login = this;
                         gruposAlumno.principalChatAlumno = principalChatAlumno;
                         gruposAlumno.mensajesAlumno = mensajesAlumno;
                         gruposAlumno.perfilAlumno = perfilAlumno;
                         gruposAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                        gruposAlumno.historialChatsAlumno = historialChatsAlumno;
+
+                        historialChatsAlumno.login = this;
+                        historialChatsAlumno.principalChatsAlumno = principalChatAlumno;
+                        historialChatsAlumno.mensajesAlumno = mensajesAlumno;
+                        historialChatsAlumno.perfilAlumno = perfilAlumno;
+                        historialChatsAlumno.gruposAlumno = gruposAlumno;
+                        historialChatsAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                        
                     }
                     else if(encontrado.SelectAdministrador())
                     {

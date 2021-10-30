@@ -68,6 +68,7 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialMensajesNav = new System.Windows.Forms.PictureBox();
             this.pcbxHistorialChatNav = new System.Windows.Forms.PictureBox();
             this.timerHistorial = new System.Windows.Forms.Timer(this.components);
+            this.timerCargarFoto = new System.Windows.Forms.Timer(this.components);
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -443,6 +444,12 @@ namespace Hatchat.Presentacion
             this.timerHistorial.Enabled = true;
             this.timerHistorial.Tick += new System.EventHandler(this.timerHistorialNav_Tick);
             // 
+            // timerCargarFoto
+            // 
+            this.timerCargarFoto.Enabled = true;
+            this.timerCargarFoto.Interval = 5000;
+            this.timerCargarFoto.Tick += new System.EventHandler(this.timerCargarFoto_Tick);
+            // 
             // MensajesAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,5 +527,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pcbxHistorialMensajesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialChatNav;
         private System.Windows.Forms.Timer timerHistorial;
+        private System.Windows.Forms.Timer timerCargarFoto;
     }
 }

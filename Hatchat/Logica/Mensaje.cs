@@ -175,5 +175,15 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.AbrirMensaje(this);
         }
+        public List<Mensaje> SelectMensajesContestadosDo(string docente)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectMensajesContestadosDo(docente);
+        }
+        public List<Mensaje> SelectMensajesContestadosDo(string docente, string nombre, string apellido)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectMensajesContestadosDo(docente, nombre, apellido);
+        }
     }
 }

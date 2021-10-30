@@ -24,7 +24,6 @@ namespace Hatchat.Presentacion
         private List<Logica.Chat> posiblesChats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
         public static Logica.Chat abierto = new Logica.Chat();
-        Logica.Clase seleccionada = new Logica.Clase();
         private List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
 
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
@@ -49,7 +48,7 @@ namespace Hatchat.Presentacion
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
-                pcbxHistorialMensajesNav.Image = Image.FromFile("mensaje gris.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -80,12 +79,10 @@ namespace Hatchat.Presentacion
         private void CerrarForm(object sender, EventArgs e)
         {
             login.Dispose();
-
         }
 
         private void pbxMensajeNav_Click(object sender, EventArgs e)
         {
-
             mensajesAlumno.Show();
             this.Hide();
         }
@@ -221,7 +218,7 @@ namespace Hatchat.Presentacion
 
             Logica.Chat chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
 
-            Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(chat.Asignatura, Login.encontrado.Ci);
+            Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursandoPorAsignaturaYCi(chat.Asignatura, Login.encontrado.Ci);
             Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(chat.Asignatura, asignaturaCursada.IdClase));
             List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(doc.Ci);
             foreach (Logica.Agenda ag in agendas)
@@ -383,8 +380,6 @@ namespace Hatchat.Presentacion
 
         }
 
-
-
         private void tmrCargChat_Tick(object sender, EventArgs e)
         {
             CargarChat();
@@ -400,16 +395,28 @@ namespace Hatchat.Presentacion
             cmbxMateria.Items.Clear();
             foreach (Logica.Asignatura asignatura in asignaturas)
             {
-                Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignatura.Id, Login.encontrado.Ci);
+                Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursandoPorAsignaturaYCi(asignatura.Id, Login.encontrado.Ci);
                 Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCiActivo(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(asignatura.Id, asignaturaCursada.IdClase));
                 List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(doc.Ci);
                 foreach (Logica.Agenda ag in agendas)
                 {
                     if (ag.EnHora(ag) && doc.SelectDocenteDisponible(asignatura.Id, doc.Ci, asignaturaCursada.IdClase))
                     {
-                        this.asignaturas.Add(asignatura); 
-                        Logica.Clase clase = new Logica.Clase().SelectClasePorId(asignaturaCursada.IdClase);
-                        cmbxMateria.Items.Add(asignatura.Nombre + " " + clase.Anio + clase.Nombre);
+                        List<Logica.SolicitaChat> soliChat = new Logica.SolicitaChat().SelectSolicitaChats(doc.Ci);
+                        bool seguir = true;
+                        foreach(Logica.SolicitaChat soli in soliChat)
+                        {
+                            if (soli.IdClase==asignaturaCursada.IdClase && soli.Asignatura == asignatura.Id)
+                            {
+                                seguir = false;
+                            }
+                        }
+                        if (seguir)
+                        {
+                            this.asignaturas.Add(asignatura);
+                            Logica.Clase clase = new Logica.Clase().SelectClasePorId(asignaturaCursada.IdClase);
+                            cmbxMateria.Items.Add(asignatura.Nombre + " " + clase.Anio + clase.Nombre);
+                        }
                     }
                 }
 
@@ -423,7 +430,7 @@ namespace Hatchat.Presentacion
                 Logica.SolicitaChat solicitaChat = new Logica.SolicitaChat();
                 solicitaChat.CiAlumno = Login.encontrado.Ci;
                 solicitaChat.Asignatura = asignaturas[cmbxMateria.SelectedIndex].Id;
-                Logica.AsignaturaCursa asignaturaCursa = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCi(asignaturas[cmbxMateria.SelectedIndex].Id, Login.encontrado.Ci);
+                Logica.AsignaturaCursa asignaturaCursa = new Logica.AsignaturaCursa().SelectAsignaturaCursandoPorAsignaturaYCi(asignaturas[cmbxMateria.SelectedIndex].Id, Login.encontrado.Ci);
                 solicitaChat.IdClase = asignaturaCursa.IdClase;
                 solicitaChat.FechaHora = DateTime.Now;
                 solicitaChat.Pendiente = true;
@@ -439,7 +446,6 @@ namespace Hatchat.Presentacion
         {
             panelIngresarChat.Visible = !panelIngresarChat.Visible;
             panelNuevoChat.Visible = false;
-
 
         }
         private void CargarIngresarChat()
@@ -513,6 +519,10 @@ namespace Hatchat.Presentacion
             }
         }
 
+        private void timerCargarFoto_Tick(object sender, EventArgs e)
+        {
+            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {

@@ -13,14 +13,14 @@ namespace Hatchat.Presentacion
 {
     public partial class PrincipalSolicitudesAdmin : Form
     {
-        
+
         List<Logica.ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
         Logica.SolicitudClaseAl soliAl = new Logica.SolicitudClaseAl();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAlAceptadas = new List<Logica.AsignaturaSolicitudClaseAl>();
 
         List<Logica.ClaseSolicitudClaseDo> claseSolicitudesClaseDo = new List<Logica.ClaseSolicitudClaseDo>();
-        List<Logica.AsignaturaSolicitudClaseDo>asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
+        List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
         Logica.SolicitudClaseDo soliDo = new Logica.SolicitudClaseDo();
         List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
 
@@ -38,7 +38,7 @@ namespace Hatchat.Presentacion
 
         public PrincipalSolicitudesAdmin()
         {
-            
+
             InitializeComponent();
             panelSolicitud.Visible = false;
             try
@@ -116,15 +116,22 @@ namespace Hatchat.Presentacion
             List<Logica.SolicitudClaseDo> solicitudesClaseDo = new Logica.SolicitudClaseDo().SelectSolicitudesClaseDo();
             List<Logica.SolicitudModif> solicitudesModif = new Logica.SolicitudModif().SelectSolicitudesModif();
             bool iguales = true;
-            if (solicitudesClaseAl.Count() == this.solicitudesClaseAl.Count() || solicitudesClaseDo.Count() == this.solicitudesClaseDo.Count() || solicitudesModif.Count() == this.solicitudesModif.Count())
+            if (solicitudesClaseAl.Count() == this.solicitudesClaseAl.Count())
             {
-                for (int x = 0; x < solicitudesModif.Count(); x++)
+                for (int x = 0; x < solicitudesClaseAl.Count(); x++)
                 {
-                    if (!(solicitudesModif[x].IdSolicitudModif == this.solicitudesModif[x].IdSolicitudModif))
+                    if (!(solicitudesClaseAl[x].IdSolicitudClaseAl == this.solicitudesClaseAl[x].IdSolicitudClaseAl))
                     {
                         iguales = false;
                     }
                 }
+            }
+            else
+            {
+                iguales = false;
+            }
+            if (solicitudesClaseDo.Count() == this.solicitudesClaseDo.Count())
+            {
                 for (int x = 0; x < solicitudesClaseDo.Count(); x++)
                 {
                     if (!(solicitudesClaseDo[x].IdSolicitudClaseDo == this.solicitudesClaseDo[x].IdSolicitudClaseDo))
@@ -132,9 +139,16 @@ namespace Hatchat.Presentacion
                         iguales = false;
                     }
                 }
-                for (int x = 0; x < solicitudesClaseAl.Count(); x++)
+            }
+            else
+            {
+                iguales = false;
+            }
+            if (solicitudesModif.Count() == this.solicitudesModif.Count())
+            {
+                for (int x = 0; x < solicitudesModif.Count(); x++)
                 {
-                    if (!(solicitudesClaseAl[x].IdSolicitudClaseAl == this.solicitudesClaseAl[x].IdSolicitudClaseAl))
+                    if (!(solicitudesModif[x].IdSolicitudModif == this.solicitudesModif[x].IdSolicitudModif))
                     {
                         iguales = false;
                     }
@@ -152,32 +166,25 @@ namespace Hatchat.Presentacion
                 ArrayList solicitudesDesordenadas = new ArrayList();
                 int y;
 
-
                 ArrayList solicitudesOrdenadas = new ArrayList();
                 if (solicitudesClaseAl.Count() > 0)
                 {
-                    foreach (Logica.SolicitudClaseAl soliAl in solicitudesClaseAl)
+                    solicitudesDesordenadas.AddRange(solicitudesClaseAl);
+                    foreach (Logica.SolicitudClaseDo soliDo in solicitudesClaseDo)
                     {
-                        if (solicitudesClaseDo.Count() > 0)
+                        for (int x = 0; x < solicitudesDesordenadas.Count; x++)
                         {
-                            foreach (Logica.SolicitudClaseDo soliDo in solicitudesClaseDo)
+                            if (!solicitudesDesordenadas.Contains(soliDo))
                             {
-                                if (!solicitudesDesordenadas.Contains(soliDo))
+                                if (soliDo.FechaHora > solicitudesClaseAl[x].FechaHora)
                                 {
-                                    if (soliDo.FechaHora > soliAl.FechaHora)
-                                    {
-                                        solicitudesDesordenadas.Add(soliDo);
-                                    }
-                                    else if (!solicitudesDesordenadas.Contains(soliAl))
-                                    {
-                                        solicitudesDesordenadas.Add(soliAl);
-                                    }
+                                    solicitudesDesordenadas.Insert(x, soliDo);
                                 }
                             }
                         }
-                        else
+                        if (!solicitudesDesordenadas.Contains(soliDo))
                         {
-                            solicitudesDesordenadas.Add(soliAl);
+                            solicitudesDesordenadas.Add(soliDo);
                         }
                     }
                 }
@@ -185,67 +192,54 @@ namespace Hatchat.Presentacion
                 {
                     solicitudesDesordenadas.AddRange(solicitudesClaseDo);
                 }
-
+                solicitudesOrdenadas.AddRange(solicitudesDesordenadas);
                 foreach (Logica.SolicitudModif soliMo in solicitudesModif)
                 {
-                    for (int x = 0; x < solicitudesDesordenadas.Count; x++)
+                    for (int x = 0; x < solicitudesOrdenadas.Count; x++)
                     {
-                        if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
+                        if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
                         {
-                            Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
+                            Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesOrdenadas[x];
                             if (!solicitudesOrdenadas.Contains(soliMo))
                             {
                                 if (soliMo.FechaHora > soli.FechaHora)
                                 {
-                                    solicitudesOrdenadas.Add(soliMo);
+                                    solicitudesOrdenadas.Insert(x,soliMo);
+                                }
+                            }
+                        }
+                        else if(solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseDo")
+                        {
+                            Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesOrdenadas[x];
+                            if (!solicitudesOrdenadas.Contains(soliMo))
+                            {
+                                if (soliMo.FechaHora > soli.FechaHora)
+                                {
+                                    solicitudesOrdenadas.Insert(x, soliMo);
                                 }
                             }
                         }
                         else
                         {
-                            Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
+                            Logica.SolicitudModif soli = (Logica.SolicitudModif)solicitudesOrdenadas[x];
                             if (!solicitudesOrdenadas.Contains(soliMo))
                             {
                                 if (soliMo.FechaHora > soli.FechaHora)
                                 {
-                                    solicitudesOrdenadas.Add(soliMo);
+                                    solicitudesOrdenadas.Insert(x, soliMo);
                                 }
                             }
                         }
                     }
-
-                }
-                foreach (Logica.SolicitudModif soliMo in solicitudesModif)
-                {
                     if (!solicitudesOrdenadas.Contains(soliMo))
                     {
                         solicitudesOrdenadas.Add(soliMo);
                     }
                 }
-                for (int x = 0; x < solicitudesDesordenadas.Count; x++)
-                {
-                    if (solicitudesDesordenadas[x].GetType().Name == "SolicitudClaseAl")
-                    {
-                        Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesDesordenadas[x];
-                        if (!solicitudesOrdenadas.Contains(soli))
-                        {
-                            solicitudesOrdenadas.Add(soli);
-                        }
-                    }
-                    else
-                    {
-                        Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesDesordenadas[x];
-                        if (!solicitudesOrdenadas.Contains(soli))
-                        {
-                            solicitudesOrdenadas.Add(soli);
-                        }
-                    }
-                }
-
-
+                
                 y = 5;
                 PanelSolicitudesPendientes.Controls.Clear();
-                
+
                 for (int x = 0; x < solicitudesOrdenadas.Count; x++)
                 {
                     if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseAl")
@@ -297,7 +291,7 @@ namespace Hatchat.Presentacion
                 }
             }
         }
-        
+
         private void AbrirSolicitudClaseAl(object sender, EventArgs e)
         {
             panelContenido.Controls.Clear();
@@ -314,7 +308,7 @@ namespace Hatchat.Presentacion
             soliAl = new Logica.SolicitudClaseAl().SelectSolicitudClaseAlPorId(new Logica.SolicitudClaseAl().StringAId(((Label)sender).Name));
             Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soliAl.Alumno);
             claseSolicitudesClaseAl = new Logica.ClaseSolicitudClaseAl().SelectClaseSolicitudClaseAl(soliAl.IdSolicitudClaseAl);
-            lblNombreApellidoSolicitud.Text = us.Nombre+" "+us.Primer_apellido+" desea ingresar a los siguientes grupos:";
+            lblNombreApellidoSolicitud.Text = us.Nombre + " " + us.Primer_apellido + " desea ingresar a los siguientes grupos:";
             lblCedula.Text = us.Ci;
 
             Label lblSolIngre = new Label();
@@ -325,16 +319,16 @@ namespace Hatchat.Presentacion
             lblSolIngre.Text = us.Primer_apellido + " envio solicitud para ingresar a:";
             panelContenido.Controls.Add(lblSolIngre);
             asignaturaSolicitudesClaseAl.AddRange(new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturaSolicitudClaseAl(soliAl.IdSolicitudClaseAl));
-            int xchbxAsig = 5, ychbxAsig = 100, xlblClase=5;
+            int xchbxAsig = 5, ychbxAsig = 100, xlblClase = 5;
             foreach (Logica.ClaseSolicitudClaseAl claseSoli in claseSolicitudesClaseAl)
             {
                 Label lblClase = new Label();
                 lblClase.Height = 46;
                 lblClase.Width = 150;
                 lblClase.Location = new Point(xlblClase, 50);
-                lblClase.Name = "lblClase"+claseSoli.IdClase;
+                lblClase.Name = "lblClase" + claseSoli.IdClase;
                 Logica.Clase clas = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
-                lblClase.Text =  clas.Anio+"°"+clas.Nombre+"\n"+new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
+                lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
                 xlblClase += 160;
                 foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAl in asignaturaSolicitudesClaseAl)
@@ -380,11 +374,11 @@ namespace Hatchat.Presentacion
                         asignaturaSolicitudesClaseAlAceptadas.Remove(soliAsi);
                     }
                 }
-                
+
             }
         }
         private void AbrirSolicitudClaseDo(object sender, EventArgs e)
-        { 
+        {
             panelContenido.Controls.Clear();
             panelSolicitud.Visible = true;
             claseSolicitudesClaseDo = new List<Logica.ClaseSolicitudClaseDo>();
@@ -422,7 +416,7 @@ namespace Hatchat.Presentacion
                 Logica.Clase clas = new Logica.Clase().SelectClasePorId(claseSoli.IdClase);
                 lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
-                
+
                 xlblClase += 160;
                 foreach (Logica.AsignaturaSolicitudClaseDo asigSoliDo in asignaturaSolicitudesClaseDo)
                 {
@@ -433,7 +427,7 @@ namespace Hatchat.Presentacion
                         dina.Width = 150;
                         dina.Location = new Point(xchbxAsig, ychbxAsig);
                         ychbxAsig += 25;
-                        dina.Name = "chbxAsig" + asigSoliDo.IdAsignatura+"Cl"+asigSoliDo.IdClaseAsig;
+                        dina.Name = "chbxAsig" + asigSoliDo.IdAsignatura + "Cl" + asigSoliDo.IdClaseAsig;
                         dina.Text = new Logica.Asignatura().SelectAsignaturaPorId(asigSoliDo.IdAsignatura).Nombre;
 
                         dina.CheckedChanged += new EventHandler(AsignaturaCambiadaDo);
@@ -496,7 +490,7 @@ namespace Hatchat.Presentacion
             lblSolIngre.Name = "lblSolMo";
             lblSolIngre.Text = us.Primer_apellido + " ha enviado una soliciutd para\nreestablecer su contraseña.\nSu preguntas de seguridad concuerda.";
             panelContenido.Controls.Add(lblSolIngre);
-            
+
         }
         private void tmrSolicitudes_Tick(object sender, EventArgs e)
         {
@@ -505,14 +499,14 @@ namespace Hatchat.Presentacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            
+
             if (soliAl.IdSolicitudClaseAl != 0)
             {
                 foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAcep in asignaturaSolicitudesClaseAlAceptadas)
                 {
                     Logica.Cursa cursa = new Logica.Cursa(asigSoliAcep.IdClaseAsig, soliAl.Alumno, asigSoliAcep.OriClaseAsig, DateTime.Now.Year);
                     cursa.InsertCursa();
-                    Logica.AsignaturaCursa asigCursa = new Logica.AsignaturaCursa(soliAl.Alumno,asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
+                    Logica.AsignaturaCursa asigCursa = new Logica.AsignaturaCursa(soliAl.Alumno, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
                     asigCursa.InsertAsignaturaCursa();
                     asigSoliAcep.AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(asigSoliAcep.IdSolicitudClaseAl, asigSoliAcep.IdAsignatura);
                 }
@@ -535,7 +529,7 @@ namespace Hatchat.Presentacion
                 }
                 soliDo.AceptarSolicitudClaseDoPorIdYAdmin(soliDo.IdSolicitudClaseDo, Login.encontrado.Ci);
             }
-            
+
             asignaturaSolicitudesClaseDoAceptadas.Clear();
             asignaturaSolicitudesClaseDo.Clear();
             claseSolicitudesClaseDo.Clear();
