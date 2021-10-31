@@ -135,7 +135,7 @@ namespace Hatchat.Logica
                 }
                 else
                 {
-                    Image nueva = Image.FromFile("Logo Nombre.png");
+                    Image nueva = Image.FromFile("Logo Completa.png");
                     fotoDePerfil = ImageToByteArray(nueva);
                     return nueva;
                 }

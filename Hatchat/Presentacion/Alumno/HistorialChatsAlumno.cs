@@ -35,7 +35,9 @@ namespace Hatchat.Presentacion
             Text = "Chat";
 
             ClientSize = new Size(1280, 720);
-            panelChat.Visible = false;
+            panelCharla.Visible = false;
+            panelDatosClase.Visible = false;
+
             StartPosition = FormStartPosition.CenterScreen;
             try
             {
@@ -327,7 +329,16 @@ namespace Hatchat.Presentacion
         }
         private void AbrirChat(object sender, EventArgs e)
         {
-            panelChat.Visible = true;
+            panelCharla.Visible = true;
+            panelDatosClase.Visible = true;
+            panelParticipantes.Visible = false;
+            panelChatsActivos.Visible = false;
+            btnFiltrarFecha.Visible = false;
+            btnFiltrarAsignatura.Visible = false;
+            cmbxAsignatura.Visible = false;
+            dtpFiltro.Visible = false;
+            btnVolver.Visible = true;
+
             pcbxMaterialDatosClase.Image = null;
             lblMateriaClaseChat.Text = "";
             lblHoras.Text = "";
@@ -349,13 +360,7 @@ namespace Hatchat.Presentacion
             lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursada.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
             abierto = chat;
-            if (mensajesAl[0].Ci == Login.encontrado.Ci && chat.Titulo == null)
-            {
-                Titulo titulo = new Titulo(false);
-                titulo.principalChatAlumno = this;
-                this.Enabled = false;
-                titulo.Show();
-            }
+            
 
             pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
             tmrCargChat.Enabled = true;
@@ -364,6 +369,7 @@ namespace Hatchat.Presentacion
 
         private void btnFiltrarAsignatura_Click(object sender, EventArgs e)
         {
+            cmbxAsignatura.Visible = !cmbxAsignatura.Visible;
             filtroAsignatura = !filtroAsignatura;
             btnFiltrarAsignatura.Text = "Filtrar asignatura";
             if (filtroAsignatura)
@@ -374,6 +380,7 @@ namespace Hatchat.Presentacion
 
         private void btnFiltrarFecha_Click(object sender, EventArgs e)
         {
+            dtpFiltro.Visible = !dtpFiltro.Visible;
             filtroFecha = !filtroFecha;
             btnFiltrarFecha.Text = "Filtrar fecha";
             if (filtroFecha)
@@ -385,6 +392,21 @@ namespace Hatchat.Presentacion
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            panelCharla.Visible = false;
+            panelDatosClase.Visible = false;
+            panelParticipantes.Visible = false;
+            panelChatsActivos.Visible = true;
+            btnFiltrarFecha.Visible = true;
+            btnFiltrarAsignatura.Visible = true;
+            cmbxAsignatura.Visible = filtroAsignatura;
+            dtpFiltro.Visible = filtroFecha;
+            btnFiltrarAsignatura.Visible = true;
+            btnFiltrarFecha.Visible = true;
+            btnVolver.Visible = false;
         }
 
         private void timerHistorialChats_Tick(object sender, EventArgs e)

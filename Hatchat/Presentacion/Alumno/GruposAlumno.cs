@@ -163,7 +163,7 @@ namespace Hatchat.Presentacion
             {
 
                 this.asignaturasCursadas = asignaturasCursadas;
-                int xpanel = 25, ypanel = 25;
+                int xpanel = 63, ypanel = 25;
                 panelContenedorGrupos.Controls.Clear();
 
                 foreach (Logica.AsignaturaCursa asignaturaCursa in asignaturasCursadas)
@@ -173,13 +173,13 @@ namespace Hatchat.Presentacion
                     Logica.Orientacion orientacion = new Logica.Orientacion().SelectOrientacioPorId(clase.Orientacion);
 
                     Label grupo = new Label();
-                    grupo.Height = 46;
+                    grupo.Height = 200;
                     grupo.Width = 150;
-                    grupo.Location = new Point(0, 100);
+                    grupo.Location = new Point(25, 110);
+                    grupo.Font = new Font("Arial", 12.0f);
                     grupo.Name = "lbl" + asignaturaCursa.AsignaturaCursada;
                     Logica.Usuario us = new Logica.Usuario().SelectUsuarioCiActivo(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(asignaturaCursa.AsignaturaCursada, asignaturaCursa.IdClase));
-                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + " " + orientacion.Nombre + "\n" + "Profesor:\n" + us.Nombre + " " + us.Primer_apellido;
-                    grupo.BorderStyle = BorderStyle.FixedSingle;
+                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + " " + orientacion.Nombre;
                     grupo.Click += new EventHandler(AbrirGrupo);
 
                     PictureBox pic = new PictureBox();
@@ -187,7 +187,7 @@ namespace Hatchat.Presentacion
                     pic.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic.Height = 80;
                     pic.Width = 80;
-                    pic.Location = new Point(50, 0);
+                    pic.Location = new Point(60, 20);
                     pic.Name = "pbx" + asignaturaCursa.AsignaturaCursada;
                     pic.Click += new EventHandler(AbrirGrupo);
 
@@ -195,13 +195,14 @@ namespace Hatchat.Presentacion
                     panel.Height = 200;
                     panel.Width = 200;
                     panel.Location = new Point(xpanel, ypanel);
-                    if (xpanel == 475)
+                    if (xpanel == 915)
                     {
-                        xpanel += -675;
+                        xpanel += -1136;
                         ypanel += 225;
                     }
-                    xpanel += 225;
+                    xpanel += 284;
                     panel.Name = "pnl" + asignaturaCursa.AsignaturaCursada;
+                    panel.BackColor = Color.White;
                     panel.Click += new EventHandler(AbrirGrupo);
                     panel.Controls.Add(grupo);
                     panel.Controls.Add(pic);
@@ -534,7 +535,7 @@ namespace Hatchat.Presentacion
 
             if (panelAsignaturas.Visible && panelAsignaturas.Controls.Count == 0)
             {
-                int ychbx = 50, xchbx = 50;
+                int ychbx = 5, xchbx = 5;
                 foreach (Logica.Asignatura asig in nuevasAsignaturas)
                 {
                     CheckBox dina = new CheckBox();
@@ -549,12 +550,12 @@ namespace Hatchat.Presentacion
                     dina.Height = 23;
                     dina.Width = 150;
                     dina.Location = new Point(xchbx, ychbx);
-                    if (xchbx == 400)
+                    if (xchbx == 160)
                     {
-                        xchbx = -125;
+                        xchbx += -310;
                         ychbx += 25;
                     }
-                    xchbx += 175;
+                    xchbx += 155;
                     dina.Name = "chbx" + asig.Id;
                     dina.Text = asig.Nombre;
 

@@ -295,7 +295,10 @@ namespace Hatchat.Presentacion
         }
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {
-            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+            try
+            {
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+            }catch(Exception ex) { }
         }
     }
 }

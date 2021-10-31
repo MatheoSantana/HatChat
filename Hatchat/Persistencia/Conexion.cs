@@ -1177,17 +1177,39 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into ChateaAl values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + chatea.HoraEnvio.ToString("HH") + ":" + chatea.HoraEnvio.ToString("mm") + ":" + chatea.HoraEnvio.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
-            insert.ExecuteNonQuery();
+            bool enviado = true;
+            do
+            {
+
+                try
+                {
+                    MySqlCommand insert = new MySqlCommand("insert into ChateaAl values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":" + DateTime.Now.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
+                    insert.ExecuteNonQuery();
+                    enviado = false;
+                }
+                catch (Exception ex) { }
+            } while (enviado);
+            
             conexion.Close();
         }
         public void InsertChateaDo(ChateaDo chatea)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into ChateaDo values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + chatea.HoraEnvio.ToString("HH") + ":" + chatea.HoraEnvio.ToString("mm") + ":" + chatea.HoraEnvio.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
-            insert.ExecuteNonQuery();
-            conexion.Close();
+            bool enviado = true;
+            do
+            {
+
+                try
+                {
+                    MySqlCommand insert = new MySqlCommand("insert into ChateaDo values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + chatea.HoraEnvio.ToString("HH") + ":" + chatea.HoraEnvio.ToString("mm") + ":" + chatea.HoraEnvio.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
+                    insert.ExecuteNonQuery();
+                    enviado = false;
+                }
+                catch (Exception ex) { }
+            } while (enviado);
+        
+        conexion.Close();
         }
         public void CerrarChat(Chat chat)
         {

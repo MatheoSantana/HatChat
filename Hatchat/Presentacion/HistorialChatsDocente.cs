@@ -29,7 +29,7 @@ namespace Hatchat.Presentacion
 
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
         bool filtroAsignatura = false, filtroFecha = false;
-        public HistorialChatsAlumno()
+        public HistorialChatsDocente()
         {
             InitializeComponent();
             Text = "Chat";
@@ -349,13 +349,7 @@ namespace Hatchat.Presentacion
             lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursada.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
             abierto = chat;
-            if (mensajesAl[0].Ci == Login.encontrado.Ci && chat.Titulo == null)
-            {
-                Titulo titulo = new Titulo(false);
-                titulo.principalChatAlumno = this;
-                this.Enabled = false;
-                titulo.Show();
-            }
+            
 
             pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
             tmrCargChat.Enabled = true;
