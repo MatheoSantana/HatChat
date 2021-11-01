@@ -207,7 +207,7 @@ namespace Hatchat.Presentacion
                     grupo.ForeColor = Color.White;
                     grupo.Font= new Font("Arial", 12.0f);
                     grupo.Name = "lblC" + chat.IdChat.ToString();
-                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n\n" + "Tema actual:" + chat.Titulo;
+                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
                     grupo.Click += new EventHandler(AbrirChat);
 
                     PictureBox picPhoto = new PictureBox();
@@ -611,7 +611,28 @@ namespace Hatchat.Presentacion
 
         private void btnTitulo_Click(object sender, EventArgs e)
         {
-
+            if (txtTitulo.Text != "")
+            {
+                abierto.Titulo = txtTitulo.Text;
+                abierto.CambiarTitulo();
+                if (cerrar)
+                {
+                    abierto.CerrarChat();
+                    abierto = new Logica.Chat();
+                    cerrar = false;
+                }
+                panel1.Enabled = true;
+                panelChat.Enabled = true;
+                panelChatsActivos.Enabled = true;
+                panelIngresarChat.Enabled = true;
+                panelNuevoChat.Enabled = true;
+                btnNuevoChat.Enabled = true;
+                btnIngresarChat.Enabled = true;
+                paneltitulo.Visible = false;
+                cerrar = true;
+                chats = new List<Logica.Chat>();
+            }
+            
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)

@@ -80,9 +80,9 @@ namespace Hatchat.Presentacion
             this.panelTextoChat = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.paneltitulo = new System.Windows.Forms.Panel();
-            this.txtTitulo = new System.Windows.Forms.TextBox();
-            this.btnTitulo = new System.Windows.Forms.Button();
             this.lblIngreseTitulo = new System.Windows.Forms.Label();
+            this.btnTitulo = new System.Windows.Forms.Button();
+            this.txtTitulo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -621,6 +621,7 @@ namespace Hatchat.Presentacion
             // 
             // paneltitulo
             // 
+            this.paneltitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.paneltitulo.Controls.Add(this.lblIngreseTitulo);
             this.paneltitulo.Controls.Add(this.btnTitulo);
             this.paneltitulo.Controls.Add(this.txtTitulo);
@@ -630,13 +631,16 @@ namespace Hatchat.Presentacion
             this.paneltitulo.TabIndex = 17;
             this.paneltitulo.Visible = false;
             // 
-            // txtTitulo
+            // lblIngreseTitulo
             // 
-            this.txtTitulo.Font = new System.Drawing.Font("Arial", 12F);
-            this.txtTitulo.Location = new System.Drawing.Point(131, 160);
-            this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(365, 26);
-            this.txtTitulo.TabIndex = 0;
+            this.lblIngreseTitulo.AutoSize = true;
+            this.lblIngreseTitulo.Font = new System.Drawing.Font("Arial", 30F);
+            this.lblIngreseTitulo.ForeColor = System.Drawing.Color.White;
+            this.lblIngreseTitulo.Location = new System.Drawing.Point(87, 58);
+            this.lblIngreseTitulo.Name = "lblIngreseTitulo";
+            this.lblIngreseTitulo.Size = new System.Drawing.Size(434, 45);
+            this.lblIngreseTitulo.TabIndex = 15;
+            this.lblIngreseTitulo.Text = "Ingrese el Tema a tratar";
             // 
             // btnTitulo
             // 
@@ -652,16 +656,13 @@ namespace Hatchat.Presentacion
             this.btnTitulo.UseVisualStyleBackColor = false;
             this.btnTitulo.Click += new System.EventHandler(this.btnTitulo_Click);
             // 
-            // lblIngreseTitulo
+            // txtTitulo
             // 
-            this.lblIngreseTitulo.AutoSize = true;
-            this.lblIngreseTitulo.Font = new System.Drawing.Font("Arial", 30F);
-            this.lblIngreseTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblIngreseTitulo.Location = new System.Drawing.Point(87, 58);
-            this.lblIngreseTitulo.Name = "lblIngreseTitulo";
-            this.lblIngreseTitulo.Size = new System.Drawing.Size(434, 45);
-            this.lblIngreseTitulo.TabIndex = 15;
-            this.lblIngreseTitulo.Text = "Ingrese el Tema a tratar";
+            this.txtTitulo.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtTitulo.Location = new System.Drawing.Point(131, 160);
+            this.txtTitulo.Name = "txtTitulo";
+            this.txtTitulo.Size = new System.Drawing.Size(365, 26);
+            this.txtTitulo.TabIndex = 0;
             // 
             // PrincipalChatAlumno
             // 
