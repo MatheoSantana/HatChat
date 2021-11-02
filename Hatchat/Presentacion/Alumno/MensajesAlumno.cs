@@ -19,7 +19,6 @@ namespace Hatchat.Presentacion
         public Form perfilAlumno;
         public Form historialChatsAlumno;
         public Form historialMensajesAlumno;
-        int y = 50;
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
         public MensajesAlumno()
         {
@@ -204,7 +203,7 @@ namespace Hatchat.Presentacion
                     docente.Activo = usuario.Activo;
 
                     PictureBox picPhoto = new PictureBox();
-                    picPhoto.Image = Image.FromFile("profesor.png");
+                    picPhoto.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
                     picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                     picPhoto.Height = 49;
                     picPhoto.Width = 49;

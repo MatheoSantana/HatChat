@@ -20,21 +20,22 @@ namespace Hatchat.Presentacion
         List<Logica.Agenda> agendas = new List<Logica.Agenda>();
 
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
+        bool lu = false, ma = false, mi = false, ju = false, vi = false;
 
         public PerfilDocente()
         {
             InitializeComponent();
 
             Text = "Perfil";
-            
-            ClientSize = new Size(1280, 720);
 
-            lblCambiarFoto.ForeColor = Color.Blue;
-            lblCambiarFoto.Font = new Font("Arial", 9.0f, FontStyle.Underline);
+            ClientSize = new Size(1280, 720);
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
 
             StartPosition = FormStartPosition.CenterScreen;
             try
             {
+
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
@@ -173,7 +174,6 @@ namespace Hatchat.Presentacion
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-            panelDiasYHorarios.Visible = true;
             agendas = new Logica.Agenda().SelectAgendasPorCi(Login.encontrado.Ci);
         }
 
@@ -259,79 +259,117 @@ namespace Hatchat.Presentacion
         }
         private void btnLunes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = Color.Orange;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(239, 136, 88);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Lunes");
         }
 
 
         private void btnMartes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = Color.Orange;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(239, 136, 88);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Martes");
         }
 
         private void btnMiercoles_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = Color.Orange;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(239, 136, 88);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Miercoles");
         }
 
         private void btnJueves_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = Color.Orange;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(239, 136, 88);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Jueves");
         }
 
-        
+
 
         private void btnViernes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = Color.Orange;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(239, 136, 88);
             RecargarAgendaDelDia("Viernes");
         }
 
-        
+
 
         private void RecargarAgendaDelDia(string dia)
         {
-            int y = 5;
+            int ypanel = 0;
             panelHorariosPorDia.Controls.Clear();
             foreach (Logica.Agenda agenda in agendas)
             {
                 if (agenda.NomDia == dia)
                 {
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblAdendaDelDia" + agenda.IdAgenda.ToString();
-                    dina.Text = agenda.HoraInicio + " - " + agenda.HoraFin + " (click para eliminar)";
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(EliminarAgenda);
-                    panelHorariosPorDia.Controls.Add(dina);
+
+                    Label linea = new Label();
+                    linea.Height = 18;
+                    linea.Width = 180;
+                    linea.Location = new Point(0, 2);
+                    linea.Font = new Font("Arial", 12, FontStyle.Bold);
+                    linea.ForeColor = Color.White;
+                    linea.Name = "lblLineaAgendaDelDia" + agenda.IdAgenda.ToString();
+                    linea.Text = "_______________________________________________";
+
+                    Label horario = new Label();
+                    horario.Height = 18;
+                    horario.Width = 150;
+                    horario.Location = new Point(10, 0);
+                    horario.Font = new Font("Arial", 12.0f);
+                    horario.ForeColor = Color.White;
+                    horario.Name = "lblAgendaDelDia" + agenda.IdAgenda.ToString();
+                    horario.Text = agenda.HoraInicio + " - " + agenda.HoraFin;
+
+                    PictureBox cruz = new PictureBox();
+                    cruz.Height = 20;
+                    cruz.Width = 20;
+                    cruz.Location = new Point(160, 0);
+                    cruz.Image = Image.FromFile("Cruz.png");
+                    cruz.ForeColor = Color.White;
+                    cruz.Name = "pcbxCruz" + agenda.IdAgenda.ToString();
+                    cruz.SizeMode = PictureBoxSizeMode.StretchImage;
+                    cruz.Click += new EventHandler(EliminarAgenda);
+
+                    Panel panel = new Panel();
+                    panel.Height = 20;
+                    panel.Width = 288;
+                    panel.Location = new Point(0, ypanel);
+                    ypanel += 20;
+                    panel.Name = "pnl" + agenda.IdAgenda.ToString();
+                    panel.BackColor = Color.FromArgb(61, 53, 50);
+
+                    panel.Controls.Add(horario);
+                    panel.Controls.Add(cruz);
+                    panel.Controls.Add(linea);
+
+                    panelHorariosPorDia.Controls.Add(panel);
+
                 }
             }
+
+                    
+                    
+                
+            
 
         }
         private void EliminarAgenda(object sender, EventArgs e)
@@ -339,6 +377,75 @@ namespace Hatchat.Presentacion
             new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
             MessageBox.Show("Se ha eliminado la agenda");
         }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
+        private void btnLun_Click(object sender, EventArgs e)
+        {
+            lu = !lu;
+            if (lu)
+            {
+                btnLu.BackColor = Color.FromArgb(239, 136, 88);
+            }
+            else
+            {
+                btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            }
+        }
+
+
+        private void btnMa_Click(object sender, EventArgs e)
+        {
+            ma = !ma;
+            if (ma)
+            {
+                btnMa.BackColor = Color.FromArgb(239, 136, 88);
+            }
+            else
+            {
+                btnMa.BackColor = Color.FromArgb(61, 53, 50);
+            }
+        }
+        private void btnMi_Click(object sender, EventArgs e)
+        {
+            mi = !mi;
+            if (mi)
+            {
+                btnMi.BackColor = Color.FromArgb(239, 136, 88);
+            }
+            else
+            {
+                btnMi.BackColor = Color.FromArgb(61, 53, 50);
+            }
+        }
+        private void btnJu_Click(object sender, EventArgs e)
+        {
+            ju = !ju;
+            if (ju)
+            {
+                btnJu.BackColor = Color.FromArgb(239, 136, 88);
+            }
+            else
+            {
+                btnJu.BackColor = Color.FromArgb(61, 53, 50);
+            }
+        }
+        private void btnVi_Click(object sender, EventArgs e)
+        {
+            vi = !vi;
+            if (vi)
+            {
+                btnVi.BackColor = Color.FromArgb(239, 136, 88);
+            }
+            else
+            {
+                btnVi.BackColor = Color.FromArgb(61, 53, 50);
+            }
+        }
+
+
         private void btnNuevaAgenda_Click(object sender, EventArgs e)
         {
             panelAgregarAgenda.Visible = true;
@@ -356,13 +463,13 @@ namespace Hatchat.Presentacion
         }
         private void btnAgregarNuevaAgenda_Click(object sender, EventArgs e)
         {
-            if (!chbxLunes.Checked && !chbxMartes.Checked && !chbxMiercoles.Checked && !chbxJueves.Checked && !chbxViernes.Checked)
+            if (!lu && !ma&& !mi && !ju && !vi)
             {
                 MessageBox.Show("No se ha seleccionado ningun dia");
             }
             else
             {
-                if (chbxLunes.Checked)
+                if (lu)
                 {
                     Logica.Agenda agenda = new Logica.Agenda();
                     agenda.Ci = Login.encontrado.Ci;
@@ -370,8 +477,10 @@ namespace Hatchat.Presentacion
                     agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
                     agenda.NomDia = "Lunes";
                     agenda.AgregarAgenda();
+                    lu = false;
+                    btnLu.BackColor = Color.FromArgb(61, 53, 50);
                 }
-                if (chbxMartes.Checked)
+                if (ma)
                 {
                     Logica.Agenda agenda = new Logica.Agenda();
                     agenda.Ci = Login.encontrado.Ci;
@@ -379,8 +488,10 @@ namespace Hatchat.Presentacion
                     agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
                     agenda.NomDia = "Martes";
                     agenda.AgregarAgenda();
+                    ma = false;
+                    btnMa.BackColor = Color.FromArgb(61, 53, 50);
                 }
-                if (chbxMiercoles.Checked)
+                if (mi)
                 {
                     Logica.Agenda agenda = new Logica.Agenda();
                     agenda.Ci = Login.encontrado.Ci;
@@ -388,8 +499,10 @@ namespace Hatchat.Presentacion
                     agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
                     agenda.NomDia = "Miercoles";
                     agenda.AgregarAgenda();
+                    mi = false;
+                    btnMi.BackColor = Color.FromArgb(61, 53, 50);
                 }
-                if (chbxJueves.Checked)
+                if (ju)
                 {
                     Logica.Agenda agenda = new Logica.Agenda();
                     agenda.Ci = Login.encontrado.Ci;
@@ -397,8 +510,10 @@ namespace Hatchat.Presentacion
                     agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
                     agenda.NomDia = "Jueves";
                     agenda.AgregarAgenda();
+                    ju = false;
+                    btnJu.BackColor = Color.FromArgb(61, 53, 50);
                 }
-                if (chbxViernes.Checked)
+                if (vi)
                 {
                     Logica.Agenda agenda = new Logica.Agenda();
                     agenda.Ci = Login.encontrado.Ci;
@@ -406,6 +521,8 @@ namespace Hatchat.Presentacion
                     agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
                     agenda.NomDia = "Viernes";
                     agenda.AgregarAgenda();
+                    vi = false;
+                    btnVi.BackColor = Color.FromArgb(61, 53, 50);
                 }
                 MessageBox.Show("Se ha agendado correctamente");
                 panelAgregarAgenda.Visible = false;
