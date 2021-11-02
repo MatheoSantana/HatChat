@@ -27,8 +27,8 @@ namespace Hatchat.Presentacion
             InitializeComponent();
 
             Text = "Mensajes";
-
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(1280, 720);
 
             StartPosition = FormStartPosition.CenterScreen;
@@ -213,6 +213,12 @@ namespace Hatchat.Presentacion
                 }
             }
         }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
+
         private void AbrirMensaje(object sender, EventArgs e)
         {
             panelContenedor.Visible = false;

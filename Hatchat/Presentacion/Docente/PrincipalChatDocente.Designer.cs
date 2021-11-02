@@ -75,6 +75,7 @@ namespace Hatchat.Presentacion
             this.panelChatsActivos = new System.Windows.Forms.Panel();
             this.panelChatsAIngresar = new System.Windows.Forms.Panel();
             this.timerSolicitudes = new System.Windows.Forms.Timer(this.components);
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelHistorialesNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).BeginInit();
@@ -537,6 +538,12 @@ namespace Hatchat.Presentacion
             this.timerSolicitudes.Interval = 500;
             this.timerSolicitudes.Tick += new System.EventHandler(this.timerSolicitudes_Tick);
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // PrincipalChatDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,5 +641,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelChatsActivos;
         private System.Windows.Forms.Panel panelChatsAIngresar;
         private System.Windows.Forms.Timer timerSolicitudes;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

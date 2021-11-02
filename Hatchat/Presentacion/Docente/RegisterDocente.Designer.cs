@@ -29,6 +29,7 @@ namespace Hatchat.Presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterDocente));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -54,6 +55,7 @@ namespace Hatchat.Presentacion
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblSegundoApellido = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxVolver)).BeginInit();
@@ -307,6 +309,12 @@ namespace Hatchat.Presentacion
             this.txtPassword.Size = new System.Drawing.Size(389, 29);
             this.txtPassword.TabIndex = 31;
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // RegisterDocente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,5 +362,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblSegundoApellido;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

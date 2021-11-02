@@ -13,7 +13,8 @@ namespace Hatchat.Presentacion
         public RegisterDocente()
         {
             InitializeComponent();
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Text = "Register Docente";
             try
             {
@@ -126,5 +127,9 @@ namespace Hatchat.Presentacion
             this.Hide();
         }
 
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
     }
 }

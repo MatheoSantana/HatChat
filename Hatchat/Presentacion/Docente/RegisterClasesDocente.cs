@@ -28,7 +28,8 @@ namespace Hatchat.Presentacion
             InitializeComponent();
             
             Text = "Register clase Docente";
-            
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
 
@@ -514,6 +515,9 @@ namespace Hatchat.Presentacion
             }
         }
 
-        
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
     }
 }

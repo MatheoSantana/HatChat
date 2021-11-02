@@ -28,7 +28,9 @@ namespace Hatchat.Presentacion
         {
             InitializeComponent();
 
-            Text = "Chat";
+            Text = "Chat"; 
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
 
             ClientSize = new Size(1280, 720);
             panelChat.Visible = false;
@@ -580,7 +582,11 @@ namespace Hatchat.Presentacion
             }
         }
 
-       
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
+
         private void CerrarChat()
         {
 

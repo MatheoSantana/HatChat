@@ -76,30 +76,74 @@ namespace Hatchat.Logica
             }
             else if (fechaHora.Length == 18)
             {
-                day = fechaHora[0].ToString() + fechaHora[1].ToString();
-                month = fechaHora[3].ToString() + fechaHora[4].ToString();
-                year = fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString() + fechaHora[9].ToString();
-                hour = "0" + fechaHora[11].ToString();
-                minute = fechaHora[13].ToString() + fechaHora[14].ToString();
-                second = fechaHora[16].ToString() + fechaHora[17].ToString();
+                if (fechaHora[1].ToString() == "/")
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = fechaHora[2].ToString() + fechaHora[3].ToString();
+                    year = fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString();
+                    hour = fechaHora[10].ToString() + fechaHora[11].ToString();
+                    minute = fechaHora[13].ToString() + fechaHora[14].ToString();
+                    second = fechaHora[16].ToString() + fechaHora[17].ToString();
+                }
+                else
+                {
+                    day = fechaHora[0].ToString() + fechaHora[1].ToString();
+                    month = fechaHora[3].ToString() + fechaHora[4].ToString();
+                    year = fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString() + fechaHora[9].ToString();
+                    hour = "0" + fechaHora[11].ToString();
+                    minute = fechaHora[13].ToString() + fechaHora[14].ToString();
+                    second = fechaHora[16].ToString() + fechaHora[17].ToString();
+                }
             }
             else if (fechaHora.Length == 17)
             {
-                day = fechaHora[0].ToString() + fechaHora[1].ToString();
-                month = fechaHora[3].ToString() + fechaHora[4].ToString();
-                year = "20" + fechaHora[6].ToString() + fechaHora[7].ToString();
-                hour = fechaHora[9].ToString() + fechaHora[10].ToString();
-                minute = fechaHora[12].ToString() + fechaHora[13].ToString();
-                second = fechaHora[15].ToString() + fechaHora[16].ToString();
+                if(fechaHora[3].ToString() == "/")
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = "0" + fechaHora[2].ToString();
+                    year = fechaHora[4].ToString() + fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString();
+                    hour = fechaHora[9].ToString() + fechaHora[10].ToString();
+                    minute = fechaHora[12].ToString() + fechaHora[13].ToString();
+                    second = fechaHora[15].ToString() + fechaHora[16].ToString();
+                }
+                else if(fechaHora[2].ToString() == "/")
+                {
+                    day = fechaHora[0].ToString() + fechaHora[1].ToString();
+                    month = fechaHora[3].ToString() + fechaHora[4].ToString();
+                    year = "20" + fechaHora[6].ToString() + fechaHora[7].ToString();
+                    hour = fechaHora[9].ToString() + fechaHora[10].ToString();
+                    minute = fechaHora[12].ToString() + fechaHora[13].ToString();
+                    second = fechaHora[15].ToString() + fechaHora[16].ToString();
+                }
+                else
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = fechaHora[2].ToString() + fechaHora[3].ToString();
+                    year = fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString();
+                    hour = "0" + fechaHora[10].ToString();
+                    minute = fechaHora[12].ToString() + fechaHora[13].ToString();
+                    second = fechaHora[15].ToString() + fechaHora[16].ToString();
+
+                }
+                
             }
             else if (fechaHora.Length == 16)
             {
-                if (fechaHora[1].ToString() == "/")
+                if (fechaHora[4].ToString() == "/")
                 {
                     day = "0" + fechaHora[0].ToString();
                     month = fechaHora[2].ToString() + fechaHora[3].ToString();
                     year = "20" + fechaHora[5].ToString() + fechaHora[6].ToString();
                     hour = fechaHora[8].ToString() + fechaHora[9].ToString();
+                    minute = fechaHora[11].ToString() + fechaHora[12].ToString();
+                    second = fechaHora[14].ToString() + fechaHora[15].ToString();
+                }
+                else if(fechaHora[3].ToString() == "/")
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = "0" + fechaHora[2].ToString();
+                    year = fechaHora[4].ToString() + fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString();
+                    hour = "0" + fechaHora[9].ToString();
                     minute = fechaHora[11].ToString() + fechaHora[12].ToString();
                     second = fechaHora[14].ToString() + fechaHora[15].ToString();
                 }
@@ -142,7 +186,7 @@ namespace Hatchat.Logica
                     minute = fechaHora[10].ToString() + fechaHora[11].ToString();
                     second = fechaHora[13].ToString() + fechaHora[14].ToString();
                 }
-                else
+                else if (fechaHora[7].ToString() == " ")
                 {
                     day = "0" + fechaHora[0].ToString();
                     month = fechaHora[2].ToString() + fechaHora[3].ToString();
@@ -151,10 +195,19 @@ namespace Hatchat.Logica
                     minute = fechaHora[10].ToString() + fechaHora[11].ToString();
                     second = fechaHora[13].ToString() + fechaHora[14].ToString();
                 }
+                else 
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = fechaHora[2].ToString() + fechaHora[3].ToString();
+                    year = fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString();
+                    hour = fechaHora[10].ToString() + fechaHora[11].ToString();
+                    minute = fechaHora[13].ToString() + fechaHora[14].ToString();
+                    second = "00";
+                }
             }
             else if (fechaHora.Length == 14)
             {
-                if (fechaHora[1].ToString() == "/")
+                if (fechaHora[6].ToString() == " ")
                 {
                     day = "0" + fechaHora[0].ToString();
                     month = "0" + fechaHora[2].ToString();
@@ -163,8 +216,17 @@ namespace Hatchat.Logica
                     minute = fechaHora[9].ToString() + fechaHora[10].ToString();
                     second = fechaHora[12].ToString() + fechaHora[13].ToString();
                 }
-                else
+                else if (fechaHora[3].ToString() == "/")
                 {
+                    day = "0" + fechaHora[0].ToString();
+                    month = "0" + fechaHora[2].ToString();
+                    year = fechaHora[4].ToString() + fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString();
+                    hour = fechaHora[9].ToString() + fechaHora[10].ToString();
+                    minute = fechaHora[12].ToString() + fechaHora[13].ToString();
+                    second = "00";
+                }
+                else if (fechaHora[2].ToString() == "/") 
+                { 
                     day = fechaHora[0].ToString() + fechaHora[1].ToString();
                     month = fechaHora[3].ToString() + fechaHora[4].ToString();
                     year = "20" + fechaHora[6].ToString() + fechaHora[7].ToString();
@@ -172,15 +234,33 @@ namespace Hatchat.Logica
                     minute = fechaHora[12].ToString() + fechaHora[13].ToString();
                     second = "00";
                 }
+                else
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = fechaHora[2].ToString() + fechaHora[3].ToString();
+                    year = fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString();
+                    hour = "0" + fechaHora[10].ToString();
+                    minute = fechaHora[12].ToString() + fechaHora[13].ToString();
+                    second = "00";
+                }
             }
             else if (fechaHora.Length == 13)
             {
-                if (fechaHora[1].ToString() == "/")
+                if (fechaHora[4].ToString() == "/")
                 {
                     day = "0" + fechaHora[0].ToString();
                     month = fechaHora[2].ToString() + fechaHora[3].ToString();
                     year = "20" + fechaHora[5].ToString() + fechaHora[6].ToString();
                     hour = fechaHora[8].ToString() + fechaHora[9].ToString();
+                    minute = fechaHora[11].ToString() + fechaHora[12].ToString();
+                    second = "00";
+                }
+                else if (fechaHora[1].ToString() == "/")
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = "0" + fechaHora[2].ToString();
+                    year = fechaHora[4].ToString() + fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString();
+                    hour = "0" + fechaHora[9].ToString();
                     minute = fechaHora[11].ToString() + fechaHora[12].ToString();
                     second = "00";
                 }
@@ -234,9 +314,26 @@ namespace Hatchat.Logica
                 minute = "00";
                 second = "00";
             }
+            else if (fechaHora.Length == 9)
+            {
+                day = "0" + fechaHora[0].ToString();
+                month = fechaHora[2].ToString() + fechaHora[3].ToString();
+                year = fechaHora[5].ToString() + fechaHora[6].ToString() + fechaHora[7].ToString() + fechaHora[8].ToString();
+                hour = "00";
+                minute = "00";
+                second = "00";
+            }
             else if (fechaHora.Length == 8)
             {
-                if (fechaHora[2].ToString() == "/")
+                if (fechaHora[1].ToString() == "/")
+                {
+                    day = "0" + fechaHora[0].ToString();
+                    month = "0" + fechaHora[2].ToString();
+                    year = fechaHora[4].ToString() + fechaHora[5].ToString() +fechaHora[6].ToString() + fechaHora[7].ToString();
+                    hour = "00";
+                    minute = "00";
+                    second = "00";
+                }else if (fechaHora[2].ToString() == "/")
                 {
                     day = fechaHora[0].ToString() + fechaHora[1].ToString();
                     month = fechaHora[3].ToString() + fechaHora[4].ToString();
