@@ -32,10 +32,6 @@ namespace Hatchat.Presentacion
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistorialChatsAlumno));
             this.lblHistorialChats = new System.Windows.Forms.Label();
-            this.panelChatsActivos = new System.Windows.Forms.Panel();
-            this.lblBienvenido = new System.Windows.Forms.Label();
-            this.lblLinea = new System.Windows.Forms.Label();
-            this.pcbxLogo = new System.Windows.Forms.PictureBox();
             this.tmrCargChats = new System.Windows.Forms.Timer(this.components);
             this.tmrCargChat = new System.Windows.Forms.Timer(this.components);
             this.timerHistorialNav = new System.Windows.Forms.Timer(this.components);
@@ -60,6 +56,11 @@ namespace Hatchat.Presentacion
             this.lblHistrialChat = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panelChatsActivos = new System.Windows.Forms.Panel();
+            this.lblBienvenido = new System.Windows.Forms.Label();
+            this.lblLinea = new System.Windows.Forms.Label();
+            this.pcbxLogo = new System.Windows.Forms.PictureBox();
+            this.panelCharla = new System.Windows.Forms.Panel();
             this.panelDatosClase = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnParticipantes = new System.Windows.Forms.Button();
@@ -67,15 +68,12 @@ namespace Hatchat.Presentacion
             this.pcbxMaterialDatosClase = new System.Windows.Forms.PictureBox();
             this.lblHorario = new System.Windows.Forms.Label();
             this.lblMateriaClaseChat = new System.Windows.Forms.Label();
-            this.panelCharla = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panelParticipantes = new System.Windows.Forms.Panel();
             this.lblParticipantes = new System.Windows.Forms.Label();
             this.panelParticipantesOrdinarios = new System.Windows.Forms.Panel();
             this.lblHostParticipantes = new System.Windows.Forms.Label();
             this.lblDocenteParticipantes = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelChatsActivos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelHistorialesNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).BeginInit();
@@ -89,6 +87,8 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
             this.panelTextoChat.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelChatsActivos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelDatosClase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxMaterialDatosClase)).BeginInit();
             this.panelParticipantes.SuspendLayout();
@@ -102,49 +102,6 @@ namespace Hatchat.Presentacion
             this.lblHistorialChats.Size = new System.Drawing.Size(74, 13);
             this.lblHistorialChats.TabIndex = 2;
             this.lblHistorialChats.Text = "Historial Chats";
-            // 
-            // panelChatsActivos
-            // 
-            this.panelChatsActivos.AutoScroll = true;
-            this.panelChatsActivos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChatsActivos.Controls.Add(this.lblBienvenido);
-            this.panelChatsActivos.Controls.Add(this.lblLinea);
-            this.panelChatsActivos.Controls.Add(this.pcbxLogo);
-            this.panelChatsActivos.Location = new System.Drawing.Point(411, 141);
-            this.panelChatsActivos.Name = "panelChatsActivos";
-            this.panelChatsActivos.Size = new System.Drawing.Size(740, 485);
-            this.panelChatsActivos.TabIndex = 5;
-            // 
-            // lblBienvenido
-            // 
-            this.lblBienvenido.AutoSize = true;
-            this.lblBienvenido.Font = new System.Drawing.Font("Arial", 26F);
-            this.lblBienvenido.ForeColor = System.Drawing.Color.White;
-            this.lblBienvenido.Location = new System.Drawing.Point(99, 96);
-            this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(503, 40);
-            this.lblBienvenido.TabIndex = 16;
-            this.lblBienvenido.Text = "Usted no tiene chats archivados";
-            // 
-            // lblLinea
-            // 
-            this.lblLinea.AutoSize = true;
-            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLinea.ForeColor = System.Drawing.Color.White;
-            this.lblLinea.Location = new System.Drawing.Point(32, 82);
-            this.lblLinea.Name = "lblLinea";
-            this.lblLinea.Size = new System.Drawing.Size(656, 67);
-            this.lblLinea.TabIndex = 17;
-            this.lblLinea.Text = "___________________";
-            // 
-            // pcbxLogo
-            // 
-            this.pcbxLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pcbxLogo.InitialImage")));
-            this.pcbxLogo.Location = new System.Drawing.Point(178, 160);
-            this.pcbxLogo.Name = "pcbxLogo";
-            this.pcbxLogo.Size = new System.Drawing.Size(363, 244);
-            this.pcbxLogo.TabIndex = 18;
-            this.pcbxLogo.TabStop = false;
             // 
             // tmrCargChats
             // 
@@ -383,6 +340,60 @@ namespace Hatchat.Presentacion
             this.panel1.Size = new System.Drawing.Size(321, 505);
             this.panel1.TabIndex = 6;
             // 
+            // panelChatsActivos
+            // 
+            this.panelChatsActivos.AutoScroll = true;
+            this.panelChatsActivos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelChatsActivos.Controls.Add(this.lblBienvenido);
+            this.panelChatsActivos.Controls.Add(this.lblLinea);
+            this.panelChatsActivos.Controls.Add(this.pcbxLogo);
+            this.panelChatsActivos.Location = new System.Drawing.Point(411, 141);
+            this.panelChatsActivos.Name = "panelChatsActivos";
+            this.panelChatsActivos.Size = new System.Drawing.Size(740, 485);
+            this.panelChatsActivos.TabIndex = 5;
+            // 
+            // lblBienvenido
+            // 
+            this.lblBienvenido.AutoSize = true;
+            this.lblBienvenido.Font = new System.Drawing.Font("Arial", 26F);
+            this.lblBienvenido.ForeColor = System.Drawing.Color.White;
+            this.lblBienvenido.Location = new System.Drawing.Point(99, 96);
+            this.lblBienvenido.Name = "lblBienvenido";
+            this.lblBienvenido.Size = new System.Drawing.Size(503, 40);
+            this.lblBienvenido.TabIndex = 16;
+            this.lblBienvenido.Text = "Usted no tiene chats archivados";
+            // 
+            // lblLinea
+            // 
+            this.lblLinea.AutoSize = true;
+            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea.ForeColor = System.Drawing.Color.White;
+            this.lblLinea.Location = new System.Drawing.Point(32, 82);
+            this.lblLinea.Name = "lblLinea";
+            this.lblLinea.Size = new System.Drawing.Size(656, 67);
+            this.lblLinea.TabIndex = 17;
+            this.lblLinea.Text = "___________________";
+            // 
+            // pcbxLogo
+            // 
+            this.pcbxLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pcbxLogo.InitialImage")));
+            this.pcbxLogo.Location = new System.Drawing.Point(178, 160);
+            this.pcbxLogo.Name = "pcbxLogo";
+            this.pcbxLogo.Size = new System.Drawing.Size(363, 244);
+            this.pcbxLogo.TabIndex = 18;
+            this.pcbxLogo.TabStop = false;
+            // 
+            // panelCharla
+            // 
+            this.panelCharla.AutoScroll = true;
+            this.panelCharla.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
+            this.panelCharla.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCharla.Location = new System.Drawing.Point(331, 218);
+            this.panelCharla.Name = "panelCharla";
+            this.panelCharla.Size = new System.Drawing.Size(921, 451);
+            this.panelCharla.TabIndex = 13;
+            this.panelCharla.Visible = false;
+            // 
             // panelDatosClase
             // 
             this.panelDatosClase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
@@ -465,16 +476,14 @@ namespace Hatchat.Presentacion
             this.lblMateriaClaseChat.TabIndex = 8;
             this.lblMateriaClaseChat.Text = "Materia Año Clase";
             // 
-            // panelCharla
+            // panel2
             // 
-            this.panelCharla.AutoScroll = true;
-            this.panelCharla.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
-            this.panelCharla.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelCharla.Location = new System.Drawing.Point(331, 218);
-            this.panelCharla.Name = "panelCharla";
-            this.panelCharla.Size = new System.Drawing.Size(921, 451);
-            this.panelCharla.TabIndex = 13;
-            this.panelCharla.Visible = false;
+            this.panel2.AutoScroll = true;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(331, 119);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(921, 550);
+            this.panel2.TabIndex = 29;
             // 
             // panelParticipantes
             // 
@@ -484,20 +493,20 @@ namespace Hatchat.Presentacion
             this.panelParticipantes.Controls.Add(this.panelParticipantesOrdinarios);
             this.panelParticipantes.Controls.Add(this.lblHostParticipantes);
             this.panelParticipantes.Controls.Add(this.lblDocenteParticipantes);
-            this.panelParticipantes.Location = new System.Drawing.Point(919, 214);
+            this.panelParticipantes.Location = new System.Drawing.Point(918, 217);
             this.panelParticipantes.Name = "panelParticipantes";
             this.panelParticipantes.Size = new System.Drawing.Size(325, 433);
-            this.panelParticipantes.TabIndex = 25;
+            this.panelParticipantes.TabIndex = 30;
             this.panelParticipantes.Visible = false;
             // 
             // lblParticipantes
             // 
             this.lblParticipantes.AutoSize = true;
-            this.lblParticipantes.Font = new System.Drawing.Font("Arial", 8F);
+            this.lblParticipantes.Font = new System.Drawing.Font("Arial", 12F);
             this.lblParticipantes.ForeColor = System.Drawing.Color.White;
-            this.lblParticipantes.Location = new System.Drawing.Point(19, 114);
+            this.lblParticipantes.Location = new System.Drawing.Point(19, 97);
             this.lblParticipantes.Name = "lblParticipantes";
-            this.lblParticipantes.Size = new System.Drawing.Size(75, 14);
+            this.lblParticipantes.Size = new System.Drawing.Size(108, 18);
             this.lblParticipantes.TabIndex = 3;
             this.lblParticipantes.Text = "Participantes: ";
             // 
@@ -512,33 +521,24 @@ namespace Hatchat.Presentacion
             // lblHostParticipantes
             // 
             this.lblHostParticipantes.AutoSize = true;
-            this.lblHostParticipantes.Font = new System.Drawing.Font("Arial", 8F);
+            this.lblHostParticipantes.Font = new System.Drawing.Font("Arial", 12F);
             this.lblHostParticipantes.ForeColor = System.Drawing.Color.White;
-            this.lblHostParticipantes.Location = new System.Drawing.Point(19, 77);
+            this.lblHostParticipantes.Location = new System.Drawing.Point(19, 60);
             this.lblHostParticipantes.Name = "lblHostParticipantes";
-            this.lblHostParticipantes.Size = new System.Drawing.Size(32, 14);
+            this.lblHostParticipantes.Size = new System.Drawing.Size(44, 18);
             this.lblHostParticipantes.TabIndex = 1;
             this.lblHostParticipantes.Text = "Host:";
             // 
             // lblDocenteParticipantes
             // 
             this.lblDocenteParticipantes.AutoSize = true;
-            this.lblDocenteParticipantes.Font = new System.Drawing.Font("Arial", 8F);
+            this.lblDocenteParticipantes.Font = new System.Drawing.Font("Arial", 12F);
             this.lblDocenteParticipantes.ForeColor = System.Drawing.Color.White;
-            this.lblDocenteParticipantes.Location = new System.Drawing.Point(16, 32);
+            this.lblDocenteParticipantes.Location = new System.Drawing.Point(16, 15);
             this.lblDocenteParticipantes.Name = "lblDocenteParticipantes";
-            this.lblDocenteParticipantes.Size = new System.Drawing.Size(50, 14);
+            this.lblDocenteParticipantes.Size = new System.Drawing.Size(71, 18);
             this.lblDocenteParticipantes.TabIndex = 0;
             this.lblDocenteParticipantes.Text = "Docente:";
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(331, 119);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(921, 550);
-            this.panel2.TabIndex = 29;
             // 
             // HistorialChatsAlumno
             // 
@@ -559,9 +559,6 @@ namespace Hatchat.Presentacion
             this.Name = "HistorialChatsAlumno";
             this.Text = "PrincipalChatAlumno";
             this.Load += new System.EventHandler(this.PrincipalChatAlumno_Load);
-            this.panelChatsActivos.ResumeLayout(false);
-            this.panelChatsActivos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).EndInit();
             this.panelHistorialesNav.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).EndInit();
@@ -576,6 +573,9 @@ namespace Hatchat.Presentacion
             this.panelTextoChat.ResumeLayout(false);
             this.panelTextoChat.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panelChatsActivos.ResumeLayout(false);
+            this.panelChatsActivos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).EndInit();
             this.panelDatosClase.ResumeLayout(false);
             this.panelDatosClase.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxMaterialDatosClase)).EndInit();
@@ -588,7 +588,6 @@ namespace Hatchat.Presentacion
 
         #endregion
         private System.Windows.Forms.Label lblHistorialChats;
-        private System.Windows.Forms.Panel panelChatsActivos;
         private System.Windows.Forms.Timer tmrCargChats;
         private System.Windows.Forms.Timer tmrCargChat;
         private System.Windows.Forms.Timer timerHistorialNav;
@@ -613,6 +612,11 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblHistrialChat;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelChatsActivos;
+        private System.Windows.Forms.Label lblBienvenido;
+        private System.Windows.Forms.Label lblLinea;
+        private System.Windows.Forms.PictureBox pcbxLogo;
+        private System.Windows.Forms.Panel panelCharla;
         private System.Windows.Forms.Panel panelDatosClase;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnParticipantes;
@@ -620,15 +624,11 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pcbxMaterialDatosClase;
         private System.Windows.Forms.Label lblHorario;
         private System.Windows.Forms.Label lblMateriaClaseChat;
-        private System.Windows.Forms.Panel panelCharla;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelParticipantes;
         private System.Windows.Forms.Label lblParticipantes;
         private System.Windows.Forms.Panel panelParticipantesOrdinarios;
         private System.Windows.Forms.Label lblHostParticipantes;
         private System.Windows.Forms.Label lblDocenteParticipantes;
-        private System.Windows.Forms.Label lblBienvenido;
-        private System.Windows.Forms.Label lblLinea;
-        private System.Windows.Forms.PictureBox pcbxLogo;
-        private System.Windows.Forms.Panel panel2;
     }
 }

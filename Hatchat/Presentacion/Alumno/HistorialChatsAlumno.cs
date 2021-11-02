@@ -19,12 +19,9 @@ namespace Hatchat.Presentacion
         public Form principalChatsAlumno;
         public Form historialMensajesAlumno;
 
-        int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
-        private List<Logica.Chat> posiblesChats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
         public static Logica.Chat abierto = new Logica.Chat();
-        Logica.Clase seleccionada = new Logica.Clase();
         private List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
 
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
@@ -544,7 +541,6 @@ namespace Hatchat.Presentacion
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
             abierto = chat;
             
-
             pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
             tmrCargChat.Enabled = true;
             mensajs.Clear();
@@ -591,8 +587,6 @@ namespace Hatchat.Presentacion
             btnFiltrarFecha.Visible = true;
             btnVolver.Visible = false;
         }
-
-        
 
         private void timerHistorialChats_Tick(object sender, EventArgs e)
         {
@@ -756,6 +750,8 @@ namespace Hatchat.Presentacion
                     dina.Height = 46;
                     dina.Width = 150;
                     dina.Location = new Point(25, y);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
                     y += 50;
                     dina.Name = "lblParticipante" + x;
                     dina.Text = "- " + usuarios[x].Nombre + " " + usuarios[x].Primer_apellido;

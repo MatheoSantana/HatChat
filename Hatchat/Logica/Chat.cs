@@ -224,5 +224,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectHistorialChatsPorCedulaAlumno(ci);
         }
+        public List<Chat> SelectHistorialChatsPorCedulaDocente(string ci)
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectHistorialChatsPorCedulaDocente(ci);
+        }
     }
 }

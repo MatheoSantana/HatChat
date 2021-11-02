@@ -19,12 +19,10 @@ namespace Hatchat.Presentacion
         public Form principalChatsAlumno;
         public Form historialMensajesAlumno;
 
-        int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
-        private List<Logica.Chat> posiblesChats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
         public static Logica.Chat abierto = new Logica.Chat();
-        Logica.Clase seleccionada = new Logica.Clase();
+        
         private List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
 
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
@@ -49,6 +47,7 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat blanco.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pcbxLogo.Image = Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -66,6 +65,7 @@ namespace Hatchat.Presentacion
             pcbxHistorialChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
 
@@ -167,6 +167,18 @@ namespace Hatchat.Presentacion
         {
             List<Logica.Chat> chats = new List<Logica.Chat>();
             List<Logica.Chat> chatstemps = new Logica.Chat().SelectHistorialChatsPorCedulaAlumno(Login.encontrado.Ci);
+            if (chatstemps.Count != 0)
+            {
+                lblLinea.Visible = false;
+                lblBienvenido.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblLinea.Visible = true;
+                lblBienvenido.Visible = true;
+                pcbxLogo.Visible = true;
+            }
             foreach (Logica.Chat chat in chatstemps)
             {
                 bool agregado = false;
@@ -244,29 +256,112 @@ namespace Hatchat.Presentacion
                     }
                 }
                 this.chats = chats;
-                y = 5;
+                int yPanel = 0;
                 panelChatsActivos.Controls.Clear();
 
                 foreach (Logica.Chat chat in chats)
                 {
                     Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
                     Logica.Clase clase = new Logica.Clase().SelectClasePorId(chat.IdClase);
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblC" + chat.IdChat.ToString();
-                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema:" + chat.Titulo;
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(AbrirChat);
-                    panelChatsActivos.Controls.Add(dina);
+                    
+
+                    List<Logica.ChateaAl> chateaAls = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
+
+                    Logica.Usuario host = new Logica.Usuario().SelectUsuarioCi(chateaAls[0].Ci);
+
+                    PictureBox picPhoto = new PictureBox();
+                    picPhoto.Image = Image.FromFile("profesor.png");
+                    picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picPhoto.Height = 69;
+                    picPhoto.Width = 69;
+                    picPhoto.Location = new Point(6, 6);
+                    picPhoto.Name = "pbxC" + chat.IdChat.ToString();
+                    picPhoto.Click += new EventHandler(AbrirChat);
+
+                    Label grupo = new Label();
+                    grupo.Height = 83;
+                    grupo.Width = 230;
+                    grupo.Location = new Point(80, 0);
+                    grupo.ForeColor = Color.White;
+                    grupo.Font = new Font("Arial", 15.0f);
+                    grupo.Name = "lblC" + chat.IdChat.ToString();
+                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre;
+                    grupo.Click += new EventHandler(AbrirChat);
+
+                    Label docente = new Label();
+                    docente.Height = 83;
+                    docente.Width = 150;
+                    docente.Location = new Point(310, 0);
+                    docente.ForeColor = Color.White;
+                    docente.Font = new Font("Arial", 12.0f);
+                    docente.Name = "lblCD" + chat.IdChat.ToString();
+                    docente.Text = "Host:\n" + host.Nombre + " " + host.Primer_apellido;
+                    docente.Click += new EventHandler(AbrirChat);
+
+                    Label inicio = new Label();
+                    inicio.Height = 83;
+                    inicio.Width = 85;
+                    inicio.Location = new Point(460, 0);
+                    inicio.ForeColor = Color.White;
+                    inicio.Font = new Font("Arial", 12.0f);
+                    inicio.Name = "lblCI" + chat.IdChat.ToString();
+                    inicio.Text = "Hora inicio:\n" + chat.HoraInicio.ToString("HH") + ":" + chat.HoraInicio.ToString("mm");
+                    inicio.Click += new EventHandler(AbrirChat);
+
+                    Label fin = new Label();
+                    fin.Height = 83;
+                    fin.Width = 85;
+                    fin.Location = new Point(545, 0);
+                    fin.ForeColor = Color.White;
+                    fin.Font = new Font("Arial", 12.0f);
+                    fin.Name = "lblCF" + chat.IdChat.ToString();
+                    fin.Text = "Hora fin:\n" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
+                    fin.Click += new EventHandler(AbrirChat);
+
+                    Label fecha = new Label();
+                    fecha.Height = 83;
+                    fecha.Width = 150;
+                    fecha.Location = new Point(630, 0);
+                    fecha.ForeColor = Color.White;
+                    fecha.Font = new Font("Arial", 12.0f);
+                    fecha.Name = "lblCI" + chat.IdChat.ToString();
+                    fecha.Text = "Fecha:\n" + chat.Fecha.ToString("dd") + "/" + chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
+                    fecha.Click += new EventHandler(AbrirChat);
+
+                    Panel panel = new Panel();
+                    panel.Height = 83;
+                    panel.Width = 738;
+                    panel.Location = new Point(0, yPanel);
+                    yPanel += 83;
+                    panel.Name = "panelC" + chat.IdChat.ToString();
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    panel.Click += new EventHandler(AbrirChat);
+
+                    panel.Controls.Add(grupo);
+                    panel.Controls.Add(picPhoto);
+                    panel.Controls.Add(docente);
+                    panel.Controls.Add(inicio);
+                    panel.Controls.Add(fin);
+                    panel.Controls.Add(fecha);
+                    panelChatsActivos.Controls.Add(panel);
                 }
             }
         }
         private void cargarChats()
         {
-            List<Logica.Chat> chats = new Logica.Chat().SelectHistorialChatsPorCedulaAlumno(Login.encontrado.Ci);
+            List<Logica.Chat> chats = new Logica.Chat().SelectHistorialChatsPorCedulaDocente(Login.encontrado.Ci);
+            if (chats.Count != 0)
+            {
+                lblLinea.Visible = false;
+                lblBienvenido.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblLinea.Visible = true;
+                lblBienvenido.Visible = true;
+                pcbxLogo.Visible = true;
+            }
             bool iguales = true;
             if (this.chats.Count == chats.Count)
             {
@@ -305,39 +400,129 @@ namespace Hatchat.Presentacion
                     }
                 }
                 this.chats = chats;
-                y = 5;
+                int yPanel = 0;
                 panelChatsActivos.Controls.Clear();
 
                 foreach (Logica.Chat chat in chats)
                 {
                     Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
                     Logica.Clase clase = new Logica.Clase().SelectClasePorId(chat.IdClase);
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblC" + chat.IdChat.ToString();
-                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema:" + chat.Titulo;
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(AbrirChat);
-                    panelChatsActivos.Controls.Add(dina);
+
+                    List<Logica.ChateaAl> chateaAls = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
+
+                    Logica.Usuario host = new Logica.Usuario().SelectUsuarioCi(chateaAls[0].Ci);
+
+                    PictureBox picPhoto = new PictureBox();
+                    picPhoto.Image = Image.FromFile("profesor.png");
+                    picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picPhoto.Height = 69;
+                    picPhoto.Width = 69;
+                    picPhoto.Location = new Point(6, 6);
+                    picPhoto.Name = "pbxC" + chat.IdChat.ToString();
+                    picPhoto.Click += new EventHandler(AbrirChat);
+
+                    Label grupo = new Label();
+                    grupo.Height = 83;
+                    grupo.Width = 230;
+                    grupo.Location = new Point(80, 0);
+                    grupo.ForeColor = Color.White;
+                    grupo.Font = new Font("Arial", 15.0f);
+                    grupo.Name = "lblC" + chat.IdChat.ToString();
+                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre;
+                    grupo.Click += new EventHandler(AbrirChat);
+
+                    Label docente = new Label();
+                    docente.Height = 83;
+                    docente.Width = 150;
+                    docente.Location = new Point(310, 0);
+                    docente.ForeColor = Color.White;
+                    docente.Font = new Font("Arial", 12.0f);
+                    docente.Name = "lblCD" + chat.IdChat.ToString();
+                    docente.Text = "Host:\n" + host.Nombre + " " + host.Primer_apellido;
+                    docente.Click += new EventHandler(AbrirChat);
+
+                    Label inicio = new Label();
+                    inicio.Height = 83;
+                    inicio.Width = 85;
+                    inicio.Location = new Point(460, 0);
+                    inicio.ForeColor = Color.White;
+                    inicio.Font = new Font("Arial", 12.0f);
+                    inicio.Name = "lblCI" + chat.IdChat.ToString();
+                    inicio.Text = "Hora inicio:\n" + chat.HoraInicio.ToString("HH") + ":" + chat.HoraInicio.ToString("mm");
+                    inicio.Click += new EventHandler(AbrirChat);
+
+                    Label fin = new Label();
+                    fin.Height = 83;
+                    fin.Width = 85;
+                    fin.Location = new Point(545, 0);
+                    fin.ForeColor = Color.White;
+                    fin.Font = new Font("Arial", 12.0f);
+                    fin.Name = "lblCF" + chat.IdChat.ToString();
+                    fin.Text = "Hora fin:\n" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
+                    fin.Click += new EventHandler(AbrirChat);
+
+                    Label fecha = new Label();
+                    fecha.Height = 83;
+                    fecha.Width = 150;
+                    fecha.Location = new Point(630, 0);
+                    fecha.ForeColor = Color.White;
+                    fecha.Font = new Font("Arial", 12.0f);
+                    fecha.Name = "lblCI" + chat.IdChat.ToString();
+                    fecha.Text = "Fecha:\n" + chat.Fecha.ToString("dd") + "/" + chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
+                    fecha.Click += new EventHandler(AbrirChat);
+
+                    Panel panel = new Panel();
+                    panel.Height = 83;
+                    panel.Width = 738;
+                    panel.Location = new Point(0, yPanel);
+                    yPanel += 83;
+                    panel.Name = "panelC" + chat.IdChat.ToString();
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    panel.Click += new EventHandler(AbrirChat);
+
+                    panel.Controls.Add(grupo);
+                    panel.Controls.Add(picPhoto);
+                    panel.Controls.Add(docente);
+                    panel.Controls.Add(inicio);
+                    panel.Controls.Add(fin);
+                    panel.Controls.Add(fecha);
+                    panelChatsActivos.Controls.Add(panel);
                 }
             }
         }
         private void AbrirChat(object sender, EventArgs e)
         {
+            panelCharla.Visible = true;
+            panelDatosClase.Visible = true;
+            panelParticipantes.Visible = false;
+            panelChatsActivos.Visible = false;
+            btnFiltrarFecha.Visible = false;
+            btnFiltrarAsignatura.Visible = false;
+            cmbxAsignatura.Visible = false;
+            dtpFiltro.Visible = false;
+            btnVolver.Visible = true;
+
             panelChat.Visible = true;
             pcbxMaterialDatosClase.Image = null;
             lblMateriaClaseChat.Text = "";
             lblHoras.Text = "";
             panelCharla.Controls.Clear();
 
-            Logica.Chat chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
+            Logica.Chat chat = new Logica.Chat();
+            if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+            {
+                chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
+            }
+            else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((PictureBox)sender).Name));
+            }
+            else
+            {
+                chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Panel)sender).Name));
+            }
 
-            Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCiInclusivo(chat.Asignatura, Login.encontrado.Ci);
-            Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(chat.Asignatura, asignaturaCursada.IdClase));
-            List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(doc.Ci);
+            List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(Login.encontrado.Ci);
             foreach (Logica.Agenda ag in agendas)
             {
                 if (ag.EnHora(ag))
@@ -346,11 +531,10 @@ namespace Hatchat.Presentacion
                 }
             }
 
-            lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursada.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
+            lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
             abierto = chat;
             
-
             pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
             tmrCargChat.Enabled = true;
             mensajs.Clear();
@@ -358,6 +542,7 @@ namespace Hatchat.Presentacion
 
         private void btnFiltrarAsignatura_Click(object sender, EventArgs e)
         {
+            cmbxAsignatura.Visible = !cmbxAsignatura.Visible;
             filtroAsignatura = !filtroAsignatura;
             btnFiltrarAsignatura.Text = "Filtrar asignatura";
             if (filtroAsignatura)
@@ -368,6 +553,7 @@ namespace Hatchat.Presentacion
 
         private void btnFiltrarFecha_Click(object sender, EventArgs e)
         {
+            dtpFiltro.Visible = !dtpFiltro.Visible;
             filtroFecha = !filtroFecha;
             btnFiltrarFecha.Text = "Filtrar fecha";
             if (filtroFecha)
@@ -379,6 +565,21 @@ namespace Hatchat.Presentacion
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            panelCharla.Visible = false;
+            panelDatosClase.Visible = false;
+            panelParticipantes.Visible = false;
+            panelChatsActivos.Visible = true;
+            btnFiltrarFecha.Visible = true;
+            btnFiltrarAsignatura.Visible = true;
+            cmbxAsignatura.Visible = filtroAsignatura;
+            dtpFiltro.Visible = filtroFecha;
+            btnFiltrarAsignatura.Visible = true;
+            btnFiltrarFecha.Visible = true;
+            btnVolver.Visible = false;
         }
 
         private void timerHistorialChats_Tick(object sender, EventArgs e)
@@ -543,6 +744,8 @@ namespace Hatchat.Presentacion
                     dina.Height = 46;
                     dina.Width = 150;
                     dina.Location = new Point(25, y);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
                     y += 50;
                     dina.Name = "lblParticipante" + x;
                     dina.Text = "- " + usuarios[x].Nombre + " " + usuarios[x].Primer_apellido;
