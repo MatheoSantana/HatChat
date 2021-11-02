@@ -69,6 +69,7 @@ namespace Hatchat.Presentacion
             this.lblPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelNavMensajes = new System.Windows.Forms.Panel();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelPerfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).BeginInit();
             this.panelHistorialesNav.SuspendLayout();
@@ -486,6 +487,12 @@ namespace Hatchat.Presentacion
             this.panelNavMensajes.Size = new System.Drawing.Size(321, 561);
             this.panelNavMensajes.TabIndex = 7;
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // PerfilAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -561,5 +568,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblLinea;
         private System.Windows.Forms.Panel panelNavMensajes;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

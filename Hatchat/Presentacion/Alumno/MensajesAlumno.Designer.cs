@@ -35,6 +35,8 @@ namespace Hatchat.Presentacion
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelNavMensajes = new System.Windows.Forms.Panel();
             this.panelContenedor = new System.Windows.Forms.Panel();
+            this.panelMensajeDocente = new System.Windows.Forms.Panel();
+            this.panelMensajeAlumno = new System.Windows.Forms.Panel();
             this.lblFechaAlumno = new System.Windows.Forms.Label();
             this.lblHoraAlumno = new System.Windows.Forms.Label();
             this.lblConsultaAlumno = new System.Windows.Forms.Label();
@@ -76,8 +78,7 @@ namespace Hatchat.Presentacion
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panelMensajeAlumno = new System.Windows.Forms.Panel();
-            this.panelMensajeDocente = new System.Windows.Forms.Panel();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelContenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlumno)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDocente)).BeginInit();
@@ -149,6 +150,20 @@ namespace Hatchat.Presentacion
             this.panelContenedor.Name = "panelContenedor";
             this.panelContenedor.Size = new System.Drawing.Size(785, 490);
             this.panelContenedor.TabIndex = 7;
+            // 
+            // panelMensajeDocente
+            // 
+            this.panelMensajeDocente.Location = new System.Drawing.Point(77, 330);
+            this.panelMensajeDocente.Name = "panelMensajeDocente";
+            this.panelMensajeDocente.Size = new System.Drawing.Size(647, 138);
+            this.panelMensajeDocente.TabIndex = 15;
+            // 
+            // panelMensajeAlumno
+            // 
+            this.panelMensajeAlumno.Location = new System.Drawing.Point(77, 78);
+            this.panelMensajeAlumno.Name = "panelMensajeAlumno";
+            this.panelMensajeAlumno.Size = new System.Drawing.Size(647, 138);
+            this.panelMensajeAlumno.TabIndex = 14;
             // 
             // lblFechaAlumno
             // 
@@ -564,19 +579,11 @@ namespace Hatchat.Presentacion
             this.panel2.Size = new System.Drawing.Size(922, 552);
             this.panel2.TabIndex = 21;
             // 
-            // panelMensajeAlumno
+            // timerCentrar
             // 
-            this.panelMensajeAlumno.Location = new System.Drawing.Point(77, 78);
-            this.panelMensajeAlumno.Name = "panelMensajeAlumno";
-            this.panelMensajeAlumno.Size = new System.Drawing.Size(647, 138);
-            this.panelMensajeAlumno.TabIndex = 14;
-            // 
-            // panelMensajeDocente
-            // 
-            this.panelMensajeDocente.Location = new System.Drawing.Point(77, 330);
-            this.panelMensajeDocente.Name = "panelMensajeDocente";
-            this.panelMensajeDocente.Size = new System.Drawing.Size(647, 138);
-            this.panelMensajeDocente.TabIndex = 15;
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
             // 
             // MensajesAlumno
             // 
@@ -672,5 +679,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelMensajeDocente;
         private System.Windows.Forms.Panel panelMensajeAlumno;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

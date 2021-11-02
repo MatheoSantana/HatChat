@@ -18,6 +18,8 @@ namespace Hatchat.Presentacion
         {
             InitializeComponent();
             Text = "Register Alumno";
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             try
             {
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
@@ -132,6 +134,9 @@ namespace Hatchat.Presentacion
             this.Hide();
         }
 
-        
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
     }
 }

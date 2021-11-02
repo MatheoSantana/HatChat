@@ -29,6 +29,7 @@ namespace Hatchat.Presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterClasesAlumno));
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
@@ -54,6 +55,7 @@ namespace Hatchat.Presentacion
             this.panelAsignaturas = new System.Windows.Forms.Panel();
             this.lblAsignaturas = new System.Windows.Forms.Label();
             this.lblAdvertencia = new System.Windows.Forms.Label();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxVolver)).BeginInit();
@@ -321,6 +323,12 @@ namespace Hatchat.Presentacion
             this.lblAdvertencia.TabIndex = 42;
             this.lblAdvertencia.Text = "Debe ingresar un año y una clase";
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // RegisterClasesAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,5 +381,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblInfoModif;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

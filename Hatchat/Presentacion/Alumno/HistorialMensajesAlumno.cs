@@ -34,7 +34,8 @@ namespace Hatchat.Presentacion
 
             StartPosition = FormStartPosition.CenterScreen;
             panelContenedor.Visible = false;
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             //nav
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             try
@@ -127,7 +128,7 @@ namespace Hatchat.Presentacion
 
             panelContenedor.Visible = true;
             lblNombreDocente.Text += ("\n" + docente.Nombre + " " + docente.Primer_apellido);
-            lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd:MM:yyyy");
+            lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd/MM/yyyy");
             lblHoraAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("HH:mm");
             lblConsultaAlumno.Text += "\n" + men.Asunto;
             lblConsultaDocente.Text += "\n" + men.Asunto;
@@ -155,7 +156,7 @@ namespace Hatchat.Presentacion
             pbxAlumno.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             pbxDocente.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
             
-                lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
+                lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd/MM/yyyy");
                 lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
             
             
@@ -406,6 +407,11 @@ namespace Hatchat.Presentacion
             btnFiltrarDocente.Visible = true;
             btnFiltrarFecha.Visible = true;
             btnVolver.Visible = false;
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void CargarMensajesFiltro()

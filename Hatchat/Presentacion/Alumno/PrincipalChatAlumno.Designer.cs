@@ -76,15 +76,16 @@ namespace Hatchat.Presentacion
             this.txtMensajeChat = new System.Windows.Forms.TextBox();
             this.panelCharla = new System.Windows.Forms.Panel();
             this.panelDatosClase = new System.Windows.Forms.Panel();
-            this.lblMateriaClaseChat = new System.Windows.Forms.Label();
-            this.lblHorario = new System.Windows.Forms.Label();
-            this.pcbxMaterialDatosClase = new System.Windows.Forms.PictureBox();
-            this.lblHoras = new System.Windows.Forms.Label();
-            this.btnParticipantes = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.btnCerrarChat = new System.Windows.Forms.Button();
+            this.btnParticipantes = new System.Windows.Forms.Button();
+            this.lblHoras = new System.Windows.Forms.Label();
+            this.pcbxMaterialDatosClase = new System.Windows.Forms.PictureBox();
+            this.lblHorario = new System.Windows.Forms.Label();
+            this.lblMateriaClaseChat = new System.Windows.Forms.Label();
             this.pcbxBotonEnviar = new System.Windows.Forms.PictureBox();
             this.panelChat = new System.Windows.Forms.Panel();
-            this.btnCerrarChat = new System.Windows.Forms.Button();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -571,46 +572,31 @@ namespace Hatchat.Presentacion
             this.panelDatosClase.Size = new System.Drawing.Size(921, 100);
             this.panelDatosClase.TabIndex = 10;
             // 
-            // lblMateriaClaseChat
+            // lblTitulo
             // 
-            this.lblMateriaClaseChat.AutoSize = true;
-            this.lblMateriaClaseChat.Font = new System.Drawing.Font("Arial", 30F);
-            this.lblMateriaClaseChat.ForeColor = System.Drawing.Color.White;
-            this.lblMateriaClaseChat.Location = new System.Drawing.Point(106, 3);
-            this.lblMateriaClaseChat.Name = "lblMateriaClaseChat";
-            this.lblMateriaClaseChat.Size = new System.Drawing.Size(342, 45);
-            this.lblMateriaClaseChat.TabIndex = 8;
-            this.lblMateriaClaseChat.Text = "Materia Año Clase";
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Arial", 30F);
+            this.lblTitulo.ForeColor = System.Drawing.Color.White;
+            this.lblTitulo.Location = new System.Drawing.Point(111, 54);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(101, 45);
+            this.lblTitulo.TabIndex = 13;
+            this.lblTitulo.Text = "titulo";
             // 
-            // lblHorario
+            // btnCerrarChat
             // 
-            this.lblHorario.AutoSize = true;
-            this.lblHorario.Font = new System.Drawing.Font("Arial", 8F);
-            this.lblHorario.ForeColor = System.Drawing.Color.White;
-            this.lblHorario.Location = new System.Drawing.Point(781, 8);
-            this.lblHorario.Name = "lblHorario";
-            this.lblHorario.Size = new System.Drawing.Size(106, 14);
-            this.lblHorario.TabIndex = 9;
-            this.lblHorario.Text = "Horario de actividad:";
-            // 
-            // pcbxMaterialDatosClase
-            // 
-            this.pcbxMaterialDatosClase.Location = new System.Drawing.Point(0, 0);
-            this.pcbxMaterialDatosClase.Name = "pcbxMaterialDatosClase";
-            this.pcbxMaterialDatosClase.Size = new System.Drawing.Size(100, 100);
-            this.pcbxMaterialDatosClase.TabIndex = 7;
-            this.pcbxMaterialDatosClase.TabStop = false;
-            // 
-            // lblHoras
-            // 
-            this.lblHoras.AutoSize = true;
-            this.lblHoras.Font = new System.Drawing.Font("Arial", 8F);
-            this.lblHoras.ForeColor = System.Drawing.Color.White;
-            this.lblHoras.Location = new System.Drawing.Point(795, 27);
-            this.lblHoras.Name = "lblHoras";
-            this.lblHoras.Size = new System.Drawing.Size(72, 14);
-            this.lblHoras.TabIndex = 10;
-            this.lblHoras.Text = "hh:mm hh:mm";
+            this.btnCerrarChat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnCerrarChat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCerrarChat.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnCerrarChat.ForeColor = System.Drawing.Color.White;
+            this.btnCerrarChat.Location = new System.Drawing.Point(799, 70);
+            this.btnCerrarChat.Name = "btnCerrarChat";
+            this.btnCerrarChat.Size = new System.Drawing.Size(115, 25);
+            this.btnCerrarChat.TabIndex = 12;
+            this.btnCerrarChat.Text = "Cerrar Chat";
+            this.btnCerrarChat.UseVisualStyleBackColor = false;
+            this.btnCerrarChat.Visible = false;
+            this.btnCerrarChat.Click += new System.EventHandler(this.btnCerrarChat_Click);
             // 
             // btnParticipantes
             // 
@@ -626,16 +612,46 @@ namespace Hatchat.Presentacion
             this.btnParticipantes.UseVisualStyleBackColor = false;
             this.btnParticipantes.Click += new System.EventHandler(this.btnParticipantes_Click);
             // 
-            // lblTitulo
+            // lblHoras
             // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Arial", 30F);
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(111, 54);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(101, 45);
-            this.lblTitulo.TabIndex = 13;
-            this.lblTitulo.Text = "titulo";
+            this.lblHoras.AutoSize = true;
+            this.lblHoras.Font = new System.Drawing.Font("Arial", 8F);
+            this.lblHoras.ForeColor = System.Drawing.Color.White;
+            this.lblHoras.Location = new System.Drawing.Point(795, 27);
+            this.lblHoras.Name = "lblHoras";
+            this.lblHoras.Size = new System.Drawing.Size(72, 14);
+            this.lblHoras.TabIndex = 10;
+            this.lblHoras.Text = "hh:mm hh:mm";
+            // 
+            // pcbxMaterialDatosClase
+            // 
+            this.pcbxMaterialDatosClase.Location = new System.Drawing.Point(0, 0);
+            this.pcbxMaterialDatosClase.Name = "pcbxMaterialDatosClase";
+            this.pcbxMaterialDatosClase.Size = new System.Drawing.Size(100, 100);
+            this.pcbxMaterialDatosClase.TabIndex = 7;
+            this.pcbxMaterialDatosClase.TabStop = false;
+            // 
+            // lblHorario
+            // 
+            this.lblHorario.AutoSize = true;
+            this.lblHorario.Font = new System.Drawing.Font("Arial", 8F);
+            this.lblHorario.ForeColor = System.Drawing.Color.White;
+            this.lblHorario.Location = new System.Drawing.Point(781, 8);
+            this.lblHorario.Name = "lblHorario";
+            this.lblHorario.Size = new System.Drawing.Size(106, 14);
+            this.lblHorario.TabIndex = 9;
+            this.lblHorario.Text = "Horario de actividad:";
+            // 
+            // lblMateriaClaseChat
+            // 
+            this.lblMateriaClaseChat.AutoSize = true;
+            this.lblMateriaClaseChat.Font = new System.Drawing.Font("Arial", 30F);
+            this.lblMateriaClaseChat.ForeColor = System.Drawing.Color.White;
+            this.lblMateriaClaseChat.Location = new System.Drawing.Point(106, 3);
+            this.lblMateriaClaseChat.Name = "lblMateriaClaseChat";
+            this.lblMateriaClaseChat.Size = new System.Drawing.Size(342, 45);
+            this.lblMateriaClaseChat.TabIndex = 8;
+            this.lblMateriaClaseChat.Text = "Materia Año Clase";
             // 
             // pcbxBotonEnviar
             // 
@@ -661,20 +677,11 @@ namespace Hatchat.Presentacion
             this.panelChat.Size = new System.Drawing.Size(922, 552);
             this.panelChat.TabIndex = 7;
             // 
-            // btnCerrarChat
+            // timerCentrar
             // 
-            this.btnCerrarChat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnCerrarChat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCerrarChat.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnCerrarChat.ForeColor = System.Drawing.Color.White;
-            this.btnCerrarChat.Location = new System.Drawing.Point(799, 70);
-            this.btnCerrarChat.Name = "btnCerrarChat";
-            this.btnCerrarChat.Size = new System.Drawing.Size(115, 25);
-            this.btnCerrarChat.TabIndex = 12;
-            this.btnCerrarChat.Text = "Cerrar Chat";
-            this.btnCerrarChat.UseVisualStyleBackColor = false;
-            this.btnCerrarChat.Visible = false;
-            this.btnCerrarChat.Click += new System.EventHandler(this.btnCerrarChat_Click);
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
             // 
             // PrincipalChatAlumno
             // 
@@ -789,5 +796,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pcbxBotonEnviar;
         private System.Windows.Forms.Panel panelChat;
         private System.Windows.Forms.Button btnCerrarChat;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

@@ -30,7 +30,8 @@ namespace Hatchat.Presentacion
         {
             InitializeComponent();
             Text = "Chat";
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(1280, 720);
             panelCharla.Visible = false;
             panelDatosClase.Visible = false;
@@ -586,6 +587,11 @@ namespace Hatchat.Presentacion
             btnFiltrarAsignatura.Visible = true;
             btnFiltrarFecha.Visible = true;
             btnVolver.Visible = false;
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void timerHistorialChats_Tick(object sender, EventArgs e)

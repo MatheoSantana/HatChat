@@ -40,7 +40,6 @@ namespace Hatchat.Presentacion
         static HistorialSolicitudesAdmin historialSolicitudesAdmin;
 
 
-
         string usuarioNoEncontrado;
         string contraseñaIncorrecta;
 
@@ -52,6 +51,9 @@ namespace Hatchat.Presentacion
         public Login()
         {
             InitializeComponent();
+
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
 
             Text = "Login";
             try
@@ -351,6 +353,9 @@ namespace Hatchat.Presentacion
 
         }
 
-
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
     }
 }

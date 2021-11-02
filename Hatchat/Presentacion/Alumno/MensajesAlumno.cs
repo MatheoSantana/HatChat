@@ -28,7 +28,8 @@ namespace Hatchat.Presentacion
 
 
             ClientSize = new Size(1280, 720);
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
             panelContenedor.Visible = false;
             panelEnviarMensaje.Visible = false;
@@ -328,7 +329,7 @@ namespace Hatchat.Presentacion
 
             panelContenedor.Visible = true;
             lblNombreDocente.Text += ("\n" + docente.Nombre + " " + docente.Primer_apellido);
-            lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd:MM:yyyy");
+            lblFechaAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("dd/MM/yyyy");
             lblHoraAlumno.Text += "\n" + men.FechaHoraAlumno.ToString("HH:mm");
             lblConsultaAlumno.Text += "\n" + men.Asunto;
             lblConsultaDocente.Text += "\n" + men.Asunto;
@@ -360,7 +361,7 @@ namespace Hatchat.Presentacion
             if (!(men.Estado == "realizado"))
             {
                 menDo.Text = men.MensajeDocente;
-                lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
+                lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd/MM/yyyy");
                 lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
                 men.Estado = "recibido";
                 men.AbrirMensaje();
@@ -389,6 +390,10 @@ namespace Hatchat.Presentacion
             }
         }
 
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
 
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {

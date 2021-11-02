@@ -32,7 +32,8 @@ namespace Hatchat.Presentacion
         {
             InitializeComponent();
             Text = "Chat";
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(1280, 720);
             panelChat.Visible = false;
             panelIngresarChat.Visible = false;
@@ -636,6 +637,11 @@ namespace Hatchat.Presentacion
                 chats = new List<Logica.Chat>();
             }
             
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)

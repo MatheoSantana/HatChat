@@ -125,7 +125,7 @@ namespace Hatchat.Presentacion
             this.panelHistorialesNav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.panelHistorialesNav.Controls.Add(this.pcbxHistorialMensajesNav);
             this.panelHistorialesNav.Controls.Add(this.pcbxHistorialChatNav);
-            this.panelHistorialesNav.Location = new System.Drawing.Point(977, 8);
+            this.panelHistorialesNav.Location = new System.Drawing.Point(882, 104);
             this.panelHistorialesNav.Name = "panelHistorialesNav";
             this.panelHistorialesNav.Size = new System.Drawing.Size(80, 170);
             this.panelHistorialesNav.TabIndex = 29;
@@ -159,7 +159,6 @@ namespace Hatchat.Presentacion
             // 
             this.panelNav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.panelNav.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelNav.Controls.Add(this.panelHistorialesNav);
             this.panelNav.Controls.Add(this.pbxGruposNav);
             this.panelNav.Controls.Add(this.pbxCerrarSesionNav);
             this.panelNav.Controls.Add(this.pbxHistorialNav);
@@ -335,6 +334,7 @@ namespace Hatchat.Presentacion
             this.btnParticipantes.TabIndex = 11;
             this.btnParticipantes.Text = "Participantes";
             this.btnParticipantes.UseVisualStyleBackColor = false;
+            this.btnParticipantes.Click += new System.EventHandler(this.btnParticipantes_Click);
             // 
             // lblHoras
             // 
@@ -543,11 +543,12 @@ namespace Hatchat.Presentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelHistorialesNav);
+            this.Controls.Add(this.panelParticipantes);
             this.Controls.Add(this.panelChatsAIngresar);
             this.Controls.Add(this.panelChatsActivos);
             this.Controls.Add(this.panelDesplegarSolicitudes);
             this.Controls.Add(this.panelTextoChat);
-            this.Controls.Add(this.panelParticipantes);
             this.Controls.Add(this.panelChat);
             this.Controls.Add(this.lblBienvenido);
             this.Controls.Add(this.lblLinea);

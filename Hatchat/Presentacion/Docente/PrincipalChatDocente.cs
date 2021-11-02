@@ -414,10 +414,6 @@ namespace Hatchat.Presentacion
         }
         private void btnSolicitudes_Click(object sender, EventArgs e)
         {
-            cargarSolicitudes();
-        }
-        private void cargarSolicitudes()
-        {
             panelChatsAIngresar.Visible = !panelChatsAIngresar.Visible;
             if (panelChatsAIngresar.Visible)
             {
@@ -428,6 +424,7 @@ namespace Hatchat.Presentacion
                 pcbxDesplegarSolicitudes.Image = Image.FromFile("flecha blanca desplegar.png");
             }
         }
+        
         private void AceptarSolicitud(object sender, EventArgs e)
         {
             
@@ -445,7 +442,6 @@ namespace Hatchat.Presentacion
                 }
             solicitaChats[Convert.ToInt32(id)].AceptarChat();
             new Logica.Chat().CrearChat(solicitaChats[Convert.ToInt32(id)]);
-            cargarSolicitudes();
         }
         private void DenegarSolicitud(object sender, EventArgs e)
         {
@@ -463,7 +459,6 @@ namespace Hatchat.Presentacion
                 }
             }
             solicitaChats[Convert.ToInt32(id)].DenegarChat();
-            cargarSolicitudes();
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
@@ -478,6 +473,19 @@ namespace Hatchat.Presentacion
             if (solicitaChats.Count == 0)
             {
                 pcbxNotificacion.Image= Image.FromFile("circulo gris.png");
+                if (panelChatsAIngresar.Controls.Count == 0)
+                {
+                    Label dina = new Label();
+                    dina.Height = 58;
+                    dina.Width = 300;
+                    dina.Location = new Point(10, 30);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
+                    dina.Name = "lblVacia";
+                    dina.Text = "No hay solicitudes pendientes";
+                    panelChatsAIngresar.Controls.Add(dina);
+                }
+
             }
             else
             {
@@ -488,7 +496,7 @@ namespace Hatchat.Presentacion
             {
                 for (int x = 0; x < solicitaChats.Count; x++)
                 {
-                    if (!(solicitaChats[x] == this.solicitaChats[x]))
+                    if (!(solicitaChats[x].CiAlumno == this.solicitaChats[x].CiAlumno && solicitaChats[x].CiDocente == this.solicitaChats[x].CiDocente && solicitaChats[x].FechaHora == this.solicitaChats[x].FechaHora && solicitaChats[x].IdClase == this.solicitaChats[x].IdClase && solicitaChats[x].OriClase == this.solicitaChats[x].OriClase && solicitaChats[x].Asignatura == this.solicitaChats[x].Asignatura))
                     {
                         iguales = false;
                     }
@@ -572,6 +580,7 @@ namespace Hatchat.Presentacion
             }
         }
 
+       
         private void CerrarChat()
         {
 
@@ -608,6 +617,8 @@ namespace Hatchat.Presentacion
                     dina.Height = 46;
                     dina.Width = 150;
                     dina.Location = new Point(25, y);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
                     y += 50;
                     dina.Name = "lblParticipante" + x;
                     dina.Text = "- " + usuarios[x].Nombre + " " + usuarios[x].Primer_apellido;

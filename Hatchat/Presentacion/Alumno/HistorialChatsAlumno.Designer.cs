@@ -74,6 +74,7 @@ namespace Hatchat.Presentacion
             this.panelParticipantesOrdinarios = new System.Windows.Forms.Panel();
             this.lblHostParticipantes = new System.Windows.Forms.Label();
             this.lblDocenteParticipantes = new System.Windows.Forms.Label();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelHistorialesNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).BeginInit();
@@ -540,6 +541,12 @@ namespace Hatchat.Presentacion
             this.lblDocenteParticipantes.TabIndex = 0;
             this.lblDocenteParticipantes.Text = "Docente:";
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // HistorialChatsAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -630,5 +637,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelParticipantesOrdinarios;
         private System.Windows.Forms.Label lblHostParticipantes;
         private System.Windows.Forms.Label lblDocenteParticipantes;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

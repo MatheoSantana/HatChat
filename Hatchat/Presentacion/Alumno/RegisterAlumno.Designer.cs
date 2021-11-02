@@ -29,6 +29,7 @@ namespace Hatchat.Presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterAlumno));
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.cbxPreguntas = new System.Windows.Forms.ComboBox();
@@ -54,6 +55,7 @@ namespace Hatchat.Presentacion
             this.panel2 = new System.Windows.Forms.Panel();
             this.pbxLogin = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLogin)).BeginInit();
@@ -308,6 +310,12 @@ namespace Hatchat.Presentacion
             this.pictureBox1.TabIndex = 43;
             this.pictureBox1.TabStop = false;
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // RegisterAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -354,5 +362,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox txtRespuesta;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

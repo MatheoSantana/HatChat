@@ -49,10 +49,8 @@ namespace Hatchat.Presentacion
             this.lblDisponibles = new System.Windows.Forms.Label();
             this.btnEntrarGrupo = new System.Windows.Forms.Button();
             this.panelInformacion = new System.Windows.Forms.Panel();
-            this.panelParticipantes = new System.Windows.Forms.Panel();
-            this.lblParticipantes = new System.Windows.Forms.Label();
-            this.panelParticipantesOrdinarios = new System.Windows.Forms.Panel();
             this.panelAgenda = new System.Windows.Forms.Panel();
+            this.lblHorariosDelDia = new System.Windows.Forms.Label();
             this.btnViernes = new System.Windows.Forms.Button();
             this.btnJueves = new System.Windows.Forms.Button();
             this.btnMiercoles = new System.Windows.Forms.Button();
@@ -65,6 +63,9 @@ namespace Hatchat.Presentacion
             this.btnParticipantes = new System.Windows.Forms.Button();
             this.btnSalirGrupo = new System.Windows.Forms.Button();
             this.lblAsignatura = new System.Windows.Forms.Label();
+            this.panelParticipantes = new System.Windows.Forms.Panel();
+            this.lblParticipantes = new System.Windows.Forms.Label();
+            this.panelParticipantesOrdinarios = new System.Windows.Forms.Panel();
             this.timerGrupos = new System.Windows.Forms.Timer(this.components);
             this.timerCargarFoto = new System.Windows.Forms.Timer(this.components);
             this.panelHistorialesNav = new System.Windows.Forms.Panel();
@@ -82,14 +83,14 @@ namespace Hatchat.Presentacion
             this.lblGrupos = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblHorariosDelDia = new System.Windows.Forms.Label();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelContenedorGrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelEntrarGrupo.SuspendLayout();
             this.panelInformacion.SuspendLayout();
-            this.panelParticipantes.SuspendLayout();
             this.panelAgenda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxProfesor)).BeginInit();
+            this.panelParticipantes.SuspendLayout();
             this.panelHistorialesNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).BeginInit();
@@ -311,37 +312,6 @@ namespace Hatchat.Presentacion
             this.panelInformacion.TabIndex = 18;
             this.panelInformacion.Visible = false;
             // 
-            // panelParticipantes
-            // 
-            this.panelParticipantes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
-            this.panelParticipantes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelParticipantes.Controls.Add(this.lblParticipantes);
-            this.panelParticipantes.Controls.Add(this.panelParticipantesOrdinarios);
-            this.panelParticipantes.Location = new System.Drawing.Point(132, 16);
-            this.panelParticipantes.Name = "panelParticipantes";
-            this.panelParticipantes.Size = new System.Drawing.Size(325, 251);
-            this.panelParticipantes.TabIndex = 5;
-            this.panelParticipantes.Visible = false;
-            // 
-            // lblParticipantes
-            // 
-            this.lblParticipantes.AutoSize = true;
-            this.lblParticipantes.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblParticipantes.ForeColor = System.Drawing.Color.White;
-            this.lblParticipantes.Location = new System.Drawing.Point(4, 3);
-            this.lblParticipantes.Name = "lblParticipantes";
-            this.lblParticipantes.Size = new System.Drawing.Size(108, 18);
-            this.lblParticipantes.TabIndex = 3;
-            this.lblParticipantes.Text = "Participantes: ";
-            // 
-            // panelParticipantesOrdinarios
-            // 
-            this.panelParticipantesOrdinarios.AutoScroll = true;
-            this.panelParticipantesOrdinarios.Location = new System.Drawing.Point(3, 51);
-            this.panelParticipantesOrdinarios.Name = "panelParticipantesOrdinarios";
-            this.panelParticipantesOrdinarios.Size = new System.Drawing.Size(319, 197);
-            this.panelParticipantesOrdinarios.TabIndex = 2;
-            // 
             // panelAgenda
             // 
             this.panelAgenda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -356,6 +326,17 @@ namespace Hatchat.Presentacion
             this.panelAgenda.Name = "panelAgenda";
             this.panelAgenda.Size = new System.Drawing.Size(508, 178);
             this.panelAgenda.TabIndex = 29;
+            // 
+            // lblHorariosDelDia
+            // 
+            this.lblHorariosDelDia.AutoSize = true;
+            this.lblHorariosDelDia.Font = new System.Drawing.Font("Arial", 14F);
+            this.lblHorariosDelDia.ForeColor = System.Drawing.Color.White;
+            this.lblHorariosDelDia.Location = new System.Drawing.Point(202, 3);
+            this.lblHorariosDelDia.Name = "lblHorariosDelDia";
+            this.lblHorariosDelDia.Size = new System.Drawing.Size(204, 22);
+            this.lblHorariosDelDia.TabIndex = 30;
+            this.lblHorariosDelDia.Text = "Horarios del dia: Lunes";
             // 
             // btnViernes
             // 
@@ -502,6 +483,37 @@ namespace Hatchat.Presentacion
             this.lblAsignatura.Size = new System.Drawing.Size(154, 18);
             this.lblAsignatura.TabIndex = 0;
             this.lblAsignatura.Text = "Asignatura añoClase";
+            // 
+            // panelParticipantes
+            // 
+            this.panelParticipantes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
+            this.panelParticipantes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelParticipantes.Controls.Add(this.lblParticipantes);
+            this.panelParticipantes.Controls.Add(this.panelParticipantesOrdinarios);
+            this.panelParticipantes.Location = new System.Drawing.Point(132, 16);
+            this.panelParticipantes.Name = "panelParticipantes";
+            this.panelParticipantes.Size = new System.Drawing.Size(325, 251);
+            this.panelParticipantes.TabIndex = 5;
+            this.panelParticipantes.Visible = false;
+            // 
+            // lblParticipantes
+            // 
+            this.lblParticipantes.AutoSize = true;
+            this.lblParticipantes.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblParticipantes.ForeColor = System.Drawing.Color.White;
+            this.lblParticipantes.Location = new System.Drawing.Point(4, 3);
+            this.lblParticipantes.Name = "lblParticipantes";
+            this.lblParticipantes.Size = new System.Drawing.Size(108, 18);
+            this.lblParticipantes.TabIndex = 3;
+            this.lblParticipantes.Text = "Participantes: ";
+            // 
+            // panelParticipantesOrdinarios
+            // 
+            this.panelParticipantesOrdinarios.AutoScroll = true;
+            this.panelParticipantesOrdinarios.Location = new System.Drawing.Point(3, 51);
+            this.panelParticipantesOrdinarios.Name = "panelParticipantesOrdinarios";
+            this.panelParticipantesOrdinarios.Size = new System.Drawing.Size(319, 197);
+            this.panelParticipantesOrdinarios.TabIndex = 2;
             // 
             // timerGrupos
             // 
@@ -668,16 +680,11 @@ namespace Hatchat.Presentacion
             this.panel2.Size = new System.Drawing.Size(921, 551);
             this.panel2.TabIndex = 29;
             // 
-            // lblHorariosDelDia
+            // timerCentrar
             // 
-            this.lblHorariosDelDia.AutoSize = true;
-            this.lblHorariosDelDia.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblHorariosDelDia.ForeColor = System.Drawing.Color.White;
-            this.lblHorariosDelDia.Location = new System.Drawing.Point(202, 3);
-            this.lblHorariosDelDia.Name = "lblHorariosDelDia";
-            this.lblHorariosDelDia.Size = new System.Drawing.Size(204, 22);
-            this.lblHorariosDelDia.TabIndex = 30;
-            this.lblHorariosDelDia.Text = "Horarios del dia: Lunes";
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
             // 
             // GruposAlumno
             // 
@@ -705,11 +712,11 @@ namespace Hatchat.Presentacion
             this.panelEntrarGrupo.PerformLayout();
             this.panelInformacion.ResumeLayout(false);
             this.panelInformacion.PerformLayout();
-            this.panelParticipantes.ResumeLayout(false);
-            this.panelParticipantes.PerformLayout();
             this.panelAgenda.ResumeLayout(false);
             this.panelAgenda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxProfesor)).EndInit();
+            this.panelParticipantes.ResumeLayout(false);
+            this.panelParticipantes.PerformLayout();
             this.panelHistorialesNav.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).EndInit();
@@ -781,5 +788,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.PictureBox pcbxLogo;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblHorariosDelDia;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

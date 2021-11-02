@@ -36,7 +36,8 @@ namespace Hatchat.Presentacion
             Text = "Grupos";
 
             ClientSize = new Size(1280, 720);
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
 
             try
@@ -714,6 +715,11 @@ namespace Hatchat.Presentacion
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void pcbxHistorialChatNav_Click(object sender, EventArgs e)

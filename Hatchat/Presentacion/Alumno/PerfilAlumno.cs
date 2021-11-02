@@ -25,7 +25,8 @@ namespace Hatchat.Presentacion
             ClientSize = new Size(1280, 720);
 
             StartPosition = FormStartPosition.CenterScreen;
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             try
             {
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
@@ -167,6 +168,11 @@ namespace Hatchat.Presentacion
         private void timerCargarFoto_Tick(object sender, EventArgs e)
         {
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void lblCambiarFoto_Click(object sender, EventArgs e)
