@@ -13,11 +13,11 @@ namespace Hatchat.Presentacion
     public partial class HistorialChatsDocente : Form
     {
         public Form login;
-        public Form mensajesAlumno;
-        public Form gruposAlumno;
-        public Form perfilAlumno;
-        public Form principalChatsAlumno;
-        public Form historialMensajesAlumno;
+        public Form mensajesDocente;
+        public Form gruposDocente;
+        public Form perfilDocente;
+        public Form principalChatsDocente;
+        public Form historialMensajesDocente;
 
         private List<Logica.Chat> chats = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
@@ -82,25 +82,25 @@ namespace Hatchat.Presentacion
 
         private void pcbxPrincipalChatNav_Click(object sender, EventArgs e)
         {
-            principalChatsAlumno.Show();
+            principalChatsDocente.Show();
             this.Hide();
         }
         private void pbxMensajeNav_Click(object sender, EventArgs e)
         {
 
-            mensajesAlumno.Show();
+            mensajesDocente.Show();
             this.Hide();
         }
 
         private void pbxPerfilNav_Click(object sender, EventArgs e)
         {
-            perfilAlumno.Show();
+            perfilDocente.Show();
             this.Hide();
         }
 
         private void pbxGruposNav_Click(object sender, EventArgs e)
         {
-            gruposAlumno.Show();
+            gruposDocente.Show();
             this.Hide();
         }
         private void pbxHistorialNav_MouseEnter(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace Hatchat.Presentacion
 
         private void pcbxHistorialMensajesNav_Click(object sender, EventArgs e)
         {
-            historialMensajesAlumno.Show();
+            historialMensajesDocente.Show();
             this.Hide();
         }
         

@@ -18,7 +18,7 @@ namespace Hatchat.Presentacion
         static MensajesDocente mensajesDocente;
         static PerfilDocente perfilDocente;
         static GruposDocente gruposDocente;
-
+        static HistorialChatsDocente historialChatsDocente;
         static HistorialMensajesDocente historialMensajesDocente;
 
         static RegisterDocente registerDocente;
@@ -155,7 +155,7 @@ namespace Hatchat.Presentacion
                         mensajesDocente = new MensajesDocente();
                         perfilDocente = new PerfilDocente();
                         gruposDocente = new GruposDocente();
-
+                        historialChatsDocente = new HistorialChatsDocente();
                         historialMensajesDocente = new HistorialMensajesDocente();
 
                         principalChatDocente.Show();
@@ -165,35 +165,45 @@ namespace Hatchat.Presentacion
                         principalChatDocente.mensajesDocente = mensajesDocente;
                         principalChatDocente.perfilDocente = perfilDocente;
                         principalChatDocente.gruposDocente = gruposDocente;
-
+                        principalChatDocente.historialChatsDocente = historialChatsDocente;
                         principalChatDocente.historialMensajesDocente = historialMensajesDocente;
 
                         mensajesDocente.login = this;
                         mensajesDocente.principalChatDocente = principalChatDocente;
                         mensajesDocente.perfilDocente = perfilDocente;
                         mensajesDocente.gruposDocente = gruposDocente;
-
+                        mensajesDocente.historialChatsDocente = historialChatsDocente;
                         mensajesDocente.historialMensajesDocente = historialMensajesDocente;
 
                         perfilDocente.login = this;
                         perfilDocente.principalChatDocente = principalChatDocente;
                         perfilDocente.mensajesDocente = mensajesDocente;
                         perfilDocente.gruposDocente = gruposDocente;
-
+                        perfilDocente.historialChatsDocente = historialChatsDocente;
                         perfilDocente.historialMensajesDocente = historialMensajesDocente;
 
                         gruposDocente.login = this;
                         gruposDocente.principalChatDocente = principalChatDocente;
                         gruposDocente.mensajesDocente = mensajesDocente;
                         gruposDocente.perfilDocente=perfilDocente;
-
+                        gruposDocente.historialChatsDocente = historialChatsDocente;
                         gruposDocente.historialMensajesDocente = historialMensajesDocente;
+
+                        historialChatsDocente.login = this;
+                        historialChatsDocente.principalChatsDocente = principalChatDocente;
+                        historialChatsDocente.mensajesDocente = mensajesDocente;
+                        historialChatsDocente.perfilDocente = perfilDocente;
+                        historialChatsDocente.gruposDocente = gruposDocente;
+                        historialChatsDocente.historialMensajesDocente = historialMensajesDocente;
+
+
 
                         historialMensajesDocente.login = this;
                         historialMensajesDocente.principalChatDocente = principalChatDocente;
                         historialMensajesDocente.mensajesDocente = mensajesDocente;
                         historialMensajesDocente.perfilDocente = perfilDocente;
                         historialMensajesDocente.gruposDocente = gruposDocente;
+                        historialMensajesDocente.historialChatsDocente = historialChatsDocente;
 
 
                     }

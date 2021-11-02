@@ -18,6 +18,7 @@ namespace Hatchat.Presentacion
             try
             {
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
                 pbxVolver.Image = Image.FromFile("volver.png");
             }
             catch (System.IO.FileNotFoundException ex)
@@ -30,6 +31,7 @@ namespace Hatchat.Presentacion
 
             pbxVolver.Image = Image.FromFile("volver.png");
             pbxVolver.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             lblTitulo.Text = "Crea tu cuenta de docente";
 

@@ -260,71 +260,100 @@ namespace Hatchat.Presentacion
         }
         private void btnLunes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = Color.Orange;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(239, 136, 88);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Lunes");
+            lblHorariosDelDia.Text = "Horarios del dia: Lunes";
         }
 
 
         private void btnMartes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = Color.Orange;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(239, 136, 88);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Martes");
+            lblHorariosDelDia.Text = "Horarios del dia: Martes";
         }
 
         private void btnMiercoles_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = Color.Orange;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(239, 136, 88);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Miercoles");
+            lblHorariosDelDia.Text = "Horarios del dia: Miercoles";
         }
 
         private void btnJueves_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = Color.Orange;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(239, 136, 88);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Jueves");
+            lblHorariosDelDia.Text = "Horarios del dia: Jueves";
         }
 
         private void btnViernes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = Color.Orange;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(239, 136, 88);
             RecargarAgendaDelDia("Viernes");
+            lblHorariosDelDia.Text = "Horarios del dia: Viernes";
         }
         private void RecargarAgendaDelDia(string dia)
         {
-            int y = 5;
+            int ypanel = 0;
             panelHorariosPorDia.Controls.Clear();
             foreach (Logica.Agenda agenda in agendas)
             {
                 if (agenda.NomDia == dia)
                 {
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblAdendaDelDia" + agenda.IdAgenda.ToString();
-                    dina.Text = agenda.HoraInicio + " - " + agenda.HoraFin;
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    panelHorariosPorDia.Controls.Add(dina);
+                    
+                    Label linea = new Label();
+                    linea.Height = 18;
+                    linea.Width = 170;
+                    linea.Location = new Point(0, 2);
+                    linea.Font = new Font("Arial", 12,FontStyle.Bold);
+                    linea.ForeColor = Color.White;
+                    linea.Name = "lblLineaAgendaDelDia" + agenda.IdAgenda.ToString();
+                    linea.Text = "_______________________________________________";
+                    
+                    Label horario = new Label();
+                    horario.Height = 18;
+                    horario.Width = 150;
+                    horario.Location = new Point(10, 0);
+                    horario.Font = new Font("Arial", 12.0f);
+                    horario.ForeColor = Color.White;
+                    horario.Name = "lblAgendaDelDia" + agenda.IdAgenda.ToString();
+                    horario.Text = agenda.HoraInicio + " - " + agenda.HoraFin;
+                    
+                    
+
+                    Panel panel = new Panel();
+                    panel.Height = 20;
+                    panel.Width = 288;
+                    panel.Location = new Point(0, ypanel);
+                    ypanel += 20;
+                    panel.Name = "pnl"+ agenda.IdAgenda.ToString();
+                    panel.BackColor = Color.FromArgb(61, 53, 50);
+                    
+                    panel.Controls.Add(horario);
+                    panel.Controls.Add(linea);
+
+                    panelHorariosPorDia.Controls.Add(panel);
+
                 }
             }
         }

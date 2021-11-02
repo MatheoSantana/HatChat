@@ -95,7 +95,8 @@ namespace Hatchat.Logica
             get { return activo; }
             set { activo = value; }
         }
-        public byte[] ToByteArray(string StringToConvert)
+        /*
+         * public byte[] ToByteArray(string StringToConvert)
         {
 
             char[] CharArray = StringToConvert.ToCharArray();
@@ -106,6 +107,7 @@ namespace Hatchat.Logica
             }
             return ByteArray;
         }
+        */
         public Image ByteArrayToImage(byte[] byteArrayIn)
         {
             if (!(byteArrayIn == null))

@@ -82,6 +82,7 @@ namespace Hatchat.Presentacion
             this.lblGrupos = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblHorariosDelDia = new System.Windows.Forms.Label();
             this.panelContenedorGrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelEntrarGrupo.SuspendLayout();
@@ -297,7 +298,6 @@ namespace Hatchat.Presentacion
             // panelInformacion
             // 
             this.panelInformacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelInformacion.Controls.Add(this.panelParticipantes);
             this.panelInformacion.Controls.Add(this.panelAgenda);
             this.panelInformacion.Controls.Add(this.btnCerrarInformacion);
             this.panelInformacion.Controls.Add(this.lblNombreProfesor);
@@ -317,7 +317,7 @@ namespace Hatchat.Presentacion
             this.panelParticipantes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelParticipantes.Controls.Add(this.lblParticipantes);
             this.panelParticipantes.Controls.Add(this.panelParticipantesOrdinarios);
-            this.panelParticipantes.Location = new System.Drawing.Point(82, 99);
+            this.panelParticipantes.Location = new System.Drawing.Point(132, 16);
             this.panelParticipantes.Name = "panelParticipantes";
             this.panelParticipantes.Size = new System.Drawing.Size(325, 251);
             this.panelParticipantes.TabIndex = 5;
@@ -345,6 +345,7 @@ namespace Hatchat.Presentacion
             // panelAgenda
             // 
             this.panelAgenda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAgenda.Controls.Add(this.lblHorariosDelDia);
             this.panelAgenda.Controls.Add(this.btnViernes);
             this.panelAgenda.Controls.Add(this.btnJueves);
             this.panelAgenda.Controls.Add(this.btnMiercoles);
@@ -358,12 +359,13 @@ namespace Hatchat.Presentacion
             // 
             // btnViernes
             // 
-            this.btnViernes.BackColor = System.Drawing.Color.White;
+            this.btnViernes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.btnViernes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnViernes.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnViernes.Location = new System.Drawing.Point(12, 135);
+            this.btnViernes.ForeColor = System.Drawing.Color.White;
+            this.btnViernes.Location = new System.Drawing.Point(12, 137);
             this.btnViernes.Name = "btnViernes";
-            this.btnViernes.Size = new System.Drawing.Size(75, 23);
+            this.btnViernes.Size = new System.Drawing.Size(181, 30);
             this.btnViernes.TabIndex = 30;
             this.btnViernes.Text = "Viernes";
             this.btnViernes.UseVisualStyleBackColor = false;
@@ -371,12 +373,13 @@ namespace Hatchat.Presentacion
             // 
             // btnJueves
             // 
-            this.btnJueves.BackColor = System.Drawing.Color.White;
+            this.btnJueves.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.btnJueves.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnJueves.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnJueves.Location = new System.Drawing.Point(12, 105);
+            this.btnJueves.ForeColor = System.Drawing.Color.White;
+            this.btnJueves.Location = new System.Drawing.Point(12, 104);
             this.btnJueves.Name = "btnJueves";
-            this.btnJueves.Size = new System.Drawing.Size(75, 23);
+            this.btnJueves.Size = new System.Drawing.Size(181, 30);
             this.btnJueves.TabIndex = 29;
             this.btnJueves.Text = "Jueves";
             this.btnJueves.UseVisualStyleBackColor = false;
@@ -384,12 +387,13 @@ namespace Hatchat.Presentacion
             // 
             // btnMiercoles
             // 
-            this.btnMiercoles.BackColor = System.Drawing.Color.White;
+            this.btnMiercoles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.btnMiercoles.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMiercoles.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnMiercoles.Location = new System.Drawing.Point(12, 76);
+            this.btnMiercoles.ForeColor = System.Drawing.Color.White;
+            this.btnMiercoles.Location = new System.Drawing.Point(12, 71);
             this.btnMiercoles.Name = "btnMiercoles";
-            this.btnMiercoles.Size = new System.Drawing.Size(75, 23);
+            this.btnMiercoles.Size = new System.Drawing.Size(181, 30);
             this.btnMiercoles.TabIndex = 28;
             this.btnMiercoles.Text = "Miercoles";
             this.btnMiercoles.UseVisualStyleBackColor = false;
@@ -397,12 +401,13 @@ namespace Hatchat.Presentacion
             // 
             // btnMartes
             // 
-            this.btnMartes.BackColor = System.Drawing.Color.White;
+            this.btnMartes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.btnMartes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMartes.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnMartes.Location = new System.Drawing.Point(12, 47);
+            this.btnMartes.ForeColor = System.Drawing.Color.White;
+            this.btnMartes.Location = new System.Drawing.Point(12, 37);
             this.btnMartes.Name = "btnMartes";
-            this.btnMartes.Size = new System.Drawing.Size(75, 23);
+            this.btnMartes.Size = new System.Drawing.Size(181, 30);
             this.btnMartes.TabIndex = 27;
             this.btnMartes.Text = "Martes";
             this.btnMartes.UseVisualStyleBackColor = false;
@@ -410,12 +415,13 @@ namespace Hatchat.Presentacion
             // 
             // btnLunes
             // 
-            this.btnLunes.BackColor = System.Drawing.Color.White;
+            this.btnLunes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.btnLunes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLunes.Font = new System.Drawing.Font("Arial", 8F);
-            this.btnLunes.Location = new System.Drawing.Point(12, 18);
+            this.btnLunes.ForeColor = System.Drawing.Color.White;
+            this.btnLunes.Location = new System.Drawing.Point(12, 3);
             this.btnLunes.Name = "btnLunes";
-            this.btnLunes.Size = new System.Drawing.Size(75, 23);
+            this.btnLunes.Size = new System.Drawing.Size(181, 30);
             this.btnLunes.TabIndex = 26;
             this.btnLunes.Text = "Lunes";
             this.btnLunes.UseVisualStyleBackColor = false;
@@ -425,9 +431,9 @@ namespace Hatchat.Presentacion
             // 
             this.panelHorariosPorDia.AutoScroll = true;
             this.panelHorariosPorDia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
-            this.panelHorariosPorDia.Location = new System.Drawing.Point(199, 23);
+            this.panelHorariosPorDia.Location = new System.Drawing.Point(205, 32);
             this.panelHorariosPorDia.Name = "panelHorariosPorDia";
-            this.panelHorariosPorDia.Size = new System.Drawing.Size(263, 135);
+            this.panelHorariosPorDia.Size = new System.Drawing.Size(288, 135);
             this.panelHorariosPorDia.TabIndex = 25;
             // 
             // btnCerrarInformacion
@@ -548,6 +554,7 @@ namespace Hatchat.Presentacion
             // 
             this.panelNav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.panelNav.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNav.Controls.Add(this.panelParticipantes);
             this.panelNav.Controls.Add(this.pbxGruposNav);
             this.panelNav.Controls.Add(this.pbxCerrarSesionNav);
             this.panelNav.Controls.Add(this.pbxHistorialNav);
@@ -661,6 +668,17 @@ namespace Hatchat.Presentacion
             this.panel2.Size = new System.Drawing.Size(921, 551);
             this.panel2.TabIndex = 29;
             // 
+            // lblHorariosDelDia
+            // 
+            this.lblHorariosDelDia.AutoSize = true;
+            this.lblHorariosDelDia.Font = new System.Drawing.Font("Arial", 14F);
+            this.lblHorariosDelDia.ForeColor = System.Drawing.Color.White;
+            this.lblHorariosDelDia.Location = new System.Drawing.Point(202, 3);
+            this.lblHorariosDelDia.Name = "lblHorariosDelDia";
+            this.lblHorariosDelDia.Size = new System.Drawing.Size(204, 22);
+            this.lblHorariosDelDia.TabIndex = 30;
+            this.lblHorariosDelDia.Text = "Horarios del dia: Lunes";
+            // 
             // GruposAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -690,6 +708,7 @@ namespace Hatchat.Presentacion
             this.panelParticipantes.ResumeLayout(false);
             this.panelParticipantes.PerformLayout();
             this.panelAgenda.ResumeLayout(false);
+            this.panelAgenda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxProfesor)).EndInit();
             this.panelHistorialesNav.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).EndInit();
@@ -761,5 +780,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblLinea;
         private System.Windows.Forms.PictureBox pcbxLogo;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblHorariosDelDia;
     }
 }

@@ -325,6 +325,8 @@ namespace Hatchat.Presentacion
             this.panelHistorialesNav.Size = new System.Drawing.Size(80, 170);
             this.panelHistorialesNav.TabIndex = 29;
             this.panelHistorialesNav.Visible = false;
+            this.panelHistorialesNav.MouseEnter += new System.EventHandler(this.panelHistorialesNav_MouseEnter);
+            this.panelHistorialesNav.MouseLeave += new System.EventHandler(this.panelHistorialesNav_MouseLeave);
             // 
             // pcbxHistorialMensajesNav
             // 
@@ -333,6 +335,9 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialMensajesNav.Size = new System.Drawing.Size(80, 80);
             this.pcbxHistorialMensajesNav.TabIndex = 8;
             this.pcbxHistorialMensajesNav.TabStop = false;
+            this.pcbxHistorialMensajesNav.Click += new System.EventHandler(this.pcbxHistorialMensajesNav_Click);
+            this.pcbxHistorialMensajesNav.MouseEnter += new System.EventHandler(this.pcbxHistorialMensajesNav_MouseEnter);
+            this.pcbxHistorialMensajesNav.MouseLeave += new System.EventHandler(this.pcbxHistorialMensajesNav_MouseLeave);
             // 
             // pcbxHistorialChatNav
             // 
@@ -341,6 +346,9 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialChatNav.Size = new System.Drawing.Size(80, 80);
             this.pcbxHistorialChatNav.TabIndex = 7;
             this.pcbxHistorialChatNav.TabStop = false;
+            this.pcbxHistorialChatNav.Click += new System.EventHandler(this.pcbxHistorialChatNav_Click);
+            this.pcbxHistorialChatNav.MouseEnter += new System.EventHandler(this.pcbxHistorialChatNav_MouseEnter);
+            this.pcbxHistorialChatNav.MouseLeave += new System.EventHandler(this.pcbxHistorialChatNav_MouseLeave);
             // 
             // panelNav
             // 
@@ -365,6 +373,7 @@ namespace Hatchat.Presentacion
             this.pbxGruposNav.Size = new System.Drawing.Size(80, 80);
             this.pbxGruposNav.TabIndex = 6;
             this.pbxGruposNav.TabStop = false;
+            this.pbxGruposNav.Click += new System.EventHandler(this.pbxGruposNav_Click);
             // 
             // pbxCerrarSesionNav
             // 
@@ -374,6 +383,7 @@ namespace Hatchat.Presentacion
             this.pbxCerrarSesionNav.Size = new System.Drawing.Size(80, 80);
             this.pbxCerrarSesionNav.TabIndex = 5;
             this.pbxCerrarSesionNav.TabStop = false;
+            this.pbxCerrarSesionNav.Click += new System.EventHandler(this.pbxCerrarSesionNav_Click);
             // 
             // pbxHistorialNav
             // 
@@ -382,6 +392,8 @@ namespace Hatchat.Presentacion
             this.pbxHistorialNav.Size = new System.Drawing.Size(80, 80);
             this.pbxHistorialNav.TabIndex = 4;
             this.pbxHistorialNav.TabStop = false;
+            this.pbxHistorialNav.MouseEnter += new System.EventHandler(this.pbxHistorialNav_MouseEnter);
+            this.pbxHistorialNav.MouseLeave += new System.EventHandler(this.pbxHistorialNav_MouseLeave);
             // 
             // pbxPerfilNav
             // 
@@ -390,6 +402,7 @@ namespace Hatchat.Presentacion
             this.pbxPerfilNav.Size = new System.Drawing.Size(80, 80);
             this.pbxPerfilNav.TabIndex = 3;
             this.pbxPerfilNav.TabStop = false;
+            this.pbxPerfilNav.Click += new System.EventHandler(this.pbxPerfilNav_Click);
             // 
             // pbxMensajeNav
             // 
@@ -398,6 +411,7 @@ namespace Hatchat.Presentacion
             this.pbxMensajeNav.Size = new System.Drawing.Size(80, 80);
             this.pbxMensajeNav.TabIndex = 2;
             this.pbxMensajeNav.TabStop = false;
+            this.pbxMensajeNav.Click += new System.EventHandler(this.pbxMensajeNav_Click);
             // 
             // pbxChatNav
             // 

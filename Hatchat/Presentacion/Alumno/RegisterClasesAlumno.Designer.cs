@@ -100,7 +100,7 @@ namespace Hatchat.Presentacion
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(1153, 34);
+            this.pictureBox1.Location = new System.Drawing.Point(1153, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(99, 76);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -111,7 +111,7 @@ namespace Hatchat.Presentacion
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.pbxVolver);
-            this.panel2.Location = new System.Drawing.Point(12, 34);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(97, 46);
             this.panel2.TabIndex = 50;
@@ -136,7 +136,7 @@ namespace Hatchat.Presentacion
             this.panel1.Controls.Add(this.lblTitulo);
             this.panel1.Controls.Add(this.lblAsignaturas);
             this.panel1.Controls.Add(this.lblAdvertencia);
-            this.panel1.Location = new System.Drawing.Point(112, 82);
+            this.panel1.Location = new System.Drawing.Point(117, 60);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1023, 563);
             this.panel1.TabIndex = 49;

@@ -15,7 +15,6 @@ namespace Hatchat.Presentacion
         public Form registerAlumno;
         private int xpanel=20;
 
-        Logica.SolicitudClaseAl solicitudClaseAl = new Logica.SolicitudClaseAl();
         List<Logica.ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturasSolicitudClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();
@@ -62,7 +61,6 @@ namespace Hatchat.Presentacion
             btnAgregar.Enabled = false;
             btnRegistrar.Enabled = false;
 
-            solicitudClaseAl = new Logica.SolicitudClaseAl();
             claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
             asignaturasSolicitudClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
             asignaturasSolicitudClaseAlPre = new List<Logica.AsignaturaSolicitudClaseAl>();

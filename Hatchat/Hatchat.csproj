@@ -118,10 +118,10 @@
     <Compile Include="Presentacion\Docente\GruposDocente.Designer.cs">
       <DependentUpon>GruposDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\HistorialChatsDocente.cs">
+    <Compile Include="Presentacion\Docente\HistorialChatsDocente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\HistorialChatsDocente.Designer.cs">
+    <Compile Include="Presentacion\Docente\HistorialChatsDocente.Designer.cs">
       <DependentUpon>HistorialChatsDocente.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Login.cs">
@@ -236,7 +236,7 @@
     <EmbeddedResource Include="Presentacion\Docente\GruposDocente.resx">
       <DependentUpon>GruposDocente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\HistorialChatsDocente.resx">
+    <EmbeddedResource Include="Presentacion\Docente\HistorialChatsDocente.resx">
       <DependentUpon>HistorialChatsDocente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Login.resx">
