@@ -17,7 +17,6 @@ namespace Hatchat.Presentacion
         public Form historialChatsDocente;
         public Form historialMensajesDocente;
 
-        int y = 200;
         private List<Logica.Chat> chats = new List<Logica.Chat>();
         private List<Logica.SolicitaChat> solicitaChats = new List<Logica.SolicitaChat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
@@ -33,7 +32,7 @@ namespace Hatchat.Presentacion
 
             ClientSize = new Size(1280, 720);
             panelChat.Visible = false;
-            panelAceptarChat.Visible = false;
+            panelChatsAIngresar.Visible = false;
             StartPosition = FormStartPosition.CenterScreen;
             try
             {
@@ -47,6 +46,9 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
+                pcbxDesplegarSolicitudes.Image= Image.FromFile("flecha blanca desplegar.png");
+                pcbxNotificacion.Image = Image.FromFile("circulo gris.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -64,6 +66,9 @@ namespace Hatchat.Presentacion
             pcbxHistorialChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxDesplegarSolicitudes.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxNotificacion.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void PrincipalChatDocente_Load(object sender, EventArgs e)
@@ -181,23 +186,55 @@ namespace Hatchat.Presentacion
             if (!iguales)
             {
                 this.chats = chats;
-                int y = 5;
+                int yPanel = 0;
                 panelChatsActivos.Controls.Clear();
 
                 foreach (Logica.Chat chat in chats)
                 {
                     Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
                     Logica.Clase clase = new Logica.Clase().SelectClasePorId(chat.IdClase);
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblC" + chat.IdChat.ToString();
-                    dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    dina.Click += new EventHandler(AbrirChat);
-                    panelChatsActivos.Controls.Add(dina);
+
+                    Label grupo = new Label();
+                    grupo.Height = 58;
+                    grupo.Width = 150;
+                    grupo.Location = new Point(91, 0);
+                    grupo.ForeColor = Color.White;
+                    grupo.Font = new Font("Arial", 12.0f);
+                    grupo.Name = "lblC" + chat.IdChat.ToString();
+                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
+                    grupo.Click += new EventHandler(AbrirChat);
+
+                    PictureBox picPhoto = new PictureBox();
+                    picPhoto.Image = Image.FromFile("profesor.png");
+                    picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picPhoto.Height = 69;
+                    picPhoto.Width = 69;
+                    picPhoto.Location = new Point(12, 12);
+                    picPhoto.Name = "pbxC" + chat.IdChat.ToString();
+                    picPhoto.Click += new EventHandler(AbrirChat);
+
+                    PictureBox picflecha = new PictureBox();
+                    picflecha.Image = Image.FromFile("flecha blanca entrar.png");
+                    picflecha.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picflecha.Height = 69;
+                    picflecha.Width = 69;
+                    picflecha.Location = new Point(249, 12);
+                    picflecha.Name = "pbxC" + chat.IdChat.ToString();
+                    picflecha.Click += new EventHandler(AbrirChat);
+
+                    Panel panel = new Panel();
+                    panel.Height = 83;
+                    panel.Width = 319;
+                    panel.Location = new Point(0, yPanel);
+                    yPanel += 83;
+                    panel.Name = "panelC" + chat.IdChat.ToString();
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    panel.Click += new EventHandler(AbrirChat);
+                    panel.Controls.Add(grupo);
+                    panel.Controls.Add(picPhoto);
+                    panel.Controls.Add(picflecha);
+
+                    panelChatsActivos.Controls.Add(panel);
                 }
             }
         }
@@ -210,8 +247,20 @@ namespace Hatchat.Presentacion
             panelCharla.Controls.Clear();
             txtMensajeChat.Text = "";
 
-            Logica.Chat chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
+            Logica.Chat chat = new Logica.Chat();
 
+            if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+            {
+                chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Label)sender).Name));
+            }
+            else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((PictureBox)sender).Name));
+            }
+            else
+            {
+                chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Panel)sender).Name));
+            }
             Logica.AsignaturaDictada asignaturaDciatada = new Logica.AsignaturaDictada().SelectAsignaturaDictadaPorAsignaturaYCi(chat.Asignatura, Login.encontrado.Ci);
             List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(Login.encontrado.Ci);
             foreach (Logica.Agenda ag in agendas)
@@ -369,8 +418,71 @@ namespace Hatchat.Presentacion
         }
         private void cargarSolicitudes()
         {
-            panelAceptarChat.Visible = !panelAceptarChat.Visible;
+            panelChatsAIngresar.Visible = !panelChatsAIngresar.Visible;
+            if (panelChatsAIngresar.Visible)
+            {
+                pcbxDesplegarSolicitudes.Image = Image.FromFile("flecha blanca contraer.png");
+            }
+            else
+            {
+                pcbxDesplegarSolicitudes.Image = Image.FromFile("flecha blanca desplegar.png");
+            }
+        }
+        private void AceptarSolicitud(object sender, EventArgs e)
+        {
+            
+                string id = "";
+                for(int x = 4; x < ((Button)sender).Name.Length; x++)
+                {
+                    if (!(((Label)sender).Name[x] == '-'))
+                    {
+                        id += ((Label)sender).Name[x];
+                    }
+                    else
+                    {
+                        x = ((Label)sender).Name.Length;
+                    }
+                }
+            solicitaChats[Convert.ToInt32(id)].AceptarChat();
+            new Logica.Chat().CrearChat(solicitaChats[Convert.ToInt32(id)]);
+            cargarSolicitudes();
+        }
+        private void DenegarSolicitud(object sender, EventArgs e)
+        {
+
+            string id = "";
+            for (int x = 4; x < ((Button)sender).Name.Length; x++)
+            {
+                if (!(((Label)sender).Name[x] == '-'))
+                {
+                    id += ((Label)sender).Name[x];
+                }
+                else
+                {
+                    x = ((Label)sender).Name.Length;
+                }
+            }
+            solicitaChats[Convert.ToInt32(id)].DenegarChat();
+            cargarSolicitudes();
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            new Logica.ChateaDo(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaDo();
+            txtMensajeChat.Text = "";
+        }
+
+        private void timerSolicitudes_Tick(object sender, EventArgs e)
+        {
             List<Logica.SolicitaChat> solicitaChats = new Logica.SolicitaChat().SelectSolicitaChats(Login.encontrado.Ci);
+            if (solicitaChats.Count == 0)
+            {
+                pcbxNotificacion.Image= Image.FromFile("circulo gris.png");
+            }
+            else
+            {
+                pcbxNotificacion.Image = Image.FromFile("circulo recibido.png");
+            }
             bool iguales = true;
             if (this.solicitaChats.Count == solicitaChats.Count)
             {
@@ -388,73 +500,78 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
-                int y=45;
-                panelAceptarChat.Controls.Clear();
-
-                Label lblIngresarChat = new Label();
-                lblIngresarChat.Height = 13;
-                lblIngresarChat.Width = 93;
-                lblIngresarChat.Location = new Point(27, 11);
-                lblIngresarChat.Name = "lblIngresarChat";
-                lblIngresarChat.Text = "Ingresar a un chat";
-                panelAceptarChat.Controls.Add(lblIngresarChat);
-
-                Label lblChatsIngresarChats = new Label();
-                lblChatsIngresarChats.Height = 13;
-                lblChatsIngresarChats.Width = 37;
-                lblChatsIngresarChats.Location = new Point(27, 27);
-                lblChatsIngresarChats.Name = "lblChatsIngresarChats";
-                lblChatsIngresarChats.Text = "Chats:";
-                panelAceptarChat.Controls.Add(lblChatsIngresarChats);
+                int yPanel = 0;
                 this.solicitaChats = solicitaChats;
+                panelChatsAIngresar.Controls.Clear();
                 int m = 0;
                 foreach (Logica.SolicitaChat solicitaChat in solicitaChats)
                 {
-                    if (panelAceptarChat.Controls.Count != solicitaChats.Count + 2)
+                    if (panelChatsAIngresar.Controls.Count != solicitaChats.Count)
                     {
                         Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(solicitaChat.Asignatura);
                         asignaturas.Add(asignatura);
                         Logica.Clase clase = new Logica.Clase().SelectClasePorId(solicitaChat.IdClase);
-                        Label dina = new Label();
-                        dina.Height = 46;
-                        dina.Width = 150;
-                        dina.Location = new Point(25, y);
-                        y += 50;
-                        dina.Name = "lblS" + m;
-                        dina.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "(Click para aceptar)";
-                        dina.BorderStyle = BorderStyle.FixedSingle;
-                        dina.Click += new EventHandler(AceptarSolicitud);
-                        panelAceptarChat.Controls.Add(dina);
+                        Logica.Orientacion ori = new Logica.Orientacion().SelectOrientacioPorId(clase.Orientacion);
+
+                        PictureBox picPhoto = new PictureBox();
+                        picPhoto.Image = Image.FromFile("profesor.png");
+                        picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                        picPhoto.Height = 40;
+                        picPhoto.Width = 40;
+                        picPhoto.Location = new Point(6, 5);
+                        picPhoto.Name = "pbxS" + m;
+
+                        Label grupo = new Label();
+                        grupo.Height = 58;
+                        grupo.Width = 150;
+                        grupo.Location = new Point(50, 0);
+                        grupo.ForeColor = Color.White;
+                        grupo.Font = new Font("Arial", 8.0f);
+                        grupo.Name = "lblS" + m;
+                        grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + ori.Nombre;
+
+                        Button button = new Button();
+                        button.ForeColor = Color.White;
+                        button.Height = 23;
+                        button.Width = 100;
+                        button.Location = new Point(210, 1);
+                        button.Font = new Font("Arial", 8.0f);
+                        button.BackColor = Color.FromArgb(125, 116, 110);
+                        button.FlatStyle = FlatStyle.Popup;
+                        button.Name = "bnAS" + m;
+                        button.Text = "Aceptar";
+                        button.Click += new EventHandler(AceptarSolicitud);
+
+                        Button button1 = new Button();
+                        button1.ForeColor = Color.White;
+                        button1.Height = 23;
+                        button1.Width = 100;
+                        button1.Location = new Point(210, 25);
+                        button1.Font = new Font("Arial", 8.0f);
+                        button1.BackColor = Color.FromArgb(125, 116, 110);
+                        button1.FlatStyle = FlatStyle.Popup;
+                        button1.Name = "bnDS" + m;
+                        button1.Text = "Denegar";
+                        button1.Click += new EventHandler(DenegarSolicitud);
+
+                        Panel panel = new Panel();
+                        panel.Height = 50;
+                        panel.Width = 319;
+                        panel.Location = new Point(0, yPanel);
+                        yPanel += 50;
+                        panel.Name = "pnlS" + m;
+                        panel.BorderStyle = BorderStyle.FixedSingle;
+                        panel.Controls.Add(grupo);
+                        panel.Controls.Add(picPhoto);
+                        panel.Controls.Add(button);
+                        panel.Controls.Add(button1);
+                        panelChatsAIngresar.Controls.Add(panel);
                         m++;
                     }
                 }
             }
         }
-        private void AceptarSolicitud(object sender, EventArgs e)
-        {
-            
-                string id = "";
-                for(int x = 4; x < ((Label)sender).Name.Length; x++)
-                {
-                    if (!(((Label)sender).Name[x] == '-'))
-                    {
-                        id += ((Label)sender).Name[x];
-                    }
-                    else
-                    {
-                        x = ((Label)sender).Name.Length;
-                    }
-                }
-            solicitaChats[Convert.ToInt32(id)].AceptarChat();
-            new Logica.Chat().CrearChat(solicitaChats[Convert.ToInt32(id)]);
-            cargarSolicitudes();
-        }
 
-        private void btnEnviar_Click(object sender, EventArgs e)
-        {
-            new Logica.ChateaDo(Login.encontrado.Ci, abierto.IdChat, DateTime.Now, txtMensajeChat.Text).InsertChateaDo();
-            txtMensajeChat.Text = "";
-        }
         private void CerrarChat()
         {
 

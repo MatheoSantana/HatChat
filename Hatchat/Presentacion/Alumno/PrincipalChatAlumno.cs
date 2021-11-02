@@ -555,6 +555,7 @@ namespace Hatchat.Presentacion
                     button.Location = new Point(240, 12);
                     button.Font = new Font("Arial", 12.0f);
                     button.BackColor=Color.FromArgb(125, 116, 110);
+                    button.FlatStyle = FlatStyle.Popup;
                     button.Name = "pbxC" + chat.IdChat.ToString();
                     button.Text = "entrar";
                     button.Click += new EventHandler(IngresarChat);

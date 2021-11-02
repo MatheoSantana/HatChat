@@ -58,7 +58,7 @@ namespace Hatchat.Persistencia
             }
             else
             {
-                MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + usuario.Activo + "," + usuario.Preguta_seguridad + ");", conexion2);
+                MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + true + "," + usuario.Preguta_seguridad + ");", conexion2);
                 insertUsuario.Parameters.AddWithValue("imagen", usuario.FotoDePerfil);
                 MySqlCommand insertHijo = new MySqlCommand("insert into " + usuario.GetType().Name + " values('" + usuario.Ci + "');", conexion2);
                 insertUsuario.ExecuteNonQuery();
@@ -1267,6 +1267,15 @@ namespace Hatchat.Persistencia
             updateEstado.ExecuteNonQuery();
             conexion.Close();
         }
+        public void DenegarChat(SolicitaChat soli)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand updateEstado = new MySqlCommand("update SolicitaChat set pendiente = false where ciDocente='" + soli.CiDocente + "' and idClase=" + soli.IdClase + " and oriClase=" + soli.OriClase + " and asignatura='" + soli.Asignatura + "';", conexion);
+            updateEstado.ExecuteNonQuery();
+            conexion.Close();
+        }
+
         public void CambiarTitulo(Chat chat)
         {
             MySqlConnection conexion = new MySqlConnection(connection);

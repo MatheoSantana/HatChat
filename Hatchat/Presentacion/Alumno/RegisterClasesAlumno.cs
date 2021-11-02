@@ -288,7 +288,7 @@ namespace Hatchat.Presentacion
                     grupo.Location = new Point(0, 0);
                     grupo.Font = new Font("Arial", 12.0f);
                     grupo.Name = "lblClase" + claseSeleccionada.IdClase;
-                    grupo.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "  ("+nuevasAsignaturas.Count+")" + "\n" + orientaciones[cbxOrientacion.SelectedIndex].Nombre;
+                    grupo.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "  ("+ asignaturasSolicitudClaseAlPre.Count+")" + "\n" + orientaciones[cbxOrientacion.SelectedIndex].Nombre;
                     grupo.Click += new EventHandler(EliminarClase);
 
                     PictureBox pic = new PictureBox();
@@ -454,6 +454,7 @@ namespace Hatchat.Presentacion
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            alumno.Activo = true;
             alumno.FotoDePerfil = alumno.ImageToByteArray(Image.FromFile("alumno.png"));
             alumno.AltaUsuario();
             Logica.SolicitudClaseAl solicitudClaseAl = new Logica.SolicitudClaseAl(DateTime.Now, true, alumno.Ci);

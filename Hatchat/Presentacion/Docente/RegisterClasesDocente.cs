@@ -190,7 +190,7 @@ namespace Hatchat.Presentacion
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-
+            docente.Activo = true;
             docente.FotoDePerfil = docente.ImageToByteArray(Image.FromFile("docente.png"));
             docente.AltaUsuario();
             Logica.SolicitudClaseDo solicitudClaseDo = new Logica.SolicitudClaseDo(DateTime.Now, true, docente.Ci);
@@ -249,18 +249,36 @@ namespace Hatchat.Presentacion
             claseSeleccionada.Orientacion = orientaciones[cbxOrientacion.SelectedIndex].Id;
             claseSeleccionada.SelectIdClasePorPorNombreAnioYorientacion();
 
-
+            int ychbx = 10, xchbx = 10;
             foreach (Logica.Asignatura asig in nuevasAsignaturas)
             {
-                Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo = new Logica.AsignaturaSolicitudClaseDo();
-                asignaturaSolicitudClaseDo.IdAsignatura = asig.Id;
-                asignaturaSolicitudClaseDo.IdClaseAsig = claseSeleccionada.IdClase;
-                asignaturaSolicitudClaseDo.OriClaseAsig = claseSeleccionada.Orientacion;
-                asignaturaSolicitudClaseDo.Aceptada = false;
-                asignaturasSolicitudClaseDoPre.Add(asignaturaSolicitudClaseDo);
+                CheckBox dina = new CheckBox();
+                dina.Checked = false;
+                foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturasSolicitudClaseDoPre)
+                {
+                    if (asignaturaSolicitudClaseDo.IdAsignatura == asig.Id && asignaturaSolicitudClaseDo.IdClaseAsig == claseSeleccionada.IdClase && asignaturaSolicitudClaseDo.OriClaseAsig == claseSeleccionada.Orientacion)
+                    {
+                        dina.Checked = true;
+                    }
+                }
+                dina.Height = 23;
+                dina.Width = 150;
+                dina.Location = new Point(xchbx, ychbx);
+                if (xchbx == 360)
+                {
+                    xchbx = -165;
+                    ychbx += 25;
+                }
+                xchbx += 175;
+                dina.Name = "chbx" + asig.Id;
+                dina.Text = asig.Nombre;
+
+                dina.CheckedChanged += new EventHandler(AsignaturaCambiada);
+                panelAsignaturas.Controls.Add(dina);
             }
 
-            
+
+
         }
         private void AsignaturaCambiada(object sender, EventArgs e)
         {
@@ -332,7 +350,7 @@ namespace Hatchat.Presentacion
                     grupo.Location = new Point(0, 0);
                     grupo.Font = new Font("Arial", 12.0f);
                     grupo.Name = "lblClase" + claseSeleccionada.IdClase;
-                    grupo.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "  (" + nuevasAsignaturas.Count + ")" + "\n" + orientaciones[cbxOrientacion.SelectedIndex].Nombre;
+                    grupo.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "  (" + asignaturasSolicitudClaseDoPre.Count + ")" + "\n" + orientaciones[cbxOrientacion.SelectedIndex].Nombre;
                     grupo.Click += new EventHandler(EliminarClase);
 
                     PictureBox pic = new PictureBox();
@@ -496,43 +514,6 @@ namespace Hatchat.Presentacion
             }
         }
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            visibles = !visibles;
-            if (visibles)
-            {
-                int ychbx = 10, xchbx = 10;
-                foreach (Logica.Asignatura asig in nuevasAsignaturas)
-                {
-                    CheckBox dina = new CheckBox();
-                    dina.Checked = false;
-                    foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturasSolicitudClaseDoPre)
-                    {
-                        if (asignaturaSolicitudClaseDo.IdAsignatura == asig.Id && asignaturaSolicitudClaseDo.IdClaseAsig == claseSeleccionada.IdClase && asignaturaSolicitudClaseDo.OriClaseAsig == claseSeleccionada.Orientacion)
-                        {
-                            dina.Checked = true;
-                        }
-                    }
-                    dina.Height = 23;
-                    dina.Width = 150;
-                    dina.Location = new Point(xchbx, ychbx);
-                    if (xchbx == 360)
-                    {
-                        xchbx = -165;
-                        ychbx += 25;
-                    }
-                    xchbx += 175;
-                    dina.Name = "chbx" + asig.Id;
-                    dina.Text = asig.Nombre;
-
-                    dina.CheckedChanged += new EventHandler(AsignaturaCambiada);
-                    panelAsignaturas.Controls.Add(dina);
-                }
-            }
-            else
-            {
-                panelAsignaturas.Controls.Clear();
-            }
-        }
+        
     }
 }

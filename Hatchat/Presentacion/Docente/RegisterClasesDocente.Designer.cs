@@ -31,8 +31,7 @@ namespace Hatchat.Presentacion
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterClasesDocente));
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lblInfoModif = new System.Windows.Forms.Label();
-            this.btnModificar = new System.Windows.Forms.Button();
+            this.lblAsig = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblAnio = new System.Windows.Forms.Label();
             this.cbxAnio = new System.Windows.Forms.ComboBox();
@@ -67,8 +66,7 @@ namespace Hatchat.Presentacion
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.lblInfoModif);
-            this.panel3.Controls.Add(this.btnModificar);
+            this.panel3.Controls.Add(this.lblAsig);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.lblAnio);
             this.panel3.Controls.Add(this.cbxAnio);
@@ -82,27 +80,16 @@ namespace Hatchat.Presentacion
             this.panel3.Size = new System.Drawing.Size(942, 286);
             this.panel3.TabIndex = 50;
             // 
-            // lblInfoModif
+            // lblAsig
             // 
-            this.lblInfoModif.AutoSize = true;
-            this.lblInfoModif.Font = new System.Drawing.Font("Arial", 13F);
-            this.lblInfoModif.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblInfoModif.Location = new System.Drawing.Point(520, 13);
-            this.lblInfoModif.Name = "lblInfoModif";
-            this.lblInfoModif.Size = new System.Drawing.Size(233, 63);
-            this.lblInfoModif.TabIndex = 50;
-            this.lblInfoModif.Text = "Si no pertenece a todas las \r\nasignaturas configurelas \r\naquí:\r\n";
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnModificar.Location = new System.Drawing.Point(407, 13);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(90, 36);
-            this.btnModificar.TabIndex = 49;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.lblAsig.AutoSize = true;
+            this.lblAsig.Font = new System.Drawing.Font("Arial", 30F);
+            this.lblAsig.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblAsig.Location = new System.Drawing.Point(394, 21);
+            this.lblAsig.Name = "lblAsig";
+            this.lblAsig.Size = new System.Drawing.Size(225, 45);
+            this.lblAsig.TabIndex = 50;
+            this.lblAsig.Text = "Asignaturas";
             // 
             // panel5
             // 
@@ -350,8 +337,7 @@ namespace Hatchat.Presentacion
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lblInfoModif;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Label lblAsig;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblAnio;
         private System.Windows.Forms.ComboBox cbxAnio;
