@@ -24,9 +24,6 @@ namespace Hatchat.Presentacion
 
             ClientSize = new Size(1280, 720);
 
-            lblCambiarFoto.ForeColor = Color.Blue;
-            lblCambiarFoto.Font = new Font("Arial", 9.0f, FontStyle.Underline);
-
             StartPosition = FormStartPosition.CenterScreen;
 
             try

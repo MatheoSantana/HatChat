@@ -48,6 +48,8 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje blanco.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pcbxLogo.Image = Image.FromFile("Logo Completa.png");
+
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -66,18 +68,21 @@ namespace Hatchat.Presentacion
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxDocente.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxAlumno.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
 
 
             cmbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            lblRespuestaDocente.Size = new Size(541, 107);
-            lblMensajeAlumno.Size = new Size(541, 107);
             CargarMensajes();
         }
 
         private void AbrirMensaje(object sender, EventArgs e)
         {
-            panelContenedor.Visible = false;
+            panelNavMensajes.Visible = false;
+            btnFiltrarDocente.Visible = false;
+            btnFiltrarFecha.Visible = false;
+            dtpFiltro.Visible = false;
+            cmbxDocentes.Visible = false;
+            btnVolver.Visible = true;
             panelContenedor.Visible = true;
             pbxDocente.Image = null;
             pbxAlumno.Image = null;
@@ -87,14 +92,25 @@ namespace Hatchat.Presentacion
             lblConsultaAlumno.Text = "Consulta:";
             lblConsultaDocente.Text = "Consulta:";
             lblNombreAlumno.Text = "Alumno:";
-            lblMensajeAlumno.Text = "";
-
+            panelMensajeAlumno.Controls.Clear();
+            panelMensajeDocente.Controls.Clear();
             lblFechaDocente.Text = "Fecha:";
             lblHoraDocente.Text = "Hora:";
-            lblRespuestaDocente.Text = "";
+;
 
             Logica.Mensaje men = new Logica.Mensaje();
-            men = men.SelectAbrirMensaje(((Label)sender).Name);
+            if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+            {
+                men = men.SelectAbrirMensaje(((Label)sender).Name);
+            }
+            else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                men = men.SelectAbrirMensaje(((PictureBox)sender).Name);
+            }
+            else
+            {
+                men = men.SelectAbrirMensaje(((Panel)sender).Name);
+            }
             Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
             Logica.Docente docente = new Logica.Docente();
 
@@ -116,15 +132,33 @@ namespace Hatchat.Presentacion
             lblConsultaAlumno.Text += "\n" + men.Asunto;
             lblConsultaDocente.Text += "\n" + men.Asunto;
             lblNombreAlumno.Text += "\n" + Login.encontrado.Nombre + " " + Login.encontrado.Primer_apellido;
-            lblMensajeAlumno.Text = men.MensajeAlumno;
+
+            Label menAl = new Label();
+            menAl.Height = 139;
+            menAl.Width = 605;
+            menAl.Location = new Point(0, 0);
+            menAl.Font = new Font("Arial", 12.0f);
+            menAl.Name = "lblMensajeAl";
+            menAl.ForeColor = Color.White;
+            menAl.Text = men.MensajeAlumno;
+            panelMensajeAlumno.Controls.Add(menAl);
+
+            Label menDo = new Label();
+            menDo.Height = 139;
+            menDo.Width = 605;
+            menDo.Location = new Point(0, 0);
+            menDo.Font = new Font("Arial", 12.0f);
+            menDo.ForeColor = Color.White;
+            menDo.Name = "lblMensajeAl";
+            menDo.Text = men.MensajeDocente;
+
             pbxAlumno.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             pbxDocente.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
-            if (!(men.Estado == "realizado"))
-            {
+            
                 lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
                 lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
-            }
-            lblRespuestaDocente.Text = men.MensajeDocente;
+            
+            
 
         }
 
@@ -220,7 +254,20 @@ namespace Hatchat.Presentacion
         private void CargarMensajes()
         {
             List<Logica.Mensaje> mensajes = new Logica.Mensaje().SelectMensajesRecibidosAl(Login.encontrado.Ci);
-            
+
+            if (mensajes.Count != 0)
+            {
+                lblLinea.Visible = false;
+                lblBienvenido.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblLinea.Visible = true;
+                lblBienvenido.Visible = true;
+                pcbxLogo.Visible = true;
+            }
+
             y = 50;
             bool iguales = true;
             if (mensajes.Count == this.mensajes.Count)
@@ -262,33 +309,84 @@ namespace Hatchat.Presentacion
                 this.mensajes = mensajes;
                 panelNavMensajes.Controls.Clear();
             panelContenedor.Visible = false;
+                int yPanel = 0;
                 foreach (Logica.Mensaje men in mensajes)
                 {
                     this.mensajes = mensajes;
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
-                    Logica.Docente docente = new Logica.Docente();
+                    Logica.Docente doc = new Logica.Docente();
 
-                    docente.Ci = usuario.Ci;
-                    docente.Apodo = usuario.Apodo;
-                    docente.Nombre = usuario.Nombre;
-                    docente.Primer_apellido = usuario.Primer_apellido;
-                    docente.Segundo_apellido = usuario.Segundo_apellido;
-                    if (!(usuario.FotoDePerfil == null))
+                    doc.Nombre = usuario.Nombre;
+                    doc.Primer_apellido = usuario.Primer_apellido;
+                    if (!(doc.FotoDePerfil == null))
                     {
-                        docente.FotoDePerfil = usuario.FotoDePerfil;
+                        doc.FotoDePerfil = usuario.FotoDePerfil;
                     }
-                    docente.Activo = usuario.Activo;
 
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(50, y);
-                    y += 50;
-                    dina.Name = "lblM" + men.IdMensaje.ToString();
-                    dina.Text = docente.Nombre + " " + docente.Primer_apellido + "\n" + men.Asunto;
+                    PictureBox picPhoto = new PictureBox();
+                    picPhoto.Image = doc.ByteArrayToImage(doc.FotoDePerfil);
+                    picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picPhoto.Height = 69;
+                    picPhoto.Width = 69;
+                    picPhoto.Location = new Point(6, 6);
+                    picPhoto.Name = "pbxC" + men.IdMensaje.ToString();
+                    picPhoto.Click += new EventHandler(AbrirMensaje);
 
-                    dina.Click += new EventHandler(AbrirMensaje);
-                    panelNavMensajes.Controls.Add(dina);
+                    Label docente = new Label();
+                    docente.Height = 83;
+                    docente.Width = 230;
+                    docente.Location = new Point(80, 0);
+                    docente.ForeColor = Color.White;
+                    docente.Font = new Font("Arial", 15.0f);
+                    docente.Name = "lblDM" + men.IdMensaje.ToString();
+                    docente.Text = doc.Nombre + " " + doc.Primer_apellido;
+                    docente.Click += new EventHandler(AbrirMensaje);
+
+                    Label mensaje = new Label();
+                    mensaje.Height = 83;
+                    mensaje.Width = 150;
+                    mensaje.Location = new Point(310, 0);
+                    mensaje.ForeColor = Color.White;
+                    mensaje.Font = new Font("Arial", 12.0f);
+                    mensaje.Name = "lblTM" + men.IdMensaje.ToString();
+                    mensaje.Text = "Tema:\n" + men.Asunto;
+                    mensaje.Click += new EventHandler(AbrirMensaje);
+
+                    Label hora = new Label();
+                    hora.Height = 83;
+                    hora.Width = 85;
+                    hora.Location = new Point(500, 0);
+                    hora.ForeColor = Color.White;
+                    hora.Font = new Font("Arial", 12.0f);
+                    hora.Name = "lblMH" + men.IdMensaje.ToString();
+                    hora.Text = "Hora:\n" + men.FechaHoraDocente.ToString("HH") + ":" + men.FechaHoraDocente.ToString("mm");
+                    hora.Click += new EventHandler(AbrirMensaje);
+
+                    Label fecha = new Label();
+                    fecha.Height = 83;
+                    fecha.Width = 150;
+                    fecha.Location = new Point(600, 0);
+                    fecha.ForeColor = Color.White;
+                    fecha.Font = new Font("Arial", 12.0f);
+                    fecha.Name = "lblCI" + men.IdMensaje.ToString();
+                    fecha.Text = "Fecha:\n" + men.FechaHoraDocente.ToString("dd") + "/" + men.FechaHoraDocente.ToString("MM") + "/" + men.FechaHoraDocente.ToString("yyyy");
+                    fecha.Click += new EventHandler(AbrirMensaje);
+
+                    Panel panel = new Panel();
+                    panel.Height = 83;
+                    panel.Width = 738;
+                    panel.Location = new Point(0, yPanel);
+                    yPanel += 83;
+                    panel.Name = "panelC" + men.IdMensaje.ToString();
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    panel.Click += new EventHandler(AbrirMensaje);
+
+                    panel.Controls.Add(mensaje);
+                    panel.Controls.Add(picPhoto);
+                    panel.Controls.Add(docente);
+                    panel.Controls.Add(hora);
+                    panel.Controls.Add(fecha);
+                    panelNavMensajes.Controls.Add(panel);
                 }
             }
         }
@@ -298,6 +396,18 @@ namespace Hatchat.Presentacion
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            panelContenedor.Visible = false;
+            panelNavMensajes.Visible = true;
+            btnFiltrarFecha.Visible = true;
+            cmbxDocentes.Visible = filtroDocente;
+            dtpFiltro.Visible = filtroFecha;
+            btnFiltrarDocente.Visible = true;
+            btnFiltrarFecha.Visible = true;
+            btnVolver.Visible = false;
+        }
+
         private void CargarMensajesFiltro()
         {
             List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
@@ -305,6 +415,18 @@ namespace Hatchat.Presentacion
             
             y = 50;
 
+            if (mensTemp.Count != 0)
+            {
+                lblLinea.Visible = false;
+                lblBienvenido.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblLinea.Visible = true;
+                lblBienvenido.Visible = true;
+                pcbxLogo.Visible = true;
+            }
 
             foreach (Logica.Mensaje men in mensTemp)
             {
@@ -374,33 +496,85 @@ namespace Hatchat.Presentacion
                 this.mensajes = mensajes;
                 panelNavMensajes.Controls.Clear();
                 panelContenedor.Visible = false;
+                int yPanel = 0;
                 foreach (Logica.Mensaje men in mensajes)
                 {
                     this.mensajes = mensajes;
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
-                    Logica.Docente docente = new Logica.Docente();
+                    Logica.Docente doc = new Logica.Docente();
 
-                    docente.Ci = usuario.Ci;
-                    docente.Apodo = usuario.Apodo;
-                    docente.Nombre = usuario.Nombre;
-                    docente.Primer_apellido = usuario.Primer_apellido;
-                    docente.Segundo_apellido = usuario.Segundo_apellido;
+                    doc.Nombre = usuario.Nombre;
+                    doc.Primer_apellido = usuario.Primer_apellido;
                     if (!(usuario.FotoDePerfil == null))
                     {
-                        docente.FotoDePerfil = usuario.FotoDePerfil;
+                        doc.FotoDePerfil = usuario.FotoDePerfil;
                     }
-                    docente.Activo = usuario.Activo;
 
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(50, y);
-                    y += 50;
-                    dina.Name = "lblM" + men.IdMensaje.ToString();
-                    dina.Text = docente.Nombre + " " + docente.Primer_apellido + "\n" + men.Asunto;
+                    PictureBox picPhoto = new PictureBox();
+                    picPhoto.Image = doc.ByteArrayToImage(doc.FotoDePerfil) ;
+                    picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picPhoto.Height = 69;
+                    picPhoto.Width = 69;
+                    picPhoto.Location = new Point(6, 6);
+                    picPhoto.Name = "pbxC" + men.IdMensaje.ToString();
+                    picPhoto.Click += new EventHandler(AbrirMensaje);
 
-                    dina.Click += new EventHandler(AbrirMensaje);
-                    panelNavMensajes.Controls.Add(dina);
+                    Label docente = new Label();
+                    docente.Height = 83;
+                    docente.Width = 230;
+                    docente.Location = new Point(80, 0);
+                    docente.ForeColor = Color.White;
+                    docente.Font = new Font("Arial", 15.0f);
+                    docente.Name = "lblDM" + men.IdMensaje.ToString();
+                    docente.Text = doc.Nombre + " " + doc.Primer_apellido;
+                    docente.Click += new EventHandler(AbrirMensaje);
+
+                    Label mensaje = new Label();
+                    mensaje.Height = 83;
+                    mensaje.Width = 150;
+                    mensaje.Location = new Point(310, 0);
+                    mensaje.ForeColor = Color.White;
+                    mensaje.Font = new Font("Arial", 12.0f);
+                    mensaje.Name = "lblTM" + men.IdMensaje.ToString();
+                    mensaje.Text = "Tema:\n" + men.Asunto;
+                    mensaje.Click += new EventHandler(AbrirMensaje);
+
+                    Label hora = new Label();
+                    hora.Height = 83;
+                    hora.Width = 85;
+                    hora.Location = new Point(460, 0);
+                    hora.ForeColor = Color.White;
+                    hora.Font = new Font("Arial", 12.0f);
+                    hora.Name = "lblMH" + men.IdMensaje.ToString();
+                    hora.Text = "Hora:\n" + men.FechaHoraDocente.ToString("HH") + ":" + men.FechaHoraDocente.ToString("mm");
+                    hora.Click += new EventHandler(AbrirMensaje);
+
+                    Label fecha = new Label();
+                    fecha.Height = 83;
+                    fecha.Width = 150;
+                    fecha.Location = new Point(630, 0);
+                    fecha.ForeColor = Color.White;
+                    fecha.Font = new Font("Arial", 12.0f);
+                    fecha.Name = "lblCI" + men.IdMensaje.ToString();
+                    fecha.Text = "Fecha:\n" + men.FechaHoraDocente.ToString("dd") + "/" + men.FechaHoraDocente.ToString("MM") + "/" + men.FechaHoraDocente.ToString("yyyy");
+                    fecha.Click += new EventHandler(AbrirMensaje);
+
+                    Panel panel = new Panel();
+                    panel.Height = 83;
+                    panel.Width = 738;
+                    panel.Location = new Point(0, yPanel);
+                    yPanel += 83;
+                    panel.Name = "panelC" + men.IdMensaje.ToString();
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    panel.Click += new EventHandler(AbrirMensaje);
+
+                    panel.Controls.Add(mensaje);
+                    panel.Controls.Add(picPhoto);
+                    panel.Controls.Add(docente);
+                    panel.Controls.Add(hora);
+                    panel.Controls.Add(fecha);
+                    panelNavMensajes.Controls.Add(panel);
+
                 }
             }
         }
@@ -408,6 +582,7 @@ namespace Hatchat.Presentacion
         private void btnFiltrarDocente_Click(object sender, EventArgs e)
         {
             filtroDocente = !filtroDocente;
+            cmbxDocentes.Visible = filtroDocente;
             btnFiltrarDocente.Text = "Filtrar docente";
             if (filtroDocente)
             {
@@ -432,6 +607,7 @@ namespace Hatchat.Presentacion
         private void btnFiltrarFecha_Click(object sender, EventArgs e)
         {
             filtroFecha = !filtroFecha;
+            dtpFiltro.Visible = filtroFecha;
             btnFiltrarFecha.Text = "Filtrar fecha";
             if (filtroFecha)
             {

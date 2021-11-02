@@ -47,7 +47,6 @@ namespace Hatchat.Presentacion
         public static Logica.Usuario encontrado = new Logica.Usuario();
 
         public static string idioma;
-        Font fuenteLink = new Font("Arial", 9.0f, FontStyle.Underline);
         Image fotoIngles;
         Image fotoEspanol;
         public Login()
@@ -60,6 +59,8 @@ namespace Hatchat.Presentacion
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 fotoEspanol = Image.FromFile("español chiquito.png");
                 fotoIngles = Image.FromFile("ingles chiquito.png");
+                pictureBox1.Image= Image.FromFile("Logo Completa.png");
+                
             }
             catch(System.IO.FileNotFoundException ex)
             {
@@ -68,11 +69,13 @@ namespace Hatchat.Presentacion
             }
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             txtPassword.UseSystemPasswordChar = true;
             //inicializamos los controles
             //bloqueamos la edicion del combo box idioma
             cmbxIdioma.DropDownStyle = ComboBoxStyle.DropDownList;
+            
 
             //agregamos los idiomas
             cmbxIdioma.Items.Add("Español");
@@ -234,8 +237,8 @@ namespace Hatchat.Presentacion
                         historialMensajesAlumno.principalChatAlumno = principalChatAlumno;
                         historialMensajesAlumno.mensajesAlumno = mensajesAlumno;
                         historialMensajesAlumno.perfilAlumno = perfilAlumno;
-                        perfilAlumno.gruposAlumno = gruposAlumno;
-                        perfilAlumno.historialChatsAlumno = historialChatsAlumno;
+                        historialMensajesAlumno.gruposAlumno = gruposAlumno;
+                        historialMensajesAlumno.historialchatsAlumno = historialChatsAlumno;
 
                         gruposAlumno.login = this;
                         gruposAlumno.principalChatAlumno = principalChatAlumno;

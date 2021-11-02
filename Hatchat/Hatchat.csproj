@@ -178,10 +178,10 @@
     <Compile Include="Presentacion\Docente\HistorialMensajesDocente.Designer.cs">
       <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentacion\PrincipalChatAlumno.cs">
+    <Compile Include="Presentacion\Alumno\PrincipalChatAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentacion\PrincipalChatAlumno.Designer.cs">
+    <Compile Include="Presentacion\Alumno\PrincipalChatAlumno.Designer.cs">
       <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Register.cs">
@@ -266,7 +266,7 @@
     <EmbeddedResource Include="Presentacion\Docente\HistorialMensajesDocente.resx">
       <DependentUpon>HistorialMensajesDocente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentacion\PrincipalChatAlumno.resx">
+    <EmbeddedResource Include="Presentacion\Alumno\PrincipalChatAlumno.resx">
       <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Register.resx">
@@ -309,6 +309,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="bin\Debug\foto fondo inicio de sesión.png" />
     <Content Include="Recursos\Administrador.png" />
     <Content Include="Recursos\Alumno.png" />
     <Content Include="Recursos\boton alumno.png" />

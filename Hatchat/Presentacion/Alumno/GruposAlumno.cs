@@ -51,6 +51,7 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pcbxLogo.Image = Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -68,6 +69,7 @@ namespace Hatchat.Presentacion
             pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxProfesor.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
 
             cmbxAnio.Items.Add(1);
             cmbxAnio.Items.Add(2);
@@ -144,6 +146,20 @@ namespace Hatchat.Presentacion
         private void timerGrupos_Tick(object sender, EventArgs e)
         {
             List<Logica.AsignaturaCursa> asignaturasCursadas = new Logica.AsignaturaCursa().SelectAsignaturasCursadasPorCi(Login.encontrado.Ci);
+
+            if (asignaturasCursadas.Count != 0)
+            {
+                lblLinea.Visible = false;
+                lblSinNada.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblLinea.Visible = true;
+                lblSinNada.Visible = true;
+                pcbxLogo.Visible = true;
+            }
+
             bool iguales = true;
             if (this.asignaturasCursadas.Count == asignaturasCursadas.Count)
             {
@@ -195,9 +211,9 @@ namespace Hatchat.Presentacion
                     panel.Height = 200;
                     panel.Width = 200;
                     panel.Location = new Point(xpanel, ypanel);
-                    if (xpanel == 915)
+                    if (xpanel == 631)
                     {
-                        xpanel += -1136;
+                        xpanel = -221;
                         ypanel += 225;
                     }
                     xpanel += 284;
@@ -337,6 +353,8 @@ namespace Hatchat.Presentacion
                     dina.Height = 46;
                     dina.Width = 150;
                     dina.Location = new Point(25, y);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
                     y += 50;
                     dina.Name = "lblParticipante" + x;
                     dina.Text = "- " + usuarios[x].Nombre + " " + usuarios[x].Primer_apellido;

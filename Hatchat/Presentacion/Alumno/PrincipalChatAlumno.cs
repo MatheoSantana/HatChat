@@ -230,7 +230,7 @@ namespace Hatchat.Presentacion
 
                     Panel panel = new Panel();
                     panel.Height = 83;
-                    panel.Width = 318;
+                    panel.Width = 319;
                     panel.Location = new Point(0, yPanel);
                     yPanel += 83;
                     panel.Name = "panelC" + chat.IdChat.ToString();
@@ -596,6 +596,8 @@ namespace Hatchat.Presentacion
                     dina.Height = 46;
                     dina.Width = 150;
                     dina.Location = new Point(25, y);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
                     y += 50;
                     dina.Name = "lblParticipante" + x;
                     dina.Text = "- " + usuarios[x].Nombre + " " + usuarios[x].Primer_apellido;

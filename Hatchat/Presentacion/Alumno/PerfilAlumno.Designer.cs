@@ -68,6 +68,7 @@ namespace Hatchat.Presentacion
             this.panelTextoChat = new System.Windows.Forms.Panel();
             this.lblPerfil = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panelNavMensajes = new System.Windows.Forms.Panel();
             this.panelPerfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).BeginInit();
             this.panelHistorialesNav.SuspendLayout();
@@ -88,6 +89,7 @@ namespace Hatchat.Presentacion
             // panelPerfil
             // 
             this.panelPerfil.AutoScroll = true;
+            this.panelPerfil.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPerfil.Controls.Add(this.label1);
             this.panelPerfil.Controls.Add(this.btnEliminar);
             this.panelPerfil.Controls.Add(this.btnModificar);
@@ -475,6 +477,15 @@ namespace Hatchat.Presentacion
             this.panel2.Size = new System.Drawing.Size(921, 551);
             this.panel2.TabIndex = 21;
             // 
+            // panelNavMensajes
+            // 
+            this.panelNavMensajes.AutoScroll = true;
+            this.panelNavMensajes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNavMensajes.Location = new System.Drawing.Point(10, 108);
+            this.panelNavMensajes.Name = "panelNavMensajes";
+            this.panelNavMensajes.Size = new System.Drawing.Size(321, 561);
+            this.panelNavMensajes.TabIndex = 7;
+            // 
             // PerfilAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,6 +496,7 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.panelHistorialesNav);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelNavMensajes);
             this.Name = "PerfilAlumno";
             this.Text = "PerfilAlumno";
             this.Load += new System.EventHandler(this.PerfilAlumno_Load);
@@ -548,5 +560,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblLinea;
+        private System.Windows.Forms.Panel panelNavMensajes;
     }
 }

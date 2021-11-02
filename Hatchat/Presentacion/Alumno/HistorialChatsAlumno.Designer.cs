@@ -30,8 +30,12 @@ namespace Hatchat.Presentacion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistorialChatsAlumno));
             this.lblHistorialChats = new System.Windows.Forms.Label();
             this.panelChatsActivos = new System.Windows.Forms.Panel();
+            this.lblBienvenido = new System.Windows.Forms.Label();
+            this.lblLinea = new System.Windows.Forms.Label();
+            this.pcbxLogo = new System.Windows.Forms.PictureBox();
             this.tmrCargChats = new System.Windows.Forms.Timer(this.components);
             this.tmrCargChat = new System.Windows.Forms.Timer(this.components);
             this.timerHistorialNav = new System.Windows.Forms.Timer(this.components);
@@ -69,6 +73,9 @@ namespace Hatchat.Presentacion
             this.panelParticipantesOrdinarios = new System.Windows.Forms.Panel();
             this.lblHostParticipantes = new System.Windows.Forms.Label();
             this.lblDocenteParticipantes = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelChatsActivos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelHistorialesNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).BeginInit();
@@ -100,10 +107,44 @@ namespace Hatchat.Presentacion
             // 
             this.panelChatsActivos.AutoScroll = true;
             this.panelChatsActivos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChatsActivos.Location = new System.Drawing.Point(421, 141);
+            this.panelChatsActivos.Controls.Add(this.lblBienvenido);
+            this.panelChatsActivos.Controls.Add(this.lblLinea);
+            this.panelChatsActivos.Controls.Add(this.pcbxLogo);
+            this.panelChatsActivos.Location = new System.Drawing.Point(411, 141);
             this.panelChatsActivos.Name = "panelChatsActivos";
-            this.panelChatsActivos.Size = new System.Drawing.Size(737, 485);
+            this.panelChatsActivos.Size = new System.Drawing.Size(740, 485);
             this.panelChatsActivos.TabIndex = 5;
+            // 
+            // lblBienvenido
+            // 
+            this.lblBienvenido.AutoSize = true;
+            this.lblBienvenido.Font = new System.Drawing.Font("Arial", 26F);
+            this.lblBienvenido.ForeColor = System.Drawing.Color.White;
+            this.lblBienvenido.Location = new System.Drawing.Point(99, 96);
+            this.lblBienvenido.Name = "lblBienvenido";
+            this.lblBienvenido.Size = new System.Drawing.Size(503, 40);
+            this.lblBienvenido.TabIndex = 16;
+            this.lblBienvenido.Text = "Usted no tiene chats archivados";
+            // 
+            // lblLinea
+            // 
+            this.lblLinea.AutoSize = true;
+            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea.ForeColor = System.Drawing.Color.White;
+            this.lblLinea.Location = new System.Drawing.Point(32, 82);
+            this.lblLinea.Name = "lblLinea";
+            this.lblLinea.Size = new System.Drawing.Size(656, 67);
+            this.lblLinea.TabIndex = 17;
+            this.lblLinea.Text = "___________________";
+            // 
+            // pcbxLogo
+            // 
+            this.pcbxLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pcbxLogo.InitialImage")));
+            this.pcbxLogo.Location = new System.Drawing.Point(178, 160);
+            this.pcbxLogo.Name = "pcbxLogo";
+            this.pcbxLogo.Size = new System.Drawing.Size(363, 244);
+            this.pcbxLogo.TabIndex = 18;
+            this.pcbxLogo.TabStop = false;
             // 
             // tmrCargChats
             // 
@@ -189,6 +230,8 @@ namespace Hatchat.Presentacion
             this.panelHistorialesNav.Size = new System.Drawing.Size(80, 170);
             this.panelHistorialesNav.TabIndex = 23;
             this.panelHistorialesNav.Visible = false;
+            this.panelHistorialesNav.MouseEnter += new System.EventHandler(this.panelHistorialesNav_MouseEnter);
+            this.panelHistorialesNav.MouseLeave += new System.EventHandler(this.panelHistorialesNav_MouseLeave);
             // 
             // pcbxHistorialMensajesNav
             // 
@@ -197,6 +240,9 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialMensajesNav.Size = new System.Drawing.Size(80, 80);
             this.pcbxHistorialMensajesNav.TabIndex = 8;
             this.pcbxHistorialMensajesNav.TabStop = false;
+            this.pcbxHistorialMensajesNav.Click += new System.EventHandler(this.pcbxHistorialMensajesNav_Click);
+            this.pcbxHistorialMensajesNav.MouseEnter += new System.EventHandler(this.pcbxHistorialMensajesNav_MouseEnter);
+            this.pcbxHistorialMensajesNav.MouseLeave += new System.EventHandler(this.pcbxHistorialMensajesNav_MouseLeave);
             // 
             // pcbxHistorialChatNav
             // 
@@ -205,6 +251,8 @@ namespace Hatchat.Presentacion
             this.pcbxHistorialChatNav.Size = new System.Drawing.Size(80, 80);
             this.pcbxHistorialChatNav.TabIndex = 7;
             this.pcbxHistorialChatNav.TabStop = false;
+            this.pcbxHistorialChatNav.MouseEnter += new System.EventHandler(this.pcbxHistorialChatNav_MouseEnter);
+            this.pcbxHistorialChatNav.MouseLeave += new System.EventHandler(this.pcbxHistorialChatNav_MouseLeave);
             // 
             // panelNav
             // 
@@ -229,6 +277,7 @@ namespace Hatchat.Presentacion
             this.pbxGruposNav.Size = new System.Drawing.Size(80, 80);
             this.pbxGruposNav.TabIndex = 6;
             this.pbxGruposNav.TabStop = false;
+            this.pbxGruposNav.Click += new System.EventHandler(this.pbxGruposNav_Click);
             // 
             // pbxCerrarSesionNav
             // 
@@ -238,6 +287,7 @@ namespace Hatchat.Presentacion
             this.pbxCerrarSesionNav.Size = new System.Drawing.Size(80, 80);
             this.pbxCerrarSesionNav.TabIndex = 5;
             this.pbxCerrarSesionNav.TabStop = false;
+            this.pbxCerrarSesionNav.Click += new System.EventHandler(this.pbxCerrarSesionNav_Click);
             // 
             // pbxHistorialNav
             // 
@@ -246,6 +296,8 @@ namespace Hatchat.Presentacion
             this.pbxHistorialNav.Size = new System.Drawing.Size(80, 80);
             this.pbxHistorialNav.TabIndex = 4;
             this.pbxHistorialNav.TabStop = false;
+            this.pbxHistorialNav.MouseEnter += new System.EventHandler(this.pbxHistorialNav_MouseEnter);
+            this.pbxHistorialNav.MouseLeave += new System.EventHandler(this.pbxHistorialNav_MouseLeave);
             // 
             // pbxPerfilNav
             // 
@@ -254,6 +306,7 @@ namespace Hatchat.Presentacion
             this.pbxPerfilNav.Size = new System.Drawing.Size(80, 80);
             this.pbxPerfilNav.TabIndex = 3;
             this.pbxPerfilNav.TabStop = false;
+            this.pbxPerfilNav.Click += new System.EventHandler(this.pbxPerfilNav_Click);
             // 
             // pbxMensajeNav
             // 
@@ -262,6 +315,7 @@ namespace Hatchat.Presentacion
             this.pbxMensajeNav.Size = new System.Drawing.Size(80, 80);
             this.pbxMensajeNav.TabIndex = 2;
             this.pbxMensajeNav.TabStop = false;
+            this.pbxMensajeNav.Click += new System.EventHandler(this.pbxMensajeNav_Click);
             // 
             // pbxChatNav
             // 
@@ -270,6 +324,7 @@ namespace Hatchat.Presentacion
             this.pbxChatNav.Size = new System.Drawing.Size(80, 80);
             this.pbxChatNav.TabIndex = 1;
             this.pbxChatNav.TabStop = false;
+            this.pbxChatNav.Click += new System.EventHandler(this.pcbxPrincipalChatNav_Click);
             // 
             // pbxFotoPerfilNav
             // 
@@ -476,6 +531,15 @@ namespace Hatchat.Presentacion
             this.lblDocenteParticipantes.TabIndex = 0;
             this.lblDocenteParticipantes.Text = "Docente:";
             // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(331, 119);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(921, 550);
+            this.panel2.TabIndex = 29;
+            // 
             // HistorialChatsAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -491,9 +555,13 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDatosClase);
             this.Controls.Add(this.panelCharla);
+            this.Controls.Add(this.panel2);
             this.Name = "HistorialChatsAlumno";
             this.Text = "PrincipalChatAlumno";
             this.Load += new System.EventHandler(this.PrincipalChatAlumno_Load);
+            this.panelChatsActivos.ResumeLayout(false);
+            this.panelChatsActivos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).EndInit();
             this.panelHistorialesNav.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialMensajesNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxHistorialChatNav)).EndInit();
@@ -558,5 +626,9 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelParticipantesOrdinarios;
         private System.Windows.Forms.Label lblHostParticipantes;
         private System.Windows.Forms.Label lblDocenteParticipantes;
+        private System.Windows.Forms.Label lblBienvenido;
+        private System.Windows.Forms.Label lblLinea;
+        private System.Windows.Forms.PictureBox pcbxLogo;
+        private System.Windows.Forms.Panel panel2;
     }
 }

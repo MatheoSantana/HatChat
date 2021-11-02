@@ -53,6 +53,7 @@ namespace Hatchat.Presentacion
 
             }
 
+
             pbxFotoPerfilNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxMensajeNav.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -68,9 +69,6 @@ namespace Hatchat.Presentacion
 
 
             cbxDestinatario.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            lblRespuestaDocente.Size = new Size(541, 107);
-            lblMensajeAlumno.Size = new Size(541, 107);
             CargarMensajes();
         }
         private void MensajesAlumno_Load(object sender, EventArgs e)
@@ -265,7 +263,7 @@ namespace Hatchat.Presentacion
 
                     Panel panel = new Panel();
                     panel.Height = 83;
-                    panel.Width = 320;
+                    panel.Width = 319;
                     panel.Location = new Point(0, yPanel);
                     yPanel += 83;
                     panel.Name = "panelM" + men.IdMensaje.ToString();
@@ -295,11 +293,11 @@ namespace Hatchat.Presentacion
             lblConsultaAlumno.Text = "Consulta:";
             lblConsultaDocente.Text = "Consulta:";
             lblNombreAlumno.Text = "Alumno:";
-            lblMensajeAlumno.Text = "";
+            panelMensajeAlumno.Controls.Clear();
+            panelMensajeDocente.Controls.Clear();
 
             lblFechaDocente.Text = "Fecha:";
             lblHoraDocente.Text = "Hora:";
-            lblRespuestaDocente.Text = "";
             Logica.Mensaje men = new Logica.Mensaje();
             if (sender.GetType().ToString() == "System.Windows.Forms.Label")
             {
@@ -335,13 +333,33 @@ namespace Hatchat.Presentacion
             lblConsultaAlumno.Text += "\n" + men.Asunto;
             lblConsultaDocente.Text += "\n" + men.Asunto;
             lblNombreAlumno.Text += "\n" + Login.encontrado.Nombre + " " + Login.encontrado.Primer_apellido;
-            lblMensajeAlumno.Text = men.MensajeAlumno;
+
+            Label menAl = new Label();
+            menAl.Height = 139;
+            menAl.Width = 605;
+            menAl.Location = new Point(0, 0);
+            menAl.Font = new Font("Arial", 12.0f);
+            menAl.Name = "lblMensajeAl";
+            menAl.ForeColor = Color.White;
+            menAl.Text = men.MensajeAlumno;
+            panelMensajeAlumno.Controls.Add(menAl);
+
+            Label menDo = new Label();
+            menDo.Height = 139;
+            menDo.Width = 605;
+            menDo.Location = new Point(0, 0);
+            menDo.Font = new Font("Arial", 12.0f);
+            menDo.ForeColor = Color.White;
+            menDo.Name = "lblMensajeAl";
+            menDo.Text = men.MensajeDocente;
+            
+
             pbxAlumno.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             pbxDocente.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
-            lblRespuestaDocente.Text = "''El mensaje no ha sido respondido''";
+            menDo.Text = "''El mensaje no ha sido respondido''";
             if (!(men.Estado == "realizado"))
-            { 
-                lblRespuestaDocente.Text = men.MensajeDocente;
+            {
+                menDo.Text = men.MensajeDocente;
                 lblFechaDocente.Text += "\n" + men.FechaHoraDocente.ToString("dd:MM:yyyy");
                 lblHoraDocente.Text += "\n" + men.FechaHoraDocente.ToString("HH:mm");
                 men.Estado = "recibido";
@@ -349,7 +367,7 @@ namespace Hatchat.Presentacion
                 mensajes.Clear();
             }
             panelEnviarMensaje.Visible = false;
-
+            panelMensajeDocente.Controls.Add(menDo);
         }
         private void btnEnviar_Click(object sender, EventArgs e)
         {

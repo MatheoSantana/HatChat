@@ -30,9 +30,14 @@ namespace Hatchat.Presentacion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GruposAlumno));
             this.timerHistorial = new System.Windows.Forms.Timer(this.components);
             this.panelContenedorGrupos = new System.Windows.Forms.Panel();
+            this.lblSinNada = new System.Windows.Forms.Label();
+            this.lblLinea = new System.Windows.Forms.Label();
+            this.pcbxLogo = new System.Windows.Forms.PictureBox();
             this.panelEntrarGrupo = new System.Windows.Forms.Panel();
+            this.btnRealizar = new System.Windows.Forms.Button();
             this.lblOrientacion = new System.Windows.Forms.Label();
             this.cmbxOrientacion = new System.Windows.Forms.ComboBox();
             this.panelAsignaturas = new System.Windows.Forms.Panel();
@@ -75,8 +80,10 @@ namespace Hatchat.Presentacion
             this.pbxFotoPerfilNav = new System.Windows.Forms.PictureBox();
             this.panelTextoChat = new System.Windows.Forms.Panel();
             this.lblGrupos = new System.Windows.Forms.Label();
-            this.btnRealizar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelContenedorGrupos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelEntrarGrupo.SuspendLayout();
             this.panelInformacion.SuspendLayout();
             this.panelParticipantes.SuspendLayout();
@@ -105,10 +112,44 @@ namespace Hatchat.Presentacion
             // 
             this.panelContenedorGrupos.AutoScroll = true;
             this.panelContenedorGrupos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelContenedorGrupos.Controls.Add(this.lblSinNada);
+            this.panelContenedorGrupos.Controls.Add(this.lblLinea);
+            this.panelContenedorGrupos.Controls.Add(this.pcbxLogo);
             this.panelContenedorGrupos.Location = new System.Drawing.Point(331, 164);
             this.panelContenedorGrupos.Name = "panelContenedorGrupos";
             this.panelContenedorGrupos.Size = new System.Drawing.Size(921, 505);
             this.panelContenedorGrupos.TabIndex = 5;
+            // 
+            // lblSinNada
+            // 
+            this.lblSinNada.AutoSize = true;
+            this.lblSinNada.Font = new System.Drawing.Font("Arial", 26F);
+            this.lblSinNada.ForeColor = System.Drawing.Color.White;
+            this.lblSinNada.Location = new System.Drawing.Point(150, 111);
+            this.lblSinNada.Name = "lblSinNada";
+            this.lblSinNada.Size = new System.Drawing.Size(617, 40);
+            this.lblSinNada.TabIndex = 19;
+            this.lblSinNada.Text = "Usted no se encuentra en ningun grupo";
+            // 
+            // lblLinea
+            // 
+            this.lblLinea.AutoSize = true;
+            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea.ForeColor = System.Drawing.Color.White;
+            this.lblLinea.Location = new System.Drawing.Point(131, 100);
+            this.lblLinea.Name = "lblLinea";
+            this.lblLinea.Size = new System.Drawing.Size(656, 67);
+            this.lblLinea.TabIndex = 20;
+            this.lblLinea.Text = "___________________";
+            // 
+            // pcbxLogo
+            // 
+            this.pcbxLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pcbxLogo.InitialImage")));
+            this.pcbxLogo.Location = new System.Drawing.Point(277, 178);
+            this.pcbxLogo.Name = "pcbxLogo";
+            this.pcbxLogo.Size = new System.Drawing.Size(363, 244);
+            this.pcbxLogo.TabIndex = 21;
+            this.pcbxLogo.TabStop = false;
             // 
             // panelEntrarGrupo
             // 
@@ -127,6 +168,20 @@ namespace Hatchat.Presentacion
             this.panelEntrarGrupo.Size = new System.Drawing.Size(317, 333);
             this.panelEntrarGrupo.TabIndex = 15;
             this.panelEntrarGrupo.Visible = false;
+            // 
+            // btnRealizar
+            // 
+            this.btnRealizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnRealizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRealizar.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnRealizar.ForeColor = System.Drawing.Color.White;
+            this.btnRealizar.Location = new System.Drawing.Point(186, 296);
+            this.btnRealizar.Name = "btnRealizar";
+            this.btnRealizar.Size = new System.Drawing.Size(115, 25);
+            this.btnRealizar.TabIndex = 12;
+            this.btnRealizar.Text = "Realizar";
+            this.btnRealizar.UseVisualStyleBackColor = false;
+            this.btnRealizar.Click += new System.EventHandler(this.btnRealizar_Click);
             // 
             // lblOrientacion
             // 
@@ -588,20 +643,6 @@ namespace Hatchat.Presentacion
             this.lblGrupos.TabIndex = 2;
             this.lblGrupos.Text = "Grupos";
             // 
-            // btnRealizar
-            // 
-            this.btnRealizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnRealizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRealizar.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnRealizar.ForeColor = System.Drawing.Color.White;
-            this.btnRealizar.Location = new System.Drawing.Point(186, 296);
-            this.btnRealizar.Name = "btnRealizar";
-            this.btnRealizar.Size = new System.Drawing.Size(115, 25);
-            this.btnRealizar.TabIndex = 12;
-            this.btnRealizar.Text = "Realizar";
-            this.btnRealizar.UseVisualStyleBackColor = false;
-            this.btnRealizar.Click += new System.EventHandler(this.btnRealizar_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
@@ -610,6 +651,15 @@ namespace Hatchat.Presentacion
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(321, 505);
             this.panel1.TabIndex = 23;
+            // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(331, 118);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(921, 551);
+            this.panel2.TabIndex = 29;
             // 
             // GruposAlumno
             // 
@@ -626,9 +676,13 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.panelEntrarGrupo);
             this.Controls.Add(this.panelContenedorGrupos);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Name = "GruposAlumno";
             this.Text = "PerfilAlumno";
             this.Load += new System.EventHandler(this.PerfilAlumno_Load);
+            this.panelContenedorGrupos.ResumeLayout(false);
+            this.panelContenedorGrupos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).EndInit();
             this.panelEntrarGrupo.ResumeLayout(false);
             this.panelEntrarGrupo.PerformLayout();
             this.panelInformacion.ResumeLayout(false);
@@ -703,5 +757,9 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblGrupos;
         private System.Windows.Forms.Button btnRealizar;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblSinNada;
+        private System.Windows.Forms.Label lblLinea;
+        private System.Windows.Forms.PictureBox pcbxLogo;
+        private System.Windows.Forms.Panel panel2;
     }
 }

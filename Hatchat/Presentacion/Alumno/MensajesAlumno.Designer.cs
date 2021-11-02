@@ -30,12 +30,11 @@ namespace Hatchat.Presentacion
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MensajesAlumno));
             this.btnNuevoChat = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelNavMensajes = new System.Windows.Forms.Panel();
             this.panelContenedor = new System.Windows.Forms.Panel();
-            this.lblMensajeAlumno = new System.Windows.Forms.Label();
-            this.lblRespuestaDocente = new System.Windows.Forms.Label();
             this.lblFechaAlumno = new System.Windows.Forms.Label();
             this.lblHoraAlumno = new System.Windows.Forms.Label();
             this.lblConsultaAlumno = new System.Windows.Forms.Label();
@@ -76,6 +75,9 @@ namespace Hatchat.Presentacion
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelMensajeAlumno = new System.Windows.Forms.Panel();
+            this.panelMensajeDocente = new System.Windows.Forms.Panel();
             this.panelContenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxAlumno)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDocente)).BeginInit();
@@ -120,6 +122,7 @@ namespace Hatchat.Presentacion
             // panelNavMensajes
             // 
             this.panelNavMensajes.AutoScroll = true;
+            this.panelNavMensajes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelNavMensajes.Location = new System.Drawing.Point(10, 189);
             this.panelNavMensajes.Name = "panelNavMensajes";
             this.panelNavMensajes.Size = new System.Drawing.Size(321, 480);
@@ -128,8 +131,9 @@ namespace Hatchat.Presentacion
             // panelContenedor
             // 
             this.panelContenedor.AutoScroll = true;
-            this.panelContenedor.Controls.Add(this.lblMensajeAlumno);
-            this.panelContenedor.Controls.Add(this.lblRespuestaDocente);
+            this.panelContenedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelContenedor.Controls.Add(this.panelMensajeDocente);
+            this.panelContenedor.Controls.Add(this.panelMensajeAlumno);
             this.panelContenedor.Controls.Add(this.lblFechaAlumno);
             this.panelContenedor.Controls.Add(this.lblHoraAlumno);
             this.panelContenedor.Controls.Add(this.lblConsultaAlumno);
@@ -145,28 +149,6 @@ namespace Hatchat.Presentacion
             this.panelContenedor.Name = "panelContenedor";
             this.panelContenedor.Size = new System.Drawing.Size(785, 490);
             this.panelContenedor.TabIndex = 7;
-            // 
-            // lblMensajeAlumno
-            // 
-            this.lblMensajeAlumno.AutoSize = true;
-            this.lblMensajeAlumno.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblMensajeAlumno.ForeColor = System.Drawing.Color.White;
-            this.lblMensajeAlumno.Location = new System.Drawing.Point(99, 82);
-            this.lblMensajeAlumno.Name = "lblMensajeAlumno";
-            this.lblMensajeAlumno.Size = new System.Drawing.Size(44, 18);
-            this.lblMensajeAlumno.TabIndex = 12;
-            this.lblMensajeAlumno.Text = "Texto";
-            // 
-            // lblRespuestaDocente
-            // 
-            this.lblRespuestaDocente.AutoSize = true;
-            this.lblRespuestaDocente.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblRespuestaDocente.ForeColor = System.Drawing.Color.White;
-            this.lblRespuestaDocente.Location = new System.Drawing.Point(99, 323);
-            this.lblRespuestaDocente.Name = "lblRespuestaDocente";
-            this.lblRespuestaDocente.Size = new System.Drawing.Size(44, 18);
-            this.lblRespuestaDocente.TabIndex = 11;
-            this.lblRespuestaDocente.Text = "Texto";
             // 
             // lblFechaAlumno
             // 
@@ -285,6 +267,7 @@ namespace Hatchat.Presentacion
             // 
             // panelEnviarMensaje
             // 
+            this.panelEnviarMensaje.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelEnviarMensaje.Controls.Add(this.lblBuevoMensaje);
             this.panelEnviarMensaje.Controls.Add(this.rtbxMensajeAEnviar);
             this.panelEnviarMensaje.Controls.Add(this.txtAsunto);
@@ -566,12 +549,34 @@ namespace Hatchat.Presentacion
             // 
             // pictureBox1
             // 
-            this.pictureBox1.InitialImage = global::Hatchat.Properties.Resources.Logo_Completa;
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(599, 244);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(363, 244);
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(330, 117);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(922, 552);
+            this.panel2.TabIndex = 21;
+            // 
+            // panelMensajeAlumno
+            // 
+            this.panelMensajeAlumno.Location = new System.Drawing.Point(77, 78);
+            this.panelMensajeAlumno.Name = "panelMensajeAlumno";
+            this.panelMensajeAlumno.Size = new System.Drawing.Size(647, 138);
+            this.panelMensajeAlumno.TabIndex = 14;
+            // 
+            // panelMensajeDocente
+            // 
+            this.panelMensajeDocente.Location = new System.Drawing.Point(77, 330);
+            this.panelMensajeDocente.Name = "panelMensajeDocente";
+            this.panelMensajeDocente.Size = new System.Drawing.Size(647, 138);
+            this.panelMensajeDocente.TabIndex = 15;
             // 
             // MensajesAlumno
             // 
@@ -590,6 +595,7 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.lblBienvenido);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel2);
             this.Name = "MensajesAlumno";
             this.Text = "MensajesAlumno";
             this.Load += new System.EventHandler(this.MensajesAlumno_Load);
@@ -642,8 +648,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblAsunto;
         private System.Windows.Forms.ComboBox cbxDestinatario;
         private System.Windows.Forms.Label lblDestinatario;
-        private System.Windows.Forms.Label lblRespuestaDocente;
-        private System.Windows.Forms.Label lblMensajeAlumno;
         private System.Windows.Forms.Timer timerMensajes;
         private System.Windows.Forms.Timer timerHistorial;
         private System.Windows.Forms.Timer timerCargarFoto;
@@ -665,5 +669,8 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblBuevoMensaje;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelMensajeDocente;
+        private System.Windows.Forms.Panel panelMensajeAlumno;
     }
 }

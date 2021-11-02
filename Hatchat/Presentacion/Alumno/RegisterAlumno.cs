@@ -21,7 +21,9 @@ namespace Hatchat.Presentacion
             try
             {
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
-                pbxVolver.Image = Image.FromFile("volver.png");
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
+                pbxLogin.Image = Image.FromFile("volver.png");
+
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -30,9 +32,9 @@ namespace Hatchat.Presentacion
             }
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-
-            pbxVolver.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxLogin.SizeMode = PictureBoxSizeMode.StretchImage;
 
             lblTitulo.Text = "Crea tu cuenta de alumno";
 
@@ -130,6 +132,6 @@ namespace Hatchat.Presentacion
             this.Hide();
         }
 
-
+        
     }
 }

@@ -32,6 +32,8 @@ namespace Hatchat.Persistencia
             MySqlDataReader reader = null;
             string query = "select * from Usuario where ci='" + usuario.Ci + "';";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            MySqlConnection conexion2 = new MySqlConnection(connection);
+            conexion2.Open();
             reader = select.ExecuteReader();
             if (reader.HasRows)
             {
@@ -39,26 +41,26 @@ namespace Hatchat.Persistencia
             }
             if (encontrado)
             {
-                MySqlCommand updateUsuario = new MySqlCommand("update usuario set activo=true where ci='" + usuario.Ci + "';", conexion);
+                MySqlCommand updateUsuario = new MySqlCommand("update usuario set activo=true where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set nombre='" + usuario.Nombre + "' where ci='" + usuario.Ci + "';", conexion);
+                updateUsuario = new MySqlCommand("update usuario set nombre='" + usuario.Nombre + "' where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set contrasenia='" + usuario.Password + "' where ci='" + usuario.Ci + "';", conexion);
+                updateUsuario = new MySqlCommand("update usuario set contrasenia='" + usuario.Password + "' where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set apellido='" + usuario.Primer_apellido + "' where ci='" + usuario.Ci + "';", conexion);
+                updateUsuario = new MySqlCommand("update usuario set apellido='" + usuario.Primer_apellido + "' where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set segApellido='" + usuario.Segundo_apellido + "' where ci='" + usuario.Ci + "';", conexion);
+                updateUsuario = new MySqlCommand("update usuario set segApellido='" + usuario.Segundo_apellido + "' where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set resSeguridad='" + usuario.Respuesta_seguridad + "' where ci='" + usuario.Ci + "';", conexion);
+                updateUsuario = new MySqlCommand("update usuario set resSeguridad='" + usuario.Respuesta_seguridad + "' where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set id=" + usuario.Preguta_seguridad + " where ci='" + usuario.Ci + "';", conexion);
+                updateUsuario = new MySqlCommand("update usuario set id=" + usuario.Preguta_seguridad + " where ci='" + usuario.Ci + "';", conexion2);
                 updateUsuario.ExecuteNonQuery();
             }
             else
             {
-                MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + usuario.Activo + "," + usuario.Preguta_seguridad + ");", conexion);
+                MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + usuario.Activo + "," + usuario.Preguta_seguridad + ");", conexion2);
                 insertUsuario.Parameters.AddWithValue("imagen", usuario.FotoDePerfil);
-                MySqlCommand insertHijo = new MySqlCommand("insert into " + usuario.GetType().Name + " values('" + usuario.Ci + "');", conexion);
+                MySqlCommand insertHijo = new MySqlCommand("insert into " + usuario.GetType().Name + " values('" + usuario.Ci + "');", conexion2);
                 insertUsuario.ExecuteNonQuery();
                 insertHijo.ExecuteNonQuery();
             }
