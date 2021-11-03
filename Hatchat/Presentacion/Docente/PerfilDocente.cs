@@ -74,6 +74,17 @@ namespace Hatchat.Presentacion
             txtPasswordCon.Text = Login.encontrado.Password;
             cbxPregs.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            for (int x = 0; x < 24; x++)
+            {
+                cmbxHoraInicio.Items.Add(x);
+                cmbxHoraCierre.Items.Add(x);
+            }
+            for (int x = 0; x < 60; x++)
+            {
+                cmbxMinutoCierre.Items.Add(x);
+                cmbxMinutoInicio.Items.Add(x);
+            }
+
             foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
                 cbxPregs.Items.Add(preg.Pregunta);
@@ -366,15 +377,10 @@ namespace Hatchat.Presentacion
                 }
             }
 
-                    
-                    
-                
-            
-
         }
         private void EliminarAgenda(object sender, EventArgs e)
         {
-            new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
+            new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Button)sender).Name));
             MessageBox.Show("Se ha eliminado la agenda");
         }
 
