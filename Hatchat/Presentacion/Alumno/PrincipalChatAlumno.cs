@@ -170,6 +170,13 @@ namespace Hatchat.Presentacion
         private void tmrActChats_Tick(object sender, EventArgs e)
         {
             cargarChats();
+            foreach (Logica.Chat chat in chats)
+            {
+                if (chat.Fecha.Day != DateTime.Now.Day || chat.Fecha.Month != DateTime.Now.Month || chat.Fecha.Year != DateTime.Now.Year)
+                {
+                    chat.CerrarChat();
+                }
+            }
             CargarIngresarChat();
         }
         private void cargarChats()
@@ -635,6 +642,7 @@ namespace Hatchat.Presentacion
                 paneltitulo.Visible = false;
                 cerrar = true;
                 chats = new List<Logica.Chat>();
+                cargarChats();
             }
             
         }
@@ -668,15 +676,17 @@ namespace Hatchat.Presentacion
                 btnIngresarChat.Enabled = false;
                 paneltitulo.Visible = true;
                 cerrar = true;
-
+                tmrCargChat.Enabled = false;
             }
             
         }
         private void CerrarChat()
         {
 
-            if (!(abierto == new Logica.Chat()))
+            if (!(abierto.IdChat == new Logica.Chat().IdChat))
             {
+                
+
                 bool cerrar = true;
                 foreach (Logica.Chat chat in chats)
                 {

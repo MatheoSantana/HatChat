@@ -187,16 +187,10 @@ namespace Hatchat.Presentacion
                 {
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
                     Logica.Docente alumno = new Logica.Docente();
-                    alumno.Ci = usuario.Ci;
-                    alumno.Apodo = usuario.Apodo;
                     alumno.Nombre = usuario.Nombre;
                     alumno.Primer_apellido = usuario.Primer_apellido;
-                    alumno.Segundo_apellido = usuario.Segundo_apellido;
-                    if (!(usuario.FotoDePerfil == null))
-                    {
-                        alumno.FotoDePerfil = usuario.FotoDePerfil;
-                    }
-                    alumno.Activo = usuario.Activo;
+                    alumno.FotoDePerfil = usuario.FotoDePerfil;
+
 
                     PictureBox picPhoto = new PictureBox();
                     picPhoto.Image = alumno.ByteArrayToImage(alumno.FotoDePerfil);

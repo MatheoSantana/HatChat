@@ -36,7 +36,8 @@ namespace Hatchat.Presentacion
             Text = "Grupos";
 
             ClientSize = new Size(1280, 720);
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
 
             try
@@ -51,6 +52,7 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pcbxLogo.Image = Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -68,6 +70,7 @@ namespace Hatchat.Presentacion
             pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxProfesor.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
 
             cmbxAnio.Items.Add(1);
             cmbxAnio.Items.Add(2);
@@ -144,6 +147,20 @@ namespace Hatchat.Presentacion
         private void timerGrupos_Tick(object sender, EventArgs e)
         {
             List<Logica.AsignaturaDictada> asignaturaDictadas = new Logica.AsignaturaDictada().SelectAsignaturasDictadasPorCi(Login.encontrado.Ci);
+
+            if (asignaturaDictadas.Count != 0)
+            {
+                lblLinea.Visible = false;
+                lblSinNada.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblLinea.Visible = true;
+                lblSinNada.Visible = true;
+                pcbxLogo.Visible = true;
+            }
+
             bool iguales = true;
             if (this.asignaturaDictadas.Count == asignaturaDictadas.Count)
             {
@@ -163,7 +180,7 @@ namespace Hatchat.Presentacion
             {
 
                 this.asignaturaDictadas = asignaturaDictadas;
-                int xpanel = 25, ypanel = 25;
+                int xpanel = 63, ypanel = 25;
                 panelContenedorGrupos.Controls.Clear();
 
                 foreach (Logica.AsignaturaDictada asignaturaDictada in asignaturaDictadas)
@@ -173,12 +190,11 @@ namespace Hatchat.Presentacion
                     Logica.Orientacion orientacion = new Logica.Orientacion().SelectOrientacioPorId(clase.Orientacion);
 
                     Label grupo = new Label();
-                    grupo.Height = 46;
+                    grupo.Height = 200;
                     grupo.Width = 150;
-                    grupo.Location = new Point(0, 100);
+                    grupo.Location = new Point(25, 110);
                     grupo.Name = "lbl" + asignaturaDictada.AsigDictada;
                     grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + " " + orientacion.Nombre;
-                    grupo.BorderStyle = BorderStyle.FixedSingle;
                     grupo.Click += new EventHandler(AbrirGrupo);
 
                     PictureBox pic = new PictureBox();
@@ -186,7 +202,7 @@ namespace Hatchat.Presentacion
                     pic.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic.Height = 80;
                     pic.Width = 80;
-                    pic.Location = new Point(50, 0);
+                    pic.Location = new Point(60, 20);
                     pic.Name = "pbx" + asignaturaDictada.AsigDictada;
                     pic.Click += new EventHandler(AbrirGrupo);
 
@@ -194,13 +210,14 @@ namespace Hatchat.Presentacion
                     panel.Height = 200;
                     panel.Width = 200;
                     panel.Location = new Point(xpanel, ypanel);
-                    if (xpanel == 475)
+                    if (xpanel == 631)
                     {
-                        xpanel += -675;
+                        xpanel = -221;
                         ypanel += 225;
                     }
-                    xpanel += 225;
+                    xpanel += 284;
                     panel.Name = "pnl" + asignaturaDictada.AsigDictada;
+                    panel.BackColor = Color.White;
                     panel.Click += new EventHandler(AbrirGrupo);
                     panel.Controls.Add(grupo);
                     panel.Controls.Add(pic);
@@ -241,71 +258,100 @@ namespace Hatchat.Presentacion
         }
         private void btnLunes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = Color.Orange;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(239, 136, 88);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Lunes");
+            lblHorariosDelDia.Text = "Horarios del dia: Lunes";
         }
 
 
         private void btnMartes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = Color.Orange;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(239, 136, 88);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Martes");
+            lblHorariosDelDia.Text = "Horarios del dia: Martes";
         }
 
         private void btnMiercoles_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = Color.Orange;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(239, 136, 88);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Miercoles");
+            lblHorariosDelDia.Text = "Horarios del dia: Miercoles";
         }
 
         private void btnJueves_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = Color.Orange;
-            btnViernes.BackColor = SystemColors.Control;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(239, 136, 88);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Jueves");
+            lblHorariosDelDia.Text = "Horarios del dia: Jueves";
         }
 
         private void btnViernes_Click(object sender, EventArgs e)
         {
-            btnLunes.BackColor = SystemColors.Control;
-            btnMartes.BackColor = SystemColors.Control;
-            btnMiercoles.BackColor = SystemColors.Control;
-            btnJueves.BackColor = SystemColors.Control;
-            btnViernes.BackColor = Color.Orange;
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(239, 136, 88);
             RecargarAgendaDelDia("Viernes");
+            lblHorariosDelDia.Text = "Horarios del dia: Viernes";
         }
         private void RecargarAgendaDelDia(string dia)
         {
-            int y = 5;
+            int ypanel = 0;
             panelHorariosPorDia.Controls.Clear();
             foreach (Logica.Agenda agenda in agendas)
             {
                 if (agenda.NomDia == dia)
                 {
-                    Label dina = new Label();
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(25, y);
-                    y += 50;
-                    dina.Name = "lblAdendaDelDia" + agenda.IdAgenda.ToString();
-                    dina.Text = agenda.HoraInicio + " - " + agenda.HoraFin;
-                    dina.BorderStyle = BorderStyle.FixedSingle;
-                    panelHorariosPorDia.Controls.Add(dina);
+
+                    Label linea = new Label();
+                    linea.Height = 18;
+                    linea.Width = 170;
+                    linea.Location = new Point(0, 2);
+                    linea.Font = new Font("Arial", 12, FontStyle.Bold);
+                    linea.ForeColor = Color.White;
+                    linea.Name = "lblLineaAgendaDelDia" + agenda.IdAgenda.ToString();
+                    linea.Text = "_______________________________________________";
+
+                    Label horario = new Label();
+                    horario.Height = 18;
+                    horario.Width = 150;
+                    horario.Location = new Point(10, 0);
+                    horario.Font = new Font("Arial", 12.0f);
+                    horario.ForeColor = Color.White;
+                    horario.Name = "lblAgendaDelDia" + agenda.IdAgenda.ToString();
+                    horario.Text = agenda.HoraInicio + " - " + agenda.HoraFin;
+
+
+
+                    Panel panel = new Panel();
+                    panel.Height = 20;
+                    panel.Width = 288;
+                    panel.Location = new Point(0, ypanel);
+                    ypanel += 20;
+                    panel.Name = "pnl" + agenda.IdAgenda.ToString();
+                    panel.BackColor = Color.FromArgb(61, 53, 50);
+
+                    panel.Controls.Add(horario);
+                    panel.Controls.Add(linea);
+
+                    panelHorariosPorDia.Controls.Add(panel);
+
                 }
             }
         }
@@ -313,6 +359,7 @@ namespace Hatchat.Presentacion
         private void btnCerrarInformacion_Click(object sender, EventArgs e)
         {
             panelInformacion.Visible = false;
+            panelParticipantes.Visible = false;
             panelNav.Enabled = true;
             btnCerrarInformacion.Enabled = true;
             btnEntrarGrupo.Enabled = true;
@@ -334,6 +381,8 @@ namespace Hatchat.Presentacion
                     dina.Height = 46;
                     dina.Width = 150;
                     dina.Location = new Point(25, y);
+                    dina.ForeColor = Color.White;
+                    dina.Font = new Font("Arial", 12.0f);
                     y += 50;
                     dina.Name = "lblParticipante" + x;
                     dina.Text = "- " + usuarios[x].Nombre + " " + usuarios[x].Primer_apellido;
@@ -350,6 +399,7 @@ namespace Hatchat.Presentacion
                 asignaturaDictada.BajaGrupo();
                 MessageBox.Show("Se ha salido del grupo correctamente");
                 panelInformacion.Visible = false;
+                panelParticipantes.Visible = false;
                 panelNav.Enabled = true;
                 btnCerrarInformacion.Enabled = true;
                 btnEntrarGrupo.Enabled = true;
@@ -404,9 +454,15 @@ namespace Hatchat.Presentacion
             panelAsignaturas.Visible = false;
             btnRealizar.Enabled = false;
 
-            foreach (int anio in new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientaciones[cmbxOrientacion.SelectedIndex].Id)))
+            if (cmbxOrientacion.SelectedIndex != -1)
             {
-                cmbxAnio.Items.Add(anio.ToString());
+                List<int> anios = new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientaciones[cmbxOrientacion.SelectedIndex].Id));
+
+
+                foreach (int anio in anios)
+                {
+                    cmbxAnio.Items.Add(anio.ToString());
+                }
             }
 
         }
@@ -512,27 +568,11 @@ namespace Hatchat.Presentacion
             {
                 nuevasAsignaturas.RemoveAt(index);
             }
-            foreach (Logica.Asignatura asig in nuevasAsignaturas)
-            {
-                Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo = new Logica.AsignaturaSolicitudClaseDo();
-                asignaturaSolicitudClaseDo.IdAsignatura = asig.Id;
-                asignaturaSolicitudClaseDo.IdClaseAsig = claseSeleccionada.IdClase;
-                asignaturaSolicitudClaseDo.OriClaseAsig = claseSeleccionada.Orientacion;
-                asignaturaSolicitudClaseDo.Aceptada = false;
-                asignaturasSolicitudClaseDo.Add(asignaturaSolicitudClaseDo);
-            }
-
-            
-
-
-        }
-        private void btnModificarGrupo_Click(object sender, EventArgs e)
-        {
             panelAsignaturas.Visible = !panelAsignaturas.Visible;
 
             if (panelAsignaturas.Visible && panelAsignaturas.Controls.Count == 0)
             {
-                int ychbx = 50, xchbx = 50;
+                int ychbx = 5, xchbx = 5;
                 foreach (Logica.Asignatura asig in nuevasAsignaturas)
                 {
                     CheckBox dina = new CheckBox();
@@ -547,12 +587,12 @@ namespace Hatchat.Presentacion
                     dina.Height = 23;
                     dina.Width = 150;
                     dina.Location = new Point(xchbx, ychbx);
-                    if (xchbx == 400)
+                    if (xchbx == 160)
                     {
-                        xchbx = -125;
+                        xchbx += -310;
                         ychbx += 25;
                     }
-                    xchbx += 175;
+                    xchbx += 155;
                     dina.Name = "chbx" + asig.Id;
                     dina.Text = asig.Nombre;
 
@@ -561,6 +601,7 @@ namespace Hatchat.Presentacion
                 }
             }
         }
+        
         private void AsignaturaCambiada(object sender, EventArgs e)
         {
             if (((CheckBox)sender).Checked)
@@ -600,65 +641,71 @@ namespace Hatchat.Presentacion
 
         private void btnRealizar_Click(object sender, EventArgs e)
         {
-            List<Logica.AsignaturaSolicitudClaseDo> solicitidesPendientes = new Logica.AsignaturaSolicitudClaseDo().SelectAsignaturasSolicitudesClaseDo(Login.encontrado.Ci);
-            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
-            bool mandable = true;
-            foreach (Logica.AsignaturaSolicitudClaseDo asigPend in solicitidesPendientes)
+            if (asignaturasSolicitudClaseDo.Count != 0)
             {
-                foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturasSolicitudClaseDo)
+                List<Logica.AsignaturaSolicitudClaseDo> solicitidesPendientes = new Logica.AsignaturaSolicitudClaseDo().SelectAsignaturasSolicitudesClaseDo(Login.encontrado.Ci);
+                string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+                bool mandable = true;
+                foreach (Logica.AsignaturaSolicitudClaseDo asigPend in solicitidesPendientes)
                 {
-                    if(asigPend.IdClaseAsig == asignaturaSolicitudClaseDo.IdClaseAsig && asigPend.OriClaseAsig == asignaturaSolicitudClaseDo.OriClaseAsig && asigPend.IdAsignatura == asignaturaSolicitudClaseDo.IdAsignatura)
+                    foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturasSolicitudClaseDo)
                     {
-                        Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.IdAsignatura);
-                        error += "\n" + asi.Nombre;
-                        mandable = false;
+                        if (asigPend.IdClaseAsig == asignaturaSolicitudClaseDo.IdClaseAsig && asigPend.OriClaseAsig == asignaturaSolicitudClaseDo.OriClaseAsig && asigPend.IdAsignatura == asignaturaSolicitudClaseDo.IdAsignatura)
+                        {
+                            Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.IdAsignatura);
+                            error += "\n" + asi.Nombre;
+                            mandable = false;
+                        }
                     }
                 }
-            }
-            if (mandable)
-            {
-                solicitudClaseDo.Docente = Login.encontrado.Ci;
-                solicitudClaseDo.FechaHora = DateTime.Now;
-                solicitudClaseDo.Pendiente = true;
-                solicitudClaseDo.EnviarSolicitudClaseDo();
-                solicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.SelectIdSolicitudClaseDo();
-
-                claseSolicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.IdSolicitudClaseDo;
-                claseSolicitudClaseDo.IdClase = claseSeleccionada.IdClase;
-                claseSolicitudClaseDo.OriClase = claseSeleccionada.Orientacion;
-                claseSolicitudClaseDo.EnviarClaseSolicitudClaseDo();
-
-                foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturasSolicitudClaseDo)
+                if (mandable)
                 {
-                    asignaturaSolicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.IdSolicitudClaseDo;
-                    asignaturaSolicitudClaseDo.EnviarAsignaturaSolicitudClaseDo();
+                    solicitudClaseDo.Docente = Login.encontrado.Ci;
+                    solicitudClaseDo.FechaHora = DateTime.Now;
+                    solicitudClaseDo.Pendiente = true;
+                    solicitudClaseDo.EnviarSolicitudClaseDo();
+                    solicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.SelectIdSolicitudClaseDo();
+
+                    claseSolicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.IdSolicitudClaseDo;
+                    claseSolicitudClaseDo.IdClase = claseSeleccionada.IdClase;
+                    claseSolicitudClaseDo.OriClase = claseSeleccionada.Orientacion;
+                    claseSolicitudClaseDo.EnviarClaseSolicitudClaseDo();
+
+                    foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturasSolicitudClaseDo)
+                    {
+                        asignaturaSolicitudClaseDo.IdSolicitudClaseDo = solicitudClaseDo.IdSolicitudClaseDo;
+                        asignaturaSolicitudClaseDo.EnviarAsignaturaSolicitudClaseDo();
+                    }
+                    MessageBox.Show("Se ha enviado la solicitud de ingreso");
                 }
-                MessageBox.Show("Se ha enviado la solicitud de ingreso");
+                else
+                {
+                    MessageBox.Show(error);
+                }
+                solicitudClaseDo = new Logica.SolicitudClaseDo();
+                claseSolicitudClaseDo = new Logica.ClaseSolicitudClaseDo();
+                asignaturasSolicitudClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
+                clasesDisponibles = new List<Logica.Clase>();
+                claseSeleccionada = new Logica.Clase();
+                orientaciones = new List<Logica.Orientacion>();
+                nuevasAsignaturas = new List<Logica.Asignatura>();
+
+                cmbxOrientacion.Items.Clear();
+                cmbxAnio.Items.Clear();
+                cmbxAnio.Enabled = false;
+                cmbxClase.Items.Clear();
+                cmbxClase.Enabled = false;
+                btnModificarGrupo.Enabled = false;
+                panelAsignaturas.Controls.Clear();
+                panelAsignaturas.Visible = false;
+                btnRealizar.Enabled = false;
+                panelEntrarGrupo.Visible = false;
+
             }
             else
             {
-                MessageBox.Show(error);
+                MessageBox.Show("Debe ingresar al menos una asignatura para solicitar el ingreso a la clase");
             }
-            solicitudClaseDo = new Logica.SolicitudClaseDo();
-            claseSolicitudClaseDo = new Logica.ClaseSolicitudClaseDo();
-            asignaturasSolicitudClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
-            clasesDisponibles = new List<Logica.Clase>();
-            claseSeleccionada = new Logica.Clase();
-            orientaciones = new List<Logica.Orientacion>();
-            nuevasAsignaturas = new List<Logica.Asignatura>();
-
-            cmbxOrientacion.Items.Clear();
-            cmbxAnio.Items.Clear();
-            cmbxAnio.Enabled = false;
-            cmbxClase.Items.Clear();
-            cmbxClase.Enabled = false;
-            btnModificarGrupo.Enabled = false;
-            panelAsignaturas.Controls.Clear();
-            panelAsignaturas.Visible = false;
-            btnRealizar.Enabled = false;
-            panelEntrarGrupo.Visible = false;
-
-
         }
 
         private void timerCargarFoto_Tick(object sender, EventArgs e)
@@ -666,11 +713,17 @@ namespace Hatchat.Presentacion
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
         }
 
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
+
         private void pcbxHistorialChatNav_Click(object sender, EventArgs e)
         {
             historialChatsDocente.Show();
             this.Hide();
         }
+
         private void timerHistorialNav_Tick(object sender, EventArgs e)
         {
             if (!enPanel && !enHistorial && !enHistorialChat && !enHistorialMensaje)

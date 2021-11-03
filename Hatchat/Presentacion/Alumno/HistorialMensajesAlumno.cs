@@ -20,8 +20,6 @@ namespace Hatchat.Presentacion
         public Form perfilAlumno;
         public Form historialchatsAlumno;
         bool enHistorial = false, enPanel = false, enHistorialChat = false, enHistorialMensaje = false;
-
-        int y = 50;
         bool filtroDocente = false, filtroFecha = false;
 
         public HistorialMensajesAlumno()
@@ -37,9 +35,10 @@ namespace Hatchat.Presentacion
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             //nav
-            pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
+            
             try
             {
+                pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
                 pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
@@ -150,8 +149,10 @@ namespace Hatchat.Presentacion
             menDo.Location = new Point(0, 0);
             menDo.Font = new Font("Arial", 12.0f);
             menDo.ForeColor = Color.White;
-            menDo.Name = "lblMensajeAl";
+            menDo.Name = "lblMensajeDo";
             menDo.Text = men.MensajeDocente;
+            panelMensajeDocente.Controls.Add(menDo);
+
 
             pbxAlumno.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
             pbxDocente.Image = docente.ByteArrayToImage(docente.FotoDePerfil);
@@ -269,7 +270,6 @@ namespace Hatchat.Presentacion
                 pcbxLogo.Visible = true;
             }
 
-            y = 50;
             bool iguales = true;
             if (mensajes.Count == this.mensajes.Count)
             {
@@ -313,7 +313,6 @@ namespace Hatchat.Presentacion
                 int yPanel = 0;
                 foreach (Logica.Mensaje men in mensajes)
                 {
-                    this.mensajes = mensajes;
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
                     Logica.Docente doc = new Logica.Docente();
 
@@ -373,6 +372,28 @@ namespace Hatchat.Presentacion
                     fecha.Text = "Fecha:\n" + men.FechaHoraDocente.ToString("dd") + "/" + men.FechaHoraDocente.ToString("MM") + "/" + men.FechaHoraDocente.ToString("yyyy");
                     fecha.Click += new EventHandler(AbrirMensaje);
 
+                    PictureBox picCirculito = new PictureBox();
+                    if (men.Estado == "recibido")
+                    {
+                        picCirculito.Image = Image.FromFile("circulo realizado.png");
+                    }
+                    else if (men.Estado == "contestado")
+                    {
+                        picCirculito.Image = Image.FromFile("circulo contestado.png");
+                    }
+                    else
+                    {
+                        picCirculito.Image = Image.FromFile("circulo recibido.png");
+
+                    }
+
+                    picCirculito.SizeMode = PictureBoxSizeMode.StretchImage;
+                    picCirculito.Height = 40;
+                    picCirculito.Width = 40;
+                    picCirculito.Location = new Point(470, 37);
+                    picCirculito.Name = "pbxCircu" + men.IdMensaje.ToString();
+                    picCirculito.Click += new EventHandler(AbrirMensaje);
+
                     Panel panel = new Panel();
                     panel.Height = 83;
                     panel.Width = 738;
@@ -385,6 +406,7 @@ namespace Hatchat.Presentacion
                     panel.Controls.Add(mensaje);
                     panel.Controls.Add(picPhoto);
                     panel.Controls.Add(docente);
+                    panel.Controls.Add(picCirculito);
                     panel.Controls.Add(hora);
                     panel.Controls.Add(fecha);
                     panelNavMensajes.Controls.Add(panel);
@@ -418,8 +440,6 @@ namespace Hatchat.Presentacion
         {
             List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
             List<Logica.Mensaje> mensTemp = new Logica.Mensaje().SelectMensajesRecibidosAl(Login.encontrado.Ci);
-            
-            y = 50;
 
             if (mensTemp.Count != 0)
             {

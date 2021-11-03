@@ -31,7 +31,6 @@ namespace Hatchat.Presentacion
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistorialMensajesAlumno));
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.timerHistorialMensajes = new System.Windows.Forms.Timer(this.components);
             this.timerHistrotial = new System.Windows.Forms.Timer(this.components);
             this.timerCargarFoto = new System.Windows.Forms.Timer(this.components);
@@ -93,15 +92,6 @@ namespace Hatchat.Presentacion
             this.panelFiltros.SuspendLayout();
             this.panelTextoChat.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Location = new System.Drawing.Point(108, 100);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(52, 13);
-            this.lblTitulo.TabIndex = 5;
-            this.lblTitulo.Text = "Mensajes";
             // 
             // timerHistorialMensajes
             // 
@@ -546,12 +536,11 @@ namespace Hatchat.Presentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelHistorialesNav);
             this.Controls.Add(this.panelContenedor);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.panelFiltros);
-            this.Controls.Add(this.panelHistorialesNav);
             this.Controls.Add(this.panelNav);
-            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.panelNavMensajes);
             this.Controls.Add(this.panel1);
             this.Name = "HistorialMensajesAlumno";
@@ -579,12 +568,10 @@ namespace Hatchat.Presentacion
             this.panelTextoChat.ResumeLayout(false);
             this.panelTextoChat.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Timer timerHistorialMensajes;
         private System.Windows.Forms.Timer timerHistrotial;
         private System.Windows.Forms.Timer timerCargarFoto;

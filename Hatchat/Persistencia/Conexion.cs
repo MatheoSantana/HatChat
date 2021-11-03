@@ -1238,7 +1238,7 @@ namespace Hatchat.Persistencia
 
                 try
                 {
-                    MySqlCommand insert = new MySqlCommand("insert into ChateaDo values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + chatea.HoraEnvio.ToString("HH") + ":" + chatea.HoraEnvio.ToString("mm") + ":" + chatea.HoraEnvio.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
+                    MySqlCommand insert = new MySqlCommand("insert into ChateaDo values('" + chatea.Ci + "'," + chatea.IdChat + ",'" + DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":" + DateTime.Now.ToString("ss") + "','" + chatea.Contenido + "');", conexion);
                     insert.ExecuteNonQuery();
                     enviado = false;
                 }

@@ -88,9 +88,7 @@ namespace Hatchat.Presentacion
 
             lblTitulo.Text = "Inicio de sesion";
             idioma = cmbxIdioma.SelectedItem.ToString();
-            lblCambioPassword.Visible = false;
-            cmbxIdioma.Visible = false;
-            pcbxIdioma.Visible = false;
+            
         }
 
         private void Login_Load(object sender, EventArgs e)

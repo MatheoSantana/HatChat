@@ -38,7 +38,10 @@ namespace Hatchat.Presentacion
 
         public PrincipalSolicitudesAdmin()
         {
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            ClientSize = new Size(1280, 720);
+            StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             panelSolicitud.Visible = false;
             try
@@ -51,6 +54,8 @@ namespace Hatchat.Presentacion
                 pbxABMGruposNav.Image = Image.FromFile("abm grupos gris.png");
                 pbxHistorialSolicitudesNav.Image = Image.FromFile("historial gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
+                
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -64,6 +69,7 @@ namespace Hatchat.Presentacion
             pbxABMGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void pbxABMAlumnoNav_Click(object sender, EventArgs e)
@@ -164,7 +170,6 @@ namespace Hatchat.Presentacion
                 this.solicitudesClaseDo = solicitudesClaseDo;
                 this.solicitudesModif = solicitudesModif;
                 ArrayList solicitudesDesordenadas = new ArrayList();
-                int y;
 
                 ArrayList solicitudesOrdenadas = new ArrayList();
                 if (solicitudesClaseAl.Count() > 0)
@@ -237,7 +242,7 @@ namespace Hatchat.Presentacion
                     }
                 }
                 
-                y = 5;
+                int yPanel = 0;
                 PanelSolicitudesPendientes.Controls.Clear();
 
                 for (int x = 0; x < solicitudesOrdenadas.Count; x++)
@@ -246,46 +251,194 @@ namespace Hatchat.Presentacion
                     {
                         Logica.SolicitudClaseAl soli = (Logica.SolicitudClaseAl)solicitudesOrdenadas[x];
                         Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Alumno);
-                        Label dina = new Label();
-                        dina.Height = 46;
-                        dina.Width = 150;
-                        dina.Location = new Point(25, y);
-                        y += 50;
-                        dina.Name = "lblSoliAl" + soli.IdSolicitudClaseAl.ToString();
-                        dina.Text = us.Nombre + " " + us.Primer_apellido + "\nDesea entrar a un grupo" + "\n" + soli.FechaHora.ToString();
-                        dina.BorderStyle = BorderStyle.FixedSingle;
-                        dina.Click += new EventHandler(AbrirSolicitudClaseAl);
-                        PanelSolicitudesPendientes.Controls.Add(dina);
+                        Logica.Alumno al = new Logica.Alumno();
+                        al.Nombre = us.Nombre;
+                        al.Primer_apellido = us.Primer_apellido;
+                        al.FotoDePerfil = us.FotoDePerfil;
+
+                        PictureBox picPhoto = new PictureBox();
+                        picPhoto.Image = us.ByteArrayToImage(us.FotoDePerfil);
+                        picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                        picPhoto.Height = 69;
+                        picPhoto.Width = 69;
+                        picPhoto.Location = new Point(12, 12);
+                        picPhoto.Name = "pcbxSoliAl" + soli.IdSolicitudClaseAl.ToString();
+                        picPhoto.Click += new EventHandler(AbrirSolicitudClaseAl);
+
+                        Label grupo = new Label();
+                        grupo.Height = 30;
+                        grupo.Width = 227;
+                        grupo.Location = new Point(91, 0);
+                        grupo.ForeColor = Color.FromArgb(209, 213, 100);
+                        grupo.Font = new Font("Arial", 10.0f);
+                        grupo.Name = "lblSoliAl" + soli.IdSolicitudClaseAl.ToString();
+                        grupo.Text = "Desea entrar a un grupo";
+                        grupo.Click += new EventHandler(AbrirSolicitudClaseAl);
+
+                        Label alumno = new Label();
+                        alumno.Height = 58;
+                        alumno.Width = 277;
+                        alumno.Location = new Point(91, 30);
+                        alumno.ForeColor = Color.White;
+                        alumno.Font = new Font("Arial", 10.0f);
+                        alumno.Name = "lblASoliAl" + soli.IdSolicitudClaseAl.ToString();
+                        alumno.Text = "Alumno:\n" + al.Nombre + " " + al.Primer_apellido;
+                        alumno.Click += new EventHandler(AbrirSolicitudClaseAl);
+
+                        Label fecha = new Label();
+                        fecha.Height = 24;
+                        fecha.Width = 150;
+                        fecha.Location = new Point(195, 65);
+                        fecha.ForeColor = Color.White;
+                        fecha.Font = new Font("Arial", 8.0f);
+                        fecha.Name = "lblFSoliAl" + soli.IdSolicitudClaseAl.ToString();
+                        fecha.Text = soli.FechaHora.ToString();
+                        fecha.Click += new EventHandler(AbrirSolicitudClaseAl);
+
+                        Panel panel = new Panel();
+                        panel.Height = 83;
+                        panel.Width = 302;
+                        panel.Location = new Point(0, yPanel);
+                        yPanel += 83;
+                        panel.Name = "panelSoliAl" + soli.IdSolicitudClaseAl.ToString();
+                        panel.BorderStyle = BorderStyle.FixedSingle;
+                        panel.Click += new EventHandler(AbrirSolicitudClaseAl);
+
+                        panel.Controls.Add(fecha);
+                        panel.Controls.Add(grupo);
+                        panel.Controls.Add(alumno);
+                        panel.Controls.Add(picPhoto);
+
+                        PanelSolicitudesPendientes.Controls.Add(panel);
+
+
                     }
                     else if (solicitudesOrdenadas[x].GetType().Name == "SolicitudClaseDo")
                     {
                         Logica.SolicitudClaseDo soli = (Logica.SolicitudClaseDo)solicitudesOrdenadas[x];
                         Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Docente);
-                        Label dina = new Label();
-                        dina.Height = 46;
-                        dina.Width = 150;
-                        dina.Location = new Point(25, y);
-                        y += 50;
-                        dina.Name = "lblSoliDo" + soli.IdSolicitudClaseDo.ToString();
-                        dina.Text = us.Nombre + " " + us.Primer_apellido + "\nDesea entrar a un grupo" + "\n" + soli.FechaHora.ToString();
-                        dina.BorderStyle = BorderStyle.FixedSingle;
-                        dina.Click += new EventHandler(AbrirSolicitudClaseDo);
-                        PanelSolicitudesPendientes.Controls.Add(dina);
+                        Logica.Docente doc = new Logica.Docente();
+                        doc.Nombre = us.Nombre;
+                        doc.Primer_apellido = us.Primer_apellido;
+                        doc.FotoDePerfil = us.FotoDePerfil;
+
+                        PictureBox picPhoto = new PictureBox();
+                        picPhoto.Image = us.ByteArrayToImage(us.FotoDePerfil);
+                        picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                        picPhoto.Height = 69;
+                        picPhoto.Width = 69;
+                        picPhoto.Location = new Point(12, 12);
+                        picPhoto.Name = "pcbxSoliDo" + soli.IdSolicitudClaseDo.ToString();
+                        picPhoto.Click += new EventHandler(AbrirSolicitudClaseDo);
+
+                        Label grupo = new Label();
+                        grupo.Height = 30;
+                        grupo.Width = 227;
+                        grupo.Location = new Point(91, 0);
+                        grupo.ForeColor = Color.FromArgb(209, 213, 100);
+                        grupo.Font = new Font("Arial", 10.0f);
+                        grupo.Name = "lblSoliDo" + soli.IdSolicitudClaseDo.ToString();
+                        grupo.Text = "Desea entrar a un grupo";
+                        grupo.Click += new EventHandler(AbrirSolicitudClaseDo);
+
+                        Label docente = new Label();
+                        docente.Height = 58;
+                        docente.Width = 277;
+                        docente.Location = new Point(91, 30);
+                        docente.ForeColor = Color.White;
+                        docente.Font = new Font("Arial", 10.0f);
+                        docente.Name = "lblASoliDo" + soli.IdSolicitudClaseDo.ToString();
+                        docente.Text = "Docente:\n" + doc.Nombre + " " + doc.Primer_apellido;
+                        docente.Click += new EventHandler(AbrirSolicitudClaseDo);
+
+                        Label fecha = new Label();
+                        fecha.Height = 24;
+                        fecha.Width = 150;
+                        fecha.Location = new Point(195, 65);
+                        fecha.ForeColor = Color.White;
+                        fecha.Font = new Font("Arial", 8.0f);
+                        fecha.Name = "lblFSoliDo" + soli.IdSolicitudClaseDo.ToString();
+                        fecha.Text = soli.FechaHora.ToString();
+                        fecha.Click += new EventHandler(AbrirSolicitudClaseDo);
+
+                        Panel panel = new Panel();
+                        panel.Height = 83;
+                        panel.Width = 302;
+                        panel.Location = new Point(0, yPanel);
+                        yPanel += 83;
+                        panel.Name = "panelSoliDo" + soli.IdSolicitudClaseDo.ToString();
+                        panel.BorderStyle = BorderStyle.FixedSingle;
+                        panel.Click += new EventHandler(AbrirSolicitudClaseDo);
+
+                        panel.Controls.Add(fecha);
+                        panel.Controls.Add(grupo);
+                        panel.Controls.Add(docente);
+                        panel.Controls.Add(picPhoto);
+
+                        PanelSolicitudesPendientes.Controls.Add(panel);
+
+
                     }
                     else
                     {
                         Logica.SolicitudModif soli = (Logica.SolicitudModif)solicitudesOrdenadas[x];
                         Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soli.Usuario);
-                        Label dina = new Label();
-                        dina.Height = 46;
-                        dina.Width = 150;
-                        dina.Location = new Point(25, y);
-                        y += 50;
-                        dina.Name = "lblSoliMod" + soli.IdSolicitudModif.ToString();
-                        dina.Text = us.Nombre + " " + us.Primer_apellido + "\nPerdio el acceso a su cuenta" + "\n" + soli.FechaHora.ToString();
-                        dina.BorderStyle = BorderStyle.FixedSingle;
-                        dina.Click += new EventHandler(AbrirSolicitudModif);
-                        PanelSolicitudesPendientes.Controls.Add(dina);
+
+                        PictureBox picPhoto = new PictureBox();
+                        picPhoto.Image = us.ByteArrayToImage(us.FotoDePerfil);
+                        picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+                        picPhoto.Height = 69;
+                        picPhoto.Width = 69;
+                        picPhoto.Location = new Point(12, 12);
+                        picPhoto.Name = "pcbxSoliMo" + soli.IdSolicitudModif.ToString();
+                        picPhoto.Click += new EventHandler(AbrirSolicitudModif);
+
+                        Label perdio = new Label();
+                        perdio.Height = 30;
+                        perdio.Width = 227;
+                        perdio.Location = new Point(91, 0);
+                        perdio.ForeColor = Color.FromArgb(206,82,75);
+                        perdio.Font = new Font("Arial", 10.0f);
+                        perdio.Text = "Perdio el acceso a su cuenta";
+                        perdio.Name = "lblSoliMod" + soli.IdSolicitudModif.ToString();
+                        perdio.Click += new EventHandler(AbrirSolicitudModif);
+
+                        Label usuario = new Label();
+                        usuario.Height = 58;
+                        usuario.Width = 277;
+                        usuario.Location = new Point(91, 30);
+                        usuario.ForeColor = Color.White;
+                        usuario.Font = new Font("Arial", 10.0f);
+                        usuario.Name = "lblUSoliMo" + soli.IdSolicitudModif.ToString();
+                        usuario.Text = "Usuario:\n" + us.Nombre + " " + us.Primer_apellido;
+                        usuario.Click += new EventHandler(AbrirSolicitudModif);
+
+                        Label fecha = new Label();
+                        fecha.Height = 24;
+                        fecha.Width = 150;
+                        fecha.Location = new Point(195, 65);
+                        fecha.ForeColor = Color.White;
+                        fecha.Font = new Font("Arial", 8.0f);
+                        fecha.Name = "lblFSoliMo" + soli.IdSolicitudModif.ToString();
+                        fecha.Text = soli.FechaHora.ToString();
+                        fecha.Click += new EventHandler(AbrirSolicitudModif);
+
+                        Panel panel = new Panel();
+                        panel.Height = 83;
+                        panel.Width = 302;
+                        panel.Location = new Point(0, yPanel);
+                        yPanel += 83;
+                        panel.Name = "panelSoliDo" + soli.IdSolicitudModif.ToString();
+                        panel.BorderStyle = BorderStyle.FixedSingle;
+                        panel.Click += new EventHandler(AbrirSolicitudModif);
+
+                        panel.Controls.Add(fecha);
+                        panel.Controls.Add(perdio);
+                        panel.Controls.Add(usuario);
+                        panel.Controls.Add(picPhoto);
+
+                        PanelSolicitudesPendientes.Controls.Add(panel);
+
                     }
 
                 }
@@ -478,7 +631,21 @@ namespace Hatchat.Presentacion
             soliAl = new Logica.SolicitudClaseAl();
             soliDo = new Logica.SolicitudClaseDo();
             soliMo = new Logica.SolicitudModif();
-            soliMo = new Logica.SolicitudModif().SelectSolicitudModifPorId(new Logica.SolicitudClaseDo().StringAId(((Label)sender).Name));
+
+            if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+            {
+                soliMo = new Logica.SolicitudModif().SelectSolicitudModifPorId(new Logica.SolicitudClaseDo().StringAId(((Label)sender).Name));
+            }
+            else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                soliMo = new Logica.SolicitudModif().SelectSolicitudModifPorId(new Logica.SolicitudClaseDo().StringAId(((PictureBox)sender).Name));
+            }
+            else
+            {
+                soliMo = new Logica.SolicitudModif().SelectSolicitudModifPorId(new Logica.SolicitudClaseDo().StringAId(((Panel)sender).Name));
+            }
+
+            
             Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soliMo.Usuario);
             lblNombreApellidoSolicitud.Text = us.Nombre + " " + us.Primer_apellido + " ha perdido\n el acceso a su cuenta";
             lblCedula.Text = us.Ci;

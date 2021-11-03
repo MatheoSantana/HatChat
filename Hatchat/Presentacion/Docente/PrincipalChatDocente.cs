@@ -49,6 +49,7 @@ namespace Hatchat.Presentacion
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pictureBox1.Image = Image.FromFile("Logo Completa.png");
+                pcbxBotonEnviar.Image = Image.FromFile("enviar.png");
                 pcbxDesplegarSolicitudes.Image= Image.FromFile("flecha blanca desplegar.png");
                 pcbxNotificacion.Image = Image.FromFile("circulo gris.png");
             }
@@ -69,6 +70,7 @@ namespace Hatchat.Presentacion
             pcbxHistorialMensajesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxMaterialDatosClase.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxBotonEnviar.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxDesplegarSolicitudes.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxNotificacion.SizeMode = PictureBoxSizeMode.StretchImage;
         }
@@ -166,6 +168,13 @@ namespace Hatchat.Presentacion
         private void tmrActChats_Tick(object sender, EventArgs e)
         {
             cargarChats();
+            foreach (Logica.Chat chat in chats)
+            {
+                if (chat.Fecha.Day != DateTime.Now.Day || chat.Fecha.Month != DateTime.Now.Month || chat.Fecha.Year != DateTime.Now.Year)
+                {
+                    chat.CerrarChat();
+                }
+            }
         }
         private void cargarChats()
         {
@@ -433,13 +442,13 @@ namespace Hatchat.Presentacion
                 string id = "";
                 for(int x = 4; x < ((Button)sender).Name.Length; x++)
                 {
-                    if (!(((Label)sender).Name[x] == '-'))
+                    if (!(((Button)sender).Name[x] == '-'))
                     {
-                        id += ((Label)sender).Name[x];
+                        id += ((Button)sender).Name[x];
                     }
                     else
                     {
-                        x = ((Label)sender).Name.Length;
+                        x = ((Button)sender).Name.Length;
                     }
                 }
             solicitaChats[Convert.ToInt32(id)].AceptarChat();
@@ -451,13 +460,13 @@ namespace Hatchat.Presentacion
             string id = "";
             for (int x = 4; x < ((Button)sender).Name.Length; x++)
             {
-                if (!(((Label)sender).Name[x] == '-'))
+                if (!(((Button)sender).Name[x] == '-'))
                 {
-                    id += ((Label)sender).Name[x];
+                    id += ((Button)sender).Name[x];
                 }
                 else
                 {
-                    x = ((Label)sender).Name.Length;
+                    x = ((Button)sender).Name.Length;
                 }
             }
             solicitaChats[Convert.ToInt32(id)].DenegarChat();

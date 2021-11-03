@@ -73,13 +73,16 @@ namespace Hatchat.Presentacion
             txtPassword.Text = Login.encontrado.Password;
             txtPasswordCon.Text = Login.encontrado.Password;
             cbxPregs.DropDownStyle = ComboBoxStyle.DropDownList;
-
+            cmbxHoraInicio.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxHoraCierre.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxMinutoCierre.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbxMinutoInicio.DropDownStyle = ComboBoxStyle.DropDownList;
             for (int x = 0; x < 24; x++)
             {
                 cmbxHoraInicio.Items.Add(x);
                 cmbxHoraCierre.Items.Add(x);
             }
-            for (int x = 0; x < 60; x++)
+            for (int x = 0; x < 60; x=x+5)
             {
                 cmbxMinutoCierre.Items.Add(x);
                 cmbxMinutoInicio.Items.Add(x);

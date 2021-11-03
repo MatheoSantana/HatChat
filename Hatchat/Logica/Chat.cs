@@ -85,6 +85,8 @@ namespace Hatchat.Logica
         {
             DateTime fh = Convert.ToDateTime(fechaHora);
 
+            //esto es un recordatorio de que hay que leer la documentacion del lenguaje antes de pensar que no funciona...
+
             /*
             string year = "", month = "", day = "", minute = "", hour = "", second = "";
             

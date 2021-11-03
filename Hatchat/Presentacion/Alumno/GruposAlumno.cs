@@ -362,6 +362,7 @@ namespace Hatchat.Presentacion
         private void btnCerrarInformacion_Click(object sender, EventArgs e)
         {
             panelInformacion.Visible = false;
+            panelParticipantes.Visible = false;
             panelNav.Enabled = true;
             btnCerrarInformacion.Enabled = true;
             btnEntrarGrupo.Enabled = true;
@@ -401,6 +402,7 @@ namespace Hatchat.Presentacion
                 asignaturaCursa.BajaGrupo();
                 MessageBox.Show("Se ha salido del grupo correctamente");
                 panelInformacion.Visible = false;
+                panelParticipantes.Visible = false;
                 panelNav.Enabled = true;
                 btnCerrarInformacion.Enabled = true;
                 btnEntrarGrupo.Enabled = true;
@@ -455,9 +457,15 @@ namespace Hatchat.Presentacion
             panelAsignaturas.Visible = false;
             btnRealizar.Enabled = false;
 
-            foreach (int anio in new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientaciones[cmbxOrientacion.SelectedIndex].Id)))
+            if (cmbxOrientacion.SelectedIndex != -1)
             {
-                cmbxAnio.Items.Add(anio.ToString());
+                List<int> anios = new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientaciones[cmbxOrientacion.SelectedIndex].Id));
+
+
+                foreach (int anio in anios)
+                {
+                    cmbxAnio.Items.Add(anio.ToString());
+                }
             }
 
         }
@@ -651,44 +659,51 @@ namespace Hatchat.Presentacion
 
         private void btnRealizar_Click(object sender, EventArgs e)
         {
-            List<Logica.AsignaturaSolicitudClaseAl> solicitidesPendientes = new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturasSolicitudesClaseAl(Login.encontrado.Ci);
-            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
-            bool mandable = true;
-            foreach (Logica.AsignaturaSolicitudClaseAl asigPend in solicitidesPendientes)
+            if (asignaturasSolicitudClaseAl.Count != 0)
             {
-                foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAl)
+                List<Logica.AsignaturaSolicitudClaseAl> solicitidesPendientes = new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturasSolicitudesClaseAl(Login.encontrado.Ci);
+                string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+                bool mandable = true;
+                foreach (Logica.AsignaturaSolicitudClaseAl asigPend in solicitidesPendientes)
                 {
-                    if(asigPend.IdClaseAsig == asignaturaSolicitudClaseAl.IdClaseAsig && asigPend.OriClaseAsig == asignaturaSolicitudClaseAl.OriClaseAsig && asigPend.IdAsignatura == asignaturaSolicitudClaseAl.IdAsignatura)
+                    foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAl)
                     {
-                        Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.IdAsignatura);
-                        error += "\n" + asi.Nombre;
-                        mandable = false;
+                        if (asigPend.IdClaseAsig == asignaturaSolicitudClaseAl.IdClaseAsig && asigPend.OriClaseAsig == asignaturaSolicitudClaseAl.OriClaseAsig && asigPend.IdAsignatura == asignaturaSolicitudClaseAl.IdAsignatura)
+                        {
+                            Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.IdAsignatura);
+                            error += "\n" + asi.Nombre;
+                            mandable = false;
+                        }
                     }
                 }
-            }
-            if (mandable)
-            {
-                solicitudClaseAl.Alumno = Login.encontrado.Ci;
-                solicitudClaseAl.FechaHora = DateTime.Now;
-                solicitudClaseAl.Pendiente = true;
-                solicitudClaseAl.EnviarSolicitudClaseAl();
-                solicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.SelectIdSolicitudClaseAl();
-
-                claseSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
-                claseSolicitudClaseAl.IdClase = claseSeleccionada.IdClase;
-                claseSolicitudClaseAl.OriClase = claseSeleccionada.Orientacion;
-                claseSolicitudClaseAl.EnviarClaseSolicitudClaseAl();
-
-                foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAl)
+                if (mandable)
                 {
-                    asignaturaSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
-                    asignaturaSolicitudClaseAl.EnviarAsignaturaSolicitudClaseAl();
+                    solicitudClaseAl.Alumno = Login.encontrado.Ci;
+                    solicitudClaseAl.FechaHora = DateTime.Now;
+                    solicitudClaseAl.Pendiente = true;
+                    solicitudClaseAl.EnviarSolicitudClaseAl();
+                    solicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.SelectIdSolicitudClaseAl();
+
+                    claseSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
+                    claseSolicitudClaseAl.IdClase = claseSeleccionada.IdClase;
+                    claseSolicitudClaseAl.OriClase = claseSeleccionada.Orientacion;
+                    claseSolicitudClaseAl.EnviarClaseSolicitudClaseAl();
+
+                    foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturasSolicitudClaseAl)
+                    {
+                        asignaturaSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
+                        asignaturaSolicitudClaseAl.EnviarAsignaturaSolicitudClaseAl();
+                    }
+                    MessageBox.Show("Se ha enviado la solicitud de ingreso");
                 }
-                MessageBox.Show("Se ha enviado la solicitud de ingreso");
+                else
+                {
+                    MessageBox.Show(error);
+                }
             }
             else
             {
-                MessageBox.Show(error);
+                MessageBox.Show("Debe ingresar al menos una asignatura para solicitar el ingreso a la clase");
             }
             solicitudClaseAl = new Logica.SolicitudClaseAl();
             claseSolicitudClaseAl = new Logica.ClaseSolicitudClaseAl();

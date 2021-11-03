@@ -271,10 +271,14 @@ namespace Hatchat.Presentacion
 
                     List<Logica.ChateaDo> chateaDos = new Logica.ChateaDo().SelectChateaDosPorIdChatMasFecha(chat.IdChat, chat.Fecha);
 
-                    Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(chateaDos[0].Ci);
+                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(chateaDos[0].Ci);
+                    Logica.Docente doc = new Logica.Docente();
+                    doc.Nombre = us.Nombre;
+                    doc.Primer_apellido = us.Primer_apellido;
+                    doc.FotoDePerfil = us.FotoDePerfil;
 
                     PictureBox picPhoto = new PictureBox();
-                    picPhoto.Image = Image.FromFile("profesor.png");
+                    picPhoto.Image = doc.ByteArrayToImage(doc.FotoDePerfil);
                     picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                     picPhoto.Height = 69;
                     picPhoto.Width = 69;

@@ -296,6 +296,7 @@ namespace Hatchat.Presentacion
             this.pcbxBotonEnviar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pcbxBotonEnviar.TabIndex = 14;
             this.pcbxBotonEnviar.TabStop = false;
+            this.pcbxBotonEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // panelDatosClase
             // 
