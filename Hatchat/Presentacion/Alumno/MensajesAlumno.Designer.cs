@@ -475,6 +475,7 @@ namespace Hatchat.Presentacion
             this.pbxCerrarSesionNav.Size = new System.Drawing.Size(80, 80);
             this.pbxCerrarSesionNav.TabIndex = 5;
             this.pbxCerrarSesionNav.TabStop = false;
+            this.pbxCerrarSesionNav.Click += new System.EventHandler(this.pbxCerrarSesionNav_Click);
             // 
             // pbxHistorialNav
             // 

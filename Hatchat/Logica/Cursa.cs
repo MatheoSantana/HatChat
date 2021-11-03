@@ -48,5 +48,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.InsertCursa(this);
         }
+        public bool SelectCursando()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectCursando(this);
+        }
     }
 }

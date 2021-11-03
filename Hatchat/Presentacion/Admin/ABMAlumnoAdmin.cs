@@ -20,7 +20,7 @@ namespace Hatchat.Presentacion
         private List<Logica.AsignaturaCursa> cursaAsigsConfirmadas = new List<Logica.AsignaturaCursa>();
         private List<Logica.Cursa> cursas = new List<Logica.Cursa>();
         private Logica.Clase claseSeleccionada = new Logica.Clase();
-
+        bool visibles = false;
         Logica.Usuario alModif = new Logica.Usuario();
 
         public Form login;
@@ -60,7 +60,7 @@ namespace Hatchat.Presentacion
             pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            pbxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbxFotoModificar.SizeMode = PictureBoxSizeMode.StretchImage;
 
             cmbxClase.Enabled = false;
             cmbxAnio.Enabled = false;
@@ -71,10 +71,10 @@ namespace Hatchat.Presentacion
             foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
                 cmbxPreguntaSeg.Items.Add(preg.Pregunta);               
-                cmbxPregsModif.Items.Add(preg.Pregunta);
+                cbxPregsModificar.Items.Add(preg.Pregunta);
                 
             }
-            cmbxPregsModif.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxPregsModificar.DropDownStyle = ComboBoxStyle.DropDownList;
 
             cmbxPreguntaSeg.SelectedIndex = 0;
             txtPassword.UseSystemPasswordChar = true;
@@ -131,66 +131,129 @@ namespace Hatchat.Presentacion
         }
         private void cmbxOrientacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            panelModificarClases.Controls.Clear();
-            cmbxClase.Enabled = false;
-            ychbx = 50;
-            xchbx = 50;
+            visibles = false;
+            if (btnAgregar.Enabled)
+            {
+                List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
+                foreach (Logica.AsignaturaCursa asigSolicita in cursaAsigs)
+                {
+                    if (claseSeleccionada.IdClase == asigSolicita.IdClase && claseSeleccionada.Orientacion == asigSolicita.Orientacion)
+                    {
+                        encontradas.Add(asigSolicita);
+                    }
+                }
+                foreach (Logica.AsignaturaCursa asigEncontrada in encontradas)
+                {
+                    cursaAsigs.Remove(asigEncontrada);
+                }
+            }
+
             cmbxAnio.Items.Clear();
             cmbxClase.Items.Clear();
-            cursaAsigs.Clear();
-            asigs.Clear();
-            btnAlterar.Enabled = false;
-            orientacionSeleccionada = orientaciones[cmbxOrientacion.SelectedIndex];
-            foreach (int anio in new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientacionSeleccionada.Id)))
-            {
-                cmbxAnio.Items.Add(anio.ToString());
-            }
+            panelModificarClases.Controls.Clear();
             cmbxAnio.Enabled = true;
+            cmbxClase.Enabled = false;
+            btnAlterar.Enabled = false;
+
+            claseSeleccionada = new Logica.Clase();
+            asigs = new List<Logica.Asignatura>();
+            cursaAsigs = new List<Logica.AsignaturaCursa>();
+            if (cmbxOrientacion.SelectedIndex != -1)
+            {
+                List<int> anios = new List<int>(new Logica.Clase().selectAnioClasesPorOrientacion(orientaciones[cmbxOrientacion.SelectedIndex].Id));
+
+
+                foreach (int anio in anios)
+                {
+                    cmbxAnio.Items.Add(anio.ToString());
+                }
+            }
         }
 
         private void cmbxAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            panelModificarClases.Controls.Clear();
-            ychbx = 50;
-            xchbx = 50;
-            btnAlterar.Enabled = false;
-            cmbxClase.Items.Clear();
-            cursaAsigs.Clear();
-            asigs.Clear();
-            List<string> clase = new List<string>();
-
-            foreach (string cla in new List<string>(new Logica.Clase().SelectNombreClasePorAnioYorientacion(Convert.ToInt32(cmbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id)))
+            visibles = false;
+            if(btnAgregar.Enabled)
             {
-                cmbxClase.Items.Add(cla);
+                List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
+                foreach (Logica.AsignaturaCursa asigSolicita in cursaAsigs)
+                {
+                    if (claseSeleccionada.IdClase == asigSolicita.IdClase && claseSeleccionada.Orientacion == asigSolicita.Orientacion)
+                    {
+                        encontradas.Add(asigSolicita);
+                    }
+                }
+                foreach (Logica.AsignaturaCursa asigEncontrada in encontradas)
+                {
+                    cursaAsigs.Remove(asigEncontrada);
+                }
             }
+
+            cmbxClase.Items.Clear();
+            panelModificarClases.Controls.Clear();
             cmbxClase.Enabled = true;
+            btnAlterar.Enabled = false;
+
+            claseSeleccionada = new Logica.Clase();
+            asigs = new List<Logica.Asignatura>();
+            cursaAsigs = new List<Logica.AsignaturaCursa>();
+
+            List<Logica.Clase> clases = new Logica.Clase().SelectClasesPorAnio(Convert.ToInt32(cmbxAnio.SelectedItem.ToString()));
+            if (cmbxOrientacion.SelectedIndex != -1)
+            {
+                foreach (Logica.Clase cla in clases)
+                {
+                    if (cla.Orientacion == orientaciones[cmbxOrientacion.SelectedIndex].Id)
+                    {
+                        cmbxClase.Items.Add(cla.Nombre);
+                    }
+                }
+            }
         }
         private void cmbxClase_SelectedIndexChanged(object sender, EventArgs e)
         {
+            visibles = false;
+            if (btnAgregar.Enabled)
+            {
+                List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
+                foreach (Logica.AsignaturaCursa asigSolicita in cursaAsigs)
+                {
+                    if (claseSeleccionada.IdClase == asigSolicita.IdClase && claseSeleccionada.Orientacion == asigSolicita.Orientacion)
+                    {
+                        encontradas.Add(asigSolicita);
+                    }
+                }
+                foreach (Logica.AsignaturaCursa asigEncontrada in encontradas)
+                {
+                    cursaAsigs.Remove(asigEncontrada);
+                }
+            }
             panelModificarClases.Controls.Clear();
-            asigs.Clear();
-            ychbx = 50;
-            xchbx = 50;
-            asigs.Clear();
-            cursaAsigs.Clear();
+            btnAlterar.Enabled = true;
+
             claseSeleccionada = new Logica.Clase();
-            asigs.AddRange(new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cmbxClase.SelectedItem.ToString(), Convert.ToInt32(cmbxAnio.SelectedItem.ToString()), orientacionSeleccionada.Id));
-            claseSeleccionada.Anio = Convert.ToInt32(cmbxAnio.SelectedItem.ToString());
-            claseSeleccionada.Orientacion = orientacionSeleccionada.Id;
+            asigs = new List<Logica.Asignatura>();
+            cursaAsigs = new List<Logica.AsignaturaCursa>();
+
+            asigs = new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cmbxClase.SelectedItem.ToString(), Convert.ToInt32(cmbxAnio.SelectedItem.ToString()), orientaciones[cmbxOrientacion.SelectedIndex].Id);
+
             claseSeleccionada.Nombre = cmbxClase.SelectedItem.ToString();
+            claseSeleccionada.Anio = Convert.ToInt32(cmbxAnio.SelectedItem.ToString());
+            claseSeleccionada.Orientacion = orientaciones[cmbxOrientacion.SelectedIndex].Id;
             claseSeleccionada.SelectIdClasePorPorNombreAnioYorientacion();
+
             foreach (Logica.Asignatura asig in asigs)
             {
-                    Logica.AsignaturaCursa cursaAsig = new Logica.AsignaturaCursa();
-                    cursaAsig.AsignaturaCursada = asig.Id;
-                    cursaAsig.IdClase = claseSeleccionada.IdClase;
-                    cursaAsig.Orientacion = orientacionSeleccionada.Id;
-                    cursaAsig.Cursando = true;
-                    cursaAsig.Anio = DateTime.Now.Year;
-                    cursaAsigs.Add(cursaAsig);
+                Logica.AsignaturaCursa cursaAsig = new Logica.AsignaturaCursa();
+                cursaAsig.AsignaturaCursada = asig.Id;
+                cursaAsig.IdClase = claseSeleccionada.IdClase;
+                cursaAsig.Orientacion = orientacionSeleccionada.Id;
+                cursaAsig.Cursando = true;
+                cursaAsig.Anio = DateTime.Now.Year;
+                cursaAsigs.Add(cursaAsig);
             }
-            
-            btnAlterar.Enabled = true;
+
+
         }
         private void btnAlterar_Click(object sender, EventArgs e)
         {
@@ -203,7 +266,7 @@ namespace Hatchat.Presentacion
                     dina.Checked = false;
                     foreach (Logica.AsignaturaCursa cursaAsig in cursaAsigs)
                     {
-                        if(cursaAsig.AsignaturaCursada==asig.Id && cursaAsig.IdClase == claseSeleccionada.IdClase/**/ && cursaAsig.Orientacion == orientacionSeleccionada.Id && cursaAsig.AsignaturaCursada == asig.Id)
+                        if(cursaAsig.AsignaturaCursada==asig.Id && cursaAsig.IdClase == claseSeleccionada.IdClase && cursaAsig.Orientacion == orientacionSeleccionada.Id && cursaAsig.AsignaturaCursada == asig.Id)
                         {
                             dina.Checked = true;
                         }
@@ -310,7 +373,7 @@ namespace Hatchat.Presentacion
             string error = "Cuidado: ";
             bool aceptable = true;
             Logica.Alumno alu = new Logica.Alumno();
-            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
+            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuestaModif.Text == "")
             {
                 aceptable = false;
                 error += "\nDebe rellenar todos los campos";
@@ -354,7 +417,7 @@ namespace Hatchat.Presentacion
                 alu.Segundo_apellido = txtSegundoApellido.Text;
                 alu.Password = txtPassword.Text;
                 alu.Preguta_seguridad = (cmbxPreguntaSeg.SelectedIndex + 1);
-                alu.Respuesta_seguridad = txtRespuesta.Text;
+                alu.Respuesta_seguridad = txtRespuestaModif.Text;
                 alu.Apodo = txtNombre.Text;
                 alu.FotoDePerfil = alu.ImageToByteArray(Image.FromFile("alumno.png"));
                 alu.AltaUsuario();
@@ -387,11 +450,16 @@ namespace Hatchat.Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            
             Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
             if(al.Ci!="" && al.SelectAlumno())
             {
-                al.RemoveUsuario();
-                MessageBox.Show("Alumno eliminado correctamente");
+                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a "+al.Nombre+" "+al.Primer_apellido+"?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+                if (eliminarAlumno == DialogResult.Yes)
+                {
+                    al.RemoveUsuario();
+                    MessageBox.Show("Alumno eliminado correctamente");
+                }
             }
             else
             {
@@ -413,14 +481,14 @@ namespace Hatchat.Presentacion
             if (new Logica.Usuario().SelectAlumno(txtCiModif.Text))
             {
                 alModif = new Logica.Usuario().SelectUsuarioCiActivo(txtCiModif.Text);
-                lblNombreCompleto.Text += alModif.Nombre + " " + alModif.Primer_apellido + " " + alModif.Segundo_apellido;
-                lblCedula.Text += alModif.Ci;
-                pbxFoto.Image = alModif.ByteArrayToImage(alModif.FotoDePerfil);
-                txtApodo.Text = alModif.Apodo;
-                txtPassword.Text = alModif.Password;
-                txtPasswordConModif.Text = alModif.Password;
-                cmbxPregsModif.SelectedIndex = (alModif.SelectPreguntaSeguridad().Id - 1);
-                txtRespuesta.Text = alModif.Respuesta_seguridad;
+                lblNombreModificar.Text += alModif.Nombre + " " + alModif.Primer_apellido + " " + alModif.Segundo_apellido;
+                lblCedulaModificar.Text += alModif.Ci;
+                pbxFotoModificar.Image = alModif.ByteArrayToImage(alModif.FotoDePerfil);
+                txtApodoModificar.Text = alModif.Apodo;
+                txtPasswordModificar.Text = alModif.Password;
+                txtPasswordConfirmarModificar.Text = alModif.Password;
+                cbxPregsModificar.SelectedIndex = (alModif.SelectPreguntaSeguridad().Id - 1);
+                txtRespuestaModif.Text = alModif.Respuesta_seguridad;
 
             }
             else
@@ -436,23 +504,23 @@ namespace Hatchat.Presentacion
             ofdFoto.Title = "Seleccionar imagen";
             if (ofdFoto.ShowDialog() == DialogResult.OK)
             {
-                pbxFoto.Image = Image.FromFile(ofdFoto.FileName);
+                pbxFotoModificar.Image = Image.FromFile(ofdFoto.FileName);
             }
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            alModif.Apodo = txtApodo.Text;
-            alModif.Password = txtPassword.Text;
-            alModif.Respuesta_seguridad = txtRespuesta.Text;
-            alModif.Preguta_seguridad = (cmbxPregsModif.SelectedIndex + 1);
-            alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFoto.Image);
+            alModif.Apodo = txtApodoModificar.Text;
+            alModif.Password = txtPasswordModificar.Text;
+            alModif.Respuesta_seguridad = txtRespuestaModif.Text;
+            alModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
+            alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFotoModificar.Image);
             alModif.UpdatePerfil();
 
-            txtApodo.Text = "";
+            txtApodoModificar.Text = "";
             txtPassword.Text = "";
-            txtRespuesta.Text = "";
-            cmbxPregsModif.SelectedIndex = -1;
-            pbxFoto.Image = null;
+            txtRespuestaModif.Text = "";
+            cbxPregsModificar.SelectedIndex = -1;
+            pbxFotoModificar.Image = null;
             txtCiModif.Text = "";
         }
 

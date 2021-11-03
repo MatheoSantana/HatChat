@@ -738,15 +738,45 @@ namespace Hatchat.Presentacion
 
             if (soliAl.IdSolicitudClaseAl != 0)
             {
-                foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAcep in asignaturaSolicitudesClaseAlAceptadas)
+                bool error = false;
+                string fallo = "Las siguientes asignaturas ya estaban registradas:";
+                foreach (Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl in claseSolicitudesClaseAl)
                 {
-                    Logica.Cursa cursa = new Logica.Cursa(asigSoliAcep.IdClaseAsig, soliAl.Alumno, asigSoliAcep.OriClaseAsig, DateTime.Now.Year);
-                    cursa.InsertCursa();
-                    Logica.AsignaturaCursa asigCursa = new Logica.AsignaturaCursa(soliAl.Alumno, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
-                    asigCursa.InsertAsignaturaCursa();
-                    asigSoliAcep.AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(asigSoliAcep.IdSolicitudClaseAl, asigSoliAcep.IdAsignatura);
+                    Logica.Cursa cursa = new Logica.Cursa(claseSolicitudClaseAl.IdClase, soliAl.Alumno, claseSolicitudClaseAl.OriClase, DateTime.Now.Year);
+                    if (!cursa.SelectCursando())
+                    {
+                        cursa.InsertCursa();
+                    }
+                    foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAcep in asignaturaSolicitudesClaseAlAceptadas)
+                    {
+                        if(claseSolicitudClaseAl.IdClase == asigSoliAcep.IdClaseAsig && claseSolicitudClaseAl.OriClase == asigSoliAcep.OriClaseAsig)
+                        {
+                            Logica.AsignaturaCursa asigCursa = new Logica.AsignaturaCursa(soliAl.Alumno, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
+                            if (asigCursa.SelectCursandoAsignatura())
+                            {
+                                if (asigCursa.SelectCursandoAsignaturaDesactivada())
+                                {
+                                    asigCursa.ActivarAsignaturaCursa();
+                                }
+                                else
+                                {
+                                    error = true;
+                                    fallo += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre;
+                                }
+                            }
+                            else
+                            {
+                                asigCursa.InsertAsignaturaCursa();
+                                asigSoliAcep.AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(asigSoliAcep.IdSolicitudClaseAl, asigSoliAcep.IdAsignatura);
+                            }
+                            
+                            
+                        }
+                        
+                    }
                 }
                 soliAl.AceptarSolicitudClaseAlPorIdYAdmin(soliAl.IdSolicitudClaseAl, Login.encontrado.Ci);
+                MessageBox.Show("");
             }
             asignaturaSolicitudesClaseAlAceptadas.Clear();
             asignaturaSolicitudesClaseAl.Clear();

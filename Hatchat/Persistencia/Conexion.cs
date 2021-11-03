@@ -1436,14 +1436,15 @@ namespace Hatchat.Persistencia
             insertRespondeClaseAl.ExecuteNonQuery();
             conexion.Close();
         }
-        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(int id, string asig)
+        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(AsignaturaSolicitudClaseAl soliAsig)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =true where idSolicitudClaseAl=" + id + " and idAsignatura='" + asig + "';", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada ="+soliAsig.Aceptada+" where idSolicitudClaseAl=" + soliAsig.IdSolicitudClaseAl + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig=" + soliAsig.IdClaseAsig + " and oriClaseAsig="+ soliAsig + ";", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
+
         public void InsertAsignaturaCursa(AsignaturaCursa asigCursa)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
@@ -1452,6 +1453,73 @@ namespace Hatchat.Persistencia
             insert.ExecuteNonQuery();
             conexion.Close();
         }
+        public void ActivarAsignaturaCursa(AsignaturaCursa asigCursa)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("update AsignaturaCursa set cursando=true where ci='" + asigCursa.Ci + "' and idClase=" + asigCursa.IdClase + " and orientacion=" + asigCursa.Orientacion + " and anio=" + asigCursa.Anio + " && asignaturaCursada='" + asigCursa.AsignaturaCursada + "';", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public bool SelectCursando(Cursa cursa)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from cursa where ci='" + cursa.CiAlumno + "' and idClase=" + cursa.IdClase + " and orientacion=" + cursa.Orientacion + " and anio=" + cursa.Anio + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            bool existe = false;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+        public bool SelectCursandoAsignatura(AsignaturaCursa asignaturaCursa)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from AsignaturaCursa where ci='" + asignaturaCursa.Ci + "' and idClase=" + asignaturaCursa.IdClase + " and orientacion=" + asignaturaCursa.Orientacion + " and anio=" + asignaturaCursa.Anio + " && asignaturaCursada='"+asignaturaCursa.AsignaturaCursada+"';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            bool existe = false;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+        public bool SelectCursandoAsignaturaDesactivada(AsignaturaCursa asignaturaCursa)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from AsignaturaCursa where ci='" + asignaturaCursa.Ci + "' and idClase=" + asignaturaCursa.IdClase + " and orientacion=" + asignaturaCursa.Orientacion + " and anio=" + asignaturaCursa.Anio + " && asignaturaCursada='" + asignaturaCursa.AsignaturaCursada + "' && cursando=false;";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            bool existe = false;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+
+
         public void InsertCursa(Cursa cursa)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
