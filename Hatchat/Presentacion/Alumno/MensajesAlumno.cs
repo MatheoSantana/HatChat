@@ -413,6 +413,7 @@ namespace Hatchat.Presentacion
             panelEnviarMensaje.Visible = !panelEnviarMensaje.Visible;
             panelContenedor.Visible = false;
             docentes = new Logica.Docente().SelectDocentesDictandoAAlumno(Login.encontrado.Ci);
+            cbxDestinatario.Items.Clear();
             foreach (Logica.Docente doc in docentes)
             {
                 cbxDestinatario.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
