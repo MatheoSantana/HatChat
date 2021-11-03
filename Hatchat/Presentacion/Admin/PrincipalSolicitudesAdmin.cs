@@ -461,13 +461,21 @@ namespace Hatchat.Presentacion
             soliAl = new Logica.SolicitudClaseAl().SelectSolicitudClaseAlPorId(new Logica.SolicitudClaseAl().StringAId(((Label)sender).Name));
             Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(soliAl.Alumno);
             claseSolicitudesClaseAl = new Logica.ClaseSolicitudClaseAl().SelectClaseSolicitudClaseAl(soliAl.IdSolicitudClaseAl);
+
             lblNombreApellidoSolicitud.Text = us.Nombre + " " + us.Primer_apellido + " desea ingresar a los siguientes grupos:";
-            lblCedula.Text = us.Ci;
+            if (claseSolicitudesClaseAl.Count == 1)
+            {
+                lblNombreApellidoSolicitud.Text = us.Nombre + " " + us.Primer_apellido + " desea ingresar al siguiente grupo:";
+            }
+            
+            lblCedula.Text = us.Ci[0].ToString() + "." + us.Ci[1].ToString() + us.Ci[2].ToString() + us.Ci[3].ToString() + "." + us.Ci[4].ToString() + us.Ci[5].ToString() + us.Ci[6].ToString() + "-" + us.Ci[7].ToString();
 
             Label lblSolIngre = new Label();
             lblSolIngre.Height = 46;
-            lblSolIngre.Width = 150;
-            lblSolIngre.Location = new Point(25, 10);
+            lblSolIngre.Width = 400;
+            lblSolIngre.Location = new Point(5, 0);
+            lblSolIngre.ForeColor = Color.White;
+            lblSolIngre.Font = new Font("Arial", 13.0f);
             lblSolIngre.Name = "lblSolIngre";
             lblSolIngre.Text = us.Primer_apellido + " envio solicitud para ingresar a:";
             panelContenido.Controls.Add(lblSolIngre);
