@@ -29,32 +29,22 @@ namespace Hatchat.Presentacion
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelNav = new System.Windows.Forms.Panel();
-            this.pbxABMGruposNav = new System.Windows.Forms.PictureBox();
-            this.pbxCerrarSesionNav = new System.Windows.Forms.PictureBox();
-            this.pbxHistorialSolicitudesNav = new System.Windows.Forms.PictureBox();
-            this.pbxABMDocenteNav = new System.Windows.Forms.PictureBox();
-            this.pbxABMAlumnoNav = new System.Windows.Forms.PictureBox();
-            this.pbxSolicitudesNav = new System.Windows.Forms.PictureBox();
-            this.pbxFotoPerfilNav = new System.Windows.Forms.PictureBox();
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.lblABMAlumno = new System.Windows.Forms.Label();
             this.panelAlta = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelClasesAgregadas = new System.Windows.Forms.Panel();
+            this.panelModificarClases = new System.Windows.Forms.Panel();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.lblExpliModi = new System.Windows.Forms.Label();
-            this.panelModificarClases = new System.Windows.Forms.Panel();
-            this.btnAlterar = new System.Windows.Forms.Button();
             this.cmbxAnio = new System.Windows.Forms.ComboBox();
+            this.btnAltaAlumno = new System.Windows.Forms.Button();
             this.lblAnio = new System.Windows.Forms.Label();
             this.cmbxOrientacion = new System.Windows.Forms.ComboBox();
             this.lblOrientacion = new System.Windows.Forms.Label();
             this.cmbxClase = new System.Windows.Forms.ComboBox();
             this.lblClase = new System.Windows.Forms.Label();
-            this.btnAltaAlumno = new System.Windows.Forms.Button();
-            this.txtRespuesta = new System.Windows.Forms.TextBox();
             this.cmbxPreguntaSeg = new System.Windows.Forms.ComboBox();
             this.lblPregSegur = new System.Windows.Forms.Label();
             this.lblExpliPregSegur = new System.Windows.Forms.Label();
@@ -70,18 +60,13 @@ namespace Hatchat.Presentacion
             this.lblCi = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtCedula = new System.Windows.Forms.TextBox();
-            this.lblCrearAlmuno = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panelBaja = new System.Windows.Forms.Panel();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.lblCedulaBaja = new System.Windows.Forms.Label();
             this.txtBajaCi = new System.Windows.Forms.TextBox();
             this.lblEliminarAlumno = new System.Windows.Forms.Label();
             this.panelModificar = new System.Windows.Forms.Panel();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.lblCiModf = new System.Windows.Forms.Label();
-            this.txtCiModif = new System.Windows.Forms.TextBox();
-            this.lblModificar = new System.Windows.Forms.Label();
+            this.btnBuscarModficar = new System.Windows.Forms.Button();
             this.txtRespuestaModif = new System.Windows.Forms.TextBox();
             this.lblRespuestaModif = new System.Windows.Forms.Label();
             this.lblPregsModif = new System.Windows.Forms.Label();
@@ -98,8 +83,32 @@ namespace Hatchat.Presentacion
             this.lblNombreCompleto = new System.Windows.Forms.Label();
             this.lblCambiarFoto = new System.Windows.Forms.Label();
             this.pbxFoto = new System.Windows.Forms.PictureBox();
-            this.btnBuscarModficar = new System.Windows.Forms.Button();
-            this.panelNav.SuspendLayout();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.lblCiModf = new System.Windows.Forms.Label();
+            this.txtCiModif = new System.Windows.Forms.TextBox();
+            this.lblModificar = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pbxABMGruposNav = new System.Windows.Forms.PictureBox();
+            this.pbxCerrarSesionNav = new System.Windows.Forms.PictureBox();
+            this.pbxHistorialSolicitudesNav = new System.Windows.Forms.PictureBox();
+            this.pbxABMDocenteNav = new System.Windows.Forms.PictureBox();
+            this.pbxABMAlumnoNav = new System.Windows.Forms.PictureBox();
+            this.pbxSolicitudesNav = new System.Windows.Forms.PictureBox();
+            this.pbxFotoPerfilNav = new System.Windows.Forms.PictureBox();
+            this.panelTextoChat = new System.Windows.Forms.Panel();
+            this.lblABMAlumno = new System.Windows.Forms.Label();
+            this.PanelSolicitudesPendientes = new System.Windows.Forms.Panel();
+            this.lblCrearAlmuno = new System.Windows.Forms.Label();
+            this.lblLinea = new System.Windows.Forms.Label();
+            this.txtRespuesta = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAlterar = new System.Windows.Forms.Button();
+            this.panelAlta.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panelBaja.SuspendLayout();
+            this.panelModificar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxHistorialSolicitudesNav)).BeginInit();
@@ -107,93 +116,18 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMAlumnoNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSolicitudesNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
-            this.panelAlta.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panelBaja.SuspendLayout();
-            this.panelModificar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).BeginInit();
+            this.panelTextoChat.SuspendLayout();
+            this.PanelSolicitudesPendientes.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelNav
-            // 
-            this.panelNav.Controls.Add(this.pbxABMGruposNav);
-            this.panelNav.Controls.Add(this.pbxCerrarSesionNav);
-            this.panelNav.Controls.Add(this.pbxHistorialSolicitudesNav);
-            this.panelNav.Controls.Add(this.pbxABMDocenteNav);
-            this.panelNav.Controls.Add(this.pbxABMAlumnoNav);
-            this.panelNav.Controls.Add(this.pbxSolicitudesNav);
-            this.panelNav.Controls.Add(this.pbxFotoPerfilNav);
-            this.panelNav.Location = new System.Drawing.Point(12, 12);
-            this.panelNav.Name = "panelNav";
-            this.panelNav.Size = new System.Drawing.Size(1063, 87);
-            this.panelNav.TabIndex = 3;
-            // 
-            // pbxABMGruposNav
-            // 
-            this.pbxABMGruposNav.Location = new System.Drawing.Point(573, 3);
-            this.pbxABMGruposNav.Name = "pbxABMGruposNav";
-            this.pbxABMGruposNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxABMGruposNav.TabIndex = 6;
-            this.pbxABMGruposNav.TabStop = false;
-            this.pbxABMGruposNav.Click += new System.EventHandler(this.pbxABMGruposNav_Click);
-            // 
-            // pbxCerrarSesionNav
-            // 
-            this.pbxCerrarSesionNav.Location = new System.Drawing.Point(980, 3);
-            this.pbxCerrarSesionNav.Name = "pbxCerrarSesionNav";
-            this.pbxCerrarSesionNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxCerrarSesionNav.TabIndex = 5;
-            this.pbxCerrarSesionNav.TabStop = false;
-            this.pbxCerrarSesionNav.Click += new System.EventHandler(this.pbxCerrarSesionNav_Click);
-            // 
-            // pbxHistorialSolicitudesNav
-            // 
-            this.pbxHistorialSolicitudesNav.Location = new System.Drawing.Point(671, 3);
-            this.pbxHistorialSolicitudesNav.Name = "pbxHistorialSolicitudesNav";
-            this.pbxHistorialSolicitudesNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxHistorialSolicitudesNav.TabIndex = 4;
-            this.pbxHistorialSolicitudesNav.TabStop = false;
-            this.pbxHistorialSolicitudesNav.Click += new System.EventHandler(this.pbxHistorialSolicitudesNav_Click);
-            // 
-            // pbxABMDocenteNav
-            // 
-            this.pbxABMDocenteNav.Location = new System.Drawing.Point(471, 3);
-            this.pbxABMDocenteNav.Name = "pbxABMDocenteNav";
-            this.pbxABMDocenteNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxABMDocenteNav.TabIndex = 3;
-            this.pbxABMDocenteNav.TabStop = false;
-            this.pbxABMDocenteNav.Click += new System.EventHandler(this.pbxABMDocenteNav_Click);
-            // 
-            // pbxABMAlumnoNav
-            // 
-            this.pbxABMAlumnoNav.Location = new System.Drawing.Point(371, 3);
-            this.pbxABMAlumnoNav.Name = "pbxABMAlumnoNav";
-            this.pbxABMAlumnoNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxABMAlumnoNav.TabIndex = 2;
-            this.pbxABMAlumnoNav.TabStop = false;
-            // 
-            // pbxSolicitudesNav
-            // 
-            this.pbxSolicitudesNav.Location = new System.Drawing.Point(272, 3);
-            this.pbxSolicitudesNav.Name = "pbxSolicitudesNav";
-            this.pbxSolicitudesNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxSolicitudesNav.TabIndex = 1;
-            this.pbxSolicitudesNav.TabStop = false;
-            this.pbxSolicitudesNav.Click += new System.EventHandler(this.pbxSolicitudesNav_Click);
-            // 
-            // pbxFotoPerfilNav
-            // 
-            this.pbxFotoPerfilNav.Location = new System.Drawing.Point(3, 3);
-            this.pbxFotoPerfilNav.Name = "pbxFotoPerfilNav";
-            this.pbxFotoPerfilNav.Size = new System.Drawing.Size(81, 81);
-            this.pbxFotoPerfilNav.TabIndex = 0;
-            this.pbxFotoPerfilNav.TabStop = false;
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(21, 164);
+            this.btnAlta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAlta.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlta.ForeColor = System.Drawing.Color.White;
+            this.btnAlta.Location = new System.Drawing.Point(-1, 65);
             this.btnAlta.Name = "btnAlta";
-            this.btnAlta.Size = new System.Drawing.Size(208, 69);
+            this.btnAlta.Size = new System.Drawing.Size(321, 97);
             this.btnAlta.TabIndex = 4;
             this.btnAlta.Text = "Alta";
             this.btnAlta.UseVisualStyleBackColor = true;
@@ -201,9 +135,12 @@ namespace Hatchat.Presentacion
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(21, 239);
+            this.btnBaja.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBaja.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBaja.ForeColor = System.Drawing.Color.White;
+            this.btnBaja.Location = new System.Drawing.Point(-1, 162);
             this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(208, 69);
+            this.btnBaja.Size = new System.Drawing.Size(321, 97);
             this.btnBaja.TabIndex = 5;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
@@ -211,30 +148,29 @@ namespace Hatchat.Presentacion
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(21, 314);
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnModificar.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.Color.White;
+            this.btnModificar.Location = new System.Drawing.Point(-1, 259);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(208, 69);
+            this.btnModificar.Size = new System.Drawing.Size(321, 97);
             this.btnModificar.TabIndex = 6;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // lblABMAlumno
-            // 
-            this.lblABMAlumno.AutoSize = true;
-            this.lblABMAlumno.Location = new System.Drawing.Point(34, 140);
-            this.lblABMAlumno.Name = "lblABMAlumno";
-            this.lblABMAlumno.Size = new System.Drawing.Size(65, 13);
-            this.lblABMAlumno.TabIndex = 7;
-            this.lblABMAlumno.Text = "ABMAlumno";
-            // 
             // panelAlta
             // 
             this.panelAlta.AutoScroll = true;
+            this.panelAlta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAlta.Controls.Add(this.btnAlterar);
+            this.panelAlta.Controls.Add(this.txtRespuesta);
+            this.panelAlta.Controls.Add(this.label1);
+            this.panelAlta.Controls.Add(this.lblCrearAlmuno);
+            this.panelAlta.Controls.Add(this.lblLinea);
             this.panelAlta.Controls.Add(this.panel1);
             this.panelAlta.Controls.Add(this.btnAgregar);
             this.panelAlta.Controls.Add(this.lblExpliModi);
-            this.panelAlta.Controls.Add(this.btnAlterar);
             this.panelAlta.Controls.Add(this.cmbxAnio);
             this.panelAlta.Controls.Add(this.btnAltaAlumno);
             this.panelAlta.Controls.Add(this.lblAnio);
@@ -242,7 +178,6 @@ namespace Hatchat.Presentacion
             this.panelAlta.Controls.Add(this.lblOrientacion);
             this.panelAlta.Controls.Add(this.cmbxClase);
             this.panelAlta.Controls.Add(this.lblClase);
-            this.panelAlta.Controls.Add(this.txtRespuesta);
             this.panelAlta.Controls.Add(this.cmbxPreguntaSeg);
             this.panelAlta.Controls.Add(this.lblPregSegur);
             this.panelAlta.Controls.Add(this.lblExpliPregSegur);
@@ -258,23 +193,41 @@ namespace Hatchat.Presentacion
             this.panelAlta.Controls.Add(this.lblCi);
             this.panelAlta.Controls.Add(this.txtNombre);
             this.panelAlta.Controls.Add(this.txtCedula);
-            this.panelAlta.Controls.Add(this.lblCrearAlmuno);
-            this.panelAlta.Location = new System.Drawing.Point(284, 140);
+            this.panelAlta.Location = new System.Drawing.Point(331, 118);
             this.panelAlta.Name = "panelAlta";
-            this.panelAlta.Size = new System.Drawing.Size(842, 529);
+            this.panelAlta.Size = new System.Drawing.Size(921, 551);
             this.panelAlta.TabIndex = 8;
             this.panelAlta.Visible = false;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panelClasesAgregadas);
+            this.panel1.Controls.Add(this.panelModificarClases);
+            this.panel1.Location = new System.Drawing.Point(135, 858);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(639, 178);
+            this.panel1.TabIndex = 28;
+            // 
             // panelClasesAgregadas
             // 
-            this.panelClasesAgregadas.Location = new System.Drawing.Point(18, 18);
+            this.panelClasesAgregadas.Location = new System.Drawing.Point(0, 0);
             this.panelClasesAgregadas.Name = "panelClasesAgregadas";
-            this.panelClasesAgregadas.Size = new System.Drawing.Size(281, 135);
+            this.panelClasesAgregadas.Size = new System.Drawing.Size(317, 178);
             this.panelClasesAgregadas.TabIndex = 27;
+            // 
+            // panelModificarClases
+            // 
+            this.panelModificarClases.AutoScroll = true;
+            this.panelModificarClases.BackColor = System.Drawing.SystemColors.Control;
+            this.panelModificarClases.Location = new System.Drawing.Point(321, 0);
+            this.panelModificarClases.Name = "panelModificarClases";
+            this.panelModificarClases.Size = new System.Drawing.Size(317, 178);
+            this.panelModificarClases.TabIndex = 25;
+            this.panelModificarClases.Visible = false;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(716, 606);
+            this.btnAgregar.Location = new System.Drawing.Point(599, 1091);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 26;
@@ -285,56 +238,48 @@ namespace Hatchat.Presentacion
             // lblExpliModi
             // 
             this.lblExpliModi.AutoSize = true;
-            this.lblExpliModi.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-            this.lblExpliModi.Location = new System.Drawing.Point(589, 553);
+            this.lblExpliModi.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpliModi.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblExpliModi.Location = new System.Drawing.Point(636, 818);
             this.lblExpliModi.Name = "lblExpliModi";
-            this.lblExpliModi.Size = new System.Drawing.Size(193, 26);
+            this.lblExpliModi.Size = new System.Drawing.Size(240, 32);
             this.lblExpliModi.TabIndex = 0;
-            this.lblExpliModi.Text = "si no pertenece a todas las asignaturas,\r\n puede configurarlo aqui";
-            // 
-            // panelModificarClases
-            // 
-            this.panelModificarClases.AutoScroll = true;
-            this.panelModificarClases.BackColor = System.Drawing.SystemColors.Control;
-            this.panelModificarClases.Location = new System.Drawing.Point(313, 18);
-            this.panelModificarClases.Name = "panelModificarClases";
-            this.panelModificarClases.Size = new System.Drawing.Size(263, 135);
-            this.panelModificarClases.TabIndex = 25;
-            this.panelModificarClases.Visible = false;
-            // 
-            // btnAlterar
-            // 
-            this.btnAlterar.Enabled = false;
-            this.btnAlterar.Location = new System.Drawing.Point(508, 556);
-            this.btnAlterar.Name = "btnAlterar";
-            this.btnAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btnAlterar.TabIndex = 24;
-            this.btnAlterar.Text = "Modificar";
-            this.btnAlterar.UseVisualStyleBackColor = true;
-            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
+            this.lblExpliModi.Text = "si no pertenece a todas las asignaturas,\r\npuede configurarlo aqui";
             // 
             // cmbxAnio
             // 
             this.cmbxAnio.FormattingEnabled = true;
-            this.cmbxAnio.Location = new System.Drawing.Point(269, 559);
+            this.cmbxAnio.Location = new System.Drawing.Point(287, 823);
             this.cmbxAnio.Name = "cmbxAnio";
             this.cmbxAnio.Size = new System.Drawing.Size(101, 21);
             this.cmbxAnio.TabIndex = 23;
             this.cmbxAnio.SelectedIndexChanged += new System.EventHandler(this.cmbxAnio_SelectedIndexChanged);
             // 
+            // btnAltaAlumno
+            // 
+            this.btnAltaAlumno.Location = new System.Drawing.Point(266, 1195);
+            this.btnAltaAlumno.Name = "btnAltaAlumno";
+            this.btnAltaAlumno.Size = new System.Drawing.Size(452, 66);
+            this.btnAltaAlumno.TabIndex = 17;
+            this.btnAltaAlumno.Text = "Agregar Alumno";
+            this.btnAltaAlumno.UseVisualStyleBackColor = true;
+            this.btnAltaAlumno.Click += new System.EventHandler(this.btnAltaAlumno_Click);
+            // 
             // lblAnio
             // 
             this.lblAnio.AutoSize = true;
-            this.lblAnio.Location = new System.Drawing.Point(273, 543);
+            this.lblAnio.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblAnio.ForeColor = System.Drawing.Color.White;
+            this.lblAnio.Location = new System.Drawing.Point(288, 791);
             this.lblAnio.Name = "lblAnio";
-            this.lblAnio.Size = new System.Drawing.Size(26, 13);
+            this.lblAnio.Size = new System.Drawing.Size(44, 22);
             this.lblAnio.TabIndex = 22;
             this.lblAnio.Text = "Año";
             // 
             // cmbxOrientacion
             // 
             this.cmbxOrientacion.FormattingEnabled = true;
-            this.cmbxOrientacion.Location = new System.Drawing.Point(134, 559);
+            this.cmbxOrientacion.Location = new System.Drawing.Point(152, 823);
             this.cmbxOrientacion.Name = "cmbxOrientacion";
             this.cmbxOrientacion.Size = new System.Drawing.Size(101, 21);
             this.cmbxOrientacion.TabIndex = 21;
@@ -343,16 +288,18 @@ namespace Hatchat.Presentacion
             // lblOrientacion
             // 
             this.lblOrientacion.AutoSize = true;
-            this.lblOrientacion.Location = new System.Drawing.Point(138, 543);
+            this.lblOrientacion.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblOrientacion.ForeColor = System.Drawing.Color.White;
+            this.lblOrientacion.Location = new System.Drawing.Point(150, 793);
             this.lblOrientacion.Name = "lblOrientacion";
-            this.lblOrientacion.Size = new System.Drawing.Size(61, 13);
+            this.lblOrientacion.Size = new System.Drawing.Size(106, 22);
             this.lblOrientacion.TabIndex = 20;
             this.lblOrientacion.Text = "Orientacion";
             // 
             // cmbxClase
             // 
             this.cmbxClase.FormattingEnabled = true;
-            this.cmbxClase.Location = new System.Drawing.Point(390, 559);
+            this.cmbxClase.Location = new System.Drawing.Point(408, 823);
             this.cmbxClase.Name = "cmbxClase";
             this.cmbxClase.Size = new System.Drawing.Size(101, 21);
             this.cmbxClase.TabIndex = 19;
@@ -361,52 +308,42 @@ namespace Hatchat.Presentacion
             // lblClase
             // 
             this.lblClase.AutoSize = true;
-            this.lblClase.Location = new System.Drawing.Point(430, 543);
+            this.lblClase.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblClase.ForeColor = System.Drawing.Color.White;
+            this.lblClase.Location = new System.Drawing.Point(404, 791);
             this.lblClase.Name = "lblClase";
-            this.lblClase.Size = new System.Drawing.Size(33, 13);
+            this.lblClase.Size = new System.Drawing.Size(59, 22);
             this.lblClase.TabIndex = 18;
             this.lblClase.Text = "Clase";
             // 
-            // btnAltaAlumno
-            // 
-            this.btnAltaAlumno.Location = new System.Drawing.Point(236, 790);
-            this.btnAltaAlumno.Name = "btnAltaAlumno";
-            this.btnAltaAlumno.Size = new System.Drawing.Size(452, 66);
-            this.btnAltaAlumno.TabIndex = 17;
-            this.btnAltaAlumno.Text = "Agregar Alumno";
-            this.btnAltaAlumno.UseVisualStyleBackColor = true;
-            this.btnAltaAlumno.Click += new System.EventHandler(this.btnAltaAlumno_Click);
-            // 
-            // txtRespuesta
-            // 
-            this.txtRespuesta.Location = new System.Drawing.Point(131, 493);
-            this.txtRespuesta.Name = "txtRespuesta";
-            this.txtRespuesta.Size = new System.Drawing.Size(213, 20);
-            this.txtRespuesta.TabIndex = 16;
-            // 
             // cmbxPreguntaSeg
             // 
+            this.cmbxPreguntaSeg.Font = new System.Drawing.Font("Arial", 14.25F);
             this.cmbxPreguntaSeg.FormattingEnabled = true;
-            this.cmbxPreguntaSeg.Location = new System.Drawing.Point(134, 466);
+            this.cmbxPreguntaSeg.Location = new System.Drawing.Point(151, 617);
             this.cmbxPreguntaSeg.Name = "cmbxPreguntaSeg";
-            this.cmbxPreguntaSeg.Size = new System.Drawing.Size(121, 21);
+            this.cmbxPreguntaSeg.Size = new System.Drawing.Size(332, 30);
             this.cmbxPreguntaSeg.TabIndex = 15;
             // 
             // lblPregSegur
             // 
             this.lblPregSegur.AutoSize = true;
-            this.lblPregSegur.Location = new System.Drawing.Point(131, 450);
+            this.lblPregSegur.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblPregSegur.ForeColor = System.Drawing.Color.White;
+            this.lblPregSegur.Location = new System.Drawing.Point(151, 585);
             this.lblPregSegur.Name = "lblPregSegur";
-            this.lblPregSegur.Size = new System.Drawing.Size(116, 13);
+            this.lblPregSegur.Size = new System.Drawing.Size(205, 22);
             this.lblPregSegur.TabIndex = 14;
             this.lblPregSegur.Text = "Pregunta de Seguridad";
             // 
             // lblExpliPregSegur
             // 
             this.lblExpliPregSegur.AutoSize = true;
-            this.lblExpliPregSegur.Location = new System.Drawing.Point(128, 389);
+            this.lblExpliPregSegur.Font = new System.Drawing.Font("Arial", 13F);
+            this.lblExpliPregSegur.ForeColor = System.Drawing.Color.White;
+            this.lblExpliPregSegur.Location = new System.Drawing.Point(148, 503);
             this.lblExpliPregSegur.Name = "lblExpliPregSegur";
-            this.lblExpliPregSegur.Size = new System.Drawing.Size(271, 39);
+            this.lblExpliPregSegur.Size = new System.Drawing.Size(457, 63);
             this.lblExpliPregSegur.TabIndex = 13;
             this.lblExpliPregSegur.Text = "Pregunta de seguridad\r\nRellene el cuadro con una respuesta que nunca olvide\r\npara" +
     " poder tomar medidas en caso de perder su cuenta.\r\n";
@@ -414,116 +351,116 @@ namespace Hatchat.Presentacion
             // lblConfirmarPassword
             // 
             this.lblConfirmarPassword.AutoSize = true;
-            this.lblConfirmarPassword.Location = new System.Drawing.Point(146, 325);
+            this.lblConfirmarPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmarPassword.ForeColor = System.Drawing.Color.White;
+            this.lblConfirmarPassword.Location = new System.Drawing.Point(148, 433);
             this.lblConfirmarPassword.Name = "lblConfirmarPassword";
-            this.lblConfirmarPassword.Size = new System.Drawing.Size(108, 13);
+            this.lblConfirmarPassword.Size = new System.Drawing.Size(195, 22);
             this.lblConfirmarPassword.TabIndex = 12;
             this.lblConfirmarPassword.Text = "Confirmar Contraseña";
             // 
             // txtConfirmarPassword
             // 
-            this.txtConfirmarPassword.Location = new System.Drawing.Point(149, 341);
+            this.txtConfirmarPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConfirmarPassword.Location = new System.Drawing.Point(151, 464);
             this.txtConfirmarPassword.Name = "txtConfirmarPassword";
-            this.txtConfirmarPassword.Size = new System.Drawing.Size(100, 20);
+            this.txtConfirmarPassword.Size = new System.Drawing.Size(565, 29);
             this.txtConfirmarPassword.TabIndex = 11;
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(146, 280);
+            this.lblPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.ForeColor = System.Drawing.Color.White;
+            this.lblPassword.Location = new System.Drawing.Point(148, 373);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(61, 13);
+            this.lblPassword.Size = new System.Drawing.Size(107, 22);
             this.lblPassword.TabIndex = 10;
             this.lblPassword.Text = "Contraseña";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(149, 296);
+            this.txtPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(151, 397);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(100, 20);
+            this.txtPassword.Size = new System.Drawing.Size(565, 29);
             this.txtPassword.TabIndex = 9;
             // 
             // lblSegundoApellido
             // 
             this.lblSegundoApellido.AutoSize = true;
-            this.lblSegundoApellido.Location = new System.Drawing.Point(146, 228);
+            this.lblSegundoApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSegundoApellido.ForeColor = System.Drawing.Color.White;
+            this.lblSegundoApellido.Location = new System.Drawing.Point(148, 306);
             this.lblSegundoApellido.Name = "lblSegundoApellido";
-            this.lblSegundoApellido.Size = new System.Drawing.Size(90, 13);
+            this.lblSegundoApellido.Size = new System.Drawing.Size(160, 22);
             this.lblSegundoApellido.TabIndex = 8;
             this.lblSegundoApellido.Text = "Segundo Apellido";
             // 
             // txtSegundoApellido
             // 
-            this.txtSegundoApellido.Location = new System.Drawing.Point(149, 244);
+            this.txtSegundoApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSegundoApellido.Location = new System.Drawing.Point(151, 333);
             this.txtSegundoApellido.Name = "txtSegundoApellido";
-            this.txtSegundoApellido.Size = new System.Drawing.Size(100, 20);
+            this.txtSegundoApellido.Size = new System.Drawing.Size(565, 29);
             this.txtSegundoApellido.TabIndex = 7;
             // 
             // lblPrimerApellido
             // 
             this.lblPrimerApellido.AutoSize = true;
-            this.lblPrimerApellido.Location = new System.Drawing.Point(146, 183);
+            this.lblPrimerApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrimerApellido.ForeColor = System.Drawing.Color.White;
+            this.lblPrimerApellido.Location = new System.Drawing.Point(148, 242);
             this.lblPrimerApellido.Name = "lblPrimerApellido";
-            this.lblPrimerApellido.Size = new System.Drawing.Size(76, 13);
+            this.lblPrimerApellido.Size = new System.Drawing.Size(139, 22);
             this.lblPrimerApellido.TabIndex = 6;
             this.lblPrimerApellido.Text = "Primer Apellido";
             // 
             // txtPrimerApellido
             // 
-            this.txtPrimerApellido.Location = new System.Drawing.Point(149, 199);
+            this.txtPrimerApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrimerApellido.Location = new System.Drawing.Point(151, 270);
             this.txtPrimerApellido.Name = "txtPrimerApellido";
-            this.txtPrimerApellido.Size = new System.Drawing.Size(100, 20);
+            this.txtPrimerApellido.Size = new System.Drawing.Size(565, 29);
             this.txtPrimerApellido.TabIndex = 5;
             // 
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(146, 132);
+            this.lblNombre.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.ForeColor = System.Drawing.Color.White;
+            this.lblNombre.Location = new System.Drawing.Point(148, 179);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.Size = new System.Drawing.Size(78, 22);
             this.lblNombre.TabIndex = 4;
             this.lblNombre.Text = "Nombre";
             // 
             // lblCi
             // 
             this.lblCi.AutoSize = true;
-            this.lblCi.Location = new System.Drawing.Point(146, 83);
+            this.lblCi.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCi.ForeColor = System.Drawing.Color.White;
+            this.lblCi.Location = new System.Drawing.Point(150, 116);
             this.lblCi.Name = "lblCi";
-            this.lblCi.Size = new System.Drawing.Size(40, 13);
+            this.lblCi.Size = new System.Drawing.Size(70, 22);
             this.lblCi.TabIndex = 3;
             this.lblCi.Text = "Cedula";
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(149, 148);
+            this.txtNombre.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.Location = new System.Drawing.Point(151, 206);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.Size = new System.Drawing.Size(565, 29);
             this.txtNombre.TabIndex = 2;
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(149, 99);
+            this.txtCedula.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCedula.Location = new System.Drawing.Point(152, 139);
             this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(100, 20);
+            this.txtCedula.Size = new System.Drawing.Size(565, 29);
             this.txtCedula.TabIndex = 1;
-            // 
-            // lblCrearAlmuno
-            // 
-            this.lblCrearAlmuno.AutoSize = true;
-            this.lblCrearAlmuno.Location = new System.Drawing.Point(337, 34);
-            this.lblCrearAlmuno.Name = "lblCrearAlmuno";
-            this.lblCrearAlmuno.Size = new System.Drawing.Size(69, 13);
-            this.lblCrearAlmuno.TabIndex = 0;
-            this.lblCrearAlmuno.Text = "Crear alumno";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.panelClasesAgregadas);
-            this.panel1.Controls.Add(this.panelModificarClases);
-            this.panel1.Location = new System.Drawing.Point(134, 606);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(579, 178);
-            this.panel1.TabIndex = 28;
             // 
             // panelBaja
             // 
@@ -603,40 +540,15 @@ namespace Hatchat.Presentacion
             this.panelModificar.TabIndex = 30;
             this.panelModificar.Visible = false;
             // 
-            // btnActualizar
+            // btnBuscarModficar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(199, 499);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(452, 66);
-            this.btnActualizar.TabIndex = 17;
-            this.btnActualizar.Text = "Modificar Alumno";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // lblCiModf
-            // 
-            this.lblCiModf.AutoSize = true;
-            this.lblCiModf.Location = new System.Drawing.Point(146, 83);
-            this.lblCiModf.Name = "lblCiModf";
-            this.lblCiModf.Size = new System.Drawing.Size(40, 13);
-            this.lblCiModf.TabIndex = 3;
-            this.lblCiModf.Text = "Cedula";
-            // 
-            // txtCiModif
-            // 
-            this.txtCiModif.Location = new System.Drawing.Point(149, 99);
-            this.txtCiModif.Name = "txtCiModif";
-            this.txtCiModif.Size = new System.Drawing.Size(100, 20);
-            this.txtCiModif.TabIndex = 1;
-            // 
-            // lblModificar
-            // 
-            this.lblModificar.AutoSize = true;
-            this.lblModificar.Location = new System.Drawing.Point(337, 34);
-            this.lblModificar.Name = "lblModificar";
-            this.lblModificar.Size = new System.Drawing.Size(87, 13);
-            this.lblModificar.TabIndex = 0;
-            this.lblModificar.Text = "Modificar alumno";
+            this.btnBuscarModficar.Location = new System.Drawing.Point(274, 98);
+            this.btnBuscarModficar.Name = "btnBuscarModficar";
+            this.btnBuscarModficar.Size = new System.Drawing.Size(65, 20);
+            this.btnBuscarModficar.TabIndex = 34;
+            this.btnBuscarModficar.Text = "Buscar";
+            this.btnBuscarModficar.UseVisualStyleBackColor = true;
+            this.btnBuscarModficar.Click += new System.EventHandler(this.btnBuscarModficar_Click);
             // 
             // txtRespuestaModif
             // 
@@ -774,40 +686,220 @@ namespace Hatchat.Presentacion
             this.pbxFoto.TabIndex = 18;
             this.pbxFoto.TabStop = false;
             // 
-            // btnBuscarModficar
+            // btnActualizar
             // 
-            this.btnBuscarModficar.Location = new System.Drawing.Point(274, 98);
-            this.btnBuscarModficar.Name = "btnBuscarModficar";
-            this.btnBuscarModficar.Size = new System.Drawing.Size(65, 20);
-            this.btnBuscarModficar.TabIndex = 34;
-            this.btnBuscarModficar.Text = "Buscar";
-            this.btnBuscarModficar.UseVisualStyleBackColor = true;
-            this.btnBuscarModficar.Click += new System.EventHandler(this.btnBuscarModficar_Click);
+            this.btnActualizar.Location = new System.Drawing.Point(199, 499);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(452, 66);
+            this.btnActualizar.TabIndex = 17;
+            this.btnActualizar.Text = "Modificar Alumno";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // lblCiModf
+            // 
+            this.lblCiModf.AutoSize = true;
+            this.lblCiModf.Location = new System.Drawing.Point(146, 83);
+            this.lblCiModf.Name = "lblCiModf";
+            this.lblCiModf.Size = new System.Drawing.Size(40, 13);
+            this.lblCiModf.TabIndex = 3;
+            this.lblCiModf.Text = "Cedula";
+            // 
+            // txtCiModif
+            // 
+            this.txtCiModif.Location = new System.Drawing.Point(149, 99);
+            this.txtCiModif.Name = "txtCiModif";
+            this.txtCiModif.Size = new System.Drawing.Size(100, 20);
+            this.txtCiModif.TabIndex = 1;
+            // 
+            // lblModificar
+            // 
+            this.lblModificar.AutoSize = true;
+            this.lblModificar.Location = new System.Drawing.Point(337, 34);
+            this.lblModificar.Name = "lblModificar";
+            this.lblModificar.Size = new System.Drawing.Size(87, 13);
+            this.lblModificar.TabIndex = 0;
+            this.lblModificar.Text = "Modificar alumno";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.pbxABMGruposNav);
+            this.panel2.Controls.Add(this.pbxCerrarSesionNav);
+            this.panel2.Controls.Add(this.pbxHistorialSolicitudesNav);
+            this.panel2.Controls.Add(this.pbxABMDocenteNav);
+            this.panel2.Controls.Add(this.pbxABMAlumnoNav);
+            this.panel2.Controls.Add(this.pbxSolicitudesNav);
+            this.panel2.Controls.Add(this.pbxFotoPerfilNav);
+            this.panel2.Location = new System.Drawing.Point(10, 10);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1242, 108);
+            this.panel2.TabIndex = 31;
+            // 
+            // pbxABMGruposNav
+            // 
+            this.pbxABMGruposNav.Location = new System.Drawing.Point(735, 14);
+            this.pbxABMGruposNav.Name = "pbxABMGruposNav";
+            this.pbxABMGruposNav.Size = new System.Drawing.Size(80, 80);
+            this.pbxABMGruposNav.TabIndex = 6;
+            this.pbxABMGruposNav.TabStop = false;
+            this.pbxABMGruposNav.Click += new System.EventHandler(this.pbxABMGruposNav_Click);
+            // 
+            // pbxCerrarSesionNav
+            // 
+            this.pbxCerrarSesionNav.InitialImage = global::Hatchat.Properties.Resources.cerrar_sesion;
+            this.pbxCerrarSesionNav.Location = new System.Drawing.Point(1129, 14);
+            this.pbxCerrarSesionNav.Name = "pbxCerrarSesionNav";
+            this.pbxCerrarSesionNav.Size = new System.Drawing.Size(80, 80);
+            this.pbxCerrarSesionNav.TabIndex = 5;
+            this.pbxCerrarSesionNav.TabStop = false;
+            this.pbxCerrarSesionNav.Click += new System.EventHandler(this.pbxCerrarSesionNav_Click);
+            // 
+            // pbxHistorialSolicitudesNav
+            // 
+            this.pbxHistorialSolicitudesNav.Location = new System.Drawing.Point(871, 14);
+            this.pbxHistorialSolicitudesNav.Name = "pbxHistorialSolicitudesNav";
+            this.pbxHistorialSolicitudesNav.Size = new System.Drawing.Size(80, 80);
+            this.pbxHistorialSolicitudesNav.TabIndex = 4;
+            this.pbxHistorialSolicitudesNav.TabStop = false;
+            this.pbxHistorialSolicitudesNav.Click += new System.EventHandler(this.pbxHistorialSolicitudesNav_Click);
+            // 
+            // pbxABMDocenteNav
+            // 
+            this.pbxABMDocenteNav.Location = new System.Drawing.Point(609, 14);
+            this.pbxABMDocenteNav.Name = "pbxABMDocenteNav";
+            this.pbxABMDocenteNav.Size = new System.Drawing.Size(80, 80);
+            this.pbxABMDocenteNav.TabIndex = 3;
+            this.pbxABMDocenteNav.TabStop = false;
+            this.pbxABMDocenteNav.Click += new System.EventHandler(this.pbxABMDocenteNav_Click);
+            // 
+            // pbxABMAlumnoNav
+            // 
+            this.pbxABMAlumnoNav.Location = new System.Drawing.Point(485, 14);
+            this.pbxABMAlumnoNav.Name = "pbxABMAlumnoNav";
+            this.pbxABMAlumnoNav.Size = new System.Drawing.Size(80, 80);
+            this.pbxABMAlumnoNav.TabIndex = 2;
+            this.pbxABMAlumnoNav.TabStop = false;
+            // 
+            // pbxSolicitudesNav
+            // 
+            this.pbxSolicitudesNav.Location = new System.Drawing.Point(351, 14);
+            this.pbxSolicitudesNav.Name = "pbxSolicitudesNav";
+            this.pbxSolicitudesNav.Size = new System.Drawing.Size(80, 80);
+            this.pbxSolicitudesNav.TabIndex = 1;
+            this.pbxSolicitudesNav.TabStop = false;
+            this.pbxSolicitudesNav.Click += new System.EventHandler(this.pbxSolicitudesNav_Click);
+            // 
+            // pbxFotoPerfilNav
+            // 
+            this.pbxFotoPerfilNav.Location = new System.Drawing.Point(3, 3);
+            this.pbxFotoPerfilNav.Name = "pbxFotoPerfilNav";
+            this.pbxFotoPerfilNav.Size = new System.Drawing.Size(100, 100);
+            this.pbxFotoPerfilNav.TabIndex = 0;
+            this.pbxFotoPerfilNav.TabStop = false;
+            // 
+            // panelTextoChat
+            // 
+            this.panelTextoChat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(136)))), ((int)(((byte)(88)))));
+            this.panelTextoChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTextoChat.Controls.Add(this.lblABMAlumno);
+            this.panelTextoChat.Location = new System.Drawing.Point(10, 118);
+            this.panelTextoChat.Name = "panelTextoChat";
+            this.panelTextoChat.Size = new System.Drawing.Size(321, 46);
+            this.panelTextoChat.TabIndex = 32;
+            // 
+            // lblABMAlumno
+            // 
+            this.lblABMAlumno.AutoSize = true;
+            this.lblABMAlumno.Font = new System.Drawing.Font("Arial", 30.25F);
+            this.lblABMAlumno.Location = new System.Drawing.Point(31, -1);
+            this.lblABMAlumno.Name = "lblABMAlumno";
+            this.lblABMAlumno.Size = new System.Drawing.Size(258, 47);
+            this.lblABMAlumno.TabIndex = 2;
+            this.lblABMAlumno.Text = "ABM Alumno";
+            // 
+            // PanelSolicitudesPendientes
+            // 
+            this.PanelSolicitudesPendientes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelSolicitudesPendientes.Controls.Add(this.btnAlta);
+            this.PanelSolicitudesPendientes.Controls.Add(this.btnBaja);
+            this.PanelSolicitudesPendientes.Controls.Add(this.btnModificar);
+            this.PanelSolicitudesPendientes.Location = new System.Drawing.Point(10, 164);
+            this.PanelSolicitudesPendientes.Name = "PanelSolicitudesPendientes";
+            this.PanelSolicitudesPendientes.Size = new System.Drawing.Size(321, 505);
+            this.PanelSolicitudesPendientes.TabIndex = 33;
+            // 
+            // lblCrearAlmuno
+            // 
+            this.lblCrearAlmuno.AutoSize = true;
+            this.lblCrearAlmuno.Font = new System.Drawing.Font("Arial", 45F);
+            this.lblCrearAlmuno.ForeColor = System.Drawing.Color.White;
+            this.lblCrearAlmuno.Location = new System.Drawing.Point(269, 11);
+            this.lblCrearAlmuno.Name = "lblCrearAlmuno";
+            this.lblCrearAlmuno.Size = new System.Drawing.Size(393, 67);
+            this.lblCrearAlmuno.TabIndex = 29;
+            this.lblCrearAlmuno.Text = "Crear Alumno";
+            // 
+            // lblLinea
+            // 
+            this.lblLinea.AutoSize = true;
+            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea.ForeColor = System.Drawing.Color.White;
+            this.lblLinea.Location = new System.Drawing.Point(110, 23);
+            this.lblLinea.Name = "lblLinea";
+            this.lblLinea.Size = new System.Drawing.Size(656, 67);
+            this.lblLinea.TabIndex = 30;
+            this.lblLinea.Text = "___________________";
+            // 
+            // txtRespuesta
+            // 
+            this.txtRespuesta.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.txtRespuesta.Location = new System.Drawing.Point(151, 659);
+            this.txtRespuesta.Name = "txtRespuesta";
+            this.txtRespuesta.Size = new System.Drawing.Size(565, 96);
+            this.txtRespuesta.TabIndex = 42;
+            this.txtRespuesta.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(123, 714);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(656, 67);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "___________________";
+            // 
+            // btnAlterar
+            // 
+            this.btnAlterar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAlterar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlterar.Location = new System.Drawing.Point(534, 820);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.Size = new System.Drawing.Size(96, 27);
+            this.btnAlterar.TabIndex = 44;
+            this.btnAlterar.Text = "Modificar";
+            this.btnAlterar.UseVisualStyleBackColor = false;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // ABMAlumnoAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.PanelSolicitudesPendientes);
+            this.Controls.Add(this.panelTextoChat);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelAlta);
             this.Controls.Add(this.panelModificar);
             this.Controls.Add(this.panelBaja);
-            this.Controls.Add(this.panelAlta);
-            this.Controls.Add(this.lblABMAlumno);
-            this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnBaja);
-            this.Controls.Add(this.btnAlta);
-            this.Controls.Add(this.panelNav);
             this.Name = "ABMAlumnoAdmin";
             this.Text = "AMBAlumnoAdmin";
             this.Load += new System.EventHandler(this.ABMAlumnoAdmin_Load);
-            this.panelNav.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxHistorialSolicitudesNav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxABMDocenteNav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxABMAlumnoNav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxSolicitudesNav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).EndInit();
             this.panelAlta.ResumeLayout(false);
             this.panelAlta.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -816,31 +908,30 @@ namespace Hatchat.Presentacion
             this.panelModificar.ResumeLayout(false);
             this.panelModificar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFoto)).EndInit();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxHistorialSolicitudesNav)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxABMDocenteNav)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxABMAlumnoNav)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxSolicitudesNav)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).EndInit();
+            this.panelTextoChat.ResumeLayout(false);
+            this.panelTextoChat.PerformLayout();
+            this.PanelSolicitudesPendientes.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panelNav;
-        private System.Windows.Forms.PictureBox pbxABMGruposNav;
-        private System.Windows.Forms.PictureBox pbxCerrarSesionNav;
-        private System.Windows.Forms.PictureBox pbxHistorialSolicitudesNav;
-        private System.Windows.Forms.PictureBox pbxABMDocenteNav;
-        private System.Windows.Forms.PictureBox pbxABMAlumnoNav;
-        private System.Windows.Forms.PictureBox pbxSolicitudesNav;
-        private System.Windows.Forms.PictureBox pbxFotoPerfilNav;
         private System.Windows.Forms.Button btnAlta;
         private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Label lblABMAlumno;
         private System.Windows.Forms.Panel panelAlta;
         private System.Windows.Forms.Panel panelClasesAgregadas;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label lblExpliModi;
         private System.Windows.Forms.Panel panelModificarClases;
-        private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.ComboBox cmbxAnio;
         private System.Windows.Forms.Label lblAnio;
         private System.Windows.Forms.ComboBox cmbxOrientacion;
@@ -848,7 +939,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.ComboBox cmbxClase;
         private System.Windows.Forms.Label lblClase;
         private System.Windows.Forms.Button btnAltaAlumno;
-        private System.Windows.Forms.TextBox txtRespuesta;
         private System.Windows.Forms.ComboBox cmbxPreguntaSeg;
         private System.Windows.Forms.Label lblPregSegur;
         private System.Windows.Forms.Label lblExpliPregSegur;
@@ -864,7 +954,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblCi;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtCedula;
-        private System.Windows.Forms.Label lblCrearAlmuno;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panelBaja;
         private System.Windows.Forms.Button btnEliminar;
@@ -893,5 +982,21 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblNombreCompleto;
         private System.Windows.Forms.Label lblCambiarFoto;
         private System.Windows.Forms.PictureBox pbxFoto;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox pbxABMGruposNav;
+        private System.Windows.Forms.PictureBox pbxCerrarSesionNav;
+        private System.Windows.Forms.PictureBox pbxHistorialSolicitudesNav;
+        private System.Windows.Forms.PictureBox pbxABMDocenteNav;
+        private System.Windows.Forms.PictureBox pbxABMAlumnoNav;
+        private System.Windows.Forms.PictureBox pbxSolicitudesNav;
+        private System.Windows.Forms.PictureBox pbxFotoPerfilNav;
+        private System.Windows.Forms.Panel panelTextoChat;
+        private System.Windows.Forms.Label lblABMAlumno;
+        private System.Windows.Forms.Panel PanelSolicitudesPendientes;
+        private System.Windows.Forms.Label lblCrearAlmuno;
+        private System.Windows.Forms.Label lblLinea;
+        private System.Windows.Forms.RichTextBox txtRespuesta;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAlterar;
     }
 }

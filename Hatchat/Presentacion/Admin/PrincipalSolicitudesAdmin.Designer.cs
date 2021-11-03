@@ -31,13 +31,6 @@ namespace Hatchat.Presentacion
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrincipalSolicitudesAdmin));
-            this.btnDenegar = new System.Windows.Forms.Button();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.panelSolicitud = new System.Windows.Forms.Panel();
-            this.lblNombreApellidoSolicitud = new System.Windows.Forms.Label();
-            this.panelContenido = new System.Windows.Forms.Panel();
-            this.lblCedula = new System.Windows.Forms.Label();
-            this.lblInformacion = new System.Windows.Forms.Label();
             this.tmrSolicitudes = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.pbxABMGruposNav = new System.Windows.Forms.PictureBox();
@@ -54,7 +47,14 @@ namespace Hatchat.Presentacion
             this.lblLinea = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panelSolicitud.SuspendLayout();
+            this.lblInformacion = new System.Windows.Forms.Label();
+            this.lblCedula = new System.Windows.Forms.Label();
+            this.panelContenido = new System.Windows.Forms.Panel();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.lblNombreApellidoSolicitud = new System.Windows.Forms.Label();
+            this.btnDenegar = new System.Windows.Forms.Button();
+            this.panelModif = new System.Windows.Forms.Panel();
+            this.panelSolicitud = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -65,88 +65,8 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
             this.panelTextoChat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelSolicitud.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnDenegar
-            // 
-            this.btnDenegar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(50)))), ((int)(((byte)(43)))));
-            this.btnDenegar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnDenegar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDenegar.Location = new System.Drawing.Point(16, 502);
-            this.btnDenegar.Name = "btnDenegar";
-            this.btnDenegar.Size = new System.Drawing.Size(163, 30);
-            this.btnDenegar.TabIndex = 1;
-            this.btnDenegar.Text = "denegar";
-            this.btnDenegar.UseVisualStyleBackColor = false;
-            this.btnDenegar.Click += new System.EventHandler(this.btnDenegar_Click);
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAceptar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(206, 502);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(163, 30);
-            this.btnAceptar.TabIndex = 0;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = false;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // panelSolicitud
-            // 
-            this.panelSolicitud.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSolicitud.Controls.Add(this.btnDenegar);
-            this.panelSolicitud.Controls.Add(this.lblNombreApellidoSolicitud);
-            this.panelSolicitud.Controls.Add(this.btnAceptar);
-            this.panelSolicitud.Controls.Add(this.panelContenido);
-            this.panelSolicitud.Controls.Add(this.lblCedula);
-            this.panelSolicitud.Controls.Add(this.lblInformacion);
-            this.panelSolicitud.Location = new System.Drawing.Point(330, 118);
-            this.panelSolicitud.Name = "panelSolicitud";
-            this.panelSolicitud.Size = new System.Drawing.Size(922, 551);
-            this.panelSolicitud.TabIndex = 5;
-            // 
-            // lblNombreApellidoSolicitud
-            // 
-            this.lblNombreApellidoSolicitud.AutoSize = true;
-            this.lblNombreApellidoSolicitud.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreApellidoSolicitud.ForeColor = System.Drawing.Color.White;
-            this.lblNombreApellidoSolicitud.Location = new System.Drawing.Point(28, 20);
-            this.lblNombreApellidoSolicitud.Name = "lblNombreApellidoSolicitud";
-            this.lblNombreApellidoSolicitud.Size = new System.Drawing.Size(671, 40);
-            this.lblNombreApellidoSolicitud.TabIndex = 0;
-            this.lblNombreApellidoSolicitud.Text = "Matheo Santana desea ingresar a un grupo";
-            // 
-            // panelContenido
-            // 
-            this.panelContenido.AutoScroll = true;
-            this.panelContenido.Location = new System.Drawing.Point(415, 116);
-            this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(474, 359);
-            this.panelContenido.TabIndex = 2;
-            // 
-            // lblCedula
-            // 
-            this.lblCedula.AutoSize = true;
-            this.lblCedula.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCedula.ForeColor = System.Drawing.Color.White;
-            this.lblCedula.Location = new System.Drawing.Point(30, 157);
-            this.lblCedula.Name = "lblCedula";
-            this.lblCedula.Size = new System.Drawing.Size(116, 27);
-            this.lblCedula.TabIndex = 1;
-            this.lblCedula.Text = "52848682";
-            // 
-            // lblInformacion
-            // 
-            this.lblInformacion.AutoSize = true;
-            this.lblInformacion.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInformacion.ForeColor = System.Drawing.Color.White;
-            this.lblInformacion.Location = new System.Drawing.Point(12, 116);
-            this.lblInformacion.Name = "lblInformacion";
-            this.lblInformacion.Size = new System.Drawing.Size(155, 24);
-            this.lblInformacion.TabIndex = 0;
-            this.lblInformacion.Text = "Su informacion:";
             // 
             // tmrSolicitudes
             // 
@@ -300,6 +220,96 @@ namespace Hatchat.Presentacion
             this.panel2.Size = new System.Drawing.Size(922, 551);
             this.panel2.TabIndex = 22;
             // 
+            // lblInformacion
+            // 
+            this.lblInformacion.AutoSize = true;
+            this.lblInformacion.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInformacion.ForeColor = System.Drawing.Color.White;
+            this.lblInformacion.Location = new System.Drawing.Point(12, 116);
+            this.lblInformacion.Name = "lblInformacion";
+            this.lblInformacion.Size = new System.Drawing.Size(155, 24);
+            this.lblInformacion.TabIndex = 0;
+            this.lblInformacion.Text = "Su informacion:";
+            // 
+            // lblCedula
+            // 
+            this.lblCedula.AutoSize = true;
+            this.lblCedula.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCedula.ForeColor = System.Drawing.Color.White;
+            this.lblCedula.Location = new System.Drawing.Point(19, 145);
+            this.lblCedula.Name = "lblCedula";
+            this.lblCedula.Size = new System.Drawing.Size(138, 27);
+            this.lblCedula.TabIndex = 1;
+            this.lblCedula.Text = "5.284.868-2";
+            // 
+            // panelContenido
+            // 
+            this.panelContenido.AutoScroll = true;
+            this.panelContenido.Location = new System.Drawing.Point(415, 116);
+            this.panelContenido.Name = "panelContenido";
+            this.panelContenido.Size = new System.Drawing.Size(474, 359);
+            this.panelContenido.TabIndex = 2;
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAceptar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceptar.Location = new System.Drawing.Point(206, 502);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(163, 30);
+            this.btnAceptar.TabIndex = 0;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = false;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // lblNombreApellidoSolicitud
+            // 
+            this.lblNombreApellidoSolicitud.AutoSize = true;
+            this.lblNombreApellidoSolicitud.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreApellidoSolicitud.ForeColor = System.Drawing.Color.White;
+            this.lblNombreApellidoSolicitud.Location = new System.Drawing.Point(28, 20);
+            this.lblNombreApellidoSolicitud.Name = "lblNombreApellidoSolicitud";
+            this.lblNombreApellidoSolicitud.Size = new System.Drawing.Size(671, 40);
+            this.lblNombreApellidoSolicitud.TabIndex = 0;
+            this.lblNombreApellidoSolicitud.Text = "Matheo Santana desea ingresar a un grupo";
+            // 
+            // btnDenegar
+            // 
+            this.btnDenegar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(50)))), ((int)(((byte)(43)))));
+            this.btnDenegar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDenegar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDenegar.Location = new System.Drawing.Point(16, 502);
+            this.btnDenegar.Name = "btnDenegar";
+            this.btnDenegar.Size = new System.Drawing.Size(163, 30);
+            this.btnDenegar.TabIndex = 1;
+            this.btnDenegar.Text = "denegar";
+            this.btnDenegar.UseVisualStyleBackColor = false;
+            this.btnDenegar.Click += new System.EventHandler(this.btnDenegar_Click);
+            // 
+            // panelModif
+            // 
+            this.panelModif.AutoScroll = true;
+            this.panelModif.Location = new System.Drawing.Point(6, 221);
+            this.panelModif.Name = "panelModif";
+            this.panelModif.Size = new System.Drawing.Size(657, 227);
+            this.panelModif.TabIndex = 3;
+            // 
+            // panelSolicitud
+            // 
+            this.panelSolicitud.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSolicitud.Controls.Add(this.panelModif);
+            this.panelSolicitud.Controls.Add(this.btnDenegar);
+            this.panelSolicitud.Controls.Add(this.lblNombreApellidoSolicitud);
+            this.panelSolicitud.Controls.Add(this.btnAceptar);
+            this.panelSolicitud.Controls.Add(this.panelContenido);
+            this.panelSolicitud.Controls.Add(this.lblCedula);
+            this.panelSolicitud.Controls.Add(this.lblInformacion);
+            this.panelSolicitud.Location = new System.Drawing.Point(330, 118);
+            this.panelSolicitud.Name = "panelSolicitud";
+            this.panelSolicitud.Size = new System.Drawing.Size(922, 551);
+            this.panelSolicitud.TabIndex = 5;
+            // 
             // PrincipalSolicitudesAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,8 +327,6 @@ namespace Hatchat.Presentacion
             this.Name = "PrincipalSolicitudesAdmin";
             this.Text = "PrincipalSolicitudesAdmin";
             this.Load += new System.EventHandler(this.PrincipalSolicitudesAdmin_Load);
-            this.panelSolicitud.ResumeLayout(false);
-            this.panelSolicitud.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).EndInit();
@@ -330,20 +338,15 @@ namespace Hatchat.Presentacion
             this.panelTextoChat.ResumeLayout(false);
             this.panelTextoChat.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelSolicitud.ResumeLayout(false);
+            this.panelSolicitud.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panelSolicitud;
-        private System.Windows.Forms.Panel panelContenido;
-        private System.Windows.Forms.Label lblCedula;
-        private System.Windows.Forms.Label lblInformacion;
-        private System.Windows.Forms.Label lblNombreApellidoSolicitud;
         private System.Windows.Forms.Timer tmrSolicitudes;
-        private System.Windows.Forms.Button btnDenegar;
-        private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pbxABMGruposNav;
         private System.Windows.Forms.PictureBox pbxCerrarSesionNav;
@@ -359,5 +362,13 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblLinea;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblInformacion;
+        private System.Windows.Forms.Label lblCedula;
+        private System.Windows.Forms.Panel panelContenido;
+        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Label lblNombreApellidoSolicitud;
+        private System.Windows.Forms.Button btnDenegar;
+        private System.Windows.Forms.Panel panelModif;
+        private System.Windows.Forms.Panel panelSolicitud;
     }
 }

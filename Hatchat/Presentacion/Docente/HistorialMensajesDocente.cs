@@ -289,7 +289,7 @@ namespace Hatchat.Presentacion
                     PictureBox picCirculito = new PictureBox();
                     if (men.Estado == "recibido")
                     {
-                        picCirculito.Image = Image.FromFile("circulo realizado.png");
+                        picCirculito.Image = Image.FromFile("circulo recibido.png");
                     }
                     else if (men.Estado == "contestado")
                     {
@@ -297,7 +297,7 @@ namespace Hatchat.Presentacion
                     }
                     else
                     {
-                        picCirculito.Image = Image.FromFile("circulo recibido.png");
+                        picCirculito.Image = Image.FromFile("circulo realizado.png");
 
                     }
 

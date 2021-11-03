@@ -407,6 +407,7 @@ namespace Hatchat.Presentacion
             panelBaja.Visible = false;
             panelModificar.Visible = !panelModificar.Visible;
         }
+
         private void btnBuscarModficar_Click(object sender, EventArgs e)
         {
             if (new Logica.Usuario().SelectAlumno(txtCiModif.Text))
@@ -446,6 +447,13 @@ namespace Hatchat.Presentacion
             alModif.Preguta_seguridad = (cmbxPregsModif.SelectedIndex + 1);
             alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFoto.Image);
             alModif.UpdatePerfil();
+
+            txtApodo.Text = "";
+            txtPassword.Text = "";
+            txtRespuesta.Text = "";
+            cmbxPregsModif.SelectedIndex = -1;
+            pbxFoto.Image = null;
+            txtCiModif.Text = "";
         }
 
     }
