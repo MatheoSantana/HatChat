@@ -47,7 +47,9 @@ namespace Hatchat.Presentacion
         {
             InitializeComponent();
 
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            StartPosition = FormStartPosition.CenterScreen;
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -58,6 +60,7 @@ namespace Hatchat.Presentacion
                 pbxABMGruposNav.Image = Image.FromFile("abm grupos blanco.png");
                 pbxHistorialSolicitudesNav.Image = Image.FromFile("historial gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -71,6 +74,7 @@ namespace Hatchat.Presentacion
             pbxABMGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             cmbxNombreBajaOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbxModificarOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -172,7 +176,7 @@ namespace Hatchat.Presentacion
 
         private void btnAltaOrientacion_Click(object sender, EventArgs e)
         {
-            int ychbx = 50, xchbx = 50;
+            int ychbx = 5, xchbx = 5;
             panelABMOrientacion.Visible = false;
 
             panelAltaOrientacion.Visible = !panelAltaOrientacion.Visible;
@@ -186,6 +190,7 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
+
             asignaturasAltaOrientacion.Clear();
             panelAltaOrientacionAsignaturas.Controls.Clear();
             asignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
@@ -193,15 +198,16 @@ namespace Hatchat.Presentacion
             {
                 CheckBox dina = new CheckBox();
 
-                dina.Height = 23;
+                dina.Height = 46;
                 dina.Width = 150;
                 dina.Location = new Point(xchbx, ychbx);
-                if (xchbx == 400)
+                if (xchbx == 180)
                 {
-                    xchbx = -125;
-                    ychbx += 25;
+                    xchbx = -170;
+                    ychbx += 48;
                 }
                 xchbx += 175;
+                dina.Font = new Font("arial", 12);
                 dina.Name = "chbx" + asig.Id;
                 dina.Text = asig.Nombre;
 
@@ -257,6 +263,31 @@ namespace Hatchat.Presentacion
                     contiene.AltaContiene();
                 }
                 MessageBox.Show("Se ha registrado la orientacion correctamente");
+                int ychbx = 5, xchbx = 5;
+                asignaturasAltaOrientacion.Clear();
+                panelAltaOrientacionAsignaturas.Controls.Clear();
+                txtNombreAltaOrientacion.Text = "";
+                asignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
+                foreach (Logica.Asignatura asig in asignaturasAltaOrientacion)
+                {
+                    CheckBox dina = new CheckBox();
+
+                    dina.Height = 46;
+                    dina.Width = 150;
+                    dina.Location = new Point(xchbx, ychbx);
+                    if (xchbx == 180)
+                    {
+                        xchbx = -170;
+                        ychbx += 48;
+                    }
+                    xchbx += 175;
+                    dina.Font = new Font("arial", 12);
+                    dina.Name = "chbx" + asig.Id;
+                    dina.Text = asig.Nombre;
+
+                    dina.CheckedChanged += new EventHandler(AsignaturaCambiadaAltaOrientacion);
+                    panelAltaOrientacionAsignaturas.Controls.Add(dina);
+                }
             }
             else
             {
@@ -289,13 +320,17 @@ namespace Hatchat.Presentacion
         }
         private void btnEliminarBajaOrientacion_Click(object sender, EventArgs e)
         {
-            orientacionesBajaOrientacion[cmbxNombreBajaOrientacion.SelectedIndex].BajaOrientacion();
-            MessageBox.Show("Se ha eliminado la orientacion correctamente");
-            cmbxNombreBajaOrientacion.Items.Clear();
-            orientacionesBajaOrientacion = new Logica.Orientacion().SelectOrientaciones();
-            foreach (Logica.Orientacion orientacion in orientacionesBajaOrientacion)
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea eliminar la orietacion "+ cmbxNombreBajaOrientacion.SelectedItem.ToString() + "?", "Eliminar Orientacion", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
             {
-                cmbxNombreBajaOrientacion.Items.Add(orientacion.Nombre);
+                orientacionesBajaOrientacion[cmbxNombreBajaOrientacion.SelectedIndex].BajaOrientacion();
+                MessageBox.Show("Se ha eliminado la orientacion correctamente");
+                cmbxNombreBajaOrientacion.Items.Clear();
+                orientacionesBajaOrientacion = new Logica.Orientacion().SelectOrientaciones();
+                foreach (Logica.Orientacion orientacion in orientacionesBajaOrientacion)
+                {
+                    cmbxNombreBajaOrientacion.Items.Add(orientacion.Nombre);
+                }
             }
         }
 
@@ -314,8 +349,12 @@ namespace Hatchat.Presentacion
             panelAltaClase.Visible = false;
             panelBajaClase.Visible = false;
             panelModificarClase.Visible = false;
+
             cmbxModificarOrientacion.Items.Clear();
+            contienesModificarOrientacion.Clear();
             orientacionesModificarOrientacion.Clear();
+            panelModificarOrientacionAsignaturas.Controls.Clear();
+            asignaturasModificarOrientacion.Clear();
             orientacionesModificarOrientacion.AddRange(new Logica.Orientacion().SelectOrientaciones());
             foreach (Logica.Orientacion ori in orientacionesModificarOrientacion)
             {
@@ -335,15 +374,16 @@ namespace Hatchat.Presentacion
 
                 CheckBox dina = new CheckBox();
 
-                dina.Height = 23;
+                dina.Height = 46;
                 dina.Width = 150;
                 dina.Location = new Point(xchbx, ychbx);
-                if (xchbx == 355)
+                if (xchbx == 180)
                 {
                     xchbx = -170;
-                    ychbx += 25;
+                    ychbx += 48;
                 }
                 xchbx += 175;
+                dina.Font = new Font("arial", 12);
                 dina.Name = "chbx" + asig.Id;
                 dina.Text = asig.Nombre;
                 foreach (Logica.Contiene cont in contienesModificarOrientacion)
@@ -397,16 +437,33 @@ namespace Hatchat.Presentacion
         }
         private void btnModificarModificarOrientacion_Click(object sender, EventArgs e)
         {
-            if (!(new Logica.Orientacion().SelectExisteNombreOrientacion(txtModificarOrientacionNombre.Text)) || txtModificarOrientacionNombre.Text == cmbxModificarOrientacion.SelectedItem.ToString())
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea modificar la orietacion?", "Modificar Orientacion", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
             {
-                Logica.Orientacion ori = orientacionesModificarOrientacion[cmbxModificarOrientacion.SelectedIndex];
-                ori.Nombre = txtModificarOrientacionNombre.Text;
-                ori.ModificarOrientacion(contienesModificarOrientacion);
-                MessageBox.Show("Se ha Modificado la orientacion correctamente");
-            }
-            else
-            {
-                MessageBox.Show("Ese nombre ya existe, pruebe con otro");
+                if (!(new Logica.Orientacion().SelectExisteNombreOrientacion(txtModificarOrientacionNombre.Text)) || txtModificarOrientacionNombre.Text == cmbxModificarOrientacion.SelectedItem.ToString())
+                {
+                    Logica.Orientacion ori = orientacionesModificarOrientacion[cmbxModificarOrientacion.SelectedIndex];
+                    ori.Nombre = txtModificarOrientacionNombre.Text;
+                    ori.ModificarOrientacion(contienesModificarOrientacion);
+                    MessageBox.Show("Se ha Modificado la orientacion correctamente");
+
+                    cmbxModificarOrientacion.Items.Clear();
+                    contienesModificarOrientacion.Clear();
+                    orientacionesModificarOrientacion.Clear();
+                    panelModificarOrientacionAsignaturas.Controls.Clear();
+                    asignaturasModificarOrientacion.Clear();
+                    orientacionesModificarOrientacion.AddRange(new Logica.Orientacion().SelectOrientaciones());
+                    foreach (Logica.Orientacion orie in orientacionesModificarOrientacion)
+                    {
+                        cmbxModificarOrientacion.Items.Add(orie.Nombre);
+                    }
+
+                    asignaturasModificarOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
+                }
+                else
+                {
+                    MessageBox.Show("Ese nombre ya existe, pruebe con otro");
+                }
             }
         }
 
@@ -438,6 +495,11 @@ namespace Hatchat.Presentacion
             asignaturasAltaAsignatura.Clear();
             asignaturasAltaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
             dgvAsignaturasAltaAsignatura.DataSource = new Logica.Asignatura().SelectAsignaturasGrilla();
+            dgvAsignaturasAltaAsignatura.Columns[0].Width = 93;
+            dgvAsignaturasAltaAsignatura.Columns[1].Width = 201;
+            dgvAsignaturasAltaAsignatura.Columns[2].Width = 76;
+            txtNombreAltaAsignatura.Text = "";
+            txtIdAltaAsignatura.Text = "";
         }
         private void btnAgregarAsignaturaAltaAsignatura_Click(object sender, EventArgs e)
         {
@@ -454,6 +516,15 @@ namespace Hatchat.Presentacion
                 Logica.Asignatura asig = new Logica.Asignatura(txtIdAltaAsignatura.Text, txtNombreAltaAsignatura.Text, Convert.ToInt32(cmbxAnioAltaAsignatura.SelectedItem), true);
                 asig.AltaAsignatura();
                 MessageBox.Show("Se ha creado correctamente la asignatura");
+
+                asignaturasAltaAsignatura.Clear();
+                asignaturasAltaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+                dgvAsignaturasAltaAsignatura.DataSource = new Logica.Asignatura().SelectAsignaturasGrilla();
+                dgvAsignaturasAltaAsignatura.Columns[0].Width = 93;
+                dgvAsignaturasAltaAsignatura.Columns[1].Width = 201;
+                dgvAsignaturasAltaAsignatura.Columns[2].Width = 76;
+                txtNombreAltaAsignatura.Text = "";
+                txtIdAltaAsignatura.Text = "";
             }
             else
             {
@@ -479,12 +550,15 @@ namespace Hatchat.Presentacion
 
             cmbxAsignaturaBajaAsignatura.Items.Clear();
             asignaturasBajaAsignatura.Clear();
+            cmbxAnioBajaAsignatura.SelectedIndex = -1;
+            cmbxAsignaturaBajaAsignatura.Enabled = false;
 
         }
         private void cmbxAnioBajaAsignatura_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbxAsignaturaBajaAsignatura.Items.Clear();
             asignaturasBajaAsignatura.Clear();
+            cmbxAsignaturaBajaAsignatura.Enabled = true;
             asignaturasBajaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
             foreach (Logica.Asignatura asig in asignaturasBajaAsignatura)
             {
@@ -497,11 +571,20 @@ namespace Hatchat.Presentacion
 
         private void btnEliminarBajaAsignatura_Click(object sender, EventArgs e)
         {
-            foreach (Logica.Asignatura asig in asignaturasBajaAsignatura)
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea eliminar la asignatura "+ cmbxAsignaturaBajaAsignatura.SelectedItem.ToString() +"? ", "Eliminar Asignatura", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
             {
-                if (asig.Id + " - " + asig.Nombre == cmbxAnioBajaAsignatura.SelectedItem.ToString())
+                foreach (Logica.Asignatura asig in asignaturasBajaAsignatura)
                 {
-                    asig.BajaAsignatura();
+                    if (asig.Id + " - " + asig.Nombre == cmbxAsignaturaBajaAsignatura.SelectedItem.ToString())
+                    {
+                        asig.BajaAsignatura();
+                        MessageBox.Show("Se ha eliminado la asignatura correctamente");
+                        cmbxAsignaturaBajaAsignatura.Items.Clear();
+                        asignaturasBajaAsignatura.Clear();
+                        cmbxAnioBajaAsignatura.SelectedIndex = -1;
+                        cmbxAsignaturaBajaAsignatura.Enabled = false;
+                    }
                 }
             }
         }
@@ -544,23 +627,27 @@ namespace Hatchat.Presentacion
 
         private void btnAlterarModificarAsignatura_Click(object sender, EventArgs e)
         {
-            Logica.Asignatura asig = asignaturasModificarAsignatura[cmbxAsignaturaModificarAsignatura.SelectedIndex];
-            asig.Anio = Convert.ToInt32(cmbxAnioModifcarAsignatura.SelectedItem);
-            asig.Nombre = txtNombreModificarAsignatura.Text;
-            asig.ModificarAsignatura();
-            MessageBox.Show("Se ha modificado la asignatura correctamente");
-            cmbxAnioModifcarAsignatura.SelectedIndex = -1;
-            cmbxAnioModifcarAsignatura.Enabled = false;
-            txtNombreModificarAsignatura.Text = "";
-            txtNombreModificarAsignatura.Enabled = false;
-            cmbxAsignaturaModificarAsignatura.Items.Clear();
-            asignaturasModificarAsignatura.Clear();
-            asignaturasModificarAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
-            foreach (Logica.Asignatura asi in asignaturasModificarAsignatura)
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea modificar la asignatura?", "Modificar Asignatura", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
             {
-                cmbxAsignaturaModificarAsignatura.Items.Add(asi.Id + " - " + asi.Nombre + " - " + asi.Anio + "°");
+                Logica.Asignatura asig = asignaturasModificarAsignatura[cmbxAsignaturaModificarAsignatura.SelectedIndex];
+                asig.Anio = Convert.ToInt32(cmbxAnioModifcarAsignatura.SelectedItem);
+                asig.Nombre = txtNombreModificarAsignatura.Text;
+                asig.ModificarAsignatura();
+                MessageBox.Show("Se ha modificado la asignatura correctamente");
+                cmbxAnioModifcarAsignatura.SelectedIndex = -1;
+                cmbxAnioModifcarAsignatura.Enabled = false;
+                txtNombreModificarAsignatura.Text = "";
+                txtNombreModificarAsignatura.Enabled = false;
+                cmbxAsignaturaModificarAsignatura.Items.Clear();
+                asignaturasModificarAsignatura.Clear();
+                asignaturasModificarAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+                foreach (Logica.Asignatura asi in asignaturasModificarAsignatura)
+                {
+                    cmbxAsignaturaModificarAsignatura.Items.Add(asi.Id + " - " + asi.Nombre + " - " + asi.Anio + "°");
+                }
+                cmbxAsignaturaModificarAsignatura.SelectedIndex = -1;
             }
-            cmbxAsignaturaModificarAsignatura.SelectedIndex = -1;
         }
 
         private void btnClase_Click(object sender, EventArgs e)
@@ -607,7 +694,7 @@ namespace Hatchat.Presentacion
             cla.Activo = true;
             cla.Orientacion = orientacionesAltaClase[cmbxOrientacionAltaClase.SelectedIndex].Id;
             cla.AltaClase();
-            MessageBox.Show("Clase creada");
+            MessageBox.Show("Se ha creado la Clase perfectamente");
             cmbxAnioAltaClase.SelectedIndex = -1;
             orientacionesAltaClase.Clear();
             orientacionesAltaClase.AddRange(new Logica.Orientacion().SelectOrientaciones());
@@ -692,19 +779,33 @@ namespace Hatchat.Presentacion
         private void btnDarBajaClase_Click(object sender, EventArgs e)
         { 
             bool error = true;
-            foreach(Logica.Clase cla in ClasesBajaClase)
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea eliminar la clase "+ cmbxAnioBajaClase.SelectedItem.ToString()+cmbxNombreBajaClase.SelectedItem.ToString() + " " + cmbxOrientacionBajaClase.SelectedItem.ToString() + " ?", "Eliminar Clase", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
             {
-                if (orientacionesBajaClase[cmbxOrientacionBajaClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreBajaClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioBajaClase.SelectedItem.ToString()) == cla.Anio)
+                foreach (Logica.Clase cla in ClasesBajaClase)
                 {
-                    cla.BajaClase();
-                    MessageBox.Show("Eliminado");
-                    error = false;
+                    if (orientacionesBajaClase[cmbxOrientacionBajaClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreBajaClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioBajaClase.SelectedItem.ToString()) == cla.Anio)
+                    {
+                        cla.BajaClase();
+                        MessageBox.Show("Se ha eliminado la clase correctamente");
+                        error = false;
+
+                        cmbxAnioBajaClase.SelectedIndex = -1;
+                        cmbxOrientacionBajaClase.Enabled = false;
+                        cmbxOrientacionBajaClase.Items.Clear();
+                        cmbxOrientacionBajaClase.SelectedIndex = -1;
+                        orientacionesBajaClase.Clear();
+                        ClasesBajaClase.Clear();
+                        cmbxNombreBajaClase.Enabled = false;
+                        cmbxNombreBajaClase.Items.Clear();
+                        cmbxNombreBajaClase.SelectedIndex = -1;
+                    }
+
                 }
-                
-            }
-            if (error)
-            {
-                MessageBox.Show("No se borro");
+                if (error)
+                {
+                    MessageBox.Show("No se logro eliminar la clase");
+                }
             }
 
         }
@@ -865,25 +966,54 @@ namespace Hatchat.Presentacion
         private void btnDarModificacionClase_Click(object sender, EventArgs e)
         { 
             bool error = true;
-            foreach (Logica.Clase cla in ClasesModificarClase)
+            DialogResult cerrarSesion = MessageBox.Show("¿Desea modificar la clase?", "Modificar Clase", MessageBoxButtons.YesNo);
+            if (cerrarSesion == DialogResult.Yes)
             {
-                if (orientacionesModificarClase[cmbxOrientacionModificarClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreModificarClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioModificarClase.SelectedItem.ToString()) == cla.Anio)
+                foreach (Logica.Clase cla in ClasesModificarClase)
                 {
+                    if (orientacionesModificarClase[cmbxOrientacionModificarClase.SelectedIndex].Id == cla.Orientacion && cla.Nombre == cmbxNombreModificarClase.SelectedItem.ToString() && Convert.ToInt32(cmbxAnioModificarClase.SelectedItem.ToString()) == cla.Anio)
+                    {
+                        cla.Orientacion = NuevasOrientacionesModificarClase[cmbxNuevaOrientacionModificarClase.SelectedIndex].Id;
+                        cla.Nombre = txtNuevoNombreModificarClase.Text;
+                        cla.Anio = Convert.ToInt32(cmbxNuevoAnioModificarClase.SelectedItem.ToString());
+                        cla.ModificarClase();
+                        MessageBox.Show("Se ha modificado correctamente la clase");
 
-                    cla.Orientacion = NuevasOrientacionesModificarClase[cmbxNuevaOrientacionModificarClase.SelectedIndex].Id;
-                    cla.Nombre = txtNuevoNombreModificarClase.Text;
-                    cla.Anio = Convert.ToInt32(cmbxNuevoAnioModificarClase.SelectedItem.ToString());
-                    cla.ModificarClase();
-                    MessageBox.Show("Modificada");
-                    error = false;
-                }
-                if (error)
-                {
-                    MessageBox.Show("No se modifico");
+                        cmbxOrientacionModificarClase.Enabled = false;
+                        cmbxNombreModificarClase.Enabled = false;
+                        cmbxNuevoAnioModificarClase.Enabled = false;
+                        cmbxNuevaOrientacionModificarClase.Enabled = false;
+                        txtNuevoNombreModificarClase.Enabled = false;
+
+                        cmbxOrientacionModificarClase.Items.Clear();
+                        cmbxNombreModificarClase.Items.Clear();
+                        cmbxNuevaOrientacionModificarClase.Items.Clear();
+                        txtNuevoNombreModificarClase.Text = "";
+
+                        cmbxAnioModificarClase.SelectedIndex = -1;
+                        cmbxOrientacionModificarClase.SelectedIndex = -1;
+                        cmbxNombreModificarClase.SelectedIndex = -1;
+                        cmbxNuevoAnioModificarClase.SelectedIndex = -1;
+                        cmbxNuevaOrientacionModificarClase.SelectedIndex = -1;
+
+                        orientacionesModificarClase.Clear();
+                        ClasesModificarClase.Clear();
+                        NuevasOrientacionesModificarClase.Clear();
+                        NuevasClasesModificarClase.Clear();
+
+                        error = false;
+                    }
+                    if (error)
+                    {
+                        MessageBox.Show("No se pudo modificar la clase");
+                    }
                 }
             }
         }
 
-        
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
     }
 }

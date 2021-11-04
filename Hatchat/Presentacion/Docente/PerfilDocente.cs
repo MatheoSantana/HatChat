@@ -383,7 +383,20 @@ namespace Hatchat.Presentacion
         }
         private void EliminarAgenda(object sender, EventArgs e)
         {
-            new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Button)sender).Name));
+            if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+            {
+                new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
+            }
+            else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((PictureBox)sender).Name));
+            }
+            else
+            {
+                new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Panel)sender).Name));
+            }
+
+            
             MessageBox.Show("Se ha eliminado la agenda");
         }
 
@@ -472,7 +485,7 @@ namespace Hatchat.Presentacion
         }
         private void btnAgregarNuevaAgenda_Click(object sender, EventArgs e)
         {
-            if (!lu && !ma&& !mi && !ju && !vi)
+            if (!lu && !ma && !mi && !ju && !vi)
             {
                 MessageBox.Show("No se ha seleccionado ningun dia");
             }

@@ -232,7 +232,7 @@ namespace Hatchat.Presentacion
 
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
                     Logica.Alumno alu = new Logica.Alumno();
-
+                    alu.Ci = usuario.Ci;
                     alu.Nombre = usuario.Nombre;
                     alu.Primer_apellido = usuario.Primer_apellido;
                     alu.FotoDePerfil = usuario.FotoDePerfil;
@@ -475,13 +475,10 @@ namespace Hatchat.Presentacion
                 {
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
                     Logica.Alumno alu = new Logica.Alumno();
-
+                    alu.Ci = usuario.Ci;
                     alu.Nombre = usuario.Nombre;
                     alu.Primer_apellido = usuario.Primer_apellido;
-                    if (!(usuario.FotoDePerfil == null))
-                    {
-                        alu.FotoDePerfil = usuario.FotoDePerfil;
-                    }
+                    alu.FotoDePerfil = usuario.FotoDePerfil;
 
                     PictureBox picPhoto = new PictureBox();
                     picPhoto.Image = alu.ByteArrayToImage(alu.FotoDePerfil);
@@ -617,10 +614,9 @@ namespace Hatchat.Presentacion
             alumno.Nombre = usuario.Nombre;
             alumno.Primer_apellido = usuario.Primer_apellido;
             alumno.Segundo_apellido = usuario.Segundo_apellido;
-            if (!(usuario.FotoDePerfil == null))
-            {
+            
                 alumno.FotoDePerfil = usuario.FotoDePerfil;
-            }
+            
             alumno.Activo = usuario.Activo;
 
             panelContenedor.Visible = true;

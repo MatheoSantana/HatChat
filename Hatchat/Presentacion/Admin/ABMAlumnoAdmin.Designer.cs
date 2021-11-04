@@ -34,39 +34,6 @@ namespace Hatchat.Presentacion
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.panelAlta = new System.Windows.Forms.Panel();
-            this.btnAltaAlumno = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnAlterar = new System.Windows.Forms.Button();
-            this.txtRespuestaModif = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblCrearAlmuno = new System.Windows.Forms.Label();
-            this.lblLinea = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panelClasesAgregadas = new System.Windows.Forms.Panel();
-            this.panelModificarClases = new System.Windows.Forms.Panel();
-            this.lblExpliModi = new System.Windows.Forms.Label();
-            this.cmbxAnio = new System.Windows.Forms.ComboBox();
-            this.lblAnio = new System.Windows.Forms.Label();
-            this.cmbxOrientacion = new System.Windows.Forms.ComboBox();
-            this.lblOrientacion = new System.Windows.Forms.Label();
-            this.cmbxClase = new System.Windows.Forms.ComboBox();
-            this.lblClase = new System.Windows.Forms.Label();
-            this.cmbxPreguntaSeg = new System.Windows.Forms.ComboBox();
-            this.lblPregSegur = new System.Windows.Forms.Label();
-            this.lblExpliPregSegur = new System.Windows.Forms.Label();
-            this.lblConfirmarPassword = new System.Windows.Forms.Label();
-            this.txtConfirmarPassword = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.lblSegundoApellido = new System.Windows.Forms.Label();
-            this.txtSegundoApellido = new System.Windows.Forms.TextBox();
-            this.lblPrimerApellido = new System.Windows.Forms.Label();
-            this.txtPrimerApellido = new System.Windows.Forms.TextBox();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.lblCi = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtCedula = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pbxABMGruposNav = new System.Windows.Forms.PictureBox();
             this.pbxCerrarSesionNav = new System.Windows.Forms.PictureBox();
@@ -78,12 +45,11 @@ namespace Hatchat.Presentacion
             this.panelTextoChat = new System.Windows.Forms.Panel();
             this.lblABMAlumno = new System.Windows.Forms.Label();
             this.PanelSolicitudesPendientes = new System.Windows.Forms.Panel();
-            this.panelBaja = new System.Windows.Forms.Panel();
-            this.lblEliminarAlumno = new System.Windows.Forms.Label();
-            this.lblLinea4 = new System.Windows.Forms.Label();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.lblCedulaBaja = new System.Windows.Forms.Label();
-            this.txtBajaCi = new System.Windows.Forms.TextBox();
+            this.lblBienvenido = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.txtCiModif = new System.Windows.Forms.TextBox();
             this.lblCiModf = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -106,15 +72,47 @@ namespace Hatchat.Presentacion
             this.lblPregsModificar = new System.Windows.Forms.Label();
             this.lblRespuestaModificar = new System.Windows.Forms.Label();
             this.txtRespuestaSeguridadModificar = new System.Windows.Forms.TextBox();
-            this.panelModificar = new System.Windows.Forms.Panel();
             this.btnActualizar = new System.Windows.Forms.Button();
-            this.lblBienvenido = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
-            this.panelAlta.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelModificar = new System.Windows.Forms.Panel();
+            this.txtCedula = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.lblCi = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.txtPrimerApellido = new System.Windows.Forms.TextBox();
+            this.lblPrimerApellido = new System.Windows.Forms.Label();
+            this.txtSegundoApellido = new System.Windows.Forms.TextBox();
+            this.lblSegundoApellido = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.txtConfirmarPassword = new System.Windows.Forms.TextBox();
+            this.lblConfirmarPassword = new System.Windows.Forms.Label();
+            this.lblExpliPregSegur = new System.Windows.Forms.Label();
+            this.lblPregSegur = new System.Windows.Forms.Label();
+            this.cmbxPreguntaSeg = new System.Windows.Forms.ComboBox();
+            this.lblClase = new System.Windows.Forms.Label();
+            this.cmbxClase = new System.Windows.Forms.ComboBox();
+            this.lblOrientacion = new System.Windows.Forms.Label();
+            this.cmbxOrientacion = new System.Windows.Forms.ComboBox();
+            this.lblAnio = new System.Windows.Forms.Label();
+            this.cmbxAnio = new System.Windows.Forms.ComboBox();
+            this.lblExpliModi = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelClasesAgregadas = new System.Windows.Forms.Panel();
+            this.panelModificarClases = new System.Windows.Forms.Panel();
+            this.lblLinea = new System.Windows.Forms.Label();
+            this.lblCrearAlmuno = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtRespuesta = new System.Windows.Forms.RichTextBox();
+            this.btnAlterar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnAltaAlumno = new System.Windows.Forms.Button();
+            this.panelAlta = new System.Windows.Forms.Panel();
+            this.txtBajaCi = new System.Windows.Forms.TextBox();
+            this.lblCedulaBaja = new System.Windows.Forms.Label();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.lblLinea4 = new System.Windows.Forms.Label();
+            this.lblEliminarAlumno = new System.Windows.Forms.Label();
+            this.panelBaja = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -125,11 +123,14 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoPerfilNav)).BeginInit();
             this.panelTextoChat.SuspendLayout();
             this.PanelSolicitudesPendientes.SuspendLayout();
-            this.panelBaja.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBuscarModificar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoModificar)).BeginInit();
             this.panelModificar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panelAlta.SuspendLayout();
+            this.panelBaja.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAlta
@@ -170,375 +171,6 @@ namespace Hatchat.Presentacion
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // panelAlta
-            // 
-            this.panelAlta.AutoScroll = true;
-            this.panelAlta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelAlta.Controls.Add(this.btnAltaAlumno);
-            this.panelAlta.Controls.Add(this.btnAgregar);
-            this.panelAlta.Controls.Add(this.btnAlterar);
-            this.panelAlta.Controls.Add(this.txtRespuestaModif);
-            this.panelAlta.Controls.Add(this.label1);
-            this.panelAlta.Controls.Add(this.lblCrearAlmuno);
-            this.panelAlta.Controls.Add(this.lblLinea);
-            this.panelAlta.Controls.Add(this.panel1);
-            this.panelAlta.Controls.Add(this.lblExpliModi);
-            this.panelAlta.Controls.Add(this.cmbxAnio);
-            this.panelAlta.Controls.Add(this.lblAnio);
-            this.panelAlta.Controls.Add(this.cmbxOrientacion);
-            this.panelAlta.Controls.Add(this.lblOrientacion);
-            this.panelAlta.Controls.Add(this.cmbxClase);
-            this.panelAlta.Controls.Add(this.lblClase);
-            this.panelAlta.Controls.Add(this.cmbxPreguntaSeg);
-            this.panelAlta.Controls.Add(this.lblPregSegur);
-            this.panelAlta.Controls.Add(this.lblExpliPregSegur);
-            this.panelAlta.Controls.Add(this.lblConfirmarPassword);
-            this.panelAlta.Controls.Add(this.txtConfirmarPassword);
-            this.panelAlta.Controls.Add(this.lblPassword);
-            this.panelAlta.Controls.Add(this.txtPassword);
-            this.panelAlta.Controls.Add(this.lblSegundoApellido);
-            this.panelAlta.Controls.Add(this.txtSegundoApellido);
-            this.panelAlta.Controls.Add(this.lblPrimerApellido);
-            this.panelAlta.Controls.Add(this.txtPrimerApellido);
-            this.panelAlta.Controls.Add(this.lblNombre);
-            this.panelAlta.Controls.Add(this.lblCi);
-            this.panelAlta.Controls.Add(this.txtNombre);
-            this.panelAlta.Controls.Add(this.txtCedula);
-            this.panelAlta.Location = new System.Drawing.Point(331, 118);
-            this.panelAlta.Name = "panelAlta";
-            this.panelAlta.Size = new System.Drawing.Size(921, 551);
-            this.panelAlta.TabIndex = 8;
-            this.panelAlta.Visible = false;
-            // 
-            // btnAltaAlumno
-            // 
-            this.btnAltaAlumno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnAltaAlumno.Enabled = false;
-            this.btnAltaAlumno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAltaAlumno.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAltaAlumno.Location = new System.Drawing.Point(226, 1058);
-            this.btnAltaAlumno.Name = "btnAltaAlumno";
-            this.btnAltaAlumno.Size = new System.Drawing.Size(409, 41);
-            this.btnAltaAlumno.TabIndex = 46;
-            this.btnAltaAlumno.Text = "Crear Alumno";
-            this.btnAltaAlumno.UseVisualStyleBackColor = false;
-            this.btnAltaAlumno.Click += new System.EventHandler(this.btnAltaAlumno_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnAgregar.Enabled = false;
-            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAgregar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(779, 859);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(96, 27);
-            this.btnAgregar.TabIndex = 45;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnAlterar
-            // 
-            this.btnAlterar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnAlterar.Enabled = false;
-            this.btnAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAlterar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlterar.Location = new System.Drawing.Point(534, 820);
-            this.btnAlterar.Name = "btnAlterar";
-            this.btnAlterar.Size = new System.Drawing.Size(96, 27);
-            this.btnAlterar.TabIndex = 44;
-            this.btnAlterar.Text = "Modificar";
-            this.btnAlterar.UseVisualStyleBackColor = false;
-            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
-            // 
-            // txtRespuestaModif
-            // 
-            this.txtRespuestaModif.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.txtRespuestaModif.Location = new System.Drawing.Point(151, 659);
-            this.txtRespuestaModif.Name = "txtRespuestaModif";
-            this.txtRespuestaModif.Size = new System.Drawing.Size(565, 96);
-            this.txtRespuestaModif.TabIndex = 42;
-            this.txtRespuestaModif.Text = "";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(123, 714);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(656, 67);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "___________________";
-            // 
-            // lblCrearAlmuno
-            // 
-            this.lblCrearAlmuno.AutoSize = true;
-            this.lblCrearAlmuno.Font = new System.Drawing.Font("Arial", 45F);
-            this.lblCrearAlmuno.ForeColor = System.Drawing.Color.White;
-            this.lblCrearAlmuno.Location = new System.Drawing.Point(269, 11);
-            this.lblCrearAlmuno.Name = "lblCrearAlmuno";
-            this.lblCrearAlmuno.Size = new System.Drawing.Size(393, 67);
-            this.lblCrearAlmuno.TabIndex = 29;
-            this.lblCrearAlmuno.Text = "Crear Alumno";
-            // 
-            // lblLinea
-            // 
-            this.lblLinea.AutoSize = true;
-            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLinea.ForeColor = System.Drawing.Color.White;
-            this.lblLinea.Location = new System.Drawing.Point(110, 23);
-            this.lblLinea.Name = "lblLinea";
-            this.lblLinea.Size = new System.Drawing.Size(656, 67);
-            this.lblLinea.TabIndex = 30;
-            this.lblLinea.Text = "___________________";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.panelClasesAgregadas);
-            this.panel1.Controls.Add(this.panelModificarClases);
-            this.panel1.Location = new System.Drawing.Point(135, 858);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(639, 178);
-            this.panel1.TabIndex = 28;
-            // 
-            // panelClasesAgregadas
-            // 
-            this.panelClasesAgregadas.Location = new System.Drawing.Point(41, 0);
-            this.panelClasesAgregadas.Name = "panelClasesAgregadas";
-            this.panelClasesAgregadas.Size = new System.Drawing.Size(180, 178);
-            this.panelClasesAgregadas.TabIndex = 27;
-            // 
-            // panelModificarClases
-            // 
-            this.panelModificarClases.AutoScroll = true;
-            this.panelModificarClases.BackColor = System.Drawing.SystemColors.Control;
-            this.panelModificarClases.Location = new System.Drawing.Point(273, 0);
-            this.panelModificarClases.Name = "panelModificarClases";
-            this.panelModificarClases.Size = new System.Drawing.Size(365, 178);
-            this.panelModificarClases.TabIndex = 25;
-            this.panelModificarClases.Visible = false;
-            // 
-            // lblExpliModi
-            // 
-            this.lblExpliModi.AutoSize = true;
-            this.lblExpliModi.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpliModi.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblExpliModi.Location = new System.Drawing.Point(636, 818);
-            this.lblExpliModi.Name = "lblExpliModi";
-            this.lblExpliModi.Size = new System.Drawing.Size(240, 32);
-            this.lblExpliModi.TabIndex = 0;
-            this.lblExpliModi.Text = "si no pertenece a todas las asignaturas,\r\npuede configurarlo aqui";
-            // 
-            // cmbxAnio
-            // 
-            this.cmbxAnio.Enabled = false;
-            this.cmbxAnio.FormattingEnabled = true;
-            this.cmbxAnio.Location = new System.Drawing.Point(287, 823);
-            this.cmbxAnio.Name = "cmbxAnio";
-            this.cmbxAnio.Size = new System.Drawing.Size(101, 21);
-            this.cmbxAnio.TabIndex = 23;
-            this.cmbxAnio.SelectedIndexChanged += new System.EventHandler(this.cmbxAnio_SelectedIndexChanged);
-            // 
-            // lblAnio
-            // 
-            this.lblAnio.AutoSize = true;
-            this.lblAnio.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.lblAnio.ForeColor = System.Drawing.Color.White;
-            this.lblAnio.Location = new System.Drawing.Point(288, 791);
-            this.lblAnio.Name = "lblAnio";
-            this.lblAnio.Size = new System.Drawing.Size(44, 22);
-            this.lblAnio.TabIndex = 22;
-            this.lblAnio.Text = "Año";
-            // 
-            // cmbxOrientacion
-            // 
-            this.cmbxOrientacion.FormattingEnabled = true;
-            this.cmbxOrientacion.Location = new System.Drawing.Point(152, 823);
-            this.cmbxOrientacion.Name = "cmbxOrientacion";
-            this.cmbxOrientacion.Size = new System.Drawing.Size(101, 21);
-            this.cmbxOrientacion.TabIndex = 21;
-            this.cmbxOrientacion.SelectedIndexChanged += new System.EventHandler(this.cmbxOrientacion_SelectedIndexChanged);
-            // 
-            // lblOrientacion
-            // 
-            this.lblOrientacion.AutoSize = true;
-            this.lblOrientacion.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.lblOrientacion.ForeColor = System.Drawing.Color.White;
-            this.lblOrientacion.Location = new System.Drawing.Point(150, 793);
-            this.lblOrientacion.Name = "lblOrientacion";
-            this.lblOrientacion.Size = new System.Drawing.Size(106, 22);
-            this.lblOrientacion.TabIndex = 20;
-            this.lblOrientacion.Text = "Orientacion";
-            // 
-            // cmbxClase
-            // 
-            this.cmbxClase.Enabled = false;
-            this.cmbxClase.FormattingEnabled = true;
-            this.cmbxClase.Location = new System.Drawing.Point(408, 823);
-            this.cmbxClase.Name = "cmbxClase";
-            this.cmbxClase.Size = new System.Drawing.Size(101, 21);
-            this.cmbxClase.TabIndex = 19;
-            this.cmbxClase.SelectedIndexChanged += new System.EventHandler(this.cmbxClase_SelectedIndexChanged);
-            // 
-            // lblClase
-            // 
-            this.lblClase.AutoSize = true;
-            this.lblClase.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.lblClase.ForeColor = System.Drawing.Color.White;
-            this.lblClase.Location = new System.Drawing.Point(404, 791);
-            this.lblClase.Name = "lblClase";
-            this.lblClase.Size = new System.Drawing.Size(59, 22);
-            this.lblClase.TabIndex = 18;
-            this.lblClase.Text = "Clase";
-            // 
-            // cmbxPreguntaSeg
-            // 
-            this.cmbxPreguntaSeg.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.cmbxPreguntaSeg.FormattingEnabled = true;
-            this.cmbxPreguntaSeg.Location = new System.Drawing.Point(151, 617);
-            this.cmbxPreguntaSeg.Name = "cmbxPreguntaSeg";
-            this.cmbxPreguntaSeg.Size = new System.Drawing.Size(454, 30);
-            this.cmbxPreguntaSeg.TabIndex = 15;
-            // 
-            // lblPregSegur
-            // 
-            this.lblPregSegur.AutoSize = true;
-            this.lblPregSegur.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.lblPregSegur.ForeColor = System.Drawing.Color.White;
-            this.lblPregSegur.Location = new System.Drawing.Point(151, 585);
-            this.lblPregSegur.Name = "lblPregSegur";
-            this.lblPregSegur.Size = new System.Drawing.Size(205, 22);
-            this.lblPregSegur.TabIndex = 14;
-            this.lblPregSegur.Text = "Pregunta de Seguridad";
-            // 
-            // lblExpliPregSegur
-            // 
-            this.lblExpliPregSegur.AutoSize = true;
-            this.lblExpliPregSegur.Font = new System.Drawing.Font("Arial", 13F);
-            this.lblExpliPregSegur.ForeColor = System.Drawing.Color.White;
-            this.lblExpliPregSegur.Location = new System.Drawing.Point(148, 503);
-            this.lblExpliPregSegur.Name = "lblExpliPregSegur";
-            this.lblExpliPregSegur.Size = new System.Drawing.Size(457, 63);
-            this.lblExpliPregSegur.TabIndex = 13;
-            this.lblExpliPregSegur.Text = "Pregunta de seguridad\r\nRellene el cuadro con una respuesta que nunca olvide\r\npara" +
-    " poder tomar medidas en caso de perder su cuenta.\r\n";
-            // 
-            // lblConfirmarPassword
-            // 
-            this.lblConfirmarPassword.AutoSize = true;
-            this.lblConfirmarPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfirmarPassword.ForeColor = System.Drawing.Color.White;
-            this.lblConfirmarPassword.Location = new System.Drawing.Point(148, 433);
-            this.lblConfirmarPassword.Name = "lblConfirmarPassword";
-            this.lblConfirmarPassword.Size = new System.Drawing.Size(195, 22);
-            this.lblConfirmarPassword.TabIndex = 12;
-            this.lblConfirmarPassword.Text = "Confirmar Contraseña";
-            // 
-            // txtConfirmarPassword
-            // 
-            this.txtConfirmarPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmarPassword.Location = new System.Drawing.Point(151, 464);
-            this.txtConfirmarPassword.Name = "txtConfirmarPassword";
-            this.txtConfirmarPassword.Size = new System.Drawing.Size(565, 29);
-            this.txtConfirmarPassword.TabIndex = 11;
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.ForeColor = System.Drawing.Color.White;
-            this.lblPassword.Location = new System.Drawing.Point(148, 373);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(107, 22);
-            this.lblPassword.TabIndex = 10;
-            this.lblPassword.Text = "Contraseña";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(151, 397);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(565, 29);
-            this.txtPassword.TabIndex = 9;
-            // 
-            // lblSegundoApellido
-            // 
-            this.lblSegundoApellido.AutoSize = true;
-            this.lblSegundoApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSegundoApellido.ForeColor = System.Drawing.Color.White;
-            this.lblSegundoApellido.Location = new System.Drawing.Point(148, 306);
-            this.lblSegundoApellido.Name = "lblSegundoApellido";
-            this.lblSegundoApellido.Size = new System.Drawing.Size(160, 22);
-            this.lblSegundoApellido.TabIndex = 8;
-            this.lblSegundoApellido.Text = "Segundo Apellido";
-            // 
-            // txtSegundoApellido
-            // 
-            this.txtSegundoApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSegundoApellido.Location = new System.Drawing.Point(151, 333);
-            this.txtSegundoApellido.Name = "txtSegundoApellido";
-            this.txtSegundoApellido.Size = new System.Drawing.Size(565, 29);
-            this.txtSegundoApellido.TabIndex = 7;
-            // 
-            // lblPrimerApellido
-            // 
-            this.lblPrimerApellido.AutoSize = true;
-            this.lblPrimerApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrimerApellido.ForeColor = System.Drawing.Color.White;
-            this.lblPrimerApellido.Location = new System.Drawing.Point(148, 242);
-            this.lblPrimerApellido.Name = "lblPrimerApellido";
-            this.lblPrimerApellido.Size = new System.Drawing.Size(139, 22);
-            this.lblPrimerApellido.TabIndex = 6;
-            this.lblPrimerApellido.Text = "Primer Apellido";
-            // 
-            // txtPrimerApellido
-            // 
-            this.txtPrimerApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrimerApellido.Location = new System.Drawing.Point(151, 270);
-            this.txtPrimerApellido.Name = "txtPrimerApellido";
-            this.txtPrimerApellido.Size = new System.Drawing.Size(565, 29);
-            this.txtPrimerApellido.TabIndex = 5;
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.ForeColor = System.Drawing.Color.White;
-            this.lblNombre.Location = new System.Drawing.Point(148, 179);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(78, 22);
-            this.lblNombre.TabIndex = 4;
-            this.lblNombre.Text = "Nombre";
-            // 
-            // lblCi
-            // 
-            this.lblCi.AutoSize = true;
-            this.lblCi.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCi.ForeColor = System.Drawing.Color.White;
-            this.lblCi.Location = new System.Drawing.Point(150, 116);
-            this.lblCi.Name = "lblCi";
-            this.lblCi.Size = new System.Drawing.Size(70, 22);
-            this.lblCi.TabIndex = 3;
-            this.lblCi.Text = "Cedula";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(151, 206);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(565, 29);
-            this.txtNombre.TabIndex = 2;
-            // 
-            // txtCedula
-            // 
-            this.txtCedula.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCedula.Location = new System.Drawing.Point(152, 139);
-            this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(565, 29);
-            this.txtCedula.TabIndex = 1;
             // 
             // panel2
             // 
@@ -649,73 +281,53 @@ namespace Hatchat.Presentacion
             this.PanelSolicitudesPendientes.Size = new System.Drawing.Size(321, 505);
             this.PanelSolicitudesPendientes.TabIndex = 33;
             // 
-            // panelBaja
+            // lblBienvenido
             // 
-            this.panelBaja.AutoScroll = true;
-            this.panelBaja.Controls.Add(this.lblEliminarAlumno);
-            this.panelBaja.Controls.Add(this.lblLinea4);
-            this.panelBaja.Controls.Add(this.btnEliminar);
-            this.panelBaja.Controls.Add(this.lblCedulaBaja);
-            this.panelBaja.Controls.Add(this.txtBajaCi);
-            this.panelBaja.Location = new System.Drawing.Point(331, 118);
-            this.panelBaja.Name = "panelBaja";
-            this.panelBaja.Size = new System.Drawing.Size(921, 551);
-            this.panelBaja.TabIndex = 29;
-            this.panelBaja.Visible = false;
+            this.lblBienvenido.AutoSize = true;
+            this.lblBienvenido.Font = new System.Drawing.Font("Arial", 45F);
+            this.lblBienvenido.ForeColor = System.Drawing.Color.White;
+            this.lblBienvenido.Location = new System.Drawing.Point(300, 25);
+            this.lblBienvenido.Name = "lblBienvenido";
+            this.lblBienvenido.Size = new System.Drawing.Size(324, 67);
+            this.lblBienvenido.TabIndex = 34;
+            this.lblBienvenido.Text = "Bienvenido";
             // 
-            // lblEliminarAlumno
+            // label2
             // 
-            this.lblEliminarAlumno.AutoSize = true;
-            this.lblEliminarAlumno.Font = new System.Drawing.Font("Arial", 45F);
-            this.lblEliminarAlumno.ForeColor = System.Drawing.Color.White;
-            this.lblEliminarAlumno.Location = new System.Drawing.Point(238, 24);
-            this.lblEliminarAlumno.Name = "lblEliminarAlumno";
-            this.lblEliminarAlumno.Size = new System.Drawing.Size(458, 67);
-            this.lblEliminarAlumno.TabIndex = 60;
-            this.lblEliminarAlumno.Text = "Eliminar Alumno";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(120, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(656, 67);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "___________________";
             // 
-            // lblLinea4
+            // pictureBox1
             // 
-            this.lblLinea4.AutoSize = true;
-            this.lblLinea4.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLinea4.ForeColor = System.Drawing.Color.White;
-            this.lblLinea4.Location = new System.Drawing.Point(135, 36);
-            this.lblLinea4.Name = "lblLinea4";
-            this.lblLinea4.Size = new System.Drawing.Size(656, 67);
-            this.lblLinea4.TabIndex = 61;
-            this.lblLinea4.Text = "___________________";
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(266, 122);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(363, 244);
+            this.pictureBox1.TabIndex = 36;
+            this.pictureBox1.TabStop = false;
             // 
-            // btnEliminar
+            // panel3
             // 
-            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEliminar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(250, 384);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(409, 41);
-            this.btnEliminar.TabIndex = 59;
-            this.btnEliminar.Text = "Modificar Alumno";
-            this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lblBienvenido);
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Location = new System.Drawing.Point(331, 118);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(922, 552);
+            this.panel3.TabIndex = 37;
             // 
-            // lblCedulaBaja
+            // timerCentrar
             // 
-            this.lblCedulaBaja.AutoSize = true;
-            this.lblCedulaBaja.Font = new System.Drawing.Font("Arial", 12F);
-            this.lblCedulaBaja.ForeColor = System.Drawing.Color.White;
-            this.lblCedulaBaja.Location = new System.Drawing.Point(162, 135);
-            this.lblCedulaBaja.Name = "lblCedulaBaja";
-            this.lblCedulaBaja.Size = new System.Drawing.Size(58, 18);
-            this.lblCedulaBaja.TabIndex = 57;
-            this.lblCedulaBaja.Text = "Cedula";
-            // 
-            // txtBajaCi
-            // 
-            this.txtBajaCi.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.txtBajaCi.Location = new System.Drawing.Point(233, 133);
-            this.txtBajaCi.Name = "txtBajaCi";
-            this.txtBajaCi.Size = new System.Drawing.Size(463, 29);
-            this.txtBajaCi.TabIndex = 56;
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
             // 
             // txtCiModif
             // 
@@ -939,6 +551,19 @@ namespace Hatchat.Presentacion
             this.txtRespuestaSeguridadModificar.Size = new System.Drawing.Size(561, 32);
             this.txtRespuestaSeguridadModificar.TabIndex = 53;
             // 
+            // btnActualizar
+            // 
+            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnActualizar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizar.Location = new System.Drawing.Point(214, 629);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(409, 41);
+            this.btnActualizar.TabIndex = 55;
+            this.btnActualizar.Text = "Modificar Alumno";
+            this.btnActualizar.UseVisualStyleBackColor = false;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // panelModificar
             // 
             this.panelModificar.AutoScroll = true;
@@ -971,63 +596,442 @@ namespace Hatchat.Presentacion
             this.panelModificar.TabIndex = 30;
             this.panelModificar.Visible = false;
             // 
-            // btnActualizar
+            // txtCedula
             // 
-            this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnActualizar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizar.Location = new System.Drawing.Point(214, 629);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(409, 41);
-            this.btnActualizar.TabIndex = 55;
-            this.btnActualizar.Text = "Modificar Alumno";
-            this.btnActualizar.UseVisualStyleBackColor = false;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            this.txtCedula.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCedula.Location = new System.Drawing.Point(152, 139);
+            this.txtCedula.Name = "txtCedula";
+            this.txtCedula.Size = new System.Drawing.Size(565, 29);
+            this.txtCedula.TabIndex = 1;
             // 
-            // lblBienvenido
+            // txtNombre
             // 
-            this.lblBienvenido.AutoSize = true;
-            this.lblBienvenido.Font = new System.Drawing.Font("Arial", 45F);
-            this.lblBienvenido.ForeColor = System.Drawing.Color.White;
-            this.lblBienvenido.Location = new System.Drawing.Point(633, 147);
-            this.lblBienvenido.Name = "lblBienvenido";
-            this.lblBienvenido.Size = new System.Drawing.Size(324, 67);
-            this.lblBienvenido.TabIndex = 34;
-            this.lblBienvenido.Text = "Bienvenido";
+            this.txtNombre.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.Location = new System.Drawing.Point(151, 206);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(565, 29);
+            this.txtNombre.TabIndex = 2;
             // 
-            // label2
+            // lblCi
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(453, 166);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(656, 67);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "___________________";
+            this.lblCi.AutoSize = true;
+            this.lblCi.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCi.ForeColor = System.Drawing.Color.White;
+            this.lblCi.Location = new System.Drawing.Point(150, 116);
+            this.lblCi.Name = "lblCi";
+            this.lblCi.Size = new System.Drawing.Size(70, 22);
+            this.lblCi.TabIndex = 3;
+            this.lblCi.Text = "Cedula";
             // 
-            // pictureBox1
+            // lblNombre
             // 
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(599, 244);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(363, 244);
-            this.pictureBox1.TabIndex = 36;
-            this.pictureBox1.TabStop = false;
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.ForeColor = System.Drawing.Color.White;
+            this.lblNombre.Location = new System.Drawing.Point(148, 179);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(78, 22);
+            this.lblNombre.TabIndex = 4;
+            this.lblNombre.Text = "Nombre";
             // 
-            // panel3
+            // txtPrimerApellido
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(331, 118);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(922, 552);
-            this.panel3.TabIndex = 37;
+            this.txtPrimerApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrimerApellido.Location = new System.Drawing.Point(151, 270);
+            this.txtPrimerApellido.Name = "txtPrimerApellido";
+            this.txtPrimerApellido.Size = new System.Drawing.Size(565, 29);
+            this.txtPrimerApellido.TabIndex = 5;
             // 
-            // timerCentrar
+            // lblPrimerApellido
             // 
-            this.timerCentrar.Enabled = true;
-            this.timerCentrar.Interval = 500;
-            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            this.lblPrimerApellido.AutoSize = true;
+            this.lblPrimerApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrimerApellido.ForeColor = System.Drawing.Color.White;
+            this.lblPrimerApellido.Location = new System.Drawing.Point(148, 242);
+            this.lblPrimerApellido.Name = "lblPrimerApellido";
+            this.lblPrimerApellido.Size = new System.Drawing.Size(139, 22);
+            this.lblPrimerApellido.TabIndex = 6;
+            this.lblPrimerApellido.Text = "Primer Apellido";
+            // 
+            // txtSegundoApellido
+            // 
+            this.txtSegundoApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSegundoApellido.Location = new System.Drawing.Point(151, 333);
+            this.txtSegundoApellido.Name = "txtSegundoApellido";
+            this.txtSegundoApellido.Size = new System.Drawing.Size(565, 29);
+            this.txtSegundoApellido.TabIndex = 7;
+            // 
+            // lblSegundoApellido
+            // 
+            this.lblSegundoApellido.AutoSize = true;
+            this.lblSegundoApellido.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSegundoApellido.ForeColor = System.Drawing.Color.White;
+            this.lblSegundoApellido.Location = new System.Drawing.Point(148, 306);
+            this.lblSegundoApellido.Name = "lblSegundoApellido";
+            this.lblSegundoApellido.Size = new System.Drawing.Size(160, 22);
+            this.lblSegundoApellido.TabIndex = 8;
+            this.lblSegundoApellido.Text = "Segundo Apellido";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(151, 397);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(565, 29);
+            this.txtPassword.TabIndex = 9;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.ForeColor = System.Drawing.Color.White;
+            this.lblPassword.Location = new System.Drawing.Point(148, 373);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(107, 22);
+            this.lblPassword.TabIndex = 10;
+            this.lblPassword.Text = "Contraseña";
+            // 
+            // txtConfirmarPassword
+            // 
+            this.txtConfirmarPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConfirmarPassword.Location = new System.Drawing.Point(151, 464);
+            this.txtConfirmarPassword.Name = "txtConfirmarPassword";
+            this.txtConfirmarPassword.Size = new System.Drawing.Size(565, 29);
+            this.txtConfirmarPassword.TabIndex = 11;
+            // 
+            // lblConfirmarPassword
+            // 
+            this.lblConfirmarPassword.AutoSize = true;
+            this.lblConfirmarPassword.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmarPassword.ForeColor = System.Drawing.Color.White;
+            this.lblConfirmarPassword.Location = new System.Drawing.Point(148, 433);
+            this.lblConfirmarPassword.Name = "lblConfirmarPassword";
+            this.lblConfirmarPassword.Size = new System.Drawing.Size(195, 22);
+            this.lblConfirmarPassword.TabIndex = 12;
+            this.lblConfirmarPassword.Text = "Confirmar Contraseña";
+            // 
+            // lblExpliPregSegur
+            // 
+            this.lblExpliPregSegur.AutoSize = true;
+            this.lblExpliPregSegur.Font = new System.Drawing.Font("Arial", 13F);
+            this.lblExpliPregSegur.ForeColor = System.Drawing.Color.White;
+            this.lblExpliPregSegur.Location = new System.Drawing.Point(148, 503);
+            this.lblExpliPregSegur.Name = "lblExpliPregSegur";
+            this.lblExpliPregSegur.Size = new System.Drawing.Size(457, 63);
+            this.lblExpliPregSegur.TabIndex = 13;
+            this.lblExpliPregSegur.Text = "Pregunta de seguridad\r\nRellene el cuadro con una respuesta que nunca olvide\r\npara" +
+    " poder tomar medidas en caso de perder su cuenta.\r\n";
+            // 
+            // lblPregSegur
+            // 
+            this.lblPregSegur.AutoSize = true;
+            this.lblPregSegur.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblPregSegur.ForeColor = System.Drawing.Color.White;
+            this.lblPregSegur.Location = new System.Drawing.Point(151, 585);
+            this.lblPregSegur.Name = "lblPregSegur";
+            this.lblPregSegur.Size = new System.Drawing.Size(205, 22);
+            this.lblPregSegur.TabIndex = 14;
+            this.lblPregSegur.Text = "Pregunta de Seguridad";
+            // 
+            // cmbxPreguntaSeg
+            // 
+            this.cmbxPreguntaSeg.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.cmbxPreguntaSeg.FormattingEnabled = true;
+            this.cmbxPreguntaSeg.Location = new System.Drawing.Point(151, 617);
+            this.cmbxPreguntaSeg.Name = "cmbxPreguntaSeg";
+            this.cmbxPreguntaSeg.Size = new System.Drawing.Size(454, 30);
+            this.cmbxPreguntaSeg.TabIndex = 15;
+            // 
+            // lblClase
+            // 
+            this.lblClase.AutoSize = true;
+            this.lblClase.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblClase.ForeColor = System.Drawing.Color.White;
+            this.lblClase.Location = new System.Drawing.Point(404, 791);
+            this.lblClase.Name = "lblClase";
+            this.lblClase.Size = new System.Drawing.Size(59, 22);
+            this.lblClase.TabIndex = 18;
+            this.lblClase.Text = "Clase";
+            // 
+            // cmbxClase
+            // 
+            this.cmbxClase.Enabled = false;
+            this.cmbxClase.FormattingEnabled = true;
+            this.cmbxClase.Location = new System.Drawing.Point(408, 823);
+            this.cmbxClase.Name = "cmbxClase";
+            this.cmbxClase.Size = new System.Drawing.Size(101, 21);
+            this.cmbxClase.TabIndex = 19;
+            this.cmbxClase.SelectedIndexChanged += new System.EventHandler(this.cmbxClase_SelectedIndexChanged);
+            // 
+            // lblOrientacion
+            // 
+            this.lblOrientacion.AutoSize = true;
+            this.lblOrientacion.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblOrientacion.ForeColor = System.Drawing.Color.White;
+            this.lblOrientacion.Location = new System.Drawing.Point(150, 793);
+            this.lblOrientacion.Name = "lblOrientacion";
+            this.lblOrientacion.Size = new System.Drawing.Size(106, 22);
+            this.lblOrientacion.TabIndex = 20;
+            this.lblOrientacion.Text = "Orientacion";
+            // 
+            // cmbxOrientacion
+            // 
+            this.cmbxOrientacion.FormattingEnabled = true;
+            this.cmbxOrientacion.Location = new System.Drawing.Point(152, 823);
+            this.cmbxOrientacion.Name = "cmbxOrientacion";
+            this.cmbxOrientacion.Size = new System.Drawing.Size(101, 21);
+            this.cmbxOrientacion.TabIndex = 21;
+            this.cmbxOrientacion.SelectedIndexChanged += new System.EventHandler(this.cmbxOrientacion_SelectedIndexChanged);
+            // 
+            // lblAnio
+            // 
+            this.lblAnio.AutoSize = true;
+            this.lblAnio.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblAnio.ForeColor = System.Drawing.Color.White;
+            this.lblAnio.Location = new System.Drawing.Point(288, 791);
+            this.lblAnio.Name = "lblAnio";
+            this.lblAnio.Size = new System.Drawing.Size(44, 22);
+            this.lblAnio.TabIndex = 22;
+            this.lblAnio.Text = "Año";
+            // 
+            // cmbxAnio
+            // 
+            this.cmbxAnio.Enabled = false;
+            this.cmbxAnio.FormattingEnabled = true;
+            this.cmbxAnio.Location = new System.Drawing.Point(287, 823);
+            this.cmbxAnio.Name = "cmbxAnio";
+            this.cmbxAnio.Size = new System.Drawing.Size(101, 21);
+            this.cmbxAnio.TabIndex = 23;
+            this.cmbxAnio.SelectedIndexChanged += new System.EventHandler(this.cmbxAnio_SelectedIndexChanged);
+            // 
+            // lblExpliModi
+            // 
+            this.lblExpliModi.AutoSize = true;
+            this.lblExpliModi.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpliModi.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblExpliModi.Location = new System.Drawing.Point(636, 818);
+            this.lblExpliModi.Name = "lblExpliModi";
+            this.lblExpliModi.Size = new System.Drawing.Size(240, 32);
+            this.lblExpliModi.TabIndex = 0;
+            this.lblExpliModi.Text = "si no pertenece a todas las asignaturas,\r\npuede configurarlo aqui";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panelClasesAgregadas);
+            this.panel1.Controls.Add(this.panelModificarClases);
+            this.panel1.Location = new System.Drawing.Point(135, 858);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(639, 178);
+            this.panel1.TabIndex = 28;
+            // 
+            // panelClasesAgregadas
+            // 
+            this.panelClasesAgregadas.Location = new System.Drawing.Point(41, 0);
+            this.panelClasesAgregadas.Name = "panelClasesAgregadas";
+            this.panelClasesAgregadas.Size = new System.Drawing.Size(180, 178);
+            this.panelClasesAgregadas.TabIndex = 27;
+            // 
+            // panelModificarClases
+            // 
+            this.panelModificarClases.AutoScroll = true;
+            this.panelModificarClases.BackColor = System.Drawing.SystemColors.Control;
+            this.panelModificarClases.Location = new System.Drawing.Point(273, 0);
+            this.panelModificarClases.Name = "panelModificarClases";
+            this.panelModificarClases.Size = new System.Drawing.Size(365, 178);
+            this.panelModificarClases.TabIndex = 25;
+            this.panelModificarClases.Visible = false;
+            // 
+            // lblLinea
+            // 
+            this.lblLinea.AutoSize = true;
+            this.lblLinea.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea.ForeColor = System.Drawing.Color.White;
+            this.lblLinea.Location = new System.Drawing.Point(110, 23);
+            this.lblLinea.Name = "lblLinea";
+            this.lblLinea.Size = new System.Drawing.Size(656, 67);
+            this.lblLinea.TabIndex = 30;
+            this.lblLinea.Text = "___________________";
+            // 
+            // lblCrearAlmuno
+            // 
+            this.lblCrearAlmuno.AutoSize = true;
+            this.lblCrearAlmuno.Font = new System.Drawing.Font("Arial", 45F);
+            this.lblCrearAlmuno.ForeColor = System.Drawing.Color.White;
+            this.lblCrearAlmuno.Location = new System.Drawing.Point(269, 11);
+            this.lblCrearAlmuno.Name = "lblCrearAlmuno";
+            this.lblCrearAlmuno.Size = new System.Drawing.Size(393, 67);
+            this.lblCrearAlmuno.TabIndex = 29;
+            this.lblCrearAlmuno.Text = "Crear Alumno";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(123, 714);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(656, 67);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "___________________";
+            // 
+            // txtRespuesta
+            // 
+            this.txtRespuesta.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.txtRespuesta.Location = new System.Drawing.Point(151, 659);
+            this.txtRespuesta.Name = "txtRespuesta";
+            this.txtRespuesta.Size = new System.Drawing.Size(565, 96);
+            this.txtRespuesta.TabIndex = 42;
+            this.txtRespuesta.Text = "";
+            // 
+            // btnAlterar
+            // 
+            this.btnAlterar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnAlterar.Enabled = false;
+            this.btnAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAlterar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlterar.Location = new System.Drawing.Point(534, 820);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.Size = new System.Drawing.Size(96, 27);
+            this.btnAlterar.TabIndex = 44;
+            this.btnAlterar.Text = "Modificar";
+            this.btnAlterar.UseVisualStyleBackColor = false;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnAgregar.Enabled = false;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAgregar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Location = new System.Drawing.Point(779, 859);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(96, 27);
+            this.btnAgregar.TabIndex = 45;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnAltaAlumno
+            // 
+            this.btnAltaAlumno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnAltaAlumno.Enabled = false;
+            this.btnAltaAlumno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAltaAlumno.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAltaAlumno.Location = new System.Drawing.Point(226, 1058);
+            this.btnAltaAlumno.Name = "btnAltaAlumno";
+            this.btnAltaAlumno.Size = new System.Drawing.Size(409, 41);
+            this.btnAltaAlumno.TabIndex = 46;
+            this.btnAltaAlumno.Text = "Crear Alumno";
+            this.btnAltaAlumno.UseVisualStyleBackColor = false;
+            this.btnAltaAlumno.Click += new System.EventHandler(this.btnAltaAlumno_Click);
+            // 
+            // panelAlta
+            // 
+            this.panelAlta.AutoScroll = true;
+            this.panelAlta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAlta.Controls.Add(this.btnAltaAlumno);
+            this.panelAlta.Controls.Add(this.btnAgregar);
+            this.panelAlta.Controls.Add(this.btnAlterar);
+            this.panelAlta.Controls.Add(this.txtRespuesta);
+            this.panelAlta.Controls.Add(this.label1);
+            this.panelAlta.Controls.Add(this.lblCrearAlmuno);
+            this.panelAlta.Controls.Add(this.lblLinea);
+            this.panelAlta.Controls.Add(this.panel1);
+            this.panelAlta.Controls.Add(this.lblExpliModi);
+            this.panelAlta.Controls.Add(this.cmbxAnio);
+            this.panelAlta.Controls.Add(this.lblAnio);
+            this.panelAlta.Controls.Add(this.cmbxOrientacion);
+            this.panelAlta.Controls.Add(this.lblOrientacion);
+            this.panelAlta.Controls.Add(this.cmbxClase);
+            this.panelAlta.Controls.Add(this.lblClase);
+            this.panelAlta.Controls.Add(this.cmbxPreguntaSeg);
+            this.panelAlta.Controls.Add(this.lblPregSegur);
+            this.panelAlta.Controls.Add(this.lblExpliPregSegur);
+            this.panelAlta.Controls.Add(this.lblConfirmarPassword);
+            this.panelAlta.Controls.Add(this.txtConfirmarPassword);
+            this.panelAlta.Controls.Add(this.lblPassword);
+            this.panelAlta.Controls.Add(this.txtPassword);
+            this.panelAlta.Controls.Add(this.lblSegundoApellido);
+            this.panelAlta.Controls.Add(this.txtSegundoApellido);
+            this.panelAlta.Controls.Add(this.lblPrimerApellido);
+            this.panelAlta.Controls.Add(this.txtPrimerApellido);
+            this.panelAlta.Controls.Add(this.lblNombre);
+            this.panelAlta.Controls.Add(this.lblCi);
+            this.panelAlta.Controls.Add(this.txtNombre);
+            this.panelAlta.Controls.Add(this.txtCedula);
+            this.panelAlta.Location = new System.Drawing.Point(331, 118);
+            this.panelAlta.Name = "panelAlta";
+            this.panelAlta.Size = new System.Drawing.Size(921, 551);
+            this.panelAlta.TabIndex = 8;
+            this.panelAlta.Visible = false;
+            // 
+            // txtBajaCi
+            // 
+            this.txtBajaCi.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.txtBajaCi.Location = new System.Drawing.Point(233, 133);
+            this.txtBajaCi.Name = "txtBajaCi";
+            this.txtBajaCi.Size = new System.Drawing.Size(463, 29);
+            this.txtBajaCi.TabIndex = 56;
+            // 
+            // lblCedulaBaja
+            // 
+            this.lblCedulaBaja.AutoSize = true;
+            this.lblCedulaBaja.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblCedulaBaja.ForeColor = System.Drawing.Color.White;
+            this.lblCedulaBaja.Location = new System.Drawing.Point(162, 135);
+            this.lblCedulaBaja.Name = "lblCedulaBaja";
+            this.lblCedulaBaja.Size = new System.Drawing.Size(58, 18);
+            this.lblCedulaBaja.TabIndex = 57;
+            this.lblCedulaBaja.Text = "Cedula";
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEliminar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Location = new System.Drawing.Point(250, 384);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(409, 41);
+            this.btnEliminar.TabIndex = 59;
+            this.btnEliminar.Text = "Eliminar Alumno";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // lblLinea4
+            // 
+            this.lblLinea4.AutoSize = true;
+            this.lblLinea4.Font = new System.Drawing.Font("Arial", 45F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinea4.ForeColor = System.Drawing.Color.White;
+            this.lblLinea4.Location = new System.Drawing.Point(135, 36);
+            this.lblLinea4.Name = "lblLinea4";
+            this.lblLinea4.Size = new System.Drawing.Size(656, 67);
+            this.lblLinea4.TabIndex = 61;
+            this.lblLinea4.Text = "___________________";
+            // 
+            // lblEliminarAlumno
+            // 
+            this.lblEliminarAlumno.AutoSize = true;
+            this.lblEliminarAlumno.Font = new System.Drawing.Font("Arial", 45F);
+            this.lblEliminarAlumno.ForeColor = System.Drawing.Color.White;
+            this.lblEliminarAlumno.Location = new System.Drawing.Point(238, 24);
+            this.lblEliminarAlumno.Name = "lblEliminarAlumno";
+            this.lblEliminarAlumno.Size = new System.Drawing.Size(458, 67);
+            this.lblEliminarAlumno.TabIndex = 60;
+            this.lblEliminarAlumno.Text = "Eliminar Alumno";
+            // 
+            // panelBaja
+            // 
+            this.panelBaja.AutoScroll = true;
+            this.panelBaja.Controls.Add(this.lblEliminarAlumno);
+            this.panelBaja.Controls.Add(this.lblLinea4);
+            this.panelBaja.Controls.Add(this.btnEliminar);
+            this.panelBaja.Controls.Add(this.lblCedulaBaja);
+            this.panelBaja.Controls.Add(this.txtBajaCi);
+            this.panelBaja.Location = new System.Drawing.Point(331, 118);
+            this.panelBaja.Name = "panelBaja";
+            this.panelBaja.Size = new System.Drawing.Size(921, 551);
+            this.panelBaja.TabIndex = 29;
+            this.panelBaja.Visible = false;
             // 
             // ABMAlumnoAdmin
             // 
@@ -1038,19 +1042,13 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.PanelSolicitudesPendientes);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelBaja);
             this.Controls.Add(this.panelAlta);
             this.Controls.Add(this.panelModificar);
-            this.Controls.Add(this.lblBienvenido);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panelBaja);
             this.Name = "ABMAlumnoAdmin";
             this.Text = "AMBAlumnoAdmin";
             this.Load += new System.EventHandler(this.ABMAlumnoAdmin_Load);
-            this.panelAlta.ResumeLayout(false);
-            this.panelAlta.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).EndInit();
@@ -1062,15 +1060,19 @@ namespace Hatchat.Presentacion
             this.panelTextoChat.ResumeLayout(false);
             this.panelTextoChat.PerformLayout();
             this.PanelSolicitudesPendientes.ResumeLayout(false);
-            this.panelBaja.ResumeLayout(false);
-            this.panelBaja.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxBuscarModificar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxFotoModificar)).EndInit();
             this.panelModificar.ResumeLayout(false);
             this.panelModificar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panelAlta.ResumeLayout(false);
+            this.panelAlta.PerformLayout();
+            this.panelBaja.ResumeLayout(false);
+            this.panelBaja.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1078,32 +1080,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Button btnAlta;
         private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Panel panelAlta;
-        private System.Windows.Forms.Panel panelClasesAgregadas;
-        private System.Windows.Forms.Label lblExpliModi;
-        private System.Windows.Forms.Panel panelModificarClases;
-        private System.Windows.Forms.ComboBox cmbxAnio;
-        private System.Windows.Forms.Label lblAnio;
-        private System.Windows.Forms.ComboBox cmbxOrientacion;
-        private System.Windows.Forms.Label lblOrientacion;
-        private System.Windows.Forms.ComboBox cmbxClase;
-        private System.Windows.Forms.Label lblClase;
-        private System.Windows.Forms.ComboBox cmbxPreguntaSeg;
-        private System.Windows.Forms.Label lblPregSegur;
-        private System.Windows.Forms.Label lblExpliPregSegur;
-        private System.Windows.Forms.Label lblConfirmarPassword;
-        private System.Windows.Forms.TextBox txtConfirmarPassword;
-        private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label lblSegundoApellido;
-        private System.Windows.Forms.TextBox txtSegundoApellido;
-        private System.Windows.Forms.Label lblPrimerApellido;
-        private System.Windows.Forms.TextBox txtPrimerApellido;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label lblCi;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox txtCedula;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pbxABMGruposNav;
         private System.Windows.Forms.PictureBox pbxCerrarSesionNav;
@@ -1115,14 +1091,11 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelTextoChat;
         private System.Windows.Forms.Label lblABMAlumno;
         private System.Windows.Forms.Panel PanelSolicitudesPendientes;
-        private System.Windows.Forms.Label lblCrearAlmuno;
-        private System.Windows.Forms.Label lblLinea;
-        private System.Windows.Forms.RichTextBox txtRespuestaModif;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAlterar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnAltaAlumno;
-        private System.Windows.Forms.Panel panelBaja;
+        private System.Windows.Forms.Label lblBienvenido;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Timer timerCentrar;
         private System.Windows.Forms.TextBox txtCiModif;
         private System.Windows.Forms.Label lblCiModf;
         private System.Windows.Forms.Label label3;
@@ -1145,17 +1118,46 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblPregsModificar;
         private System.Windows.Forms.Label lblRespuestaModificar;
         private System.Windows.Forms.TextBox txtRespuestaSeguridadModificar;
-        private System.Windows.Forms.Panel panelModificar;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.Label lblEliminarAlumno;
-        private System.Windows.Forms.Label lblLinea4;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Label lblCedulaBaja;
+        private System.Windows.Forms.Panel panelModificar;
+        private System.Windows.Forms.TextBox txtCedula;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblCi;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox txtPrimerApellido;
+        private System.Windows.Forms.Label lblPrimerApellido;
+        private System.Windows.Forms.TextBox txtSegundoApellido;
+        private System.Windows.Forms.Label lblSegundoApellido;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.TextBox txtConfirmarPassword;
+        private System.Windows.Forms.Label lblConfirmarPassword;
+        private System.Windows.Forms.Label lblExpliPregSegur;
+        private System.Windows.Forms.Label lblPregSegur;
+        private System.Windows.Forms.ComboBox cmbxPreguntaSeg;
+        private System.Windows.Forms.Label lblClase;
+        private System.Windows.Forms.ComboBox cmbxClase;
+        private System.Windows.Forms.Label lblOrientacion;
+        private System.Windows.Forms.ComboBox cmbxOrientacion;
+        private System.Windows.Forms.Label lblAnio;
+        private System.Windows.Forms.ComboBox cmbxAnio;
+        private System.Windows.Forms.Label lblExpliModi;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelClasesAgregadas;
+        private System.Windows.Forms.Panel panelModificarClases;
+        private System.Windows.Forms.Label lblLinea;
+        private System.Windows.Forms.Label lblCrearAlmuno;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox txtRespuesta;
+        private System.Windows.Forms.Button btnAlterar;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnAltaAlumno;
+        private System.Windows.Forms.Panel panelAlta;
         private System.Windows.Forms.TextBox txtBajaCi;
-        private System.Windows.Forms.Label lblBienvenido;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Timer timerCentrar;
+        private System.Windows.Forms.Label lblCedulaBaja;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Label lblLinea4;
+        private System.Windows.Forms.Label lblEliminarAlumno;
+        private System.Windows.Forms.Panel panelBaja;
     }
 }

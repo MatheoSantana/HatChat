@@ -12,7 +12,7 @@ namespace Hatchat.Presentacion
 {
     public partial class ABMAlumnoAdmin : Form
     {
-        private int xlbl = 50, ylbl = 50, yPanel=0;
+        private int yPanel = 0;
         private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
         private Logica.Orientacion orientacionSeleccionada = new Logica.Orientacion();
         private List<Logica.Asignatura> asigs = new List<Logica.Asignatura>();
@@ -47,7 +47,9 @@ namespace Hatchat.Presentacion
                 pbxABMDocenteNav.Image = Image.FromFile("abm docente gris.png");
                 pbxABMGruposNav.Image = Image.FromFile("abm grupos gris.png");
                 pbxHistorialSolicitudesNav.Image = Image.FromFile("historial gris.png");
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pcbxBuscarModificar.Image = Image.FromFile("buscar.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -61,9 +63,9 @@ namespace Hatchat.Presentacion
             pbxABMGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
-
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxFotoModificar.SizeMode = PictureBoxSizeMode.StretchImage;
-
+            pcbxBuscarModificar.SizeMode = PictureBoxSizeMode.StretchImage;
             cmbxClase.Enabled = false;
             cmbxAnio.Enabled = false;
             cmbxAnio.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -232,7 +234,7 @@ namespace Hatchat.Presentacion
             }
             panelModificarClases.Controls.Clear();
             btnAlterar.Enabled = true;
-
+            btnAgregar.Enabled = true;
             claseSeleccionada = new Logica.Clase();
             cursaAsigs = new List<Logica.AsignaturaCursa>();
 
@@ -343,7 +345,7 @@ namespace Hatchat.Presentacion
             {
                 foreach (Logica.AsignaturaCursa asigCursa in cursaAsigsConfirmadas)
                 {
-                    if (asigPend.Orientacion == asigCursa.Orientacion && asigPend.AsignaturaCursada == asigCursa.AsignaturaCursada && asigPend.IdClase == asigCursa.IdClase)
+                    if (asigPend.Orientacion == asigCursa.Orientacion && asigPend.AsignaturaCursada == asigCursa.AsignaturaCursada)
                     {
                         Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.AsignaturaCursada);
                         error += "\n" + asi.Nombre;
@@ -392,8 +394,9 @@ namespace Hatchat.Presentacion
 
                     panelClasesAgregadas.Controls.Add(panel);
                     cursas.Add(cursa);
+                    btnAltaAlumno.Enabled = true;
                 }
-                
+
             }
             else
             {
@@ -403,7 +406,7 @@ namespace Hatchat.Presentacion
             cmbxOrientacion.SelectedIndex = -1;
             cmbxAnio.Items.Clear();
             cmbxClase.Items.Clear();
-            
+
 
             cmbxAnio.Enabled = false;
             cmbxClase.Enabled = false;
@@ -490,36 +493,36 @@ namespace Hatchat.Presentacion
                 }
 
                 Label grupo = new Label();
-                    grupo.Height = 60;
-                    grupo.Width = 100;
-                    grupo.Location = new Point(0, 0);
-                    grupo.Font = new Font("Arial", 12.0f);
-                    grupo.Name = "lblClase" + clase.IdClase;
-                    grupo.Text = clase.Anio + "º" + clase.Nombre + "  (" + asignaturas.Count + ")" + "\n" + orientacion.Nombre;
-                    grupo.Click += new EventHandler(EliminarClase);
+                grupo.Height = 60;
+                grupo.Width = 100;
+                grupo.Location = new Point(0, 0);
+                grupo.Font = new Font("Arial", 12.0f);
+                grupo.Name = "lblClase" + clase.IdClase;
+                grupo.Text = clase.Anio + "º" + clase.Nombre + "  (" + asignaturas.Count + ")" + "\n" + orientacion.Nombre;
+                grupo.Click += new EventHandler(EliminarClase);
 
-                    PictureBox pic = new PictureBox();
-                    pic.Image = Image.FromFile("cruz negra.png");
-                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
-                    pic.Height = 20;
-                    pic.Width = 20;
-                    pic.Location = new Point(115, 20);
-                    pic.Name = "pbxClase" + clase.IdClase;
-                    pic.Click += new EventHandler(EliminarClase);
+                PictureBox pic = new PictureBox();
+                pic.Image = Image.FromFile("cruz negra.png");
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                pic.Height = 20;
+                pic.Width = 20;
+                pic.Location = new Point(115, 20);
+                pic.Name = "pbxClase" + clase.IdClase;
+                pic.Click += new EventHandler(EliminarClase);
 
-                    Panel panel = new Panel();
-                    panel.Height = 60;
-                    panel.Width = 150;
-                    panel.Location = new Point(0, yPanel);
-                    panel.BorderStyle = BorderStyle.FixedSingle;
-                    yPanel += 60;
-                    panel.Name = "pnlClase" + clase.IdClase;
-                    panel.BackColor = Color.White;
-                    panel.Click += new EventHandler(EliminarClase);
-                    panel.Controls.Add(grupo);
-                    panel.Controls.Add(pic);
+                Panel panel = new Panel();
+                panel.Height = 60;
+                panel.Width = 150;
+                panel.Location = new Point(0, yPanel);
+                panel.BorderStyle = BorderStyle.FixedSingle;
+                yPanel += 60;
+                panel.Name = "pnlClase" + clase.IdClase;
+                panel.BackColor = Color.White;
+                panel.Click += new EventHandler(EliminarClase);
+                panel.Controls.Add(grupo);
+                panel.Controls.Add(pic);
 
-                    panelClasesAgregadas.Controls.Add(panel);
+                panelClasesAgregadas.Controls.Add(panel);
 
 
             }
@@ -535,7 +538,7 @@ namespace Hatchat.Presentacion
             string error = "Cuidado: ";
             bool aceptable = true;
             Logica.Alumno alu = new Logica.Alumno();
-            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuestaModif.Text == "")
+            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
             {
                 aceptable = false;
                 error += "\nDebe rellenar todos los campos";
@@ -579,22 +582,69 @@ namespace Hatchat.Presentacion
                 alu.Segundo_apellido = txtSegundoApellido.Text;
                 alu.Password = txtPassword.Text;
                 alu.Preguta_seguridad = (cmbxPreguntaSeg.SelectedIndex + 1);
-                alu.Respuesta_seguridad = txtRespuestaModif.Text;
+                alu.Respuesta_seguridad = txtRespuesta.Text;
                 alu.Apodo = txtNombre.Text;
                 alu.FotoDePerfil = alu.ImageToByteArray(Image.FromFile("alumno.png"));
                 alu.AltaUsuario();
+                string fallo = "Las siguientes asignaturas ya estaban registradas:";
+                string ingresadas = "Las siguientes asignaturas fueron ingresadas con existo:";
                 foreach (Logica.Cursa cursa in cursas)
                 {
                     cursa.CiAlumno = alu.Ci;
-                    cursa.InsertCursa();
+                    if (!cursa.SelectCursando())
+                    {
+                        cursa.InsertCursa();
+                    }
                 }
                 foreach (Logica.AsignaturaCursa asigCursa in cursaAsigsConfirmadas)
                 {
                     asigCursa.Ci = alu.Ci;
-                    asigCursa.InsertAsignaturaCursa();
+                    if (asigCursa.SelectCursandoAsignatura())
+                    {
+                        if (asigCursa.SelectCursandoAsignaturaDesactivada())
+                        {
+                            asigCursa.ActivarAsignaturaCursa();
+                            ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+                        }
+                        else
+                        {
+                            fallo += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+                        }
+                    }
+                    else
+                    {
+                        asigCursa.InsertAsignaturaCursa();
+                        ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+
+                    }
+                }
+                MessageBox.Show("Se ha creado el alumno correctamente");
+                if (ingresadas != "Las siguientes asignaturas fueron ingresadas con existo:")
+                {
+                    MessageBox.Show(ingresadas);
+                }
+                if (ingresadas != "Las siguientes asignaturas ya estaban registradas:")
+                {
+                    MessageBox.Show(fallo);
                 }
 
-                MessageBox.Show("Se ha creado el alumno correctamente");
+                
+                txtCedula.Text = "";
+                txtNombre.Text = "";
+                txtPrimerApellido.Text = "";
+                txtSegundoApellido.Text = "";
+                txtPassword.Text = "";
+                txtConfirmarPassword.Text = "";
+                cmbxPreguntaSeg.SelectedIndex = -1;
+                txtRespuesta.Text = "";
+                orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
+                orientacionSeleccionada = new Logica.Orientacion();
+                asigs = new List<Logica.Asignatura>();
+                cursaAsigs = new List<Logica.AsignaturaCursa>();
+                cursaAsigsConfirmadas = new List<Logica.AsignaturaCursa>();
+                cursas = new List<Logica.Cursa>();
+                claseSeleccionada = new Logica.Clase();
+
             }
 
         }
@@ -616,11 +666,12 @@ namespace Hatchat.Presentacion
             Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
             if (al.Ci != "" && al.SelectAlumno())
             {
-                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a " + al.Nombre + " " + al.Primer_apellido + "?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a " + al.Nombre + " " + al.Primer_apellido + "?", "Eliminar", MessageBoxButtons.YesNo);
                 if (eliminarAlumno == DialogResult.Yes)
                 {
                     al.RemoveUsuario();
                     MessageBox.Show("Alumno eliminado correctamente");
+                    txtBajaCi.Text = "";
                 }
             }
             else
@@ -655,8 +706,7 @@ namespace Hatchat.Presentacion
                 txtPasswordModificar.Text = alModif.Password;
                 txtPasswordConfirmarModificar.Text = alModif.Password;
                 cbxPregsModificar.SelectedIndex = (alModif.SelectPreguntaSeguridad().Id - 1);
-                txtRespuestaModif.Text = alModif.Respuesta_seguridad;
-
+                txtRespuesta.Text = alModif.Respuesta_seguridad;
             }
             else
             {
@@ -676,19 +726,23 @@ namespace Hatchat.Presentacion
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            alModif.Apodo = txtApodoModificar.Text;
-            alModif.Password = txtPasswordModificar.Text;
-            alModif.Respuesta_seguridad = txtRespuestaModif.Text;
-            alModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
-            alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFotoModificar.Image);
-            alModif.UpdatePerfil();
+            DialogResult eliminarAlumno = MessageBox.Show("¿Desea modificar este perfil?", "Modificar", MessageBoxButtons.YesNo);
+            if (eliminarAlumno == DialogResult.Yes)
+            {
+                alModif.Apodo = txtApodoModificar.Text;
+                alModif.Password = txtPasswordModificar.Text;
+                alModif.Respuesta_seguridad = txtRespuesta.Text;
+                alModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
+                alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFotoModificar.Image);
+                alModif.UpdatePerfil();
 
-            txtApodoModificar.Text = "";
-            txtPassword.Text = "";
-            txtRespuestaModif.Text = "";
-            cbxPregsModificar.SelectedIndex = -1;
-            pbxFotoModificar.Image = null;
-            txtCiModif.Text = "";
+                txtApodoModificar.Text = "";
+                txtPassword.Text = "";
+                txtRespuesta.Text = "";
+                cbxPregsModificar.SelectedIndex = -1;
+                pbxFotoModificar.Image = null;
+                txtCiModif.Text = "";
+            }
         }
 
     }

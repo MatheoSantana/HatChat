@@ -605,7 +605,7 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel2);
             this.Name = "MensajesAlumno";
-            this.Text = "MensajesAlumno";
+            this.Text = "m";
             this.Load += new System.EventHandler(this.MensajesAlumno_Load);
             this.panelContenedor.ResumeLayout(false);
             this.panelContenedor.PerformLayout();
