@@ -29,6 +29,7 @@ namespace Hatchat.Presentacion
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ABMAlumnoAdmin));
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
@@ -111,6 +112,7 @@ namespace Hatchat.Presentacion
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelAlta.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -304,18 +306,18 @@ namespace Hatchat.Presentacion
             // 
             // panelClasesAgregadas
             // 
-            this.panelClasesAgregadas.Location = new System.Drawing.Point(0, 0);
+            this.panelClasesAgregadas.Location = new System.Drawing.Point(41, 0);
             this.panelClasesAgregadas.Name = "panelClasesAgregadas";
-            this.panelClasesAgregadas.Size = new System.Drawing.Size(317, 178);
+            this.panelClasesAgregadas.Size = new System.Drawing.Size(180, 178);
             this.panelClasesAgregadas.TabIndex = 27;
             // 
             // panelModificarClases
             // 
             this.panelModificarClases.AutoScroll = true;
             this.panelModificarClases.BackColor = System.Drawing.SystemColors.Control;
-            this.panelModificarClases.Location = new System.Drawing.Point(321, 0);
+            this.panelModificarClases.Location = new System.Drawing.Point(273, 0);
             this.panelModificarClases.Name = "panelModificarClases";
-            this.panelModificarClases.Size = new System.Drawing.Size(317, 178);
+            this.panelModificarClases.Size = new System.Drawing.Size(365, 178);
             this.panelModificarClases.TabIndex = 25;
             this.panelModificarClases.Visible = false;
             // 
@@ -398,7 +400,7 @@ namespace Hatchat.Presentacion
             this.cmbxPreguntaSeg.FormattingEnabled = true;
             this.cmbxPreguntaSeg.Location = new System.Drawing.Point(151, 617);
             this.cmbxPreguntaSeg.Name = "cmbxPreguntaSeg";
-            this.cmbxPreguntaSeg.Size = new System.Drawing.Size(332, 30);
+            this.cmbxPreguntaSeg.Size = new System.Drawing.Size(454, 30);
             this.cmbxPreguntaSeg.TabIndex = 15;
             // 
             // lblPregSegur
@@ -1021,6 +1023,12 @@ namespace Hatchat.Presentacion
             this.panel3.Size = new System.Drawing.Size(922, 552);
             this.panel3.TabIndex = 37;
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // ABMAlumnoAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1148,5 +1156,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

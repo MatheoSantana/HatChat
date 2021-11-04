@@ -479,8 +479,8 @@ namespace Hatchat.Presentacion
                 grupo.Width = 150;
                 grupo.Location = new Point(0, 0);
                 grupo.Font = new Font("Arial", 12.0f);
-                grupo.Name = "lblClase" + claseSeleccionada.IdClase;
-                grupo.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "(" + asignaturas.Count + ")" + "\n" + orientaciones[cbxOrientacion.SelectedIndex].Nombre;
+                grupo.Name = "lblClase" + clase.IdClase;
+                grupo.Text = clase.Anio + "º" + clase.Nombre + "(" + asignaturas.Count + ")" + "\n" + orientacion.Nombre;
                 grupo.Click += new EventHandler(EliminarClase);
 
                 PictureBox pic = new PictureBox();
@@ -489,7 +489,7 @@ namespace Hatchat.Presentacion
                 pic.Height = 20;
                 pic.Width = 20;
                 pic.Location = new Point(150, 20);
-                pic.Name = "pbxClase" + claseSeleccionada.IdClase;
+                pic.Name = "pbxClase" + clase.IdClase;
                 pic.Click += new EventHandler(EliminarClase);
 
                 Panel panel = new Panel();
@@ -498,7 +498,7 @@ namespace Hatchat.Presentacion
                 panel.Location = new Point(xpanel, 0);
 
                 xpanel += 170;
-                panel.Name = "pnlClase" + claseSeleccionada.IdClase;
+                panel.Name = "pnlClase" + clase.IdClase;
                 panel.BackColor = Color.White;
                 panel.Click += new EventHandler(EliminarClase);
                 panel.Controls.Add(grupo);

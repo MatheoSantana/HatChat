@@ -55,6 +55,7 @@ namespace Hatchat.Presentacion
             this.btnDenegar = new System.Windows.Forms.Button();
             this.panelModif = new System.Windows.Forms.Panel();
             this.panelSolicitud = new System.Windows.Forms.Panel();
+            this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCerrarSesionNav)).BeginInit();
@@ -310,6 +311,12 @@ namespace Hatchat.Presentacion
             this.panelSolicitud.Size = new System.Drawing.Size(922, 551);
             this.panelSolicitud.TabIndex = 5;
             // 
+            // timerCentrar
+            // 
+            this.timerCentrar.Enabled = true;
+            this.timerCentrar.Interval = 500;
+            this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
+            // 
             // PrincipalSolicitudesAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -370,5 +377,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Button btnDenegar;
         private System.Windows.Forms.Panel panelModif;
         private System.Windows.Forms.Panel panelSolicitud;
+        private System.Windows.Forms.Timer timerCentrar;
     }
 }

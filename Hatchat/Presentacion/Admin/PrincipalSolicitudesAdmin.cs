@@ -39,6 +39,8 @@ namespace Hatchat.Presentacion
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(1280, 720);
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             panelSolicitud.Visible = false;
@@ -891,6 +893,11 @@ namespace Hatchat.Presentacion
             soliMo = new Logica.SolicitudModif();
 
             panelSolicitud.Visible = false;
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
     }
 

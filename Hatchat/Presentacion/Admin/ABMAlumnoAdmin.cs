@@ -12,7 +12,7 @@ namespace Hatchat.Presentacion
 {
     public partial class ABMAlumnoAdmin : Form
     {
-        private int ychbx = 50, xchbx = 50, xlbl = 50, ylbl = 50;
+        private int xlbl = 50, ylbl = 50, yPanel=0;
         private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
         private Logica.Orientacion orientacionSeleccionada = new Logica.Orientacion();
         private List<Logica.Asignatura> asigs = new List<Logica.Asignatura>();
@@ -20,7 +20,6 @@ namespace Hatchat.Presentacion
         private List<Logica.AsignaturaCursa> cursaAsigsConfirmadas = new List<Logica.AsignaturaCursa>();
         private List<Logica.Cursa> cursas = new List<Logica.Cursa>();
         private Logica.Clase claseSeleccionada = new Logica.Clase();
-        bool visibles = false;
         Logica.Usuario alModif = new Logica.Usuario();
 
         public Form login;
@@ -31,6 +30,9 @@ namespace Hatchat.Presentacion
         public ABMAlumnoAdmin()
         {
             InitializeComponent();
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            StartPosition = FormStartPosition.CenterScreen;
             foreach (Logica.Orientacion ori in orientaciones)
             {
                 cmbxOrientacion.Items.Add(ori.Nombre);
@@ -70,9 +72,9 @@ namespace Hatchat.Presentacion
             cmbxPreguntaSeg.DropDownStyle = ComboBoxStyle.DropDownList;
             foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
             {
-                cmbxPreguntaSeg.Items.Add(preg.Pregunta);               
+                cmbxPreguntaSeg.Items.Add(preg.Pregunta);
                 cbxPregsModificar.Items.Add(preg.Pregunta);
-                
+
             }
             cbxPregsModificar.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -131,7 +133,7 @@ namespace Hatchat.Presentacion
         }
         private void cmbxOrientacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            visibles = false;
+            panelModificarClases.Visible = false;
             if (btnAgregar.Enabled)
             {
                 List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
@@ -172,8 +174,8 @@ namespace Hatchat.Presentacion
 
         private void cmbxAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            visibles = false;
-            if(btnAgregar.Enabled)
+            panelModificarClases.Visible = false;
+            if (btnAgregar.Enabled)
             {
                 List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
                 foreach (Logica.AsignaturaCursa asigSolicita in cursaAsigs)
@@ -212,7 +214,7 @@ namespace Hatchat.Presentacion
         }
         private void cmbxClase_SelectedIndexChanged(object sender, EventArgs e)
         {
-            visibles = false;
+            panelModificarClases.Visible = false;
             if (btnAgregar.Enabled)
             {
                 List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
@@ -232,7 +234,6 @@ namespace Hatchat.Presentacion
             btnAlterar.Enabled = true;
 
             claseSeleccionada = new Logica.Clase();
-            asigs = new List<Logica.Asignatura>();
             cursaAsigs = new List<Logica.AsignaturaCursa>();
 
             asigs = new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cmbxClase.SelectedItem.ToString(), Convert.ToInt32(cmbxAnio.SelectedItem.ToString()), orientaciones[cmbxOrientacion.SelectedIndex].Id);
@@ -258,26 +259,29 @@ namespace Hatchat.Presentacion
         private void btnAlterar_Click(object sender, EventArgs e)
         {
             panelModificarClases.Visible = !panelModificarClases.Visible;
-            if (panelModificarClases.Visible && panelModificarClases.Controls.Count==0)
+            if (panelModificarClases.Visible)
             {
+                int ychbx = 10, xchbx = 10;
                 foreach (Logica.Asignatura asig in asigs)
                 {
                     CheckBox dina = new CheckBox();
                     dina.Checked = false;
                     foreach (Logica.AsignaturaCursa cursaAsig in cursaAsigs)
                     {
-                        if(cursaAsig.AsignaturaCursada==asig.Id && cursaAsig.IdClase == claseSeleccionada.IdClase && cursaAsig.Orientacion == orientacionSeleccionada.Id && cursaAsig.AsignaturaCursada == asig.Id)
+                        if (cursaAsig.AsignaturaCursada == asig.Id && cursaAsig.IdClase == claseSeleccionada.IdClase && cursaAsig.Orientacion == orientacionSeleccionada.Id && cursaAsig.AsignaturaCursada == asig.Id)
                         {
                             dina.Checked = true;
                         }
                     }
-                    dina.Height = 23;
+                    dina.Height = 50;
                     dina.Width = 150;
+                    dina.ForeColor = Color.DimGray;
+                    dina.Font = new Font("arial", 10);
                     dina.Location = new Point(xchbx, ychbx);
-                    if (xchbx == 400)
+                    if (xchbx == 185)
                     {
-                        xchbx = -125;
-                        ychbx += 25;
+                        xchbx = -165;
+                        ychbx += 55;
                     }
                     xchbx += 175;
                     dina.Name = "chbx" + asig.Id;
@@ -286,6 +290,10 @@ namespace Hatchat.Presentacion
                     dina.CheckedChanged += new EventHandler(AsignaturaCambiada);
                     panelModificarClases.Controls.Add(dina);
                 }
+            }
+            else
+            {
+                panelModificarClases.Controls.Clear();
             }
         }
         private void AsignaturaCambiada(object sender, EventArgs e)
@@ -328,45 +336,199 @@ namespace Hatchat.Presentacion
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             panelClasesAgregadas.AutoScrollPosition = Point.Empty;
-            panelModificarClases.AutoScrollPosition = Point.Empty;
-            Logica.Cursa cursa = new Logica.Cursa();
-            cursa.IdClase = claseSeleccionada.IdClase;
-            cursa.Orientacion = orientacionSeleccionada.Id;
-            cursa.Anio = DateTime.Now.Year;
-            if (!cursas.Contains(cursa))
+
+            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+            bool mandable = true;
+            foreach (Logica.AsignaturaCursa asigPend in cursaAsigs)
             {
-                Label dina = new Label();
-                dina.Height = 46;
-                dina.Width = 150;
-                dina.Location = new Point(xlbl, ylbl);
-                if (xlbl == 100)
+                foreach (Logica.AsignaturaCursa asigCursa in cursaAsigsConfirmadas)
                 {
-                    xlbl = -125;
-                    ylbl += 25;
+                    if (asigPend.Orientacion == asigCursa.Orientacion && asigPend.AsignaturaCursada == asigCursa.AsignaturaCursada && asigPend.IdClase == asigCursa.IdClase)
+                    {
+                        Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(asigPend.AsignaturaCursada);
+                        error += "\n" + asi.Nombre;
+                        mandable = false;
+                    }
                 }
-                xlbl += 175;
-                dina.Name = "lblClase" + claseSeleccionada.IdClase;
-                dina.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre;
-                foreach (Logica.AsignaturaCursa cursaAsig in cursaAsigs)
-                {
-                    cursaAsigsConfirmadas.Add(cursaAsig);
-                    dina.Text += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(cursaAsig.AsignaturaCursada).Nombre;
-                    dina.Height += 23;
-                }
-                dina.Text += "\n" + orientacionSeleccionada.Nombre;/* + "\n(click para borrar)";
-                dina.Click += new EventHandler(EliminarClase);*/
-                panelClasesAgregadas.Controls.Add(dina);
-                panelModificarClases.Controls.Clear();
-                cmbxOrientacion.SelectedItem = 0;
-                cmbxAnio.Items.Clear();
-                cmbxClase.Items.Clear();
-                cursas.Add(cursa);
-                claseSeleccionada = new Logica.Clase();
-                orientacionSeleccionada = new Logica.Orientacion();
             }
+            if (mandable)
+            {
+                cursaAsigsConfirmadas.AddRange(cursaAsigs);
+                Logica.Cursa cursa = new Logica.Cursa();
+                cursa.IdClase = claseSeleccionada.IdClase;
+                cursa.Orientacion = orientacionSeleccionada.Id;
+                cursa.Anio = DateTime.Now.Year;
+                if (!cursas.Contains(cursa))
+                {
+                    Label grupo = new Label();
+                    grupo.Height = 60;
+                    grupo.Width = 100;
+                    grupo.Location = new Point(0, 0);
+                    grupo.Font = new Font("Arial", 12.0f);
+                    grupo.Name = "lblClase" + claseSeleccionada.IdClase;
+                    grupo.Text = claseSeleccionada.Anio + "º" + claseSeleccionada.Nombre + "  (" + cursaAsigs.Count + ")" + "\n" + orientaciones[cmbxOrientacion.SelectedIndex].Nombre;
+                    grupo.Click += new EventHandler(EliminarClase);
+
+                    PictureBox pic = new PictureBox();
+                    pic.Image = Image.FromFile("cruz negra.png");
+                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pic.Height = 20;
+                    pic.Width = 20;
+                    pic.Location = new Point(115, 20);
+                    pic.Name = "pbxClase" + claseSeleccionada.IdClase;
+                    pic.Click += new EventHandler(EliminarClase);
+
+                    Panel panel = new Panel();
+                    panel.Height = 60;
+                    panel.Width = 150;
+                    panel.Location = new Point(0, yPanel);
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    yPanel += 60;
+                    panel.Name = "pnlClase" + claseSeleccionada.IdClase;
+                    panel.BackColor = Color.White;
+                    panel.Click += new EventHandler(EliminarClase);
+                    panel.Controls.Add(grupo);
+                    panel.Controls.Add(pic);
+
+                    panelClasesAgregadas.Controls.Add(panel);
+                    cursas.Add(cursa);
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show(error);
+            }
+            panelModificarClases.Controls.Clear();
+            cmbxOrientacion.SelectedIndex = -1;
+            cmbxAnio.Items.Clear();
+            cmbxClase.Items.Clear();
+            
+
+            cmbxAnio.Enabled = false;
+            cmbxClase.Enabled = false;
+            btnAgregar.Enabled = false;
+
+            cursaAsigs = new List<Logica.AsignaturaCursa>();
+            claseSeleccionada = new Logica.Clase();
+            orientacionSeleccionada = new Logica.Orientacion();
         }
 
-        
+        private void EliminarClase(object sender, EventArgs e)
+        {
+            List<Logica.AsignaturaCursa> encontradas = new List<Logica.AsignaturaCursa>();
+            foreach (Logica.AsignaturaCursa asigCursa in cursaAsigsConfirmadas)
+            {
+                if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+                {
+                    if (((Label)sender).Name == "lblClase" + asigCursa.IdClase)
+                    {
+                        encontradas.Add(asigCursa);
+                    }
+                }
+                else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+                {
+                    if (((PictureBox)sender).Name == "pbxClase" + asigCursa.IdClase)
+                    {
+                        encontradas.Add(asigCursa);
+                    }
+                }
+                else
+                {
+                    if (((Panel)sender).Name == "pnlClase" + asigCursa.IdClase)
+                    {
+                        encontradas.Add(asigCursa);
+                    }
+                }
+
+            }
+            foreach (Logica.AsignaturaCursa asigSoli in encontradas)
+            {
+                cursaAsigsConfirmadas.Remove(asigSoli);
+            }
+            Logica.Cursa encontrada = new Logica.Cursa();
+            foreach (Logica.Cursa cursa in cursas)
+            {
+                if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+                {
+                    if (((Label)sender).Name == "lblClase" + cursa.IdClase)
+                    {
+                        encontrada = cursa;
+                    }
+                }
+                else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+                {
+                    if (((PictureBox)sender).Name == "pbxClase" + cursa.IdClase)
+                    {
+                        encontrada = cursa;
+                    }
+                }
+                else
+                {
+                    if (((Panel)sender).Name == "pnlClase" + cursa.IdClase)
+                    {
+                        encontrada = cursa;
+                    }
+                }
+
+
+            }
+            cursas.Remove(encontrada);
+            panelClasesAgregadas.Controls.Clear();
+            yPanel = 0;
+            foreach (Logica.Cursa cursa in cursas)
+            {
+                Logica.Clase clase = new Logica.Clase().SelectClasePorId(cursa.IdClase);
+                Logica.Orientacion orientacion = new Logica.Orientacion().SelectOrientacioPorId(clase.Orientacion);
+                List<Logica.Asignatura> asignaturas = new List<Logica.Asignatura>();
+                foreach (Logica.AsignaturaCursa asigCursa in cursaAsigs)
+                {
+                    if (asigCursa.IdClase == clase.IdClase)
+                    {
+                        asignaturas.Add(new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada));
+                    }
+                }
+
+                Label grupo = new Label();
+                    grupo.Height = 60;
+                    grupo.Width = 100;
+                    grupo.Location = new Point(0, 0);
+                    grupo.Font = new Font("Arial", 12.0f);
+                    grupo.Name = "lblClase" + clase.IdClase;
+                    grupo.Text = clase.Anio + "º" + clase.Nombre + "  (" + asignaturas.Count + ")" + "\n" + orientacion.Nombre;
+                    grupo.Click += new EventHandler(EliminarClase);
+
+                    PictureBox pic = new PictureBox();
+                    pic.Image = Image.FromFile("cruz negra.png");
+                    pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                    pic.Height = 20;
+                    pic.Width = 20;
+                    pic.Location = new Point(115, 20);
+                    pic.Name = "pbxClase" + clase.IdClase;
+                    pic.Click += new EventHandler(EliminarClase);
+
+                    Panel panel = new Panel();
+                    panel.Height = 60;
+                    panel.Width = 150;
+                    panel.Location = new Point(0, yPanel);
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    yPanel += 60;
+                    panel.Name = "pnlClase" + clase.IdClase;
+                    panel.BackColor = Color.White;
+                    panel.Click += new EventHandler(EliminarClase);
+                    panel.Controls.Add(grupo);
+                    panel.Controls.Add(pic);
+
+                    panelClasesAgregadas.Controls.Add(panel);
+
+
+            }
+            btnAltaAlumno.Enabled = false;
+            if (cursas.Count > 0)
+            {
+                btnAltaAlumno.Enabled = true;
+            }
+        }
 
         private void btnAltaAlumno_Click(object sender, EventArgs e)
         {
@@ -434,10 +596,10 @@ namespace Hatchat.Presentacion
 
                 MessageBox.Show("Se ha creado el alumno correctamente");
             }
-            
+
         }
 
-        
+
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
@@ -446,15 +608,15 @@ namespace Hatchat.Presentacion
             panelModificar.Visible = false;
         }
 
-        
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            
+
             Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
-            if(al.Ci!="" && al.SelectAlumno())
+            if (al.Ci != "" && al.SelectAlumno())
             {
-                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a "+al.Nombre+" "+al.Primer_apellido+"?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a " + al.Nombre + " " + al.Primer_apellido + "?", "Cerrar Sesion", MessageBoxButtons.YesNo);
                 if (eliminarAlumno == DialogResult.Yes)
                 {
                     al.RemoveUsuario();
@@ -467,13 +629,18 @@ namespace Hatchat.Presentacion
             }
         }
 
-        
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             panelAlta.Visible = false;
             panelBaja.Visible = false;
             panelModificar.Visible = !panelModificar.Visible;
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
 
         private void btnBuscarModficar_Click(object sender, EventArgs e)
