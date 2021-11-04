@@ -246,9 +246,9 @@ namespace Hatchat.Presentacion
             // panelContenido
             // 
             this.panelContenido.AutoScroll = true;
-            this.panelContenido.Location = new System.Drawing.Point(415, 116);
+            this.panelContenido.Location = new System.Drawing.Point(415, 90);
             this.panelContenido.Name = "panelContenido";
-            this.panelContenido.Size = new System.Drawing.Size(474, 359);
+            this.panelContenido.Size = new System.Drawing.Size(474, 385);
             this.panelContenido.TabIndex = 2;
             // 
             // btnAceptar

@@ -1042,9 +1042,9 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.PanelSolicitudesPendientes);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panelBaja);
             this.Controls.Add(this.panelAlta);
             this.Controls.Add(this.panelModificar);
+            this.Controls.Add(this.panelBaja);
             this.Controls.Add(this.panel3);
             this.Name = "ABMAlumnoAdmin";
             this.Text = "AMBAlumnoAdmin";

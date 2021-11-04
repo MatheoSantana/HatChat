@@ -486,12 +486,12 @@ namespace Hatchat.Presentacion
             Label lblSolIngre = new Label();
             lblSolIngre.Height = 36;
             lblSolIngre.Width = 400;
-            lblSolIngre.Location = new Point(412, 90);
+            lblSolIngre.Location = new Point(0, 5);
             lblSolIngre.ForeColor = Color.White;
             lblSolIngre.Font = new Font("Arial", 13.0f);
             lblSolIngre.Name = "lblSolIngre";
             lblSolIngre.Text = us.Primer_apellido + " envio solicitud para ingresar a:";
-            panelSolicitud.Controls.Add(lblSolIngre);
+            panelContenido.Controls.Add(lblSolIngre);
             asignaturaSolicitudesClaseAl.AddRange(new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturaSolicitudClaseAl(soliAl.IdSolicitudClaseAl));
             int xchbxAsig = 5, xlblClase = 5;
             foreach (Logica.ClaseSolicitudClaseAl claseSoli in claseSolicitudesClaseAl)
@@ -499,7 +499,7 @@ namespace Hatchat.Presentacion
                 Label lblClase = new Label();
                 lblClase.Height = 46;
                 lblClase.Width = 150;
-                lblClase.Location = new Point(xlblClase, 0);
+                lblClase.Location = new Point(xlblClase, 41);
                 lblClase.Name = "lblClase" + claseSoli.IdClase;
                 lblClase.ForeColor = Color.White;
                 lblClase.Font = new Font("Arial", 12.0f);
@@ -507,7 +507,7 @@ namespace Hatchat.Presentacion
                 lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
                 xlblClase += 160;
-                int ychbxAsig = 50;
+                int ychbxAsig = 90;
                 foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAl in asignaturaSolicitudesClaseAl)
                 {
                     if (claseSoli.IdClase == asigSoliAl.IdClaseAsig)
@@ -597,12 +597,12 @@ namespace Hatchat.Presentacion
             Label lblSolIngre = new Label();
             lblSolIngre.Height = 36;
             lblSolIngre.Width = 400;
-            lblSolIngre.Location = new Point(412, 90);
+            lblSolIngre.Location = new Point(0, 5);
             lblSolIngre.ForeColor = Color.White;
             lblSolIngre.Font = new Font("Arial", 13.0f);
             lblSolIngre.Name = "lblSolIngre";
             lblSolIngre.Text = us.Primer_apellido + " envio solicitud para ingresar a:";
-            panelSolicitud.Controls.Add(lblSolIngre);
+            panelContenido.Controls.Add(lblSolIngre);
             asignaturaSolicitudesClaseDo.AddRange(new Logica.AsignaturaSolicitudClaseDo().SelectAsignaturaSolicitudClaseDo(soliDo.IdSolicitudClaseDo));
             int xchbxAsig = 5, xlblClase = 5;
             foreach (Logica.ClaseSolicitudClaseDo claseSoli in claseSolicitudesClaseDo)
@@ -610,7 +610,7 @@ namespace Hatchat.Presentacion
                 Label lblClase = new Label();
                 lblClase.Height = 46;
                 lblClase.Width = 150;
-                lblClase.Location = new Point(xlblClase, 0);
+                lblClase.Location = new Point(xlblClase, 41);
                 lblClase.Name = "lblClase" + claseSoli.IdClase;
                 lblClase.ForeColor = Color.White;
                 lblClase.Font = new Font("Arial", 12.0f);
@@ -618,7 +618,7 @@ namespace Hatchat.Presentacion
                 lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
                 xlblClase += 160;
-                int ychbxAsig = 50;
+                int ychbxAsig = 90;
                 foreach (Logica.AsignaturaSolicitudClaseDo asigSoliDo in asignaturaSolicitudesClaseDo)
                 {
                     if (claseSoli.IdClase == asigSoliDo.IdClaseAsig)

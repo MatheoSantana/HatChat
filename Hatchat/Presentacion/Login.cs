@@ -13,6 +13,7 @@ namespace Hatchat.Presentacion
     public partial class Login : Form
     {
         static Register register;
+        static CambiarContra cambiarContra;
 
         static PrincipalChatDocente principalChatDocente;
         static MensajesDocente mensajesDocente;
@@ -354,6 +355,14 @@ namespace Hatchat.Presentacion
         private void timerCentrar_Tick(object sender, EventArgs e)
         {
             CenterToScreen();
+        }
+
+        private void lblCambioPassword_Click(object sender, EventArgs e)
+        {
+            cambiarContra = new CambiarContra();
+            cambiarContra.Show();
+            this.Hide();
+            cambiarContra.login = this;
         }
     }
 }

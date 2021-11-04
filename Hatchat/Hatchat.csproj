@@ -184,6 +184,12 @@
     <Compile Include="Presentacion\Alumno\PrincipalChatAlumno.Designer.cs">
       <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\CambiarContra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\CambiarContra.designer.cs">
+      <DependentUpon>CambiarContra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Register.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Alumno\PrincipalChatAlumno.resx">
       <DependentUpon>PrincipalChatAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\CambiarContra.resx">
+      <DependentUpon>CambiarContra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Register.resx">
       <DependentUpon>Register.cs</DependentUpon>

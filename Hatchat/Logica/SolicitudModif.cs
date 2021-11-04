@@ -84,5 +84,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             return conexion.SelectSolicitudesModifResueltas(ci);
         }
+        public void EnviarSolicitudModif()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            conexion.EnviarSolicitudModif(this);
+        }
     }
 }

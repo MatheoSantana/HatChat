@@ -74,7 +74,14 @@ namespace Hatchat.Persistencia
             insert.ExecuteNonQuery();
             conexion.Close();
         }
-
+        public void EnviarSolicitudModif(SolicitudModif soli)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into SolicitudModif (fechaHora,contraNueva,pendiente,usuario) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "','"+soli.ContraNueva+"'," + soli.Pendiente + ",'" + soli.Usuario + "');", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
         public void EnviarClaseSolicitudClaseAl(ClaseSolicitudClaseAl soliclase)
         {
             MySqlConnection conexion = new MySqlConnection(connection);

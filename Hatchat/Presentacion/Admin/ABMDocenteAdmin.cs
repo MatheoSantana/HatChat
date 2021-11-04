@@ -39,7 +39,9 @@ namespace Hatchat.Presentacion
             {
                 cmbxOrientacion.Items.Add(ori.Nombre);
             }
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            StartPosition = FormStartPosition.CenterScreen;
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");

@@ -182,3 +182,4 @@ C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hat
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialChatsDocente.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialChatsAlumno.resources
 C:\Users\Admin.DESKTOP-0Q23CA9\Desktop\EntregaFinalHatchat\Hatchat\obj\Debug\Hatchat.Presentacion.HistorialMensajesDocente.resources
+C:\Users\miusi\OneDrive\Escritorio\EntregaFinalProyecto\Hatchat\obj\Debug\Hatchat.Presentacion.CambiarContra.resources

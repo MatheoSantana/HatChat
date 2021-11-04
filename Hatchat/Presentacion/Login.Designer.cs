@@ -69,7 +69,7 @@ namespace Hatchat.Presentacion
             this.cmbxIdioma.Location = new System.Drawing.Point(1078, 12);
             this.cmbxIdioma.Name = "cmbxIdioma";
             this.cmbxIdioma.Size = new System.Drawing.Size(167, 28);
-            this.cmbxIdioma.TabIndex = 2;
+            this.cmbxIdioma.TabIndex = 4;
             this.cmbxIdioma.SelectedIndexChanged += new System.EventHandler(this.cbxIdioma_SelectedIndexChanged);
             // 
             // txtCedula
@@ -78,7 +78,7 @@ namespace Hatchat.Presentacion
             this.txtCedula.Location = new System.Drawing.Point(29, 192);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(632, 30);
-            this.txtCedula.TabIndex = 3;
+            this.txtCedula.TabIndex = 1;
             // 
             // txtPassword
             // 
@@ -86,7 +86,7 @@ namespace Hatchat.Presentacion
             this.txtPassword.Location = new System.Drawing.Point(29, 250);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(632, 30);
-            this.txtPassword.TabIndex = 4;
+            this.txtPassword.TabIndex = 2;
             // 
             // lblCedula
             // 
@@ -118,6 +118,7 @@ namespace Hatchat.Presentacion
             this.lblCambioPassword.Size = new System.Drawing.Size(180, 16);
             this.lblCambioPassword.TabIndex = 7;
             this.lblCambioPassword.Text = "No recuerdo mi contraseña";
+            this.lblCambioPassword.Click += new System.EventHandler(this.lblCambioPassword_Click);
             // 
             // lblRegistrarse
             // 
@@ -151,7 +152,7 @@ namespace Hatchat.Presentacion
             this.btnIniciarSesion.Location = new System.Drawing.Point(496, 326);
             this.btnIniciarSesion.Name = "btnIniciarSesion";
             this.btnIniciarSesion.Size = new System.Drawing.Size(168, 40);
-            this.btnIniciarSesion.TabIndex = 10;
+            this.btnIniciarSesion.TabIndex = 3;
             this.btnIniciarSesion.Text = "Iniciar sesion";
             this.btnIniciarSesion.UseVisualStyleBackColor = false;
             this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
