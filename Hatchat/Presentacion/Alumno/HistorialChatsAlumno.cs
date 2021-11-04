@@ -12,6 +12,15 @@ namespace Hatchat.Presentacion
 {
     public partial class HistorialChatsAlumno : Form
     {
+        string error;
+        string filtrarAsignatura;
+        string filtrarntAsignatura;
+        string filtrarFecha;
+        string filtrarntFecha;
+
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+
         public Form login;
         public Form mensajesAlumno;
         public Form gruposAlumno;
@@ -37,6 +46,56 @@ namespace Hatchat.Presentacion
             panelDatosClase.Visible = false;
 
             StartPosition = FormStartPosition.CenterScreen;
+            
+            if (Login.idioma == "Español")
+            {
+
+                lblHistrialChat.Text = "Historial de Chats";
+                btnFiltrarAsignatura.Text = "Filtrar Asignatura";
+                filtrarAsignatura = "Filtrar Asignatura";
+                filtrarntAsignatura = "Dejar de filtrar asignatura";
+                btnFiltrarFecha.Text = "Filtrar Fecha";
+                filtrarFecha = "Filtrar Fecha";
+                filtrarntFecha = "Dejar de filtrar fecha";
+                btnVolver.Text = "Volver";
+                /*
+                lblOrientacion.Text = "Orientación:";
+                lblAnio.Text = "Año:";
+                lblClase.Text = "Clase";
+                btnModificarGrupo.Text = "Modificar";
+                btnRealizar.Text = "Enviar";
+                lblDisponibles.Text = "Disponibles:";
+                btnLunes.Text = "Lunes";
+                btnMartes.Text = "Martes";
+                btnMiercoles.Text = "Miercoles";
+                btnJueves.Text = "Jueves";
+                btnViernes.Text = "Viernes";
+                lblSinNada.Text = "Usted no se encuentra en ningun grupo.";
+                btnSalirGrupo.Text = "Salir del grupo";
+                btnParticipantes.Text = "Participantes";
+                lblParticipantes.Text = "Participantes";
+                error = " comuníquese con el administrador.";
+                profesor = "Profesor: ";
+                horariosLunes = "Horarios del dia: Lunes:";
+                horariosMartes = "Horarios del dia: Martes:";
+                horariosMiercoles = "Horarios del dia: Miercoles:";
+                horariosJueves = "Horarios del dia: Jueves:";
+                horariosViernes = "Horarios del dia: Viernes:";
+                msgSalirDelGrupo = "¿Desea salir del grupo?";
+                titSalirDelGrupo = "Salir del grupo";
+                salisteDelGrupo = "Se ha salido del grupo correctamente";
+                errorSolicitud = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas:";
+                soliIngreso = "Se ha enviado la solicitud de ingreso";
+                alMenosUna = "Debe ingresar al menos una asignatura para solicitar el ingreso a la clase";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+                */
+
+            }
+            else
+            {
+                
+            }
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -49,14 +108,13 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat blanco.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
-                pcbxLogo.Image= Image.FromFile("Logo Completa.png");
+                pcbxLogo.Image = Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show("archivo faltante (" + ex.Message + ") comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
-
             pbxFotoPerfilNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxChatNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxMensajeNav.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -555,10 +613,10 @@ namespace Hatchat.Presentacion
         {
             cmbxAsignatura.Visible = !cmbxAsignatura.Visible;
             filtroAsignatura = !filtroAsignatura;
-            btnFiltrarAsignatura.Text = "Filtrar asignatura";
+            btnFiltrarAsignatura.Text = filtrarAsignatura;
             if (filtroAsignatura)
             {
-                btnFiltrarAsignatura.Text = "Dejar de filtrar asignatura";
+                btnFiltrarAsignatura.Text = filtrarntAsignatura;
             }
         }
 
@@ -566,10 +624,10 @@ namespace Hatchat.Presentacion
         {
             dtpFiltro.Visible = !dtpFiltro.Visible;
             filtroFecha = !filtroFecha;
-            btnFiltrarFecha.Text = "Filtrar fecha";
+            btnFiltrarFecha.Text = filtrarFecha;
             if (filtroFecha)
             {
-                btnFiltrarFecha.Text = "Dejar de filtrar fecha";
+                btnFiltrarFecha.Text = filtrarntFecha;
             }
         }
 

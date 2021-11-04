@@ -40,6 +40,9 @@ namespace Hatchat.Presentacion
         {
 
             InitializeComponent();
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            ClientSize = new Size(1280, 720);
             panelSolicitud.Visible = false;
             try
             {
@@ -51,6 +54,7 @@ namespace Hatchat.Presentacion
                 pbxABMGruposNav.Image = Image.FromFile("abm grupos gris.png");
                 pbxHistorialSolicitudesNav.Image = Image.FromFile("historial blanco.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                pcbxLogo.Image= Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -64,6 +68,7 @@ namespace Hatchat.Presentacion
             pbxABMGruposNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxHistorialSolicitudesNav.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxCerrarSesionNav.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void pbxPrincipalSolicitudesAdminNav_Click(object sender, EventArgs e)
@@ -278,7 +283,18 @@ namespace Hatchat.Presentacion
                     
                 }
             }
-            
+            if (solicitudesOrdenadas.Count == 0)
+            {
+                lblBienvenido.Visible = false;
+                lblLinea.Visible = false;
+                pcbxLogo.Visible = false;
+            }
+            else
+            {
+                lblBienvenido.Visible = true;
+                lblLinea.Visible = true;
+                pcbxLogo.Visible = true;
+            }
             bool iguales = true;
             if (solicitudesOrdenadas.Count == this.solicitudesOrdenadas.Count)
             {
@@ -776,6 +792,11 @@ namespace Hatchat.Presentacion
             dtpFiltroFecha.Visible = filtrar;
             btnFiltrar.Visible = true;
             btnVolver.Visible = false;
+        }
+
+        private void timerCentrar_Tick(object sender, EventArgs e)
+        {
+            CenterToScreen();
         }
     }
 

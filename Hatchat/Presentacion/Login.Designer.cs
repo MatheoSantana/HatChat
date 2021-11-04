@@ -125,7 +125,7 @@ namespace Hatchat.Presentacion
             this.lblRegistrarse.AutoSize = true;
             this.lblRegistrarse.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRegistrarse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(106)))), ((int)(((byte)(58)))));
-            this.lblRegistrarse.Location = new System.Drawing.Point(169, 341);
+            this.lblRegistrarse.Location = new System.Drawing.Point(178, 341);
             this.lblRegistrarse.Name = "lblRegistrarse";
             this.lblRegistrarse.Size = new System.Drawing.Size(79, 16);
             this.lblRegistrarse.TabIndex = 8;
@@ -180,11 +180,11 @@ namespace Hatchat.Presentacion
             // 
             this.lblExplicacion.AutoSize = true;
             this.lblExplicacion.Font = new System.Drawing.Font("Arial", 12.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.lblExplicacion.Location = new System.Drawing.Point(169, 98);
+            this.lblExplicacion.Location = new System.Drawing.Point(156, 98);
             this.lblExplicacion.Name = "lblExplicacion";
-            this.lblExplicacion.Size = new System.Drawing.Size(374, 19);
+            this.lblExplicacion.Size = new System.Drawing.Size(373, 19);
             this.lblExplicacion.TabIndex = 11;
-            this.lblExplicacion.Text = "Introduzca su nombre de usuario y contraseña";
+            this.lblExplicacion.Text = "Introduzca su cedula de identidad y contraseña";
             // 
             // label1
             // 

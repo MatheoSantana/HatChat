@@ -11,6 +11,12 @@ namespace Hatchat.Presentacion
     public partial class CambiarContra : Form
     {
         Logica.Usuario us = new Logica.Usuario();
+        
+        string usuariont;
+        string enviado;
+        string noIguales;
+        string respuestant;
+        string error;
 
         public Form login;
         
@@ -22,6 +28,42 @@ namespace Hatchat.Presentacion
             FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
+            if (Login.idioma == "Español")
+            {
+                lblTitulo.Text = "Contacte con un administrador:";
+                lblCedula.Text = "Ingrese su cedula:";
+                lblPregSegur.Text = "Pregunta de Seguridad:";
+                cmbxPreguntaSeg.Items.Add("¿Cuál es el nombre de tu primer mascota?");
+                cmbxPreguntaSeg.Items.Add("¿En qué calle está ubicado tu primer hogar?");
+                cmbxPreguntaSeg.Items.Add("¿Cual es tu sabor de helado favorito?");
+                lblRespuesta.Text = "Respuesta:";
+                lblPassword.Text = "Nueva Contraseña:";
+                lblConfirmarPassword.Text = "Confirmar Contraseña:";
+                btnEnviar.Text = "Enviar solicitud";
+                usuariont = "No se ha encontrado el usuario";
+                enviado = "Se ha enviado la solicitud correctamente";
+                noIguales = "Las contraseñas no coinciden";
+                respuestant = "La respuesta no es correcta";
+                error = " comuníquese con el administrador.";
+            }
+            else
+            {
+                lblTitulo.Text = "Contact an administrator:";
+                lblCedula.Text = "Enter your ID:";
+                lblPregSegur.Text = "Security Question:";
+                cmbxPreguntaSeg.Items.Add("What is the name of your first pet?");
+                cmbxPreguntaSeg.Items.Add("On what street is your first home located?");
+                cmbxPreguntaSeg.Items.Add("What is your favorite ice cream flavor?");
+                lblRespuesta.Text = "Answer:";
+                lblPassword.Text = "New Password:";
+                lblConfirmarPassword.Text = "Confirm Password:";
+                btnEnviar.Text = "Send request";
+                usuariont = "User not found";
+                enviado = "The request has been sent successfully";
+                noIguales = "Passwords do not match";
+                respuestant = "The answer is not correct";
+                error = " Contact the administrator.";
+            }
             try
             {
                 pbxLogin.Image = Image.FromFile("volver.png");
@@ -30,12 +72,14 @@ namespace Hatchat.Presentacion
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
             cmbxPreguntaSeg.DropDownStyle = ComboBoxStyle.DropDownList;
             pbxLogin.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            
 
         }
 
@@ -64,32 +108,42 @@ namespace Hatchat.Presentacion
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            if (us.Respuesta_seguridad == txtRepuesta.Text)
-            {
-                if (txtPassword.Text == txtConfirmarPassword.Text) 
-                {
-                    Logica.SolicitudModif soli = new Logica.SolicitudModif();
-                    soli.FechaHora = DateTime.Now;
-                    soli.ContraNueva = txtPassword.Text;
-                    soli.Pendiente = true;
-                    soli.Usuario = txtCedula.Text;
-                    soli.EnviarSolicitudModif();
-                    MessageBox.Show("Se ha enviado la solicitud correctamente");
+            us = new Logica.Usuario().SelectUsuarioCi(txtCedula.Text);
 
-                    txtCedula.Text = "";
-                    cmbxPreguntaSeg.Items.Clear();
-                    txtRepuesta.Text = "";
-                    txtPassword.Text = "";
-                    txtConfirmarPassword.Text = "";
+            if (us.Ci != null)
+            {
+                if (us.Respuesta_seguridad == txtRepuesta.Text)
+                {
+                    if (txtPassword.Text == txtConfirmarPassword.Text)
+                    {
+                        Logica.SolicitudModif soli = new Logica.SolicitudModif();
+                        soli.FechaHora = DateTime.Now;
+                        soli.ContraNueva = txtPassword.Text;
+                        soli.Pendiente = true;
+                        soli.Usuario = txtCedula.Text;
+                        soli.EnviarSolicitudModif();
+                        MessageBox.Show(enviado);
+
+                        txtCedula.Text = "";
+                        cmbxPreguntaSeg.SelectedIndex = -1;
+                        txtRepuesta.Text = "";
+                        txtPassword.Text = "";
+                        txtConfirmarPassword.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show(noIguales);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Las contraseñas no coinciden");
+                    MessageBox.Show(respuestant);
                 }
             }
             else
             {
-                MessageBox.Show("La respuesta no es correcta");
+                MessageBox.Show(usuariont);
+
             }
         }
 
@@ -98,10 +152,22 @@ namespace Hatchat.Presentacion
             if (txtCedula.Text.Length == 8)
             {
                 us = new Logica.Usuario().SelectUsuarioCi(txtCedula.Text);
-                List<Logica.PreguntaSeg> prgs = new Logica.PreguntaSeg().SelectPreguntasSeguridad();
-                cmbxPreguntaSeg.Items.Clear();
-                cmbxPreguntaSeg.Items.Add(prgs[us.Preguta_seguridad].Pregunta);
+
+                if (us.Ci != null)
+                {
+                    cmbxPreguntaSeg.SelectedIndex = (us.Preguta_seguridad - 1);
+                }
+                else
+                {
+                    MessageBox.Show(usuariont);
+                }
             }
+            else
+            {
+                cmbxPreguntaSeg.SelectedIndex = -1;
+            }
+            
         }
     }
 }
+

@@ -91,6 +91,7 @@ namespace Hatchat.Presentacion
             this.pbxVolver.Size = new System.Drawing.Size(51, 46);
             this.pbxVolver.TabIndex = 2;
             this.pbxVolver.TabStop = false;
+            this.pbxVolver.Click += new System.EventHandler(this.pbxVolver_Click);
             // 
             // txtRespuesta
             // 

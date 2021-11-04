@@ -49,6 +49,8 @@ namespace Hatchat.Presentacion
             this.lblDisponibles = new System.Windows.Forms.Label();
             this.btnEntrarGrupo = new System.Windows.Forms.Button();
             this.panelInformacion = new System.Windows.Forms.Panel();
+            this.btnParticipantes = new System.Windows.Forms.Button();
+            this.btnSalirGrupo = new System.Windows.Forms.Button();
             this.panelAgenda = new System.Windows.Forms.Panel();
             this.lblHorariosDelDia = new System.Windows.Forms.Label();
             this.btnViernes = new System.Windows.Forms.Button();
@@ -82,8 +84,6 @@ namespace Hatchat.Presentacion
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.timerCentrar = new System.Windows.Forms.Timer(this.components);
-            this.btnSalirGrupo = new System.Windows.Forms.Button();
-            this.btnParticipantes = new System.Windows.Forms.Button();
             this.panelContenedorGrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
             this.panelEntrarGrupo.SuspendLayout();
@@ -311,6 +311,34 @@ namespace Hatchat.Presentacion
             this.panelInformacion.Size = new System.Drawing.Size(516, 325);
             this.panelInformacion.TabIndex = 18;
             this.panelInformacion.Visible = false;
+            // 
+            // btnParticipantes
+            // 
+            this.btnParticipantes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnParticipantes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnParticipantes.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnParticipantes.ForeColor = System.Drawing.Color.White;
+            this.btnParticipantes.Location = new System.Drawing.Point(396, 59);
+            this.btnParticipantes.Name = "btnParticipantes";
+            this.btnParticipantes.Size = new System.Drawing.Size(115, 25);
+            this.btnParticipantes.TabIndex = 31;
+            this.btnParticipantes.Text = "Participantes";
+            this.btnParticipantes.UseVisualStyleBackColor = false;
+            this.btnParticipantes.Click += new System.EventHandler(this.btnParticipantes_Click);
+            // 
+            // btnSalirGrupo
+            // 
+            this.btnSalirGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnSalirGrupo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSalirGrupo.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnSalirGrupo.ForeColor = System.Drawing.Color.White;
+            this.btnSalirGrupo.Location = new System.Drawing.Point(396, 32);
+            this.btnSalirGrupo.Name = "btnSalirGrupo";
+            this.btnSalirGrupo.Size = new System.Drawing.Size(115, 25);
+            this.btnSalirGrupo.TabIndex = 30;
+            this.btnSalirGrupo.Text = "Salir del grupo";
+            this.btnSalirGrupo.UseVisualStyleBackColor = false;
+            this.btnSalirGrupo.Click += new System.EventHandler(this.btnSalirGrupo_Click);
             // 
             // panelAgenda
             // 
@@ -660,34 +688,6 @@ namespace Hatchat.Presentacion
             this.timerCentrar.Enabled = true;
             this.timerCentrar.Interval = 500;
             this.timerCentrar.Tick += new System.EventHandler(this.timerCentrar_Tick);
-            // 
-            // btnSalirGrupo
-            // 
-            this.btnSalirGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnSalirGrupo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSalirGrupo.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnSalirGrupo.ForeColor = System.Drawing.Color.White;
-            this.btnSalirGrupo.Location = new System.Drawing.Point(396, 32);
-            this.btnSalirGrupo.Name = "btnSalirGrupo";
-            this.btnSalirGrupo.Size = new System.Drawing.Size(115, 25);
-            this.btnSalirGrupo.TabIndex = 30;
-            this.btnSalirGrupo.Text = "Salir del grupo";
-            this.btnSalirGrupo.UseVisualStyleBackColor = false;
-            this.btnSalirGrupo.Click += new System.EventHandler(this.btnSalirGrupo_Click);
-            // 
-            // btnParticipantes
-            // 
-            this.btnParticipantes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
-            this.btnParticipantes.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnParticipantes.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnParticipantes.ForeColor = System.Drawing.Color.White;
-            this.btnParticipantes.Location = new System.Drawing.Point(396, 59);
-            this.btnParticipantes.Name = "btnParticipantes";
-            this.btnParticipantes.Size = new System.Drawing.Size(115, 25);
-            this.btnParticipantes.TabIndex = 31;
-            this.btnParticipantes.Text = "Participantes";
-            this.btnParticipantes.UseVisualStyleBackColor = false;
-            this.btnParticipantes.Click += new System.EventHandler(this.btnParticipantes_Click);
             // 
             // GruposAlumno
             // 

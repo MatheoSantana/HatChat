@@ -46,9 +46,11 @@ namespace Hatchat.Presentacion
 
         public static Logica.Usuario encontrado = new Logica.Usuario();
 
-        public static string idioma;
+        
         Image fotoIngles;
         Image fotoEspanol;
+        public static string idioma="Español";
+        string error = " comuníquese con el administrador.";
         public Login()
         {
             InitializeComponent();
@@ -62,13 +64,13 @@ namespace Hatchat.Presentacion
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 fotoEspanol = Image.FromFile("español chiquito.png");
                 fotoIngles = Image.FromFile("ingles chiquito.png");
-                pictureBox1.Image= Image.FromFile("Logo Completa.png");
-                
+                pictureBox1.Image = Image.FromFile("Logo Completa.png");
+
             }
-            catch(System.IO.FileNotFoundException ex)
+            catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
-                
+                MessageBox.Show(ex.Message + error, "Error");
+
             }
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
@@ -87,7 +89,6 @@ namespace Hatchat.Presentacion
             //seteamos en español el idioma del combo box
             cmbxIdioma.SelectedIndex = 0;
 
-            lblTitulo.Text = "Inicio de sesion";
             idioma = cmbxIdioma.SelectedItem.ToString();
             
         }
@@ -101,31 +102,45 @@ namespace Hatchat.Presentacion
         {
             if (cmbxIdioma.SelectedItem.ToString() == "Español")
             {
+                idioma = "Español";
                 idioma = cmbxIdioma.SelectedItem.ToString();
                 lblTitulo.Text = "Inicio de sesion";
+                lblTitulo.Location = new Point(162, 18);
                 lblCedula.Text = "Cédula de identidad";
                 lblPassword.Text = "Contraseña";
                 pcbxIdioma.Image = fotoEspanol;
                 btnIniciarSesion.Text = "Iniciar\nSesion";
                 lblCambioPassword.Text = "No recuerdo mi contraseña";
+                lblCambioPassword.Location = new Point(300, 341);
                 lblTextoSinCuenta.Text = "¿No tienes una cuenta?";
                 lblRegistrarse.Text = "Registrate";
+                lblRegistrarse.Location = new Point(178, 341);
                 usuarioNoEncontrado = "Usuario no existente";
                 contraseñaIncorrecta = "Contraseña incorrecta";
+                lblExplicacion.Text = "Introduzca su cedula de identidad y contraseña";
+                lblExplicacion.Location = new Point(156, 98);
+                error = " comuníquese con el administrador.";
             }
             else
             {
+                idioma = "English";
                 idioma = cmbxIdioma.SelectedItem.ToString();
                 lblTitulo.Text = "Login";
+                lblTitulo.Location = new Point(262, 18);
                 lblCedula.Text = "Identity card";
                 lblPassword.Text = "Password";
                 pcbxIdioma.Image = fotoIngles;
                 btnIniciarSesion.Text = "Login";
                 lblCambioPassword.Text = "I don't remember my password";
+                lblCambioPassword.Location = new Point(290, 341);
                 lblTextoSinCuenta.Text = "You don't have an account?";
                 lblRegistrarse.Text = "Sign up";
+                lblRegistrarse.Location = new Point(194, 341);
                 usuarioNoEncontrado = "Non-existent user";
                 contraseñaIncorrecta = "Incorrect password";
+                lblExplicacion.Text = "Enter your identity card and password";
+                lblExplicacion.Location = new Point(196, 98);
+                error = " Contact the administrator.";
             }
         }
 

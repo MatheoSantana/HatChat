@@ -10,6 +10,24 @@ namespace Hatchat.Presentacion
 {
     public partial class GruposAlumno : Form
     {
+
+        string error;
+        string profesor;
+        string horariosLunes;
+        string horariosMartes;
+        string horariosMiercoles;
+        string horariosJueves;
+        string horariosViernes;
+        string msgSalirDelGrupo;
+        string titSalirDelGrupo;
+        string salisteDelGrupo;
+        string errorSolicitud;
+        string soliIngreso;
+        string alMenosUna;
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+        Image imgProfesor;
+
         public Form login;
         public Form principalChatAlumno;
         public Form mensajesAlumno;
@@ -39,6 +57,77 @@ namespace Hatchat.Presentacion
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
+            if (Login.idioma == "Español")
+            {
+                lblGrupos.Text = "Grupos";
+                btnEntrarGrupo.Text = "Entrar a un grupo";
+                lblOrientacion.Text = "Orientación:";
+                lblAnio.Text = "Año:";
+                lblClase.Text = "Clase";
+                btnModificarGrupo.Text = "Modificar";
+                btnRealizar.Text = "Enviar";
+                lblDisponibles.Text = "Disponibles:";
+                btnLunes.Text = "Lunes";
+                btnMartes.Text = "Martes";
+                btnMiercoles.Text = "Miercoles";
+                btnJueves.Text = "Jueves";
+                btnViernes.Text = "Viernes";
+                lblSinNada.Text = "Usted no se encuentra en ningun grupo.";
+                btnSalirGrupo.Text = "Salir del grupo";
+                btnParticipantes.Text = "Participantes";
+                lblParticipantes.Text= "Participantes";
+                error = " comuníquese con el administrador.";
+                profesor = "Profesor: ";
+                horariosLunes= "Horarios del dia: Lunes:";
+                horariosMartes = "Horarios del dia: Martes:";
+                horariosMiercoles = "Horarios del dia: Miercoles:";
+                horariosJueves = "Horarios del dia: Jueves:";
+                horariosViernes = "Horarios del dia: Viernes:";
+                msgSalirDelGrupo = "¿Desea salir del grupo?";
+                titSalirDelGrupo = "Salir del grupo";
+                salisteDelGrupo = "Se ha salido del grupo correctamente";
+                errorSolicitud = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas:";
+                soliIngreso = "Se ha enviado la solicitud de ingreso";
+                alMenosUna = "Debe ingresar al menos una asignatura para solicitar el ingreso a la clase";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+
+            }
+            else
+            {
+                lblGrupos.Text = "Groups";
+                btnEntrarGrupo.Text = "Join a group";
+                lblOrientacion.Text = "Orientation:";
+                lblAnio.Text = "Year:";
+                lblClase.Text = "Class";
+                btnModificarGrupo.Text = "Modify";
+                btnRealizar.Text = "Send";
+                lblDisponibles.Text = "Available:";
+                btnLunes.Text = "Monday";
+                btnMartes.Text = "Tuesday";
+                btnMiercoles.Text = "Wednesday";
+                btnJueves.Text = "Thursday";
+                btnViernes.Text = "Friday";
+                lblSinNada.Text = "You are not in any group.";
+                btnSalirGrupo.Text = "Leave the group";
+                btnParticipantes.Text = "Participants";
+                lblParticipantes.Text = "Participants";
+                error = " Contact an administrator:";
+                profesor = "Teacher: ";
+                horariosLunes = "Hours of the day: Monday:";
+                horariosMartes = "Hours of the day: Tuesday:";
+                horariosMiercoles = "Hours of the day: Wednesday:";
+                horariosJueves = "Hours of the day: Thursday:";
+                horariosViernes = "Hours of the day: Friday:";
+                msgSalirDelGrupo = "Do you want to leave the group?";
+                titSalirDelGrupo = "Leave the group";
+                salisteDelGrupo = "You have successfully left the group";
+                errorSolicitud = "Request denied, already on request to enter the following subjects:";
+                soliIngreso = "The application for admission has been sent";
+                alMenosUna = "You must enter at least one subject to request entry to the class";
+                msgCerrarSesion = "Do you want to log out?";
+                cerrarSesionTitulo = "Logout";
+            }
 
             try
             {
@@ -53,10 +142,11 @@ namespace Hatchat.Presentacion
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pcbxLogo.Image = Image.FromFile("Logo Completa.png");
+                imgProfesor = Image.FromFile("profesor.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
 
@@ -200,7 +290,7 @@ namespace Hatchat.Presentacion
                     grupo.Click += new EventHandler(AbrirGrupo);
 
                     PictureBox pic = new PictureBox();
-                    pic.Image = Image.FromFile("profesor.png");
+                    pic.Image = imgProfesor;
                     pic.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic.Height = 80;
                     pic.Width = 80;
@@ -252,7 +342,7 @@ namespace Hatchat.Presentacion
             Logica.Clase clase = new Logica.Clase().SelectClasePorId(asignaturaCursa.IdClase);
             Logica.Orientacion orientacion = new Logica.Orientacion().SelectOrientacioPorId(clase.Orientacion);
             Logica.Asignatura asignatura = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursa.AsignaturaCursada);
-            lblNombreProfesor.Text = "Profesor: " + us.Nombre + " " + us.Primer_apellido;
+            lblNombreProfesor.Text = profesor + us.Nombre + " " + us.Primer_apellido;
             pcbxProfesor.Image = us.ByteArrayToImage(us.FotoDePerfil);
             lblAsignatura.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + " " +orientacion.Nombre;
             agendas = new Logica.Agenda().SelectAgendasPorCi(us.Ci);
@@ -267,7 +357,7 @@ namespace Hatchat.Presentacion
             btnJueves.BackColor = Color.FromArgb(61, 53, 50);
             btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Lunes");
-            lblHorariosDelDia.Text = "Horarios del dia: Lunes";
+            lblHorariosDelDia.Text = horariosLunes;
         }
 
 
@@ -279,7 +369,7 @@ namespace Hatchat.Presentacion
             btnJueves.BackColor = Color.FromArgb(61, 53, 50);
             btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Martes");
-            lblHorariosDelDia.Text = "Horarios del dia: Martes";
+            lblHorariosDelDia.Text = horariosMartes;
         }
 
         private void btnMiercoles_Click(object sender, EventArgs e)
@@ -289,7 +379,7 @@ namespace Hatchat.Presentacion
             btnMiercoles.BackColor = Color.FromArgb(239, 136, 88);
             btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Miercoles");
-            lblHorariosDelDia.Text = "Horarios del dia: Miercoles";
+            lblHorariosDelDia.Text = horariosMiercoles;
         }
 
         private void btnJueves_Click(object sender, EventArgs e)
@@ -300,7 +390,7 @@ namespace Hatchat.Presentacion
             btnJueves.BackColor = Color.FromArgb(239, 136, 88);
             btnViernes.BackColor = Color.FromArgb(61, 53, 50);
             RecargarAgendaDelDia("Jueves");
-            lblHorariosDelDia.Text = "Horarios del dia: Jueves";
+            lblHorariosDelDia.Text = horariosJueves;
         }
 
         private void btnViernes_Click(object sender, EventArgs e)
@@ -311,7 +401,7 @@ namespace Hatchat.Presentacion
             btnJueves.BackColor = Color.FromArgb(61, 53, 50);
             btnViernes.BackColor = Color.FromArgb(239, 136, 88);
             RecargarAgendaDelDia("Viernes");
-            lblHorariosDelDia.Text = "Horarios del dia: Viernes";
+            lblHorariosDelDia.Text = horariosViernes;
         }
         private void RecargarAgendaDelDia(string dia)
         {
@@ -397,11 +487,11 @@ namespace Hatchat.Presentacion
 
         private void btnSalirGrupo_Click(object sender, EventArgs e)
         {
-            DialogResult salirGrupo = MessageBox.Show("¿Desea salir del grupo?", "Salir del grupo", MessageBoxButtons.YesNo);
+            DialogResult salirGrupo = MessageBox.Show(msgSalirDelGrupo, titSalirDelGrupo, MessageBoxButtons.YesNo);
             if (salirGrupo == DialogResult.Yes)
             {
                 asignaturaCursa.BajaGrupo();
-                MessageBox.Show("Se ha salido del grupo correctamente");
+                MessageBox.Show(salisteDelGrupo);
                 panelInformacion.Visible = false;
                 panelParticipantes.Visible = false;
                 panelNav.Enabled = true;
@@ -663,7 +753,7 @@ namespace Hatchat.Presentacion
             if (asignaturasSolicitudClaseAl.Count != 0)
             {
                 List<Logica.AsignaturaSolicitudClaseAl> solicitidesPendientes = new Logica.AsignaturaSolicitudClaseAl().SelectAsignaturasSolicitudesClaseAl(Login.encontrado.Ci);
-                string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+                string error = errorSolicitud;
                 bool mandable = true;
                 foreach (Logica.AsignaturaSolicitudClaseAl asigPend in solicitidesPendientes)
                 {
@@ -695,7 +785,7 @@ namespace Hatchat.Presentacion
                         asignaturaSolicitudClaseAl.IdSolicitudClaseAl = solicitudClaseAl.IdSolicitudClaseAl;
                         asignaturaSolicitudClaseAl.EnviarAsignaturaSolicitudClaseAl();
                     }
-                    MessageBox.Show("Se ha enviado la solicitud de ingreso");
+                    MessageBox.Show(soliIngreso);
                 }
                 else
                 {
@@ -704,7 +794,7 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                MessageBox.Show("Debe ingresar al menos una asignatura para solicitar el ingreso a la clase");
+                MessageBox.Show(alMenosUna);
             }
             solicitudClaseAl = new Logica.SolicitudClaseAl();
             claseSolicitudClaseAl = new Logica.ClaseSolicitudClaseAl();
@@ -752,7 +842,7 @@ namespace Hatchat.Presentacion
         }
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            DialogResult cerrarSesion = MessageBox.Show(msgCerrarSesion, cerrarSesionTitulo, MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
                 Login.encontrado = new Logica.Usuario();

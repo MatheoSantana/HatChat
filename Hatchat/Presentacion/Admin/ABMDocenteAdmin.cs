@@ -54,6 +54,7 @@ namespace Hatchat.Presentacion
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pictureBox1.Image = Image.FromFile("Logo Completa.png");
                 pcbxBuscarModificar.Image=Image.FromFile("buscar.png");
+                pcbxBuscarAgenda.Image = Image.FromFile("buscar.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -70,6 +71,7 @@ namespace Hatchat.Presentacion
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxFotoModificar.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbxBuscarModificar.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbxBuscarAgenda.SizeMode = PictureBoxSizeMode.StretchImage;
 
             cmbxClase.Enabled = false;
             cmbxAnio.Enabled = false;

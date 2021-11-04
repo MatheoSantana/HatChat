@@ -10,6 +10,8 @@ namespace Hatchat.Presentacion
 {
     public partial class Register : Form
     {
+        string error;
+
         public Form login;
         public Form registerDocente;
         public Form registerAlumno;
@@ -21,20 +23,48 @@ namespace Hatchat.Presentacion
             FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
+            
+
+            if (Login.idioma == "Español")
+            {
+                lblTitulo.Text = "Contacte con un administrador:";
+                error = " comuníquese con el administrador.";
+                try
+                {
+                    pbxAlumno.Image = Image.FromFile("boton alumno.png");
+                    pbxDocente.Image = Image.FromFile("boton docente.png");
+                }
+                catch (System.IO.FileNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message + error, "Error");
+                }
+
+            }
+            else
+            {
+                lblTitulo.Text = "Choose your account type:";
+                error = " Contact the administrator.";
+                try
+                {
+                    pbxAlumno.Image = Image.FromFile("boton Student account.png");
+                    pbxDocente.Image = Image.FromFile("boton teaching account.png");
+                }
+                catch (System.IO.FileNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message + error, "Error");
+                }
+            }
+
             try
             {
-                pbxAlumno.Image = Image.FromFile("boton alumno.png");
-                pbxDocente.Image = Image.FromFile("boton docente.png");
                 pbxLogin.Image = Image.FromFile("volver.png");
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pictureBox1.Image = Image.FromFile("Logo Completa.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
-
+                MessageBox.Show(ex.Message + error, "Error");
             }
-
             pbxAlumno.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxDocente.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxLogin.SizeMode = PictureBoxSizeMode.StretchImage;
