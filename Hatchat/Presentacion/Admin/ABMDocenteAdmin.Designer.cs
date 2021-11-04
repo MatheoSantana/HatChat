@@ -213,7 +213,7 @@ namespace Hatchat.Presentacion
             this.btnAltaAlumno.Name = "btnAltaAlumno";
             this.btnAltaAlumno.Size = new System.Drawing.Size(409, 41);
             this.btnAltaAlumno.TabIndex = 46;
-            this.btnAltaAlumno.Text = "Crear Alumno";
+            this.btnAltaAlumno.Text = "Crear Docente";
             this.btnAltaAlumno.UseVisualStyleBackColor = false;
             this.btnAltaAlumno.Click += new System.EventHandler(this.btnAltaDocente_Click);
             // 
@@ -1410,11 +1410,11 @@ namespace Hatchat.Presentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelAlta);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.PanelABM);
             this.Controls.Add(this.panelNav);
             this.Controls.Add(this.panelAgenda);
-            this.Controls.Add(this.panelAlta);
             this.Controls.Add(this.panelModificar);
             this.Controls.Add(this.panelBaja);
             this.Controls.Add(this.panel3);
