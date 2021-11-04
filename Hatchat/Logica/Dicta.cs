@@ -48,5 +48,10 @@ namespace Hatchat.Logica
             Persistencia.Conexion conexion = new Persistencia.Conexion();
             conexion.InsertDicta(this);
         }
+        public bool SelectDictando()
+        {
+            Persistencia.Conexion conexion = new Persistencia.Conexion();
+            return conexion.SelectDictando(this);
+        }
     }
 }

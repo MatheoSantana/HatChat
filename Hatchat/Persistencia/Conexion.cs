@@ -1436,7 +1436,7 @@ namespace Hatchat.Persistencia
             insertRespondeClaseAl.ExecuteNonQuery();
             conexion.Close();
         }
-        public void AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(AsignaturaSolicitudClaseAl soliAsig)
+        public void AceptarAsignaturaSolicitudClaseAl(AsignaturaSolicitudClaseAl soliAsig)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
@@ -1453,6 +1453,23 @@ namespace Hatchat.Persistencia
             insert.ExecuteNonQuery();
             conexion.Close();
         }
+        public void ActivarAsignaturaDicta(AsignaturaDictada asiDicta)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("update asignaturaDictada set dictando=true where ci='" + asiDicta.Ci + "' and idClase=" + asiDicta.IdClase + " and orientacion=" + asiDicta.Orientacion + " and anio=" + asiDicta.Anio + " && asignaturaDictada='" + asiDicta.AsigDictada + "';", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+        public void InsertAsignaturaDictada(AsignaturaDictada asigDicta)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlCommand insert = new MySqlCommand("insert into asignaturaDictada values('" + asigDicta.Ci + "'," + asigDicta.IdClase + "," + asigDicta.Orientacion + "," + asigDicta.Anio + ",'" + asigDicta.AsigDictada + "',true);", conexion);
+            insert.ExecuteNonQuery();
+            conexion.Close();
+        }
+
         public void ActivarAsignaturaCursa(AsignaturaCursa asigCursa)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
@@ -1480,12 +1497,70 @@ namespace Hatchat.Persistencia
             conexion.Close();
             return existe;
         }
+        public bool SelectDictando(Dicta dicta)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from dicta where ci='" + dicta.CiDocente + "' and idClase=" + dicta.IdClase + " and orientacion=" + dicta.Orientacion + " and anio=" + dicta.Anio + ";";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            bool existe = false;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+
         public bool SelectCursandoAsignatura(AsignaturaCursa asignaturaCursa)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             MySqlDataReader reader = null;
-            string query = "select * from AsignaturaCursa where ci='" + asignaturaCursa.Ci + "' and idClase=" + asignaturaCursa.IdClase + " and orientacion=" + asignaturaCursa.Orientacion + " and anio=" + asignaturaCursa.Anio + " && asignaturaCursada='"+asignaturaCursa.AsignaturaCursada+"';";
+            string query = "select * from AsignaturaCursa where ci='" + asignaturaCursa.Ci + "' and idClase=" + asignaturaCursa.IdClase + " and orientacion=" + asignaturaCursa.Orientacion + " and anio=" + asignaturaCursa.Anio + " && asignaturaCursada='" + asignaturaCursa.AsignaturaCursada + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            bool existe = false;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+        public bool SelectDictandoAsignatura(AsignaturaDictada asignaturaDictando)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from AsignaturaDictada where ci='" + asignaturaDictando.Ci + "' and idClase=" + asignaturaDictando.IdClase + " and orientacion=" + asignaturaDictando.Orientacion + " and anio=" + asignaturaDictando.Anio + " && asignaturaDictada='" + asignaturaDictando.AsigDictada + "';";
+            MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+            reader = select.ExecuteReader();
+            bool existe = false;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            conexion.Close();
+            return existe;
+        }
+        public bool SelectDictandoAsignaturaDesactivada(AsignaturaDictada asignaturaDictando)
+        {
+            MySqlConnection conexion = new MySqlConnection(connection);
+            conexion.Open();
+            MySqlDataReader reader = null;
+            string query = "select * from AsignaturaDictada where ci='" + asignaturaDictando.Ci + "' and idClase=" + asignaturaDictando.IdClase + " and orientacion=" + asignaturaDictando.Orientacion + " and anio=" + asignaturaDictando.Anio + " && asignaturaDictada='" + asignaturaDictando.AsigDictada + "'&& dictando=false;";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
             bool existe = false;
@@ -1613,22 +1688,15 @@ namespace Hatchat.Persistencia
             insertRespondeClaseDo.ExecuteNonQuery();
             conexion.Close();
         }
-        public void AceptarAsignaturaSolicitudClaseDoPorIdSolicitudYIdAsig(int id, string asig)
+        public void AceptarAsignaturaSolicitudClaseDo(AsignaturaSolicitudClaseDo soliAsig)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
-            conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =true where idSolicitudClaseAl=" + id + " and idAsignatura='" + asig + "';", conexion);
+            conexion.Open();    
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =" + soliAsig.Aceptada + " where idSolicitudClaseDo=" + soliAsig.IdSolicitudClaseDo + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig = " + soliAsig.IdClaseAsig + " and oriClaseAsig = " + soliAsig + "; ", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
-        public void InsertAsignaturaDictada(AsignaturaDictada asigDicta)
-        {
-            MySqlConnection conexion = new MySqlConnection(connection);
-            conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into asignaturaDictada values('" + asigDicta.Ci + "'," + asigDicta.IdClase + "," + asigDicta.Orientacion + "," + asigDicta.Anio + ",'" + asigDicta.AsigDictada + "',true);", conexion);
-            insert.ExecuteNonQuery();
-            conexion.Close();
-        }
+        
         public void InsertDicta(Dicta dicta)
         {
             MySqlConnection conexion = new MySqlConnection(connection);

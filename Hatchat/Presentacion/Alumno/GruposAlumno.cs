@@ -376,13 +376,14 @@ namespace Hatchat.Presentacion
             panelParticipantes.Visible = !panelParticipantes.Visible;
             if (panelParticipantes.Visible)
             {
+                panelParticipantesOrdinarios.Controls.Clear();
                 List<Logica.Usuario> usuarios = new Logica.Usuario().SelectParticipantesGrupo(asignaturaCursa);
                 int y = 5;
                 for (int x = 0; x < usuarios.Count; x++)
                 {
                     Label dina = new Label();
                     dina.Height = 46;
-                    dina.Width = 150;
+                    dina.Width = 310;
                     dina.Location = new Point(25, y);
                     dina.ForeColor = Color.White;
                     dina.Font = new Font("Arial", 12.0f);

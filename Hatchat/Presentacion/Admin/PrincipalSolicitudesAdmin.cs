@@ -17,12 +17,10 @@ namespace Hatchat.Presentacion
         List<Logica.ClaseSolicitudClaseAl> claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
         Logica.SolicitudClaseAl soliAl = new Logica.SolicitudClaseAl();
         List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
-        List<Logica.AsignaturaSolicitudClaseAl> asignaturaSolicitudesClaseAlAceptadas = new List<Logica.AsignaturaSolicitudClaseAl>();
 
         List<Logica.ClaseSolicitudClaseDo> claseSolicitudesClaseDo = new List<Logica.ClaseSolicitudClaseDo>();
         List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
         Logica.SolicitudClaseDo soliDo = new Logica.SolicitudClaseDo();
-        List<Logica.AsignaturaSolicitudClaseDo> asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
 
         Logica.SolicitudModif soliMo = new Logica.SolicitudModif();
 
@@ -453,8 +451,6 @@ namespace Hatchat.Presentacion
             claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
             asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
             asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
-            asignaturaSolicitudesClaseAlAceptadas = new List<Logica.AsignaturaSolicitudClaseAl>();
-            asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
             soliAl = new Logica.SolicitudClaseAl();
             soliDo = new Logica.SolicitudClaseDo();
             soliMo = new Logica.SolicitudModif();
@@ -509,7 +505,6 @@ namespace Hatchat.Presentacion
                 lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
                 xlblClase += 160;
-                asignaturaSolicitudesClaseAlAceptadas.AddRange(asignaturaSolicitudesClaseAl);
                 int ychbxAsig = 50;
                 foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAl in asignaturaSolicitudesClaseAl)
                 {
@@ -518,13 +513,7 @@ namespace Hatchat.Presentacion
                         CheckBox dina = new CheckBox();
                         dina.Height = 23;
                         dina.Width = 150;
-                        foreach (Logica.AsignaturaSolicitudClaseAl asignaturaSolicitudClaseAl in asignaturaSolicitudesClaseAlAceptadas)
-                        {
-                            if (asignaturaSolicitudClaseAl.IdAsignatura == asigSoliAl.IdAsignatura && asignaturaSolicitudClaseAl.IdClaseAsig == asigSoliAl.IdClaseAsig && asignaturaSolicitudClaseAl.OriClaseAsig == asigSoliAl.OriClaseAsig)
-                            {
-                                dina.Checked = true;
-                            }
-                        }
+                        dina.Checked = asigSoliAl.Aceptada;
                         dina.ForeColor = Color.White;
                         dina.Font = new Font("Arial", 12.0f);
                         dina.Location = new Point(xchbxAsig, ychbxAsig);
@@ -547,7 +536,7 @@ namespace Hatchat.Presentacion
 
                     if (((CheckBox)sender).Name == "chbxAsig" + asig.IdAsignatura + "Cl" + asig.IdClaseAsig)
                     {
-                        asignaturaSolicitudesClaseAlAceptadas.Add(asig);
+                        asig.Aceptada = true;
                     }
 
                 }
@@ -559,7 +548,7 @@ namespace Hatchat.Presentacion
                 {
                     if (((CheckBox)sender).Name == "chbxAsig" + soliAsi.IdAsignatura + "Cl" + soliAsi.IdClaseAsig)
                     {
-                        asignaturaSolicitudesClaseAlAceptadas.Remove(soliAsi);
+                        soliAsi.Aceptada = false;
                     }
                 }
 
@@ -573,8 +562,7 @@ namespace Hatchat.Presentacion
             claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
             asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
             asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
-            asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
-            asignaturaSolicitudesClaseAlAceptadas = new List<Logica.AsignaturaSolicitudClaseAl>();
+
             soliAl = new Logica.SolicitudClaseAl();
             soliDo = new Logica.SolicitudClaseDo();
             soliMo = new Logica.SolicitudModif();
@@ -628,7 +616,6 @@ namespace Hatchat.Presentacion
                 lblClase.Text = clas.Anio + "°" + clas.Nombre + "\n" + new Logica.Orientacion().SelectOrientacioPorId(claseSoli.OriClase).Nombre;
                 panelContenido.Controls.Add(lblClase);
                 xlblClase += 160;
-                asignaturaSolicitudesClaseDoAceptadas.AddRange(asignaturaSolicitudesClaseDo);
                 int ychbxAsig = 50;
                 foreach (Logica.AsignaturaSolicitudClaseDo asigSoliDo in asignaturaSolicitudesClaseDo)
                 {
@@ -637,13 +624,7 @@ namespace Hatchat.Presentacion
                         CheckBox dina = new CheckBox();
                         dina.Height = 23;
                         dina.Width = 150;
-                        foreach (Logica.AsignaturaSolicitudClaseDo asignaturaSolicitudClaseDo in asignaturaSolicitudesClaseDoAceptadas)
-                        {
-                            if (asignaturaSolicitudClaseDo.IdAsignatura == asigSoliDo.IdAsignatura && asignaturaSolicitudClaseDo.IdClaseAsig == asigSoliDo.IdClaseAsig && asignaturaSolicitudClaseDo.OriClaseAsig == asigSoliDo.OriClaseAsig)
-                            {
-                                dina.Checked = true;
-                            }
-                        }
+                        dina.Checked = asigSoliDo.Aceptada;
                         dina.ForeColor = Color.White;
                         dina.Font = new Font("Arial", 12.0f);
                         dina.Location = new Point(xchbxAsig, ychbxAsig);
@@ -667,7 +648,7 @@ namespace Hatchat.Presentacion
 
                     if (((CheckBox)sender).Name == "chbxAsig" + asig.IdAsignatura + "Cl" + asig.IdClaseAsig)
                     {
-                        asignaturaSolicitudesClaseDoAceptadas.Add(asig);
+                        asig.Aceptada = true; ;
                     }
 
                 }
@@ -679,7 +660,7 @@ namespace Hatchat.Presentacion
                 {
                     if (((CheckBox)sender).Name == "chbxAsig" + soliAsi.IdAsignatura + "Cl" + soliAsi.IdClaseAsig)
                     {
-                        asignaturaSolicitudesClaseDoAceptadas.Remove(soliAsi);
+                        soliAsi.Aceptada = false;
                     }
                 }
 
@@ -693,8 +674,6 @@ namespace Hatchat.Presentacion
             claseSolicitudesClaseAl = new List<Logica.ClaseSolicitudClaseAl>();
             asignaturaSolicitudesClaseAl = new List<Logica.AsignaturaSolicitudClaseAl>();
             asignaturaSolicitudesClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
-            asignaturaSolicitudesClaseDoAceptadas = new List<Logica.AsignaturaSolicitudClaseDo>();
-            asignaturaSolicitudesClaseAlAceptadas = new List<Logica.AsignaturaSolicitudClaseAl>();
             soliAl = new Logica.SolicitudClaseAl();
             soliDo = new Logica.SolicitudClaseDo();
             soliMo = new Logica.SolicitudModif();
@@ -738,65 +717,139 @@ namespace Hatchat.Presentacion
 
             if (soliAl.IdSolicitudClaseAl != 0)
             {
-                bool error = false;
                 string fallo = "Las siguientes asignaturas ya estaban registradas:";
+                string ingresadas = "Las siguientes asignaturas fueron ingresadas con existo:";
                 foreach (Logica.ClaseSolicitudClaseAl claseSolicitudClaseAl in claseSolicitudesClaseAl)
                 {
+                    bool cursar = false;
                     Logica.Cursa cursa = new Logica.Cursa(claseSolicitudClaseAl.IdClase, soliAl.Alumno, claseSolicitudClaseAl.OriClase, DateTime.Now.Year);
-                    if (!cursa.SelectCursando())
+                    foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAcep in asignaturaSolicitudesClaseAl)
                     {
-                        cursa.InsertCursa();
-                    }
-                    foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAcep in asignaturaSolicitudesClaseAlAceptadas)
-                    {
-                        if(claseSolicitudClaseAl.IdClase == asigSoliAcep.IdClaseAsig && claseSolicitudClaseAl.OriClase == asigSoliAcep.OriClaseAsig)
+                        if (claseSolicitudClaseAl.IdClase == asigSoliAcep.IdClaseAsig && claseSolicitudClaseAl.OriClase == asigSoliAcep.OriClaseAsig)
                         {
-                            Logica.AsignaturaCursa asigCursa = new Logica.AsignaturaCursa(soliAl.Alumno, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
-                            if (asigCursa.SelectCursandoAsignatura())
-                            {
-                                if (asigCursa.SelectCursandoAsignaturaDesactivada())
-                                {
-                                    asigCursa.ActivarAsignaturaCursa();
-                                }
-                                else
-                                {
-                                    error = true;
-                                    fallo += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre;
-                                }
-                            }
-                            else
-                            {
-                                asigCursa.InsertAsignaturaCursa();
-                                asigSoliAcep.AceptarAsignaturaSolicitudClaseAlPorIdSolicitudYIdAsig(asigSoliAcep.IdSolicitudClaseAl, asigSoliAcep.IdAsignatura);
-                            }
-                            
-                            
+                            cursar = true;
                         }
-                        
+                    }
+                    if (cursar)
+                    {
+                        if (!cursa.SelectCursando())
+                        {
+                            cursa.InsertCursa();
+                        }
+                        foreach (Logica.AsignaturaSolicitudClaseAl asigSoliAcep in asignaturaSolicitudesClaseAl)
+                        {
+                            if (claseSolicitudClaseAl.IdClase == asigSoliAcep.IdClaseAsig && claseSolicitudClaseAl.OriClase == asigSoliAcep.OriClaseAsig)
+                            {
+                                if (asigSoliAcep.Aceptada)
+                                {
+                                    Logica.AsignaturaCursa asigCursa = new Logica.AsignaturaCursa(soliAl.Alumno, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
+                                    if (asigCursa.SelectCursandoAsignatura())
+                                    {
+                                        if (asigCursa.SelectCursandoAsignaturaDesactivada())
+                                        {
+                                            asigCursa.ActivarAsignaturaCursa();
+                                            ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+                                        }
+                                        else
+                                        {
+                                            fallo += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " "+ new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        asigCursa.InsertAsignaturaCursa();
+                                        ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+
+                                    }
+                                }
+                                asigSoliAcep.AceptarAsignaturaSolicitudClaseAl();
+
+                            }
+
+                        }
                     }
                 }
                 soliAl.AceptarSolicitudClaseAlPorIdYAdmin(soliAl.IdSolicitudClaseAl, Login.encontrado.Ci);
-                MessageBox.Show("");
+                if(ingresadas!= "Las siguientes asignaturas fueron ingresadas con existo:")
+                {
+                    MessageBox.Show(ingresadas);
+                }
+                if(ingresadas != "Las siguientes asignaturas ya estaban registradas:")
+                {
+                    MessageBox.Show(fallo);
+                }
+                
             }
-            asignaturaSolicitudesClaseAlAceptadas.Clear();
+            
             asignaturaSolicitudesClaseAl.Clear();
             claseSolicitudesClaseAl.Clear();
             soliAl = new Logica.SolicitudClaseAl();
 
             if (soliDo.IdSolicitudClaseDo != 0)
             {
-                foreach (Logica.AsignaturaSolicitudClaseDo asigSoliAcep in asignaturaSolicitudesClaseDoAceptadas)
+                string fallo = "Las siguientes asignaturas ya estaban registradas:";
+                string ingresadas = "Las siguientes asignaturas fueron ingresadas con existo:";
+                foreach (Logica.ClaseSolicitudClaseDo claseSolicitudClaseDo in claseSolicitudesClaseDo)
                 {
-                    Logica.Dicta dicta = new Logica.Dicta(asigSoliAcep.IdClaseAsig, soliDo.Docente, asigSoliAcep.OriClaseAsig, DateTime.Now.Year);
-                    dicta.InsertDicta();
-                    Logica.AsignaturaDictada asigDictada = new Logica.AsignaturaDictada(soliDo.Docente, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
-                    asigDictada.InsertAsignaturaDictada();
-                    asigSoliAcep.AceptarAsignaturaSolicitudClaseDoPorIdSolicitudYIdAsig(asigSoliAcep.IdSolicitudClaseDo, asigSoliAcep.IdAsignatura);
+                    bool dictar = false;
+                    Logica.Dicta dicta = new Logica.Dicta(claseSolicitudClaseDo.IdClase, soliDo.Docente, claseSolicitudClaseDo.OriClase, DateTime.Now.Year);
+                    foreach (Logica.AsignaturaSolicitudClaseDo asigSoliAcep in asignaturaSolicitudesClaseDo)
+                    {
+                        if (claseSolicitudClaseDo.IdClase == asigSoliAcep.IdClaseAsig && claseSolicitudClaseDo.OriClase == asigSoliAcep.OriClaseAsig)
+                        {
+                            dictar = true;
+                        }
+                    }
+                    if (dictar)
+                    {
+                        if (!dicta.SelectDictando())
+                        {
+                            dicta.InsertDicta();
+                        }
+                        foreach (Logica.AsignaturaSolicitudClaseDo asigSoliAcep in asignaturaSolicitudesClaseDo)
+                        {
+                            if (claseSolicitudClaseDo.IdClase == asigSoliAcep.IdClaseAsig && claseSolicitudClaseDo.OriClase == asigSoliAcep.OriClaseAsig)
+                            {
+                                if (asigSoliAcep.Aceptada)
+                                {
+                                    Logica.AsignaturaDictada asigDicta = new Logica.AsignaturaDictada(soliDo.Docente, asigSoliAcep.IdClaseAsig, asigSoliAcep.OriClaseAsig, DateTime.Now.Year, asigSoliAcep.IdAsignatura, true);
+                                    if (asigDicta.SelectDictandoAsignatura())
+                                    {
+                                        if (asigDicta.SelectDictandoAsignaturaDesactivada())
+                                        {
+                                            asigDicta.ActivarAsignaturaDicta();
+                                            ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigDicta.AsigDictada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigDicta.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigDicta.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigDicta.Orientacion).Nombre;
+                                        }
+                                        else
+                                        {
+                                            fallo += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigDicta.AsigDictada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigDicta.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigDicta.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigDicta.Orientacion).Nombre;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        asigDicta.InsertAsignaturaDictada();
+                                        ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigDicta.AsigDictada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigDicta.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigDicta.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigDicta.Orientacion).Nombre;
+
+                                    }
+                                }
+                                asigSoliAcep.AceptarAsignaturaSolicitudClaseDo();
+
+                            }
+
+                        }
+                    }
                 }
                 soliDo.AceptarSolicitudClaseDoPorIdYAdmin(soliDo.IdSolicitudClaseDo, Login.encontrado.Ci);
+                if (ingresadas != "Las siguientes asignaturas fueron ingresadas con existo:")
+                {
+                    MessageBox.Show(ingresadas);
+                }
+                if (ingresadas != "Las siguientes asignaturas ya estaban registradas:")
+                {
+                    MessageBox.Show(fallo);
+                }
             }
 
-            asignaturaSolicitudesClaseDoAceptadas.Clear();
             asignaturaSolicitudesClaseDo.Clear();
             claseSolicitudesClaseDo.Clear();
             soliDo = new Logica.SolicitudClaseDo();
@@ -805,6 +858,7 @@ namespace Hatchat.Presentacion
             {
                 soliMo.Aceptada = true;
                 soliMo.AceptarSolicitudModifPorSoliYAdmin(Login.encontrado.Ci, true);
+                MessageBox.Show("Se ha modificado la contraseña correctamente");
             }
             soliMo = new Logica.SolicitudModif();
             panelSolicitud.Visible = false;
@@ -816,7 +870,6 @@ namespace Hatchat.Presentacion
             {
                 soliAl.AceptarSolicitudClaseAlPorIdYAdmin(soliAl.IdSolicitudClaseAl, Login.encontrado.Ci);
             }
-            asignaturaSolicitudesClaseAlAceptadas.Clear();
             asignaturaSolicitudesClaseAl.Clear();
             claseSolicitudesClaseAl.Clear();
             soliAl = new Logica.SolicitudClaseAl();
@@ -826,7 +879,6 @@ namespace Hatchat.Presentacion
                 soliDo.AceptarSolicitudClaseDoPorIdYAdmin(soliDo.IdSolicitudClaseDo, Login.encontrado.Ci);
             }
 
-            asignaturaSolicitudesClaseDoAceptadas.Clear();
             asignaturaSolicitudesClaseDo.Clear();
             claseSolicitudesClaseDo.Clear();
             soliDo = new Logica.SolicitudClaseDo();
