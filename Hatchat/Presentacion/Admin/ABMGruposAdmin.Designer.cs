@@ -1642,7 +1642,6 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.PanelSolicitudesPendientes);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.panelnav);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelModificarClase);
             this.Controls.Add(this.panelBajaClase);
             this.Controls.Add(this.panelAltaClase);
@@ -1652,6 +1651,7 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.panelModificarOrientacion);
             this.Controls.Add(this.panelBajaOrientacion);
             this.Controls.Add(this.panelAltaOrientacion);
+            this.Controls.Add(this.panel3);
             this.Name = "ABMGruposAdmin";
             this.Text = "AMBAlumnoAdmin";
             this.Load += new System.EventHandler(this.ABMAlumnoAdmin_Load);
