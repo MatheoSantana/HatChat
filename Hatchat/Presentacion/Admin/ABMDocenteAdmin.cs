@@ -982,7 +982,7 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+                btnLu.BackColor = Color.FromArgb(61, 53, 50);
             }
         }
 

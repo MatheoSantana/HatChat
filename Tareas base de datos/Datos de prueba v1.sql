@@ -28,7 +28,6 @@ insert into Asignatura
 values ('mate3','Matematica',3,true);
 
 
-
 insert into Asignatura
 values ('progi1','Programacion I',1,true);
 
@@ -63,11 +62,11 @@ insert into Contiene
 values('mate3',2);
 
 /*---------------------------------------------------------Ingreso-Clase--------------------------------------------------------*/
-insert into Clase(nombre,anio,orientacion)
-values ('BA',3,1);
+insert into Clase(nombre,anio,orientacion,activo)
+values ('BA',3,1,true);
 
-insert into Clase(nombre,anio,orientacion)
-values ('BB',3,2); 
+insert into Clase(nombre,anio,orientacion,activo)
+values ('BB',3,2,true); 
 
 /*------------------------------------------------------Ingreso-Administrador---------------------------------------------------*/
 insert into Usuario
@@ -165,7 +164,7 @@ insert into Dicta
 values('29993223',2,2,2021);
 
 insert into asignaturaDictada
-values('29993223',1,1,2021,'mate3',true);
+values('29993223',1,1,2021,'progds3',true);
 
 /*--Docente-3--*/
 insert into Usuario
@@ -227,24 +226,24 @@ values(1,'00000000');
 /*-------------------------------------------Ingreso-Solicitud-Clase-Alumno-----------------------------------------*/
 
 insert into SolicitudClaseAl(fechaHora,pendiente,alumno)
-values('2021-03-17T23:34:09',false,'52848682');
+values('2021-03-17T23:34:09',true,'52848682');
 
 insert into claseSolicitudClaseAl
 values(1,1,1);
 
 insert into asignaturaSolicitudClaseAl
-values(1,1,1,'progds3',true);
+values(1,1,1,'progds3',false);
 
 insert into asignaturaSolicitudClaseAl
-values(1,1,1,'bdd2',true);
+values(1,1,1,'bdd2',false);
 
 insert into asignaturaSolicitudClaseAl
-values(1,1,1,'progdw3',true);
+values(1,1,1,'progdw3',false);
 
 insert into asignaturaSolicitudClaseAl
 values(1,1,1,'mate3',false);
 
-insert into RespondeClase
+insert into RespondeClaseAl
 values(1,'00000000');
 
 /*-------------------------------------------Ingreso-Solicitud-Clase-Docente-----------------------------------------*/
@@ -276,7 +275,7 @@ values(1,2,2,'bdd2',false);
 insert into asignaturaSolicitudClaseDo
 values(1,2,2,'mate3',false);
 
-insert into RespondeClase2
+insert into RespondeClaseDo
 values(1,'00000000');
 
 /*----------------------------------------------Ingreso-Solicitud-de-Chat---------------------------------------------*/

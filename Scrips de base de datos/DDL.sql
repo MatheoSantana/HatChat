@@ -1,5 +1,4 @@
 
-
 /*------------------------------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------DDL-------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------------------*/
@@ -17,12 +16,12 @@ create table Usuario(
 ci char(8) not null,
 apodo varchar(30) not null,
 nombre varchar(30) not null,
-contraseña varchar(30) not null,
+contrasenia varchar(30) not null,
 apellido varchar(30) not null,
 segApellido varchar(30),
 resSeguridad varchar(30) not null,
 foto mediumblob,
-activo boolean,
+activo boolean not null,
 id int not null,
 primary key(ci),
 foreign key(id) references PreguntaSeguridad(id));
@@ -46,18 +45,19 @@ create table Asignatura(
 id varchar(10) not null,
 nombre varchar(30) not null,
 anio int not null,
-activo boolean,
+activo boolean not null,
 primary key(id));
 
 create table Orientacion(
 id int auto_increment not null,
-nombre varchar(60) not null,
-activo boolean,
+nombre varchar(60) not null unique,
+activo boolean not null,
 primary key(id));
 
 create table Contiene(
 idAsig varchar(10) not null,
 idOri int not null,
+activo boolean not null,
 primary key(idAsig,idOri),
 foreign key(idAsig) references Asignatura(id),
 foreign key(idOri) references Orientacion(id));
@@ -67,7 +67,7 @@ idClase int auto_increment not null,
 nombre varchar(4) not null,
 anio int not null,
 orientacion int not null,
-activo boolean,
+activo boolean not null,
 primary key(idClase,orientacion),
 foreign key(orientacion) references Orientacion(id));
 
@@ -89,6 +89,7 @@ idSolicitudModif int auto_increment not null,
 fechaHora datetime not null,
 contraNueva varchar(30) not null,
 pendiente boolean not null,
+aceptada boolean,
 usuario char(8) not null,
 primary key(idSolicitudModif,usuario),
 foreign key(usuario) references Usuario(ci));
@@ -170,7 +171,7 @@ foreign key(asignaturaDictada) references Contiene(idAsig));
 
 create table Agenda(
 idAgenda int auto_increment not null,
-nomDia enum("Lunes","Martes","Miercoles","Jueves","Viernes","Sabado") not null,
+nomDia enum("Lunes","Martes","Miercoles","Jueves","Viernes") not null,
 horaInicio time not null,
 horaFin time not null,
 ci char(8) not null,
@@ -217,14 +218,14 @@ primary key(idSolicitudModif,ci),
 foreign key(idSolicitudModif) references SolicitudModif(idSolicitudModif),
 foreign key(ci) references Administrador(ci));
 
-create table RespondeClase(
+create table RespondeClaseAl(
 idSolicitudClaseAl int not null,
 ciAdmin char(8) not null,
 primary key(idSolicitudClaseAl,ciAdmin),
 foreign key(idSolicitudClaseAl) references SolicitudClaseAl(idSolicitudClaseAl),
 foreign key(ciAdmin) references Administrador(ci)); 
 
-create table RespondeClase2(
+create table RespondeClaseDo(
 idSolicitudClaseDo int not null,
 ciAdmin char(8) not null,
 primary key(idSolicitudClaseDo,ciAdmin),
@@ -237,7 +238,7 @@ idClase int not null,
 oriClase int not null,
 asignatura varchar(10) not null,
 fecha date not null,
-horaInico time not null,
+horaInicio time not null,
 horaFin time,
 titulo varchar(60),
 activo boolean not null,

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: hatchat
+-- Host: localhost    Database: Hatchat
 -- ------------------------------------------------------
 -- Server version	5.7.34-log
 
@@ -103,7 +103,7 @@ CREATE TABLE `asignatura` (
   `id` varchar(10) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `anio` int(11) NOT NULL,
-  `activo` tinyint(1) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -145,7 +145,7 @@ CREATE TABLE `asignaturacursa` (
 
 LOCK TABLES `asignaturacursa` WRITE;
 /*!40000 ALTER TABLE `asignaturacursa` DISABLE KEYS */;
-INSERT INTO `asignaturacursa` VALUES ('51972127',2,2,2021,'bdd2',1),('51972127',2,2,2021,'progdw3',1),('52124670',1,1,2021,'bdd2',1),('52124670',1,1,2021,'progds3',1),('52848682',1,1,2021,'bdd2',1),('52848682',1,1,2021,'progds3',1),('52848682',1,1,2021,'progdw3',1);
+INSERT INTO `asignaturacursa` VALUES ('51972127',2,2,2021,'bdd2',1),('51972127',2,2,2021,'progdw3',1),('52124670',1,1,2021,'bdd2',1),('52124670',1,1,2021,'progds3',1),('52848682',1,1,2021,'bdd2',1),('52848682',1,1,2021,'mate3',1),('52848682',1,1,2021,'progds3',1);
 /*!40000 ALTER TABLE `asignaturacursa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +306,7 @@ CREATE TABLE `chateaal` (
 
 LOCK TABLES `chateaal` WRITE;
 /*!40000 ALTER TABLE `chateaal` DISABLE KEYS */;
-INSERT INTO `chateaal` VALUES ('51972127',1,'11:42:16','¡ Agustin ha ingresado al chat !'),('51972127',1,'11:42:57','jajajajajajaj'),('52124670',1,'11:41:02','¡ Mauro ha ingresado al chat !'),('52124670',1,'11:42:45','Queeeee!! hay escrito de bdd, para cuando es?'),('52124670',1,'11:46:42','Uh la baja'),('52124670',1,'11:48:03','Y having q es? es un comando pero para q sirve'),('52848682',1,'11:05:09','Profe, el chat solo puede ser cerrado por el alumno que lo creo. Digame y yo lo cierro'),('52848682',1,'11:40:32','¡ Palme ha ingresado al chat !'),('52848682',1,'11:41:26','En el pdf de consultas, hay un comando que se llama HAVING, este va para el proximo escrito?'),('52848682',1,'11:49:12','Es como el where pero se usa despues de un group by, y en este se puede funciones. Es una restriccion');
+INSERT INTO `chateaal` VALUES ('51972127',1,'11:42:16','¡ Agustin ha ingresado al chat !'),('51972127',1,'11:42:57','jajajajajajaj'),('52124670',1,'11:41:02','¡ Mauro ha ingresado al chat !'),('52124670',1,'11:42:45','Queeeee!! hay escrito de bdd, para cuando es?'),('52124670',1,'11:46:42','Uh la baja'),('52124670',1,'11:48:03','Y having q es? es un comando pero para q sirve'),('52848682',1,'11:40:32','¡ Palme ha ingresado al chat !'),('52848682',1,'11:41:26','En el pdf de consultas, hay un comando que se llama HAVING, este va para el proximo escrito?'),('52848682',1,'11:49:12','Es como el where pero se usa despues de un group by, y en este se puede funciones. Es una restriccion'),('52848682',1,'12:05:09','Profe, el chat solo puede ser cerrado por el alumno que lo creo. Digame y yo lo cierro');
 /*!40000 ALTER TABLE `chateaal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +335,7 @@ CREATE TABLE `chateado` (
 
 LOCK TABLES `chateado` WRITE;
 /*!40000 ALTER TABLE `chateado` DISABLE KEYS */;
-INSERT INTO `chateado` VALUES ('12314542',1,'11:40:32','¡ Jose ha ingresado al chat !'),('12314542',1,'11:42:10','Si, having va, ya que forma parte de los temas de consultas'),('12314542',1,'11:45:32','El escrito es para el proximo martes, aun tiene una semana para repasar. este mas atento!!'),('12314542',1,'11:50:43','Muy bien matheo!'),('12314542',1,'12:03:58','Chicos voy a cerrar el chat que ya casi es la hora, si alguien tiene alguna otra consulta, este es el momento');
+INSERT INTO `chateado` VALUES ('12314542',1,'11:40:33','¡ Jose ha ingresado al chat !'),('12314542',1,'11:42:10','Si, having va, ya que forma parte de los temas de consultas'),('12314542',1,'11:45:32','El escrito es para el proximo martes, aun tiene una semana para repasar. este mas atento!!'),('12314542',1,'11:50:43','Muy bien matheo!'),('12314542',1,'12:03:58','Chicos voy a cerrar el chat que ya casi es la hora, si alguien tiene alguna otra consulta, este es el momento');
 /*!40000 ALTER TABLE `chateado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +351,7 @@ CREATE TABLE `clase` (
   `nombre` varchar(4) NOT NULL,
   `anio` int(11) NOT NULL,
   `orientacion` int(11) NOT NULL,
-  `activo` tinyint(1) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
   PRIMARY KEY (`idClase`,`orientacion`),
   KEY `orientacion` (`orientacion`),
   CONSTRAINT `clase_ibfk_1` FOREIGN KEY (`orientacion`) REFERENCES `orientacion` (`id`)
@@ -364,7 +364,7 @@ CREATE TABLE `clase` (
 
 LOCK TABLES `clase` WRITE;
 /*!40000 ALTER TABLE `clase` DISABLE KEYS */;
-INSERT INTO `clase` VALUES (1,'BA',3,1,NULL),(2,'BB',3,2,NULL);
+INSERT INTO `clase` VALUES (1,'BA',3,1,1),(2,'BB',3,2,1);
 /*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -576,8 +576,9 @@ DROP TABLE IF EXISTS `orientacion`;
 CREATE TABLE `orientacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
-  `activo` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre` (`nombre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -643,57 +644,57 @@ INSERT INTO `responde` VALUES (1,'00000000');
 UNLOCK TABLES;
 
 --
--- Table structure for table `respondeclase`
+-- Table structure for table `respondeclaseal`
 --
 
-DROP TABLE IF EXISTS `respondeclase`;
+DROP TABLE IF EXISTS `respondeclaseal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `respondeclase` (
+CREATE TABLE `respondeclaseal` (
   `idSolicitudClaseAl` int(11) NOT NULL,
   `ciAdmin` char(8) NOT NULL,
   PRIMARY KEY (`idSolicitudClaseAl`,`ciAdmin`),
   KEY `ciAdmin` (`ciAdmin`),
-  CONSTRAINT `respondeclase_ibfk_1` FOREIGN KEY (`idSolicitudClaseAl`) REFERENCES `solicitudclaseal` (`idSolicitudClaseAl`),
-  CONSTRAINT `respondeclase_ibfk_2` FOREIGN KEY (`ciAdmin`) REFERENCES `administrador` (`ci`)
+  CONSTRAINT `respondeclaseal_ibfk_1` FOREIGN KEY (`idSolicitudClaseAl`) REFERENCES `solicitudclaseal` (`idSolicitudClaseAl`),
+  CONSTRAINT `respondeclaseal_ibfk_2` FOREIGN KEY (`ciAdmin`) REFERENCES `administrador` (`ci`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `respondeclase`
+-- Dumping data for table `respondeclaseal`
 --
 
-LOCK TABLES `respondeclase` WRITE;
-/*!40000 ALTER TABLE `respondeclase` DISABLE KEYS */;
-INSERT INTO `respondeclase` VALUES (1,'00000000');
-/*!40000 ALTER TABLE `respondeclase` ENABLE KEYS */;
+LOCK TABLES `respondeclaseal` WRITE;
+/*!40000 ALTER TABLE `respondeclaseal` DISABLE KEYS */;
+INSERT INTO `respondeclaseal` VALUES (1,'00000000');
+/*!40000 ALTER TABLE `respondeclaseal` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `respondeclase2`
+-- Table structure for table `respondeclasedo`
 --
 
-DROP TABLE IF EXISTS `respondeclase2`;
+DROP TABLE IF EXISTS `respondeclasedo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `respondeclase2` (
+CREATE TABLE `respondeclasedo` (
   `idSolicitudClaseDo` int(11) NOT NULL,
   `ciAdmin` char(8) NOT NULL,
   PRIMARY KEY (`idSolicitudClaseDo`,`ciAdmin`),
   KEY `ciAdmin` (`ciAdmin`),
-  CONSTRAINT `respondeclase2_ibfk_1` FOREIGN KEY (`idSolicitudClaseDo`) REFERENCES `solicitudclasedo` (`idSolicitudClaseDo`),
-  CONSTRAINT `respondeclase2_ibfk_2` FOREIGN KEY (`ciAdmin`) REFERENCES `administrador` (`ci`)
+  CONSTRAINT `respondeclasedo_ibfk_1` FOREIGN KEY (`idSolicitudClaseDo`) REFERENCES `solicitudclasedo` (`idSolicitudClaseDo`),
+  CONSTRAINT `respondeclasedo_ibfk_2` FOREIGN KEY (`ciAdmin`) REFERENCES `administrador` (`ci`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `respondeclase2`
+-- Dumping data for table `respondeclasedo`
 --
 
-LOCK TABLES `respondeclase2` WRITE;
-/*!40000 ALTER TABLE `respondeclase2` DISABLE KEYS */;
-INSERT INTO `respondeclase2` VALUES (1,'00000000');
-/*!40000 ALTER TABLE `respondeclase2` ENABLE KEYS */;
+LOCK TABLES `respondeclasedo` WRITE;
+/*!40000 ALTER TABLE `respondeclasedo` DISABLE KEYS */;
+INSERT INTO `respondeclasedo` VALUES (1,'00000000');
+/*!40000 ALTER TABLE `respondeclasedo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -828,12 +829,12 @@ CREATE TABLE `usuario` (
   `ci` char(8) NOT NULL,
   `apodo` varchar(30) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `contraseña` varchar(30) NOT NULL,
+  `contrasenia` varchar(30) NOT NULL,
   `apellido` varchar(30) NOT NULL,
   `segApellido` varchar(30) DEFAULT NULL,
   `resSeguridad` varchar(30) NOT NULL,
   `foto` mediumblob,
-  `activo` tinyint(1) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
   `id` int(11) NOT NULL,
   PRIMARY KEY (`ci`),
   KEY `id` (`id`),
@@ -860,4 +861,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-17 15:15:01
+-- Dump completed on 2021-09-25 21:36:04
