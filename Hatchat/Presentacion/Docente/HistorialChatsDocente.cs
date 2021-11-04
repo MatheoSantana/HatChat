@@ -521,15 +521,8 @@ namespace Hatchat.Presentacion
             {
                 chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Panel)sender).Name));
             }
+            lblHoras.Text += "\n" + chat.HoraInicio.ToString("HH") + chat.HoraInicio.ToString("mm") + " " + chat.HoraFin.ToString("HH") + chat.HoraFin.ToString("mm");
 
-            List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(Login.encontrado.Ci);
-            foreach (Logica.Agenda ag in agendas)
-            {
-                if (ag.EnHora(ag))
-                {
-                    lblHoras.Text += ag.HoraInicio + " " + ag.HoraFin;
-                }
-            }
 
             lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);

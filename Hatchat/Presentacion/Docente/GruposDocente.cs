@@ -10,6 +10,8 @@ namespace Hatchat.Presentacion
 {
     public partial class GruposDocente : Form
     {
+        string horario;
+
         public Form login;
         public Form principalChatDocente;
         public Form mensajesDocente;
@@ -365,6 +367,13 @@ namespace Hatchat.Presentacion
             btnEntrarGrupo.Enabled = true;
             panelEntrarGrupo.Enabled = true;
             panelContenedorGrupos.Enabled = true;
+            panelHorariosPorDia.Controls.Clear();
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
+            lblHorariosDelDia.Text = horario;
 
         }
 

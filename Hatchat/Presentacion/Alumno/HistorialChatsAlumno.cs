@@ -17,9 +17,13 @@ namespace Hatchat.Presentacion
         string filtrarntAsignatura;
         string filtrarFecha;
         string filtrarntFecha;
-
+        string horaInicio;
+        string horaFin;
+        string fecha;
+        string docente;
         string msgCerrarSesion;
         string cerrarSesionTitulo;
+        Image imagenProfesor;
 
         public Form login;
         public Form mensajesAlumno;
@@ -49,8 +53,8 @@ namespace Hatchat.Presentacion
             
             if (Login.idioma == "Español")
             {
-
                 lblHistrialChat.Text = "Historial de Chats";
+                lblHistrialChat.Location = new Point(-1, 0);
                 btnFiltrarAsignatura.Text = "Filtrar Asignatura";
                 filtrarAsignatura = "Filtrar Asignatura";
                 filtrarntAsignatura = "Dejar de filtrar asignatura";
@@ -58,43 +62,44 @@ namespace Hatchat.Presentacion
                 filtrarFecha = "Filtrar Fecha";
                 filtrarntFecha = "Dejar de filtrar fecha";
                 btnVolver.Text = "Volver";
-                /*
-                lblOrientacion.Text = "Orientación:";
-                lblAnio.Text = "Año:";
-                lblClase.Text = "Clase";
-                btnModificarGrupo.Text = "Modificar";
-                btnRealizar.Text = "Enviar";
-                lblDisponibles.Text = "Disponibles:";
-                btnLunes.Text = "Lunes";
-                btnMartes.Text = "Martes";
-                btnMiercoles.Text = "Miercoles";
-                btnJueves.Text = "Jueves";
-                btnViernes.Text = "Viernes";
-                lblSinNada.Text = "Usted no se encuentra en ningun grupo.";
-                btnSalirGrupo.Text = "Salir del grupo";
+                lblHorario.Text = "Horario de actividad:";
                 btnParticipantes.Text = "Participantes";
-                lblParticipantes.Text = "Participantes";
+                docente = "Docente: ";
+                lblDocenteParticipantes.Text = docente;
+                lblHostParticipantes.Text = "Host: ";
+                lblParticipantes.Text = "Participantes: ";
+                lblBienvenido.Text = "Usted no tiene chats archivados";
+                horaInicio = "Hora inicio: ";
+                horaFin = "Hora Fin: ";
+                fecha = "Fecha: ";
                 error = " comuníquese con el administrador.";
-                profesor = "Profesor: ";
-                horariosLunes = "Horarios del dia: Lunes:";
-                horariosMartes = "Horarios del dia: Martes:";
-                horariosMiercoles = "Horarios del dia: Miercoles:";
-                horariosJueves = "Horarios del dia: Jueves:";
-                horariosViernes = "Horarios del dia: Viernes:";
-                msgSalirDelGrupo = "¿Desea salir del grupo?";
-                titSalirDelGrupo = "Salir del grupo";
-                salisteDelGrupo = "Se ha salido del grupo correctamente";
-                errorSolicitud = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas:";
-                soliIngreso = "Se ha enviado la solicitud de ingreso";
-                alMenosUna = "Debe ingresar al menos una asignatura para solicitar el ingreso a la clase";
                 msgCerrarSesion = "¿Desea cerrar sesion?";
                 cerrarSesionTitulo = "Cerrar Sesion";
-                */
-
             }
             else
             {
-                
+                lblHistrialChat.Text = "Chat History";
+                lblHistrialChat.Location = new Point(44, 0);
+                btnFiltrarAsignatura.Text = "Filter Subject";
+                filtrarAsignatura = "Filter Subject";
+                filtrarntAsignatura = "Stop filtering subject";
+                btnFiltrarFecha.Text = "Filter Date";
+                filtrarFecha = "Filter Date";
+                filtrarntFecha = "Stop filtering date";
+                btnVolver.Text = "Return";
+                lblHorario.Text = "Hours of activity:";
+                btnParticipantes.Text = "Participants";
+                docente = "Teacher: ";
+                lblDocenteParticipantes.Text = docente;
+                lblHostParticipantes.Text = "Host: ";
+                lblParticipantes.Text = "Participants: ";
+                lblBienvenido.Text = "You do not have archived chats";
+                horaInicio = "Start Time: ";
+                horaFin = "End Time: ";
+                fecha = "Date: ";
+                error = "  Contact an administrator.";
+                msgCerrarSesion = "Do you want to log out?";
+                cerrarSesionTitulo = "Logout";
             }
             try
             {
@@ -109,6 +114,7 @@ namespace Hatchat.Presentacion
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pcbxLogo.Image = Image.FromFile("Logo Completa.png");
+                imagenProfesor = Image.FromFile("profesor.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -213,7 +219,7 @@ namespace Hatchat.Presentacion
         }
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            DialogResult cerrarSesion = MessageBox.Show(msgCerrarSesion, cerrarSesionTitulo, MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
                 Login.encontrado = new Logica.Usuario();
@@ -333,10 +339,9 @@ namespace Hatchat.Presentacion
                     Logica.Docente doc = new Logica.Docente();
                     doc.Nombre = us.Nombre;
                     doc.Primer_apellido = us.Primer_apellido;
-                    doc.FotoDePerfil = us.FotoDePerfil;
 
                     PictureBox picPhoto = new PictureBox();
-                    picPhoto.Image = doc.ByteArrayToImage(doc.FotoDePerfil);
+                    picPhoto.Image = imagenProfesor;
                     picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                     picPhoto.Height = 69;
                     picPhoto.Width = 69;
@@ -361,7 +366,7 @@ namespace Hatchat.Presentacion
                     docente.ForeColor = Color.White;
                     docente.Font = new Font("Arial", 12.0f);
                     docente.Name = "lblCD" + chat.IdChat.ToString();
-                    docente.Text = "Docente:\n" + doc.Nombre + " " + doc.Primer_apellido;
+                    docente.Text = this.docente+"\n" + doc.Nombre + " " + doc.Primer_apellido;
                     docente.Click += new EventHandler(AbrirChat);
 
                     Label inicio = new Label();
@@ -371,7 +376,7 @@ namespace Hatchat.Presentacion
                     inicio.ForeColor = Color.White;
                     inicio.Font = new Font("Arial", 12.0f);
                     inicio.Name = "lblCI" + chat.IdChat.ToString();
-                    inicio.Text = "Hora inicio:\n" + chat.HoraInicio.ToString("HH") + ":" + chat.HoraInicio.ToString("mm");
+                    inicio.Text = horaInicio + "\n" + chat.HoraInicio.ToString("HH") + ":" + chat.HoraInicio.ToString("mm");
                     inicio.Click += new EventHandler(AbrirChat);
 
                     Label fin = new Label();
@@ -381,7 +386,7 @@ namespace Hatchat.Presentacion
                     fin.ForeColor = Color.White;
                     fin.Font = new Font("Arial", 12.0f);
                     fin.Name = "lblCF" + chat.IdChat.ToString();
-                    fin.Text = "Hora fin:\n" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
+                    fin.Text = horaFin + "\n" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
                     fin.Click += new EventHandler(AbrirChat);
 
                     Label fecha = new Label();
@@ -391,7 +396,7 @@ namespace Hatchat.Presentacion
                     fecha.ForeColor = Color.White;
                     fecha.Font = new Font("Arial", 12.0f);
                     fecha.Name = "lblCI" + chat.IdChat.ToString();
-                    fecha.Text = "Fecha:\n" + chat.Fecha.ToString("dd") + "/" + chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
+                    fecha.Text =  this.fecha + "\n" + chat.Fecha.ToString("dd") + "/" + chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
                     fecha.Click += new EventHandler(AbrirChat);
 
                     Panel panel = new Panel();
@@ -481,7 +486,7 @@ namespace Hatchat.Presentacion
                     Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(chateaDos[0].Ci);
 
                     PictureBox picPhoto = new PictureBox();
-                    picPhoto.Image = Image.FromFile("profesor.png");
+                    picPhoto.Image = imagenProfesor;
                     picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
                     picPhoto.Height = 69;
                     picPhoto.Width = 69;
@@ -506,7 +511,7 @@ namespace Hatchat.Presentacion
                     docente.ForeColor = Color.White;
                     docente.Font = new Font("Arial", 12.0f);
                     docente.Name = "lblCD" + chat.IdChat.ToString();
-                    docente.Text = "Docente:\n" + doc.Nombre + " " + doc.Primer_apellido;
+                    docente.Text = this.docente + "\n" + doc.Nombre + " " + doc.Primer_apellido;
                     docente.Click += new EventHandler(AbrirChat);
                     
                     Label inicio = new Label();
@@ -516,7 +521,7 @@ namespace Hatchat.Presentacion
                     inicio.ForeColor = Color.White;
                     inicio.Font = new Font("Arial", 12.0f);
                     inicio.Name = "lblCI" + chat.IdChat.ToString();
-                    inicio.Text = "Hora inicio:\n" + chat.HoraInicio.ToString("HH") + ":" + chat.HoraInicio.ToString("mm");
+                    inicio.Text = horaInicio + "\n" + chat.HoraInicio.ToString("HH") + ":" + chat.HoraInicio.ToString("mm");
                     inicio.Click += new EventHandler(AbrirChat);
 
                     Label fin = new Label();
@@ -526,7 +531,7 @@ namespace Hatchat.Presentacion
                     fin.ForeColor = Color.White;
                     fin.Font = new Font("Arial", 12.0f);
                     fin.Name = "lblCF" + chat.IdChat.ToString();
-                    fin.Text = "Hora fin:\n" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
+                    fin.Text = horaFin + "\n" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
                     fin.Click += new EventHandler(AbrirChat);
 
                     Label fecha = new Label();
@@ -536,7 +541,7 @@ namespace Hatchat.Presentacion
                     fecha.ForeColor = Color.White;
                     fecha.Font = new Font("Arial", 12.0f);
                     fecha.Name = "lblCI" + chat.IdChat.ToString();
-                    fecha.Text = "Fecha:\n" + chat.Fecha.ToString("dd") +"/"+ chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
+                    fecha.Text = this.fecha + "\n" + chat.Fecha.ToString("dd") +"/"+ chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
                     fecha.Click += new EventHandler(AbrirChat);
                     
                     Panel panel = new Panel();
@@ -591,20 +596,14 @@ namespace Hatchat.Presentacion
 
             Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCiInclusivo(chat.Asignatura, Login.encontrado.Ci);
             Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(chat.Asignatura, asignaturaCursada.IdClase));
-            List<Logica.Agenda> agendas = new Logica.Agenda().SelectAgendasPorCi(doc.Ci);
-            foreach (Logica.Agenda ag in agendas)
-            {
-                if (ag.EnHora(ag))
-                {
-                    lblHoras.Text += "\n"+ag.HoraInicio + " " + ag.HoraFin;
-                }
-            }
+
+            lblHoras.Text += "\n" + chat.HoraInicio.ToString("HH") + chat.HoraInicio.ToString("mm") + " " + chat.HoraFin.ToString("HH") + chat.HoraFin.ToString("mm");
 
             lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursada.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);
             abierto = chat;
             
-            pcbxMaterialDatosClase.Image = Image.FromFile("profesor.png");
+            pcbxMaterialDatosClase.Image = imagenProfesor;
             tmrCargChat.Enabled = true;
             mensajs.Clear();
         }
@@ -809,7 +808,8 @@ namespace Hatchat.Presentacion
             if (panelParticipantes.Visible)
             {
                 List<Logica.Usuario> usuarios = new Logica.Usuario().SelectParticipantes(abierto.IdChat);
-                lblDocenteParticipantes.Text = "Docente: " + usuarios[1].Nombre + " " + usuarios[1].Primer_apellido;
+                string docentePart=
+                lblDocenteParticipantes.Text = docente + usuarios[1].Nombre + " " + usuarios[1].Primer_apellido;
                 lblHostParticipantes.Text = "Host: " + usuarios[0].Nombre + " " + usuarios[0].Primer_apellido;
                 int y = 5;
                 for(int x=2; x < usuarios.Count; x++)

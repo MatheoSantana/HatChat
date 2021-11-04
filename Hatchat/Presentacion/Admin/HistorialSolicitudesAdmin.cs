@@ -42,7 +42,6 @@ namespace Hatchat.Presentacion
             InitializeComponent();
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            ClientSize = new Size(1280, 720);
             panelSolicitud.Visible = false;
             try
             {

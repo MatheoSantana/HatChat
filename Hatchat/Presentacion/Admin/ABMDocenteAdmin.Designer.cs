@@ -749,6 +749,7 @@ namespace Hatchat.Presentacion
             // btnNuevaAgenda
             // 
             this.btnNuevaAgenda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(116)))), ((int)(((byte)(110)))));
+            this.btnNuevaAgenda.Enabled = false;
             this.btnNuevaAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNuevaAgenda.Font = new System.Drawing.Font("Arial", 12F);
             this.btnNuevaAgenda.ForeColor = System.Drawing.Color.White;
@@ -1410,11 +1411,11 @@ namespace Hatchat.Presentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelAgenda);
             this.Controls.Add(this.panelAlta);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.PanelABM);
             this.Controls.Add(this.panelNav);
-            this.Controls.Add(this.panelAgenda);
             this.Controls.Add(this.panelModificar);
             this.Controls.Add(this.panelBaja);
             this.Controls.Add(this.panel3);

@@ -13,6 +13,7 @@ namespace Hatchat.Presentacion
 
         string error;
         string profesor;
+        string horario;
         string horariosLunes;
         string horariosMartes;
         string horariosMiercoles;
@@ -91,7 +92,8 @@ namespace Hatchat.Presentacion
                 alMenosUna = "Debe ingresar al menos una asignatura para solicitar el ingreso a la clase";
                 msgCerrarSesion = "¿Desea cerrar sesion?";
                 cerrarSesionTitulo = "Cerrar Sesion";
-
+                horario = "Horarios del dia: ";
+                lblHorariosDelDia.Text = horario;
             }
             else
             {
@@ -112,7 +114,7 @@ namespace Hatchat.Presentacion
                 btnSalirGrupo.Text = "Leave the group";
                 btnParticipantes.Text = "Participants";
                 lblParticipantes.Text = "Participants";
-                error = " Contact an administrator:";
+                error = " Contact an administrator.";
                 profesor = "Teacher: ";
                 horariosLunes = "Hours of the day: Monday:";
                 horariosMartes = "Hours of the day: Tuesday:";
@@ -127,6 +129,8 @@ namespace Hatchat.Presentacion
                 alMenosUna = "You must enter at least one subject to request entry to the class";
                 msgCerrarSesion = "Do you want to log out?";
                 cerrarSesionTitulo = "Logout";
+                horario = "Hours of the day: ";
+                lblHorariosDelDia.Text = horario;
             }
 
             try
@@ -458,6 +462,13 @@ namespace Hatchat.Presentacion
             btnEntrarGrupo.Enabled = true;
             panelEntrarGrupo.Enabled = true;
             panelContenedorGrupos.Enabled = true;
+            panelHorariosPorDia.Controls.Clear();
+            btnLunes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMartes.BackColor = Color.FromArgb(61, 53, 50);
+            btnMiercoles.BackColor = Color.FromArgb(61, 53, 50);
+            btnJueves.BackColor = Color.FromArgb(61, 53, 50);
+            btnViernes.BackColor = Color.FromArgb(61, 53, 50);
+            lblHorariosDelDia.Text = horario;
 
         }
 

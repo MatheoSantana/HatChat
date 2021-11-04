@@ -51,9 +51,9 @@ namespace Hatchat.Presentacion
             this.lblNombreModificarClase = new System.Windows.Forms.Label();
             this.lblModificarClase = new System.Windows.Forms.Label();
             this.lblLinea4 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblClaseModificarClase = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.lblModificar = new System.Windows.Forms.Label();
+            this.lblNuevaClaseModificarClase = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtNuevoNombreModificarClase = new System.Windows.Forms.TextBox();
             this.lblNuevoNombreModificarClase = new System.Windows.Forms.Label();
@@ -381,9 +381,9 @@ namespace Hatchat.Presentacion
             this.panelModificarClase.Controls.Add(this.lblNombreModificarClase);
             this.panelModificarClase.Controls.Add(this.lblModificarClase);
             this.panelModificarClase.Controls.Add(this.lblLinea4);
-            this.panelModificarClase.Controls.Add(this.label4);
+            this.panelModificarClase.Controls.Add(this.lblClaseModificarClase);
             this.panelModificarClase.Controls.Add(this.label5);
-            this.panelModificarClase.Controls.Add(this.lblModificar);
+            this.panelModificarClase.Controls.Add(this.lblNuevaClaseModificarClase);
             this.panelModificarClase.Controls.Add(this.label3);
             this.panelModificarClase.Controls.Add(this.txtNuevoNombreModificarClase);
             this.panelModificarClase.Controls.Add(this.lblNuevoNombreModificarClase);
@@ -446,16 +446,16 @@ namespace Hatchat.Presentacion
             this.lblLinea4.TabIndex = 63;
             this.lblLinea4.Text = "___________________";
             // 
-            // label4
+            // lblClaseModificarClase
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 16F);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(159, 104);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(180, 25);
-            this.label4.TabIndex = 66;
-            this.label4.Text = "Modificar Alumno";
+            this.lblClaseModificarClase.AutoSize = true;
+            this.lblClaseModificarClase.Font = new System.Drawing.Font("Arial", 16F);
+            this.lblClaseModificarClase.ForeColor = System.Drawing.Color.White;
+            this.lblClaseModificarClase.Location = new System.Drawing.Point(159, 104);
+            this.lblClaseModificarClase.Name = "lblClaseModificarClase";
+            this.lblClaseModificarClase.Size = new System.Drawing.Size(67, 25);
+            this.lblClaseModificarClase.TabIndex = 66;
+            this.lblClaseModificarClase.Text = "Clase";
             // 
             // label5
             // 
@@ -468,16 +468,16 @@ namespace Hatchat.Presentacion
             this.label5.TabIndex = 67;
             this.label5.Text = "___________________";
             // 
-            // lblModificar
+            // lblNuevaClaseModificarClase
             // 
-            this.lblModificar.AutoSize = true;
-            this.lblModificar.Font = new System.Drawing.Font("Arial", 16F);
-            this.lblModificar.ForeColor = System.Drawing.Color.White;
-            this.lblModificar.Location = new System.Drawing.Point(159, 267);
-            this.lblModificar.Name = "lblModificar";
-            this.lblModificar.Size = new System.Drawing.Size(180, 25);
-            this.lblModificar.TabIndex = 64;
-            this.lblModificar.Text = "Modificar Alumno";
+            this.lblNuevaClaseModificarClase.AutoSize = true;
+            this.lblNuevaClaseModificarClase.Font = new System.Drawing.Font("Arial", 16F);
+            this.lblNuevaClaseModificarClase.ForeColor = System.Drawing.Color.White;
+            this.lblNuevaClaseModificarClase.Location = new System.Drawing.Point(159, 267);
+            this.lblNuevaClaseModificarClase.Name = "lblNuevaClaseModificarClase";
+            this.lblNuevaClaseModificarClase.Size = new System.Drawing.Size(135, 25);
+            this.lblNuevaClaseModificarClase.TabIndex = 64;
+            this.lblNuevaClaseModificarClase.Text = "Nueva Clase";
             // 
             // label3
             // 
@@ -1741,9 +1741,9 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel PanelSolicitudesPendientes;
         private System.Windows.Forms.Label lblModificarClase;
         private System.Windows.Forms.Label lblLinea4;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblClaseModificarClase;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblModificar;
+        private System.Windows.Forms.Label lblNuevaClaseModificarClase;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtNombreAltaOrientacion;

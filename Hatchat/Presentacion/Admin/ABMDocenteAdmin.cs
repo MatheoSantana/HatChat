@@ -755,6 +755,7 @@ namespace Hatchat.Presentacion
                 doAgenda = new Logica.Usuario().SelectUsuarioCiActivo(txtCedulaAgenda.Text);
                 panelDiasYHorarios.Visible = true;
                 agendas = new Logica.Agenda().SelectAgendasPorCi(txtCedulaAgenda.Text);
+                btnNuevaAgenda.Enabled = true;
             }
             else
             {
@@ -912,7 +913,7 @@ namespace Hatchat.Presentacion
                 if (lu)
                 {
                     Logica.Agenda agenda = new Logica.Agenda();
-                    agenda.Ci = Login.encontrado.Ci;
+                    agenda.Ci = doAgenda.Ci;
                     agenda.HoraInicio = cmbxHoraInicio.SelectedItem.ToString() + ":" + cmbxMinutoInicio.SelectedItem.ToString() + ":00";
                     agenda.HoraFin = cmbxHoraCierre.SelectedItem.ToString() + ":" + cmbxMinutoCierre.SelectedItem.ToString() + ":00";
                     agenda.NomDia = "Lunes";

@@ -53,10 +53,10 @@ namespace Hatchat.Presentacion
             this.lblCedula = new System.Windows.Forms.Label();
             this.lblInformacion = new System.Windows.Forms.Label();
             this.PanelSolicitudesResueltas = new System.Windows.Forms.Panel();
-            this.panelContenedorResueltas = new System.Windows.Forms.Panel();
             this.lblBienvenido = new System.Windows.Forms.Label();
             this.lblLinea = new System.Windows.Forms.Label();
             this.pcbxLogo = new System.Windows.Forms.PictureBox();
+            this.panelContenedorResueltas = new System.Windows.Forms.Panel();
             this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             this.panelNav.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxABMGruposNav)).BeginInit();
@@ -70,8 +70,8 @@ namespace Hatchat.Presentacion
             this.panelTextoChat.SuspendLayout();
             this.panelSolicitud.SuspendLayout();
             this.PanelSolicitudesResueltas.SuspendLayout();
-            this.panelContenedorResueltas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).BeginInit();
+            this.panelContenedorResueltas.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmrSolicitudes
@@ -302,15 +302,6 @@ namespace Hatchat.Presentacion
             this.PanelSolicitudesResueltas.Size = new System.Drawing.Size(740, 490);
             this.PanelSolicitudesResueltas.TabIndex = 52;
             // 
-            // panelContenedorResueltas
-            // 
-            this.panelContenedorResueltas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelContenedorResueltas.Controls.Add(this.PanelSolicitudesResueltas);
-            this.panelContenedorResueltas.Location = new System.Drawing.Point(330, 118);
-            this.panelContenedorResueltas.Name = "panelContenedorResueltas";
-            this.panelContenedorResueltas.Size = new System.Drawing.Size(922, 551);
-            this.panelContenedorResueltas.TabIndex = 0;
-            // 
             // lblBienvenido
             // 
             this.lblBienvenido.AutoSize = true;
@@ -341,6 +332,15 @@ namespace Hatchat.Presentacion
             this.pcbxLogo.Size = new System.Drawing.Size(363, 244);
             this.pcbxLogo.TabIndex = 21;
             this.pcbxLogo.TabStop = false;
+            // 
+            // panelContenedorResueltas
+            // 
+            this.panelContenedorResueltas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelContenedorResueltas.Controls.Add(this.PanelSolicitudesResueltas);
+            this.panelContenedorResueltas.Location = new System.Drawing.Point(330, 118);
+            this.panelContenedorResueltas.Name = "panelContenedorResueltas";
+            this.panelContenedorResueltas.Size = new System.Drawing.Size(922, 551);
+            this.panelContenedorResueltas.TabIndex = 0;
             // 
             // timerCentrar
             // 
@@ -377,8 +377,8 @@ namespace Hatchat.Presentacion
             this.panelSolicitud.PerformLayout();
             this.PanelSolicitudesResueltas.ResumeLayout(false);
             this.PanelSolicitudesResueltas.PerformLayout();
-            this.panelContenedorResueltas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbxLogo)).EndInit();
+            this.panelContenedorResueltas.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
