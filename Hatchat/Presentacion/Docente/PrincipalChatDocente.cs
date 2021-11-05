@@ -10,6 +10,21 @@ namespace Hatchat.Presentacion
 {
     public partial class PrincipalChatDocente : Form
     {
+        string error;
+        string docente;
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+        string tema;
+        string soliEnviada;
+        string entrar;
+        string cerrarChat;
+        string cerrarChatTit;
+        string soliPend;
+        string cerrado;
+        string aceptar;
+        string denegar;
+        Image imagenProfesor;
+
         public Form login;
         public Form mensajesDocente;
         public Form perfilDocente;
@@ -36,6 +51,63 @@ namespace Hatchat.Presentacion
             panelChat.Visible = false;
             panelChatsAIngresar.Visible = false;
             StartPosition = FormStartPosition.CenterScreen;
+            if (Login.idioma == "Español")
+            {
+
+                lblChats.Text = "Chats";
+                lblHorario.Text = "Horario de actividad:";
+                btnParticipantes.Text = "Participantes";
+                docente = "Docente: ";
+                lblDocenteParticipantes.Text = docente;
+                lblHostParticipantes.Text = "Host: ";
+                lblParticipantes.Text = "Participantes: ";
+                lblBienvenido.Text = "Bienvenido";
+
+                tema = "Tema actual: ";
+                soliEnviada = "Solicitud enviada";
+                entrar = "entrar";
+                cerrarChat = "¿Desea cerrar el Chat?";
+                cerrarChatTit = "Cerrar chat";
+                cerrado = "Este chat ha sido cerrado";
+
+                error = " comuníquese con el administrador.";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+
+
+                lblSolicitudes.Text = "Solicitudes";
+                soliPend = "No hay solicitudes pendientes";
+                aceptar = "Aceptar";
+                denegar = "Denegar";
+            }
+            else
+            {
+                lblChats.Text = "Chats";
+                lblHorario.Text = "Hours of activity:";
+                btnParticipantes.Text = "Participants";
+                docente = "Teacher: ";
+                lblDocenteParticipantes.Text = docente;
+                lblHostParticipantes.Text = "Host: ";
+                lblParticipantes.Text = "Participants: ";
+                lblBienvenido.Text = "Welcome";
+
+                tema = "Current topic: ";
+                soliEnviada = "Request sent";
+                entrar = "Get in";
+                cerrarChat = "Do you want to close the Chat?";
+                cerrarChatTit = "Close Chat";
+                cerrado = "This chat has been closed";
+
+                error = "  Contact an administrator.";
+                msgCerrarSesion = "Do you want to log out?";
+                cerrarSesionTitulo = "Logout";
+
+                lblSolicitudes.Text = "Request";
+                soliPend = "No pending requests";
+                aceptar = "Accept";
+                denegar = "Deny";
+
+            }
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -52,6 +124,7 @@ namespace Hatchat.Presentacion
                 pcbxBotonEnviar.Image = Image.FromFile("enviar.png");
                 pcbxDesplegarSolicitudes.Image= Image.FromFile("flecha blanca desplegar.png");
                 pcbxNotificacion.Image = Image.FromFile("circulo gris.png");
+                imagenProfesor = Image.FromFile("profesor.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -157,7 +230,7 @@ namespace Hatchat.Presentacion
 
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            DialogResult cerrarSesion = MessageBox.Show(msgCerrarSesion, cerrarChatTit, MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
                 Login.encontrado = new Logica.Usuario();
@@ -212,7 +285,7 @@ namespace Hatchat.Presentacion
                     grupo.ForeColor = Color.White;
                     grupo.Font = new Font("Arial", 12.0f);
                     grupo.Name = "lblC" + chat.IdChat.ToString();
-                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + "Tema actual:" + chat.Titulo;
+                    grupo.Text = asignatura.Nombre + " " + clase.Anio.ToString() + clase.Nombre + "\n" + tema + chat.Titulo;
                     grupo.Click += new EventHandler(AbrirChat);
 
                     PictureBox picPhoto = new PictureBox();
@@ -493,7 +566,7 @@ namespace Hatchat.Presentacion
                     dina.ForeColor = Color.White;
                     dina.Font = new Font("Arial", 12.0f);
                     dina.Name = "lblVacia";
-                    dina.Text = "No hay solicitudes pendientes";
+                    dina.Text = soliPend;
                     panelChatsAIngresar.Controls.Add(dina);
                 }
 
@@ -558,7 +631,7 @@ namespace Hatchat.Presentacion
                         button.BackColor = Color.FromArgb(125, 116, 110);
                         button.FlatStyle = FlatStyle.Popup;
                         button.Name = "bnAS" + m;
-                        button.Text = "Aceptar";
+                        button.Text = aceptar;
                         button.Click += new EventHandler(AceptarSolicitud);
 
                         Button button1 = new Button();
@@ -570,7 +643,7 @@ namespace Hatchat.Presentacion
                         button1.BackColor = Color.FromArgb(125, 116, 110);
                         button1.FlatStyle = FlatStyle.Popup;
                         button1.Name = "bnDS" + m;
-                        button1.Text = "Denegar";
+                        button1.Text = denegar;
                         button1.Click += new EventHandler(DenegarSolicitud);
 
                         Panel panel = new Panel();
@@ -613,7 +686,7 @@ namespace Hatchat.Presentacion
                 {
                     panelChat.Visible = false;
                     tmrCargChat.Enabled = false;
-                    MessageBox.Show("Este chat a sido cerrado");
+                    MessageBox.Show(cerrado);
                 }
             }
         }
@@ -623,7 +696,7 @@ namespace Hatchat.Presentacion
             if (panelParticipantes.Visible)
             {
                 List<Logica.Usuario> usuarios = new Logica.Usuario().SelectParticipantes(abierto.IdChat);
-                lblDocenteParticipantes.Text = "Docente: " + usuarios[1].Nombre + " " + usuarios[1].Primer_apellido;
+                lblDocenteParticipantes.Text = docente + usuarios[1].Nombre + " " + usuarios[1].Primer_apellido;
                 lblHostParticipantes.Text = "Host: " + usuarios[0].Nombre + " " + usuarios[0].Primer_apellido;
                 int y = 5;
                 for (int x = 2; x < usuarios.Count; x++)

@@ -508,7 +508,7 @@ namespace Hatchat.Presentacion
             this.lblSolicitudes.AutoSize = true;
             this.lblSolicitudes.Font = new System.Drawing.Font("Arial", 25.25F);
             this.lblSolicitudes.ForeColor = System.Drawing.Color.White;
-            this.lblSolicitudes.Location = new System.Drawing.Point(27, -1);
+            this.lblSolicitudes.Location = new System.Drawing.Point(17, -1);
             this.lblSolicitudes.Name = "lblSolicitudes";
             this.lblSolicitudes.Size = new System.Drawing.Size(177, 39);
             this.lblSolicitudes.TabIndex = 2;

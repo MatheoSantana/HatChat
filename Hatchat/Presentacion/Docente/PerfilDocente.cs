@@ -24,12 +24,10 @@ namespace Hatchat.Presentacion
         string titBorrar;
         string titModificar;
         string borrado;
-        string horario;
-        string horariosLunes;
-        string horariosMartes;
-        string horariosMiercoles;
-        string horariosJueves;
-        string horariosViernes;
+        string sinDia;
+        string agendado;
+        string msgBorrarAgenda;
+        string titBorrarAgenda;
 
         Image cruz;
 
@@ -90,30 +88,26 @@ namespace Hatchat.Presentacion
                 borrado = "Usuario eliminado, cerrando sesion";
 
 
-                btnLu.Text = "";
-                btnMa.Text = "";
-                btnMi.Text = "";
-                btnJu.Text = "";
-                btnVi.Text = "";
-                btnLunes.Text = "";
-                btnMartes.Text = "";
-                btnMiercoles.Text = "";
-                btnJueves.Text = "";
-                btnViernes.Text = "";
-                btnListo.Text = "";
-                btnNuevaAgenda.Text = "";
+                btnLu.Text = "Lu";
+                btnMa.Text = "Ma";
+                btnMi.Text = "Mi";
+                btnJu.Text = "Ju";
+                btnVi.Text = "Vi";
+                btnLunes.Text = "Lunes";
+                btnMartes.Text = "Martes";
+                btnMiercoles.Text = "Miércoles";
+                btnJueves.Text = "Jueves";
+                btnViernes.Text = "Viernes";
+                btnListo.Text = "Listo";
+                btnNuevaAgenda.Text = "Agregar Agenda";
 
-                lblAgenda.Text = "";
-                lblCierre.Text = "";
-                lblInicio.Text = "";
-
-                horariosLunes = "Horarios del dia: Lunes:";
-                horariosMartes = "Horarios del dia: Martes:";
-                horariosMiercoles = "Horarios del dia: Miercoles:";
-                horariosJueves = "Horarios del dia: Jueves:";
-                horariosViernes = "Horarios del dia: Viernes:";
-                horario = "Horarios del dia: ";
-
+                lblAgenda.Text = "Agenda";
+                lblCierre.Text = "Cierre";
+                lblInicio.Text = "Inicio";
+                sinDia = "No se ha seleccionado ningun dia";
+                agendado = "Se ha agendado correctamente";
+                msgBorrarAgenda = "¿Desea eliminar esta agenda?";
+                titBorrarAgenda = "Eliminar Agenda";
 
             }
             else
@@ -149,12 +143,26 @@ namespace Hatchat.Presentacion
                 titBorrar = "Delete profile";
                 borrado = "User deleted, session closed";
 
-                horariosLunes = "Hours of the day: Monday:";
-                horariosMartes = "Hours of the day: Tuesday:";
-                horariosMiercoles = "Hours of the day: Wednesday:";
-                horariosJueves = "Hours of the day: Thursday:";
-                horariosViernes = "Hours of the day: Friday:";
-                horario = "Hours of the day: ";
+                btnLu.Text = "Mo";
+                btnMa.Text = "Tu";
+                btnMi.Text = "We";
+                btnJu.Text = "Th";
+                btnVi.Text = "Fr";
+                btnLunes.Text = "Monday";
+                btnMartes.Text = "Tuesday";
+                btnMiercoles.Text = "Wednesday";
+                btnJueves.Text = "Thursday";
+                btnViernes.Text = "Friday";
+                btnListo.Text = "Ready";
+                btnNuevaAgenda.Text = "Add Date";
+
+                lblAgenda.Text = "Calendar";
+                lblCierre.Text = "Close";
+                lblInicio.Text = "Start";
+                sinDia = "No se ha seleccionado ningun dia";
+                agendado = "Se ha agendado correctamente";
+                msgBorrarAgenda = "¿Desea eliminar esta agenda?";
+                titBorrarAgenda = "Eliminar Agenda";
             }
             try
             {
@@ -504,21 +512,25 @@ namespace Hatchat.Presentacion
         }
         private void EliminarAgenda(object sender, EventArgs e)
         {
-            if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+            DialogResult borrarAgenda = MessageBox.Show(msgBorrarAgenda, titBorrarAgenda, MessageBoxButtons.YesNo);
+            if (borrarAgenda == DialogResult.Yes)
             {
-                new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
-            }
-            else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
-            {
-                new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((PictureBox)sender).Name));
-            }
-            else
-            {
-                new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Panel)sender).Name));
-            }
+                if (sender.GetType().ToString() == "System.Windows.Forms.Label")
+                {
+                    new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Label)sender).Name));
+                }
+                else if (sender.GetType().ToString() == "System.Windows.Forms.PictureBox")
+                {
+                    new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((PictureBox)sender).Name));
+                }
+                else
+                {
+                    new Logica.Agenda().EliminarAgendaPorId(new Logica.Agenda().StringAId(((Panel)sender).Name));
+                }
 
-            
-            MessageBox.Show("Se ha eliminado la agenda");
+
+                MessageBox.Show("Se ha eliminado la agenda");
+            }
         }
 
         private void timerCentrar_Tick(object sender, EventArgs e)
@@ -608,7 +620,7 @@ namespace Hatchat.Presentacion
         {
             if (!lu && !ma && !mi && !ju && !vi)
             {
-                MessageBox.Show("No se ha seleccionado ningun dia");
+                MessageBox.Show(sinDia);
             }
             else
             {
@@ -667,7 +679,7 @@ namespace Hatchat.Presentacion
                     vi = false;
                     btnVi.BackColor = Color.FromArgb(61, 53, 50);
                 }
-                MessageBox.Show("Se ha agendado correctamente");
+                MessageBox.Show(agendado);
                 panelAgregarAgenda.Visible = false;
                 panel1.Enabled = true;
                 panelAgenda.Enabled = true;

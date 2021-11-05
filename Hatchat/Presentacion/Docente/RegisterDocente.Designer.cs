@@ -40,7 +40,7 @@ namespace Hatchat.Presentacion
             this.lblTitulo = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.btnSiguiente = new System.Windows.Forms.Button();
-            this.lbl = new System.Windows.Forms.Label();
+            this.lblRellene = new System.Windows.Forms.Label();
             this.lblCedula = new System.Windows.Forms.Label();
             this.cbxPreguntas = new System.Windows.Forms.ComboBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -118,7 +118,7 @@ namespace Hatchat.Presentacion
             this.panel1.Controls.Add(this.lblTitulo);
             this.panel1.Controls.Add(this.txtCedula);
             this.panel1.Controls.Add(this.btnSiguiente);
-            this.panel1.Controls.Add(this.lbl);
+            this.panel1.Controls.Add(this.lblRellene);
             this.panel1.Controls.Add(this.lblCedula);
             this.panel1.Controls.Add(this.cbxPreguntas);
             this.panel1.Controls.Add(this.txtNombre);
@@ -170,15 +170,15 @@ namespace Hatchat.Presentacion
             this.btnSiguiente.UseVisualStyleBackColor = false;
             this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
             // 
-            // lbl
+            // lblRellene
             // 
-            this.lbl.AutoSize = true;
-            this.lbl.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.lbl.Location = new System.Drawing.Point(60, 81);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(340, 22);
-            this.lbl.TabIndex = 23;
-            this.lbl.Text = "Rellene las casillas con su informacion:";
+            this.lblRellene.AutoSize = true;
+            this.lblRellene.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblRellene.Location = new System.Drawing.Point(60, 81);
+            this.lblRellene.Name = "lblRellene";
+            this.lblRellene.Size = new System.Drawing.Size(340, 22);
+            this.lblRellene.TabIndex = 23;
+            this.lblRellene.Text = "Rellene las casillas con su informacion:";
             // 
             // lblCedula
             // 
@@ -348,7 +348,7 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.TextBox txtCedula;
         private System.Windows.Forms.Button btnSiguiente;
-        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.Label lblRellene;
         private System.Windows.Forms.Label lblCedula;
         private System.Windows.Forms.ComboBox cbxPreguntas;
         private System.Windows.Forms.TextBox txtNombre;

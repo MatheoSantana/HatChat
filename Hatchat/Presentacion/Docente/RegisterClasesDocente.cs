@@ -10,10 +10,13 @@ namespace Hatchat.Presentacion
 {
     public partial class RegisterClasesDocente : Form
     {
+        string error;
+        string yaIngresadas;
+        string creado;
+
         public Form login;
         public Form registerDocente;
         private int xpanel = 20;
-        bool visibles = false;
 
         List<Logica.ClaseSolicitudClaseDo> claseSolicitudesClaseDo = new List<Logica.ClaseSolicitudClaseDo>();
         List<Logica.AsignaturaSolicitudClaseDo> asignaturasSolicitudClaseDo = new List<Logica.AsignaturaSolicitudClaseDo>();
@@ -33,7 +36,36 @@ namespace Hatchat.Presentacion
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
 
-            lblTitulo.Text = "Crea tu cuenta de docente";
+            if (Login.idioma == "Español")
+            {
+                error = " comuníquese con el administrador.";
+                lblTitulo.Text = "Crea tu cuenta de Docente";
+                lblIngresarA.Text = "Ingresar a...";
+                lblAnio.Text = "Año:";
+                lblClase.Text = "Clase:";
+                lblOrientacion.Text = "orientación:";
+                btnAgregar.Text = "Agregar";
+                btnRegistrar.Text = "registrar";
+                lblAsig.Text = "Asignaturas";
+                yaIngresadas = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+                creado = "Se ha creado el docente correctamente\nVolviendo al Login";
+
+            }
+            else
+            {
+                error = "  Contact an administrator.";
+                lblTitulo.Text = "Create your Teacher account";
+                lblIngresarA.Text = "Enter...";
+                lblAnio.Text = "Year:";
+                lblClase.Text = "Class:";
+                lblOrientacion.Text = "Orientation:";
+                btnAgregar.Text = "Agree";
+                btnRegistrar.Text = "Create Account";
+                lblAsig.Text = "Course:";
+                yaIngresadas = "Application denied, already on request to enter the following subjects: ";
+                creado = "The teacher has been created correctly\nReturning to Login";
+
+            }
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -41,7 +73,7 @@ namespace Hatchat.Presentacion
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
             pbxVolver.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -102,7 +134,6 @@ namespace Hatchat.Presentacion
         private void cbxOrientacion_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            visibles = false;
             if (btnAgregar.Enabled)
             {
                 List<Logica.AsignaturaSolicitudClaseDo> encontradas = new List<Logica.AsignaturaSolicitudClaseDo>();
@@ -148,7 +179,6 @@ namespace Hatchat.Presentacion
 
         private void cbxAnio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            visibles = false;
             if (btnAgregar.Enabled)
             {
                 List<Logica.AsignaturaSolicitudClaseDo> encontradas = new List<Logica.AsignaturaSolicitudClaseDo>();
@@ -209,7 +239,7 @@ namespace Hatchat.Presentacion
                 soliAsig.EnviarAsignaturaSolicitudClaseDo();
             }
 
-            MessageBox.Show("Se ha creado el docente correctamente\nVolviendo al Login");
+            MessageBox.Show(creado);
             login.Show();
             this.Dispose();
 
@@ -218,7 +248,6 @@ namespace Hatchat.Presentacion
 
         private void cbxClases_SelectedIndexChanged(object sender, EventArgs e)
         {
-            visibles = false;
 
             if (btnAgregar.Enabled)
             {
@@ -322,7 +351,7 @@ namespace Hatchat.Presentacion
             
             panelAgregadas.AutoScrollPosition =Point.Empty;
 
-            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+            string error = yaIngresadas;
             bool mandable = true;
             foreach (Logica.AsignaturaSolicitudClaseDo asigPend in asignaturasSolicitudClaseDoPre)
             {
