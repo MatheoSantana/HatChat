@@ -153,34 +153,48 @@ namespace Hatchat.Logica
         }
         public bool VerficarCedula(string ci)
         {
-            int[] nCedula = new int[8];
-            int[] numerosVer = { 2, 9, 8, 7, 6, 3, 4 };
-            int guion = 0;
-            int aux = 0;
-            int suma = 0;
-            string pe = "";
-            for (int x = 0; x < 8; x++)
+            if (ci.Length == 8)
             {
-                pe = ci[x].ToString();
-                nCedula[x] = Convert.ToInt32(pe);
-                if (x < 7)
+                try
                 {
-                    suma += (nCedula[x] * numerosVer[x]);
-                }
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                aux = suma + i;
-                if (aux % 10 == 0)
-                {
-                    guion = aux - suma;
-                    i = 10;
-                }
-            }
+                    int[] nCedula = new int[8];
+                    int[] numerosVer = { 2, 9, 8, 7, 6, 3, 4 };
+                    int guion = 0;
+                    int aux = 0;
+                    int suma = 0;
+                    string pe = "";
+                    for (int x = 0; x < 8; x++)
+                    {
+                        pe = ci[x].ToString();
+                        nCedula[x] = Convert.ToInt32(pe);
+                        if (x < 7)
+                        {
+                            suma += (nCedula[x] * numerosVer[x]);
+                        }
+                    }
+                    for (int i = 0; i < 10; i++)
+                    {
+                        aux = suma + i;
+                        if (aux % 10 == 0)
+                        {
+                            guion = aux - suma;
+                            i = 10;
+                        }
+                    }
 
-            if (nCedula[7] == guion)
-            {
-                return true;
+                    if (nCedula[7] == guion)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
             }
             else
             {

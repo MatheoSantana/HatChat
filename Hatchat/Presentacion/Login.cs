@@ -43,6 +43,7 @@ namespace Hatchat.Presentacion
 
         string usuarioNoEncontrado;
         string contraseñaIncorrecta;
+        string soloNumeros;
 
         public static Logica.Usuario encontrado = new Logica.Usuario();
 
@@ -119,6 +120,7 @@ namespace Hatchat.Presentacion
                 contraseñaIncorrecta = "Contraseña incorrecta";
                 lblExplicacion.Text = "Introduzca su cedula de identidad y contraseña";
                 lblExplicacion.Location = new Point(156, 98);
+                soloNumeros = "La cedula debe tener solo numeros";
                 error = " comuníquese con el administrador.";
             }
             else
@@ -141,6 +143,7 @@ namespace Hatchat.Presentacion
                 lblExplicacion.Text = "Enter your identity card and password";
                 lblExplicacion.Location = new Point(196, 98);
                 error = " Contact the administrator.";
+                soloNumeros = "The ID must have only numbers";
             }
         }
 
@@ -156,190 +159,196 @@ namespace Hatchat.Presentacion
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-
-            encontrado = encontrado.SelectUsuarioCiActivo(txtCedula.Text);
-            
-            if (encontrado.Ci != null)
+            try
             {
-                if (encontrado.Password == txtPassword.Text)
+                Convert.ToInt32(txtCedula.Text);
+                encontrado = encontrado.SelectUsuarioCiActivo(txtCedula.Text);
+
+                if (encontrado.Ci != null)
                 {
-                    if (encontrado.SelectDocente())
+                    if (encontrado.Password == txtPassword.Text)
                     {
-                        txtCedula.Text = "";
-                        txtPassword.Text = "";
-                        principalChatDocente = new PrincipalChatDocente();
-                        mensajesDocente = new MensajesDocente();
-                        perfilDocente = new PerfilDocente();
-                        gruposDocente = new GruposDocente();
-                        historialChatsDocente = new HistorialChatsDocente();
-                        historialMensajesDocente = new HistorialMensajesDocente();
+                        if (encontrado.SelectDocente())
+                        {
+                            txtCedula.Text = "";
+                            txtPassword.Text = "";
+                            principalChatDocente = new PrincipalChatDocente();
+                            mensajesDocente = new MensajesDocente();
+                            perfilDocente = new PerfilDocente();
+                            gruposDocente = new GruposDocente();
+                            historialChatsDocente = new HistorialChatsDocente();
+                            historialMensajesDocente = new HistorialMensajesDocente();
 
-                        principalChatDocente.Show();
-                        this.Hide();
+                            principalChatDocente.Show();
+                            this.Hide();
 
-                        principalChatDocente.login = this;
-                        principalChatDocente.mensajesDocente = mensajesDocente;
-                        principalChatDocente.perfilDocente = perfilDocente;
-                        principalChatDocente.gruposDocente = gruposDocente;
-                        principalChatDocente.historialChatsDocente = historialChatsDocente;
-                        principalChatDocente.historialMensajesDocente = historialMensajesDocente;
+                            principalChatDocente.login = this;
+                            principalChatDocente.mensajesDocente = mensajesDocente;
+                            principalChatDocente.perfilDocente = perfilDocente;
+                            principalChatDocente.gruposDocente = gruposDocente;
+                            principalChatDocente.historialChatsDocente = historialChatsDocente;
+                            principalChatDocente.historialMensajesDocente = historialMensajesDocente;
 
-                        mensajesDocente.login = this;
-                        mensajesDocente.principalChatDocente = principalChatDocente;
-                        mensajesDocente.perfilDocente = perfilDocente;
-                        mensajesDocente.gruposDocente = gruposDocente;
-                        mensajesDocente.historialChatsDocente = historialChatsDocente;
-                        mensajesDocente.historialMensajesDocente = historialMensajesDocente;
+                            mensajesDocente.login = this;
+                            mensajesDocente.principalChatDocente = principalChatDocente;
+                            mensajesDocente.perfilDocente = perfilDocente;
+                            mensajesDocente.gruposDocente = gruposDocente;
+                            mensajesDocente.historialChatsDocente = historialChatsDocente;
+                            mensajesDocente.historialMensajesDocente = historialMensajesDocente;
 
-                        perfilDocente.login = this;
-                        perfilDocente.principalChatDocente = principalChatDocente;
-                        perfilDocente.mensajesDocente = mensajesDocente;
-                        perfilDocente.gruposDocente = gruposDocente;
-                        perfilDocente.historialChatsDocente = historialChatsDocente;
-                        perfilDocente.historialMensajesDocente = historialMensajesDocente;
+                            perfilDocente.login = this;
+                            perfilDocente.principalChatDocente = principalChatDocente;
+                            perfilDocente.mensajesDocente = mensajesDocente;
+                            perfilDocente.gruposDocente = gruposDocente;
+                            perfilDocente.historialChatsDocente = historialChatsDocente;
+                            perfilDocente.historialMensajesDocente = historialMensajesDocente;
 
-                        gruposDocente.login = this;
-                        gruposDocente.principalChatDocente = principalChatDocente;
-                        gruposDocente.mensajesDocente = mensajesDocente;
-                        gruposDocente.perfilDocente=perfilDocente;
-                        gruposDocente.historialChatsDocente = historialChatsDocente;
-                        gruposDocente.historialMensajesDocente = historialMensajesDocente;
+                            gruposDocente.login = this;
+                            gruposDocente.principalChatDocente = principalChatDocente;
+                            gruposDocente.mensajesDocente = mensajesDocente;
+                            gruposDocente.perfilDocente = perfilDocente;
+                            gruposDocente.historialChatsDocente = historialChatsDocente;
+                            gruposDocente.historialMensajesDocente = historialMensajesDocente;
 
-                        historialChatsDocente.login = this;
-                        historialChatsDocente.principalChatsDocente = principalChatDocente;
-                        historialChatsDocente.mensajesDocente = mensajesDocente;
-                        historialChatsDocente.perfilDocente = perfilDocente;
-                        historialChatsDocente.gruposDocente = gruposDocente;
-                        historialChatsDocente.historialMensajesDocente = historialMensajesDocente;
-
-
-
-                        historialMensajesDocente.login = this;
-                        historialMensajesDocente.principalChatDocente = principalChatDocente;
-                        historialMensajesDocente.mensajesDocente = mensajesDocente;
-                        historialMensajesDocente.perfilDocente = perfilDocente;
-                        historialMensajesDocente.gruposDocente = gruposDocente;
-                        historialMensajesDocente.historialChatsDocente = historialChatsDocente;
+                            historialChatsDocente.login = this;
+                            historialChatsDocente.principalChatsDocente = principalChatDocente;
+                            historialChatsDocente.mensajesDocente = mensajesDocente;
+                            historialChatsDocente.perfilDocente = perfilDocente;
+                            historialChatsDocente.gruposDocente = gruposDocente;
+                            historialChatsDocente.historialMensajesDocente = historialMensajesDocente;
 
 
+
+                            historialMensajesDocente.login = this;
+                            historialMensajesDocente.principalChatDocente = principalChatDocente;
+                            historialMensajesDocente.mensajesDocente = mensajesDocente;
+                            historialMensajesDocente.perfilDocente = perfilDocente;
+                            historialMensajesDocente.gruposDocente = gruposDocente;
+                            historialMensajesDocente.historialChatsDocente = historialChatsDocente;
+
+
+                        }
+                        else if (encontrado.SelectAlumno())
+                        {
+                            txtCedula.Text = "";
+                            txtPassword.Text = "";
+                            principalChatAlumno = new PrincipalChatAlumno();
+                            mensajesAlumno = new MensajesAlumno();
+                            perfilAlumno = new PerfilAlumno();
+                            gruposAlumno = new GruposAlumno();
+                            historialMensajesAlumno = new HistorialMensajesAlumno();
+                            historialChatsAlumno = new HistorialChatsAlumno();
+
+
+                            principalChatAlumno.Show();
+                            this.Hide();
+
+                            principalChatAlumno.login = this;
+                            principalChatAlumno.mensajesAlumno = mensajesAlumno;
+                            principalChatAlumno.perfilAlumno = perfilAlumno;
+                            principalChatAlumno.gruposAlumno = gruposAlumno;
+                            principalChatAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                            principalChatAlumno.historialChatsAlumno = historialChatsAlumno;
+
+                            mensajesAlumno.login = this;
+                            mensajesAlumno.principalChatAlumno = principalChatAlumno;
+                            mensajesAlumno.perfilAlumno = perfilAlumno;
+                            mensajesAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                            mensajesAlumno.gruposAlumno = gruposAlumno;
+                            mensajesAlumno.historialChatsAlumno = historialChatsAlumno;
+
+                            perfilAlumno.login = this;
+                            perfilAlumno.principalChatAlumno = principalChatAlumno;
+                            perfilAlumno.mensajesAlumno = mensajesAlumno;
+                            perfilAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                            perfilAlumno.gruposAlumno = gruposAlumno;
+                            perfilAlumno.historialChatsAlumno = historialChatsAlumno;
+
+                            historialMensajesAlumno.login = this;
+                            historialMensajesAlumno.principalChatAlumno = principalChatAlumno;
+                            historialMensajesAlumno.mensajesAlumno = mensajesAlumno;
+                            historialMensajesAlumno.perfilAlumno = perfilAlumno;
+                            historialMensajesAlumno.gruposAlumno = gruposAlumno;
+                            historialMensajesAlumno.historialchatsAlumno = historialChatsAlumno;
+
+                            gruposAlumno.login = this;
+                            gruposAlumno.principalChatAlumno = principalChatAlumno;
+                            gruposAlumno.mensajesAlumno = mensajesAlumno;
+                            gruposAlumno.perfilAlumno = perfilAlumno;
+                            gruposAlumno.historialMensajesAlumno = historialMensajesAlumno;
+                            gruposAlumno.historialChatsAlumno = historialChatsAlumno;
+
+                            historialChatsAlumno.login = this;
+                            historialChatsAlumno.principalChatsAlumno = principalChatAlumno;
+                            historialChatsAlumno.mensajesAlumno = mensajesAlumno;
+                            historialChatsAlumno.perfilAlumno = perfilAlumno;
+                            historialChatsAlumno.gruposAlumno = gruposAlumno;
+                            historialChatsAlumno.historialMensajesAlumno = historialMensajesAlumno;
+
+                        }
+                        else if (encontrado.SelectAdministrador())
+                        {
+                            txtCedula.Text = "";
+                            txtPassword.Text = "";
+                            principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
+                            abmAlumnoAdmin = new ABMAlumnoAdmin();
+                            abmDocenteAdmin = new ABMDocenteAdmin();
+                            abmGruposAdmin = new ABMGruposAdmin();
+                            historialSolicitudesAdmin = new HistorialSolicitudesAdmin();
+
+                            principalSolicitudesAdmin.login = this;
+                            principalSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
+                            principalSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                            principalSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
+                            principalSolicitudesAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
+
+                            abmAlumnoAdmin.login = this;
+                            abmAlumnoAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                            abmAlumnoAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                            abmAlumnoAdmin.abmGruposAdmin = abmGruposAdmin;
+                            abmAlumnoAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
+
+                            abmDocenteAdmin.login = this;
+                            abmDocenteAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                            abmDocenteAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
+                            abmDocenteAdmin.abmGruposAdmin = abmGruposAdmin;
+                            abmDocenteAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
+
+                            abmGruposAdmin.login = this;
+                            abmGruposAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                            abmGruposAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
+                            abmGruposAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                            abmGruposAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
+
+                            historialSolicitudesAdmin.login = this;
+                            historialSolicitudesAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
+                            historialSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
+                            historialSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
+                            historialSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
+
+
+
+
+
+                            principalSolicitudesAdmin.Show();
+                            this.Hide();
+                        }
                     }
-                    else if (encontrado.SelectAlumno())
+                    else
                     {
-                        txtCedula.Text = "";
-                        txtPassword.Text = "";
-                        principalChatAlumno = new PrincipalChatAlumno();
-                        mensajesAlumno = new MensajesAlumno();
-                        perfilAlumno = new PerfilAlumno();
-                        gruposAlumno = new GruposAlumno();
-                        historialMensajesAlumno = new HistorialMensajesAlumno();
-                        historialChatsAlumno = new HistorialChatsAlumno();
-
-
-                        principalChatAlumno.Show();
-                        this.Hide();
-
-                        principalChatAlumno.login = this;
-                        principalChatAlumno.mensajesAlumno = mensajesAlumno;
-                        principalChatAlumno.perfilAlumno = perfilAlumno;
-                        principalChatAlumno.gruposAlumno = gruposAlumno;
-                        principalChatAlumno.historialMensajesAlumno = historialMensajesAlumno;
-                        principalChatAlumno.historialChatsAlumno = historialChatsAlumno;
-
-                        mensajesAlumno.login = this;
-                        mensajesAlumno.principalChatAlumno = principalChatAlumno;
-                        mensajesAlumno.perfilAlumno = perfilAlumno;
-                        mensajesAlumno.historialMensajesAlumno = historialMensajesAlumno;
-                        mensajesAlumno.gruposAlumno = gruposAlumno;
-                        mensajesAlumno.historialChatsAlumno = historialChatsAlumno;
-
-                        perfilAlumno.login = this;
-                        perfilAlumno.principalChatAlumno = principalChatAlumno;
-                        perfilAlumno.mensajesAlumno = mensajesAlumno;
-                        perfilAlumno.historialMensajesAlumno = historialMensajesAlumno;
-                        perfilAlumno.gruposAlumno = gruposAlumno;
-                        perfilAlumno.historialChatsAlumno = historialChatsAlumno;
-
-                        historialMensajesAlumno.login = this;
-                        historialMensajesAlumno.principalChatAlumno = principalChatAlumno;
-                        historialMensajesAlumno.mensajesAlumno = mensajesAlumno;
-                        historialMensajesAlumno.perfilAlumno = perfilAlumno;
-                        historialMensajesAlumno.gruposAlumno = gruposAlumno;
-                        historialMensajesAlumno.historialchatsAlumno = historialChatsAlumno;
-
-                        gruposAlumno.login = this;
-                        gruposAlumno.principalChatAlumno = principalChatAlumno;
-                        gruposAlumno.mensajesAlumno = mensajesAlumno;
-                        gruposAlumno.perfilAlumno = perfilAlumno;
-                        gruposAlumno.historialMensajesAlumno = historialMensajesAlumno;
-                        gruposAlumno.historialChatsAlumno = historialChatsAlumno;
-
-                        historialChatsAlumno.login = this;
-                        historialChatsAlumno.principalChatsAlumno = principalChatAlumno;
-                        historialChatsAlumno.mensajesAlumno = mensajesAlumno;
-                        historialChatsAlumno.perfilAlumno = perfilAlumno;
-                        historialChatsAlumno.gruposAlumno = gruposAlumno;
-                        historialChatsAlumno.historialMensajesAlumno = historialMensajesAlumno;
-                        
+                        MessageBox.Show(contraseñaIncorrecta);
                     }
-                    else if(encontrado.SelectAdministrador())
-                    {
-                        txtCedula.Text = "";
-                        txtPassword.Text = "";
-                        principalSolicitudesAdmin = new PrincipalSolicitudesAdmin();
-                        abmAlumnoAdmin = new ABMAlumnoAdmin();
-                        abmDocenteAdmin = new ABMDocenteAdmin();
-                        abmGruposAdmin = new ABMGruposAdmin();
-                        historialSolicitudesAdmin = new HistorialSolicitudesAdmin();
 
-                        principalSolicitudesAdmin.login = this;
-                        principalSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
-                        principalSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
-                        principalSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
-                        principalSolicitudesAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
-
-                        abmAlumnoAdmin.login = this;
-                        abmAlumnoAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
-                        abmAlumnoAdmin.abmDocenteAdmin = abmDocenteAdmin;
-                        abmAlumnoAdmin.abmGruposAdmin = abmGruposAdmin;
-                        abmAlumnoAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
-
-                        abmDocenteAdmin.login = this;
-                        abmDocenteAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
-                        abmDocenteAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
-                        abmDocenteAdmin.abmGruposAdmin = abmGruposAdmin;
-                        abmDocenteAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
-
-                        abmGruposAdmin.login = this;
-                        abmGruposAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
-                        abmGruposAdmin.abmDAlumnoAdmin = abmAlumnoAdmin;
-                        abmGruposAdmin.abmDocenteAdmin = abmDocenteAdmin;
-                        abmGruposAdmin.historialSolicitudesAdmin = historialSolicitudesAdmin;
-
-                        historialSolicitudesAdmin.login = this;
-                        historialSolicitudesAdmin.principalSolicitudesAdmin = principalSolicitudesAdmin;
-                        historialSolicitudesAdmin.abmAlumnoAdmin = abmAlumnoAdmin;
-                        historialSolicitudesAdmin.abmDocenteAdmin = abmDocenteAdmin;
-                        historialSolicitudesAdmin.abmGruposAdmin = abmGruposAdmin;
-
-
-
-
-
-                        principalSolicitudesAdmin.Show();
-                        this.Hide();
-                    }
                 }
                 else
                 {
-                    MessageBox.Show(contraseñaIncorrecta);
+                    MessageBox.Show(usuarioNoEncontrado);
                 }
-
             }
-            else
+            catch
             {
-                MessageBox.Show(usuarioNoEncontrado);
+                MessageBox.Show(soloNumeros);
             }
-
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)

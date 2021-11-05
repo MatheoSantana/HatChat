@@ -26,7 +26,7 @@ namespace Hatchat.Presentacion
         Image recibido;
         Image constestado;
         Image realizado;
-
+        List<Logica.Mensaje> mensTemp = new List<Logica.Mensaje>();
         private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
         private List<Logica.Alumno> alumnos = new List<Logica.Alumno>();
 
@@ -116,12 +116,12 @@ namespace Hatchat.Presentacion
                 pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
                 pbxChatNav.Image = Image.FromFile("chat gris.png");
-                pbxMensajeNav.Image = Image.FromFile("mensaje blanco.png");
+                pbxMensajeNav.Image = Image.FromFile("mensaje gris.png");
                 pbxPerfilNav.Image = Image.FromFile("perfil gris.png");
                 pbxGruposNav.Image = Image.FromFile("grupos gris.png");
                 pbxHistorialNav.Image = Image.FromFile("historial gris.png");
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
-                pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
+                pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje blanco.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pcbxLogo.Image = Image.FromFile("Logo Completa.png");
                 recibido = Image.FromFile("circulo recibido.png");
@@ -287,7 +287,7 @@ namespace Hatchat.Presentacion
                 foreach (Logica.Mensaje men in mensajes)
                 {
                     bool agregar = true;
-                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
                     foreach (Logica.Alumno alum in alumnos)
                     {
                         if (alum.Ci == us.Ci)
@@ -461,8 +461,36 @@ namespace Hatchat.Presentacion
                 lblBienvenido.Visible = true;
                 pcbxLogo.Visible = true;
             }
+            bool igualestemps = true;
+            if (mensTemp.Count == this.mensTemp.Count)
+            {
+                for (int x = 0; x < mensTemp.Count; x++)
+                {
+                    if (!(mensTemp[x].IdMensaje == this.mensTemp[x].IdMensaje && mensTemp[x].Estado == this.mensTemp[x].Estado))
+                    {
+                        igualestemps = false;
+                    }
+                }
+            }
+            else
+            {
+                igualestemps = false;
+            }
+            if (!igualestemps)
+            {
+                cmbxAlumnos.Items.Clear();
+                alumnos.Clear();
+                foreach (Logica.Mensaje men in mensTemp)
+                {
+                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
+                    Logica.Alumno alu = new Logica.Alumno(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
+                    alumnos.Add(alu);
+                    cmbxAlumnos.Items.Add(alu.Nombre + " " + alu.Primer_apellido);
+                }
+                this.mensTemp = mensTemp;
+            }
 
-            foreach (Logica.Mensaje men in mensTemp)
+                foreach (Logica.Mensaje men in mensTemp)
             {
                 bool agregado = false;
                 if (filtroAlumno || filtroFecha)
@@ -474,21 +502,21 @@ namespace Hatchat.Presentacion
                     }
                     if (filtroAlumno && filtroFecha)
                     {
-                        if ((men.Docente == ci) && ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day)))
+                        if ((men.Alumno == ci) && ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day)))
                         {
                             mensajes.Add(men);
                             agregado = true;
                         }
                     }
-                    if (filtroAlumno && !agregado)
+                    if (filtroAlumno && !agregado &&!filtroFecha)
                     {
-                        if (men.Docente == ci)
+                        if (men.Alumno == ci)
                         {
                             mensajes.Add(men);
                             agregado = true;
                         }
                     }
-                    if (filtroFecha && !agregado)
+                    if (filtroFecha && !agregado &&!filtroAlumno)
                     {
                         if ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day))
                         {
@@ -501,24 +529,7 @@ namespace Hatchat.Presentacion
                     mensajes.Add(men);
                 }
             }
-            foreach (Logica.Mensaje men in mensTemp)
-            {
-                bool agregado = false;
-                if (filtroFecha)
-                {
-                    if (filtroFecha && !agregado)
-                    {
-                        if ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day))
-                        {
-                            mensajes.Add(men);
-                        }
-                    }
-                }
-                else
-                {
-                    mensajes.Add(men);
-                }
-            }
+            
             bool iguales = true;
             if (mensajes.Count == this.mensajes.Count)
             {
@@ -536,15 +547,7 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
-                cmbxAlumnos.Items.Clear();
-                alumnos.Clear();
-                foreach (Logica.Mensaje men in mensTemp)
-                {
-                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
-                    Logica.Alumno alu = new Logica.Alumno(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
-                    alumnos.Add(alu);
-                    cmbxAlumnos.Items.Add(alu.Nombre + " " + alu.Primer_apellido);
-                }
+                
                 this.mensajes = mensajes;
                 panelNavMensajes.Controls.Clear();
                 panelContenedor.Visible = false;

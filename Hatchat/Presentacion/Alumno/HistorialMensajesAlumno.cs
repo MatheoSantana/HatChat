@@ -27,6 +27,7 @@ namespace Hatchat.Presentacion
         Image realizado;
 
         private List<Logica.Docente> docentes = new List<Logica.Docente>();
+        private List<Logica.Mensaje> mensTemp = new List<Logica.Mensaje>();
         private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
 
         public Form login;
@@ -529,8 +530,35 @@ namespace Hatchat.Presentacion
                 lblBienvenido.Visible = true;
                 pcbxLogo.Visible = true;
             }
-
-            foreach (Logica.Mensaje men in mensTemp)
+            bool igualestemps = true;
+            if (mensTemp.Count == this.mensTemp.Count)
+            {
+                for (int x = 0; x < mensTemp.Count; x++)
+                {
+                    if (!(mensTemp[x].IdMensaje == this.mensTemp[x].IdMensaje && mensTemp[x].Estado == this.mensTemp[x].Estado))
+                    {
+                        igualestemps = false;
+                    }
+                }
+            }
+            else
+            {
+                igualestemps = false;
+            }
+            if (!igualestemps)
+            {
+                cmbxDocentes.Items.Clear();
+                docentes.Clear();
+                foreach (Logica.Mensaje men in mensTemp)
+                {
+                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
+                    Logica.Docente doc = new Logica.Docente(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
+                    docentes.Add(doc);
+                    cmbxDocentes.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
+                }
+                this.mensTemp = mensTemp;
+            }
+                foreach (Logica.Mensaje men in mensTemp)
             {
                 bool agregado = false;
                 if (filtroDocente || filtroFecha)
@@ -548,7 +576,7 @@ namespace Hatchat.Presentacion
                             agregado = true;
                         }
                     }
-                    if (filtroDocente && !agregado)
+                    if (filtroDocente && !agregado && !filtroFecha)
                     {
                         if (men.Docente == ci)
                         {
@@ -556,7 +584,7 @@ namespace Hatchat.Presentacion
                             agregado = true;
                         }
                     }
-                    if (filtroFecha && !agregado)
+                    if (filtroFecha && !agregado && !filtroDocente)
                     {
                         if ((men.FechaHoraAlumno.Year == dtpFiltro.Value.Year && men.FechaHoraAlumno.Month == dtpFiltro.Value.Month && men.FechaHoraAlumno.Day == dtpFiltro.Value.Day) || (men.FechaHoraDocente.Year == dtpFiltro.Value.Year && men.FechaHoraDocente.Month == dtpFiltro.Value.Month && men.FechaHoraDocente.Day == dtpFiltro.Value.Day))
                         {
@@ -586,15 +614,7 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
-                cmbxDocentes.Items.Clear();
-                docentes.Clear();
-                foreach (Logica.Mensaje men in mensTemp)
-                {
-                    Logica.Usuario us = new Logica.Usuario().SelectUsuarioCi(men.Docente);
-                    Logica.Docente doc = new Logica.Docente(us.Ci, us.Nombre, us.Primer_apellido, us.Segundo_apellido, us.FotoDePerfil, us.Apodo, us.Activo);
-                    docentes.Add(doc);
-                    cmbxDocentes.Items.Add(doc.Nombre + " " + doc.Primer_apellido);
-                }
+                
                 this.mensajes = mensajes;
                 panelNavMensajes.Controls.Clear();
                 panelContenedor.Visible = false;

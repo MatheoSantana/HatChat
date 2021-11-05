@@ -125,7 +125,7 @@ namespace Hatchat.Presentacion
             string error = cuidado;
             bool aceptable = true;
 
-            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
+            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "" || cbxPreguntas.SelectedIndex == -1)
             {
                 aceptable = false;
                 error += "\n" + rellenar;

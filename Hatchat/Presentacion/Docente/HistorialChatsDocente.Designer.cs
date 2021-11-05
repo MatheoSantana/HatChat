@@ -32,7 +32,6 @@ namespace Hatchat.Presentacion
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistorialChatsDocente));
             this.lblHistorialChats = new System.Windows.Forms.Label();
-            this.tmrCargChats = new System.Windows.Forms.Timer(this.components);
             this.tmrCargChat = new System.Windows.Forms.Timer(this.components);
             this.timerHistorialNav = new System.Windows.Forms.Timer(this.components);
             this.timerHistorialChats = new System.Windows.Forms.Timer(this.components);
@@ -103,11 +102,6 @@ namespace Hatchat.Presentacion
             this.lblHistorialChats.Size = new System.Drawing.Size(74, 13);
             this.lblHistorialChats.TabIndex = 2;
             this.lblHistorialChats.Text = "Historial Chats";
-            // 
-            // tmrCargChats
-            // 
-            this.tmrCargChats.Enabled = true;
-            this.tmrCargChats.Interval = 500;
             // 
             // tmrCargChat
             // 
@@ -345,8 +339,8 @@ namespace Hatchat.Presentacion
             // 
             this.panelChat.AutoScroll = true;
             this.panelChat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChat.Controls.Add(this.panelDatosClase);
             this.panelChat.Controls.Add(this.panelCharla);
+            this.panelChat.Controls.Add(this.panelDatosClase);
             this.panelChat.Location = new System.Drawing.Point(331, 118);
             this.panelChat.Name = "panelChat";
             this.panelChat.Size = new System.Drawing.Size(921, 551);
@@ -496,7 +490,7 @@ namespace Hatchat.Presentacion
             this.panelParticipantes.Controls.Add(this.panelParticipantesOrdinarios);
             this.panelParticipantes.Controls.Add(this.lblHostParticipantes);
             this.panelParticipantes.Controls.Add(this.lblDocenteParticipantes);
-            this.panelParticipantes.Location = new System.Drawing.Point(918, 217);
+            this.panelParticipantes.Location = new System.Drawing.Point(919, 217);
             this.panelParticipantes.Name = "panelParticipantes";
             this.panelParticipantes.Size = new System.Drawing.Size(325, 433);
             this.panelParticipantes.TabIndex = 19;
@@ -550,8 +544,8 @@ namespace Hatchat.Presentacion
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.panelHistorialesNav);
-            this.Controls.Add(this.panelChatsActivos);
             this.Controls.Add(this.panelParticipantes);
+            this.Controls.Add(this.panelChatsActivos);
             this.Controls.Add(this.panelChat);
             this.Controls.Add(this.panelTextoChat);
             this.Controls.Add(this.panel2);
@@ -590,7 +584,6 @@ namespace Hatchat.Presentacion
 
         #endregion
         private System.Windows.Forms.Label lblHistorialChats;
-        private System.Windows.Forms.Timer tmrCargChats;
         private System.Windows.Forms.Timer tmrCargChat;
         private System.Windows.Forms.Timer timerHistorialNav;
         private System.Windows.Forms.Timer timerHistorialChats;

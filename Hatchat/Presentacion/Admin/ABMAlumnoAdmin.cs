@@ -12,6 +12,28 @@ namespace Hatchat.Presentacion
 {
     public partial class ABMAlumnoAdmin : Form
     {
+        string error;
+        string cuidado;
+        string corta;
+        string distintas;
+        string rellenar;
+        string existe;
+        string real;
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+        string seleccionaImagen;
+        string modificado;
+        string msgBorrar;
+        string msgModificar;
+        string titBorrar;
+        string titModificar;
+        string borrado;
+        string yaIngresadas;
+        string creado;
+        string ingresadas;
+        string fallo;
+        string eliminadont;
+
         private int yPanel = 0;
         private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
         private Logica.Orientacion orientacionSeleccionada = new Logica.Orientacion();
@@ -37,7 +59,142 @@ namespace Hatchat.Presentacion
             {
                 cmbxOrientacion.Items.Add(ori.Nombre);
             }
+            if (Login.idioma == "Español")
+            {
+                lblABMAlumno.Text = "ABM Alumno";
+                lblAnio.Text = "Año";
+                lblApodoModificar.Text = "Apodo";
+                lblBienvenido.Text = "Bienvenido";
+                lblCambiarFotoModificar.Text = "Cambiar foto de perfil";
+                lblCedulaBaja.Text = "Cedula: ";
+                lblCedulaModificar.Text = "Cedula: ";
+                lblCi.Text = "Cedula";
+                lblCiModf.Text = "cedula";
+                lblClase.Text = "Clase";
+                lblConfirmarPassword.Text = "Confirmar contraseña";
+                lblCrearAlmuno.Text = "Crear Alumno";
+                lblEliminarAlumno.Text = "Eliminar Alumno";
+                lblEstudianteModificar.Text = "Estudiante";
+                lblExpliModi.Text = "si no pertenece a todas las asignaturas,\npuede configurarlo aqui";
+                lblExpliPregSegur.Text = "Pregunta de seguridad\nRellene el cuadro con una respuesta que nunca olvide\npara poder tomar medidas en caso de perder su cuenta.";
+                lblInformacionModificar.Text = "Informacion";
+                lblModificar.Text = "Modificar";
+                lblNombre.Text = "Nombre";
+                lblNombreModificar.Text = "Nombre: ";
+                lblOrientacion.Text = "Orientacion: ";
+                lblPassword.Text = "Contraseña";
+                lblPasswordConfirmarModificar.Text = "Confirmar Contraseña";
+                lblPasswordModificar.Text = "Contraseña";
+                lblPregSegur.Text = "Pregunta de seguridad";
+                lblPregsModificar.Text = "Pregunta de seguridad";
+                lblPrimerApellido.Text = "Primer apellido";
+                lblRespuestaModificar.Text = "Respuesta";
+                lblSegundoApellido.Text = "Segundo Apellido";
+                
+                btnActualizar.Text = "Modificar Alumno";
+                btnAgregar.Text = "Agregar";
+                btnAlta.Text = "Alta";
+                btnAltaAlumno.Text = "Crear Alumno";
+                btnAlterar.Text = "Modificar Alumno";
+                btnBaja.Text = "Baja";
+                btnEliminar.Text = "Eliminar Alumno";
+                btnModificar.Text = "Modificar";
 
+                msgModificar = "¿Desea modificar su perfil?";
+                titModificar = "Modificar perfil";
+                modificado = "Se han modificado sus datos";
+                msgBorrar = "¿Desea eliminar a ";
+                titBorrar = "Borrar Perfil";
+                borrado = "Usuario eliminado";
+                seleccionaImagen = "Seleccionar imagen";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+
+                cbxPregsModificar.Items.Add("¿Cuál es el nombre de tu primer mascota?");
+                cbxPregsModificar.Items.Add("¿En qué calle está ubicado tu primer hogar?");
+                cbxPregsModificar.Items.Add("¿Cual es tu sabor de helado favorito?");
+                cmbxPreguntaSeg.Items.Add("¿Cuál es el nombre de tu primer mascota?");
+                cmbxPreguntaSeg.Items.Add("¿En qué calle está ubicado tu primer hogar?");
+                cmbxPreguntaSeg.Items.Add("¿Cual es tu sabor de helado favorito?");
+                error = " comuníquese con el administrador.";
+                cuidado = "Cuidado:";
+                rellenar = "Debe rellenar todos los campos ";
+                corta = "La contraseña es demasiado corta ";
+                distintas = "Las contraseñas no son iguales";
+                existe = "Esa cedula ya esta ingresada";
+                real = "La cedula debe ser real";
+
+
+                ingresadas = "El alumno a ingresado a los grupos correctamente";
+                fallo = "EL ALUMNO YA ESTABA CURSANDO LAS SIGUIENTES ASIGNATURAS:\n";
+                creado = "Se ha creado el alumno correctamente";
+                eliminadont = "Alumno no encontrado";
+            }
+            else
+            {
+                lblABMAlumno.Text = "";
+                lblAnio.Text = "";
+                lblApodoModificar.Text = "";
+                lblBienvenido.Text = "";
+                lblCambiarFotoModificar.Text = "";
+                lblCedulaBaja.Text = "";
+                lblCedulaModificar.Text = "";
+                lblCi.Text = "";
+                lblCiModf.Text = "";
+                lblClase.Text = "";
+                lblConfirmarPassword.Text = "";
+                lblCrearAlmuno.Text = "";
+                lblEliminarAlumno.Text = "";
+                lblEstudianteModificar.Text = "";
+                lblExpliModi.Text = "";
+                lblExpliPregSegur.Text = "";
+                lblInformacionModificar.Text = "";
+                lblModificar.Text = "";
+                lblNombre.Text = "";
+                lblNombreModificar.Text = "";
+                lblOrientacion.Text = "";
+                lblPassword.Text = "";
+                lblPasswordConfirmarModificar.Text = "";
+                lblPasswordModificar.Text = "";
+                lblPregSegur.Text = "";
+                lblPregsModificar.Text = "";
+                lblPrimerApellido.Text = "";
+                lblRespuestaModificar.Text = "";
+                lblSegundoApellido.Text = "";
+
+                btnActualizar.Text = "";
+                btnAgregar.Text = "";
+                btnAlta.Text = "";
+                btnAltaAlumno.Text = "";
+                btnAlterar.Text = "";
+                btnBaja.Text = "";
+                btnEliminar.Text = "";
+                btnModificar.Text = "";
+
+                msgCerrarSesion = "Do you want to log out?";
+                cerrarSesionTitulo = "Logout";
+                cbxPregsModificar.Items.Add("What is the name of your first pet?");
+                cbxPregsModificar.Items.Add("On what street is your first home located?");
+                cbxPregsModificar.Items.Add("What is your favorite ice cream flavor?");
+                cmbxPreguntaSeg.Items.Add("What is the name of your first pet?");
+                cmbxPreguntaSeg.Items.Add("On what street is your first home located?");
+                cmbxPreguntaSeg.Items.Add("What is your favorite ice cream flavor?");
+                seleccionaImagen = "Select image";
+                error = "  Contact an administrator.";
+                cuidado = "Warning:";
+                rellenar = "You must complete all the data ";
+                corta = "the password is too short ";
+                distintas = "Passwords do not match";
+                existe = "That ID is already entered";
+                real = "The ID must be real"; 
+                msgModificar = "Do you want to eliminate ";
+                titModificar = "Modify profile";
+                modificado = "Your data has been modified";
+                msgBorrar = "Do you want to delete your profile?";
+                titBorrar = "Delete profile";
+                borrado = "User delete";
+
+            }
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -119,7 +276,7 @@ namespace Hatchat.Presentacion
 
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            DialogResult cerrarSesion = MessageBox.Show(msgCerrarSesion, cerrarSesionTitulo, MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
                 Login.encontrado = new Logica.Usuario();
@@ -339,7 +496,7 @@ namespace Hatchat.Presentacion
         {
             panelClasesAgregadas.AutoScrollPosition = Point.Empty;
 
-            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+            string error = yaIngresadas;
             bool mandable = true;
             foreach (Logica.AsignaturaCursa asigPend in cursaAsigs)
             {
@@ -535,38 +692,38 @@ namespace Hatchat.Presentacion
 
         private void btnAltaAlumno_Click(object sender, EventArgs e)
         {
-            string error = "Cuidado: ";
+            string error = cuidado;
             bool aceptable = true;
             Logica.Alumno alu = new Logica.Alumno();
             if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
             {
                 aceptable = false;
-                error += "\nDebe rellenar todos los campos";
+                error += "\n"+rellenar;
             }
             if (txtCedula.Text != "")
             {
                 if (!alu.VerficarCedula(txtCedula.Text))
                 {
                     aceptable = false;
-                    error += "\nLa cedula debe ser real";
+                    error += "\n"+real;
                 }
             }
             if (txtPassword.Text.Length < 8)
             {
                 aceptable = false;
-                error += "\nLa contraseña es demaciado corta";
+                error += "\n"+corta;
             }
             if (txtConfirmarPassword.Text != txtPassword.Text)
             {
                 aceptable = false;
-                error += "\nLas contraseñas no son iguales";
+                error += "\n"+distintas;
             }
 
 
             if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
             {
                 aceptable = false;
-                error += "\n\nAdvertencia: esa cedula ya esta ingresada";
+                error += "\n\n"+existe;
             }
 
 
@@ -586,8 +743,8 @@ namespace Hatchat.Presentacion
                 alu.Apodo = txtNombre.Text;
                 alu.FotoDePerfil = alu.ImageToByteArray(Image.FromFile("alumno.png"));
                 alu.AltaUsuario();
-                string fallo = "Las siguientes asignaturas ya estaban registradas:";
-                string ingresadas = "Las siguientes asignaturas fueron ingresadas con existo:";
+                string fallo = this.fallo;
+                bool ingreso = false;
                 foreach (Logica.Cursa cursa in cursas)
                 {
                     cursa.CiAlumno = alu.Ci;
@@ -604,26 +761,25 @@ namespace Hatchat.Presentacion
                         if (asigCursa.SelectCursandoAsignaturaDesactivada())
                         {
                             asigCursa.ActivarAsignaturaCursa();
-                            ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+                            ingreso = true;
                         }
                         else
                         {
-                            fallo += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
+                            fallo += "\n- " + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
                         }
                     }
                     else
                     {
                         asigCursa.InsertAsignaturaCursa();
-                        ingresadas += "\n" + new Logica.Asignatura().SelectAsignaturaPorId(asigCursa.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Anio + new Logica.Clase().SelectClasePorId(asigCursa.IdClase).Nombre + " " + new Logica.Orientacion().SelectOrientacioPorId(asigCursa.Orientacion).Nombre;
-
+                        ingreso = true;
                     }
                 }
-                MessageBox.Show("Se ha creado el alumno correctamente");
-                if (ingresadas != "Las siguientes asignaturas fueron ingresadas con existo:")
+                MessageBox.Show(creado);
+                if (ingreso)
                 {
                     MessageBox.Show(ingresadas);
                 }
-                if (ingresadas != "Las siguientes asignaturas ya estaban registradas:")
+                if (fallo != this.fallo)
                 {
                     MessageBox.Show(fallo);
                 }
@@ -666,17 +822,17 @@ namespace Hatchat.Presentacion
             Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
             if (al.Ci != "" && al.SelectAlumno())
             {
-                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a " + al.Nombre + " " + al.Primer_apellido + "?", "Eliminar", MessageBoxButtons.YesNo);
+                DialogResult eliminarAlumno = MessageBox.Show(msgBorrar + al.Nombre + " " + al.Primer_apellido + "?", titBorrar, MessageBoxButtons.YesNo);
                 if (eliminarAlumno == DialogResult.Yes)
                 {
                     al.RemoveUsuario();
-                    MessageBox.Show("Alumno eliminado correctamente");
+                    MessageBox.Show(borrado);
                     txtBajaCi.Text = "";
                 }
             }
             else
             {
-                MessageBox.Show("Alumno no encontrado");
+                MessageBox.Show(eliminadont);
             }
         }
 
@@ -710,7 +866,7 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                MessageBox.Show("Alumno no encontrado");
+                MessageBox.Show(eliminadont);
             }
         }
         private void lblCambiarFoto_Click(object sender, EventArgs e)
@@ -718,7 +874,7 @@ namespace Hatchat.Presentacion
             OpenFileDialog ofdFoto = new OpenFileDialog();
             ofdFoto.Filter = "Imagenes|*.jpeg;*.jpg;*.png";
             ofdFoto.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            ofdFoto.Title = "Seleccionar imagen";
+            ofdFoto.Title = seleccionaImagen;
             if (ofdFoto.ShowDialog() == DialogResult.OK)
             {
                 pbxFotoModificar.Image = Image.FromFile(ofdFoto.FileName);
@@ -726,7 +882,7 @@ namespace Hatchat.Presentacion
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            DialogResult eliminarAlumno = MessageBox.Show("¿Desea modificar este perfil?", "Modificar", MessageBoxButtons.YesNo);
+            DialogResult eliminarAlumno = MessageBox.Show(msgModificar, titModificar, MessageBoxButtons.YesNo);
             if (eliminarAlumno == DialogResult.Yes)
             {
                 alModif.Apodo = txtApodoModificar.Text;
@@ -735,7 +891,7 @@ namespace Hatchat.Presentacion
                 alModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
                 alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFotoModificar.Image);
                 alModif.UpdatePerfil();
-
+                MessageBox.Show(modificado);
                 txtApodoModificar.Text = "";
                 txtPassword.Text = "";
                 txtRespuesta.Text = "";

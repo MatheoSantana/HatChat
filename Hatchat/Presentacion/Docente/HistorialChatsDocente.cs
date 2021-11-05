@@ -33,6 +33,7 @@ namespace Hatchat.Presentacion
         public Form historialMensajesDocente;
 
         private List<Logica.Chat> chats = new List<Logica.Chat>();
+        private List<Logica.Chat> chatstemps = new List<Logica.Chat>();
         private List<Logica.Chatea> mensajs = new List<Logica.Chatea>();
         public static Logica.Chat abierto = new Logica.Chat();
         
@@ -230,7 +231,7 @@ namespace Hatchat.Presentacion
         private void cargarChatsFiltro()
         {
             List<Logica.Chat> chats = new List<Logica.Chat>();
-            List<Logica.Chat> chatstemps = new Logica.Chat().SelectHistorialChatsPorCedulaAlumno(Login.encontrado.Ci);
+            List<Logica.Chat> chatstemps = new Logica.Chat().SelectHistorialChatsPorCedulaDocente(Login.encontrado.Ci);
             if (chatstemps.Count != 0)
             {
                 lblLinea.Visible = false;
@@ -243,7 +244,48 @@ namespace Hatchat.Presentacion
                 lblBienvenido.Visible = true;
                 pcbxLogo.Visible = true;
             }
-            foreach (Logica.Chat chat in chatstemps)
+
+            bool igualestemps = true;
+            if (this.chatstemps.Count == chatstemps.Count)
+            {
+                for (int x = 0; x < chatstemps.Count; x++)
+                {
+                    if (!(chatstemps[x].IdChat == this.chatstemps[x].IdChat))
+                    {
+                        igualestemps = false;
+                    }
+                }
+            }
+            else
+            {
+                igualestemps = false;
+            }
+            if (!igualestemps)
+            {
+                cmbxAsignatura.Items.Clear();
+                asignaturas.Clear();
+                foreach (Logica.Chat chat in chatstemps)
+                {
+                    bool agregar = true;
+                    Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
+                    foreach (Logica.Asignatura asig in asignaturas)
+                    {
+                        if (asi.Id == asig.Id)
+                        {
+                            agregar = false;
+                        }
+                    }
+                    if (agregar)
+                    {
+
+                        asignaturas.Add(asi);
+                        cmbxAsignatura.Items.Add(asi.Nombre);
+                    }
+                }
+                this.chatstemps = chatstemps;
+            }
+
+                foreach (Logica.Chat chat in chatstemps)
             {
                 bool agregado = false;
                 if (filtroAsignatura || filtroFecha)
@@ -261,7 +303,7 @@ namespace Hatchat.Presentacion
                             agregado = true;
                         }
                     }
-                    if (filtroAsignatura && !agregado)
+                    if (filtroAsignatura && !agregado && !filtroFecha)
                     {
                         if (chat.Asignatura == id)
                         {
@@ -269,7 +311,7 @@ namespace Hatchat.Presentacion
                             agregado = true;
                         }
                     }
-                    if (filtroFecha && !agregado)
+                    if (filtroFecha && !agregado && !filtroAsignatura)
                     {
                         if (chat.Fecha.Year == dtpFiltro.Value.Year && chat.Fecha.Month == dtpFiltro.Value.Month && chat.Fecha.Day == dtpFiltro.Value.Day)
                         {
@@ -299,26 +341,7 @@ namespace Hatchat.Presentacion
             }
             if (!iguales)
             {
-                cmbxAsignatura.Items.Clear();
-                asignaturas.Clear();
-                foreach (Logica.Chat chat in chats)
-                {
-                    bool agregar = true;
-                    Logica.Asignatura asi = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura);
-                    foreach (Logica.Asignatura asig in asignaturas)
-                    {
-                        if (asi.Id == asig.Id)
-                        {
-                            agregar = false;
-                        }
-                    }
-                    if (agregar)
-                    {
-                        
-                        asignaturas.Add(asi);
-                        cmbxAsignatura.Items.Add(asi.Nombre);
-                    }
-                }
+                
                 this.chats = chats;
                 int yPanel = 0;
                 panelChatsActivos.Controls.Clear();
@@ -532,7 +555,7 @@ namespace Hatchat.Presentacion
                     fecha.ForeColor = Color.White;
                     fecha.Font = new Font("Arial", 12.0f);
                     fecha.Name = "lblCI" + chat.IdChat.ToString();
-                    fecha.Text = fecha+"\n" + chat.Fecha.ToString("dd") + "/" + chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
+                    fecha.Text = this.fecha+"\n" + chat.Fecha.ToString("dd") + "/" + chat.Fecha.ToString("MM") + "/" + chat.Fecha.ToString("yyyy");
                     fecha.Click += new EventHandler(AbrirChat);
 
                     Panel panel = new Panel();
