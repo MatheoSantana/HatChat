@@ -736,15 +736,22 @@ namespace Hatchat.Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            Logica.Usuario doce = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
-            if(doce.Ci!="" && doce.SelectDocente())
+            if (txtBajaCi.Text.Length == 8)
             {
-                DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a " + doce.Nombre + " " + doce.Primer_apellido + "?", "Eliminar", MessageBoxButtons.YesNo);
-                if (eliminarAlumno == DialogResult.Yes)
+                Logica.Usuario doce = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
+                if (doce.Ci != "" && doce.SelectDocente())
                 {
-                    doce.RemoveUsuario();
-                    MessageBox.Show("Docente eliminado correctamente");
-                    txtBajaCi.Text = "";
+                    DialogResult eliminarAlumno = MessageBox.Show("¿Desea eliminar a " + doce.Nombre + " " + doce.Primer_apellido + "?", "Eliminar", MessageBoxButtons.YesNo);
+                    if (eliminarAlumno == DialogResult.Yes)
+                    {
+                        doce.RemoveUsuario();
+                        MessageBox.Show("Docente eliminado correctamente");
+                        txtBajaCi.Text = "";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Docente no encontrado");
                 }
             }
             else
@@ -802,22 +809,29 @@ namespace Hatchat.Presentacion
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            DialogResult eliminarDocente = MessageBox.Show("¿Desea modificar este perfil?", "Modificar", MessageBoxButtons.YesNo);
-            if (eliminarDocente == DialogResult.Yes)
+            if (doModif.Ci != null)
             {
-                doModif.Apodo = txtApodoModificar.Text;
-                doModif.Password = txtPasswordModificar.Text;
-                doModif.Respuesta_seguridad = txtRespuesta.Text;
-                doModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
-                doModif.FotoDePerfil = doModif.ImageToByteArray(pbxFotoModificar.Image);
-                doModif.UpdatePerfil();
+                DialogResult eliminarDocente = MessageBox.Show("¿Desea modificar este perfil?", "Modificar", MessageBoxButtons.YesNo);
+                if (eliminarDocente == DialogResult.Yes)
+                {
+                    doModif.Apodo = txtApodoModificar.Text;
+                    doModif.Password = txtPasswordModificar.Text;
+                    doModif.Respuesta_seguridad = txtRespuesta.Text;
+                    doModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
+                    doModif.FotoDePerfil = doModif.ImageToByteArray(pbxFotoModificar.Image);
+                    doModif.UpdatePerfil();
 
-                txtApodoModificar.Text = "";
-                txtPassword.Text = "";
-                txtRespuesta.Text = "";
-                cbxPregsModificar.SelectedIndex = -1;
-                pbxFotoModificar.Image = null;
-                txtCiModif.Text = "";
+                    txtApodoModificar.Text = "";
+                    txtPassword.Text = "";
+                    txtRespuesta.Text = "";
+                    cbxPregsModificar.SelectedIndex = -1;
+                    pbxFotoModificar.Image = null;
+                    txtCiModif.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar una usuario");
+                }
             }
         }
         private void btnAgenda_Click(object sender, EventArgs e)
@@ -953,9 +967,35 @@ namespace Hatchat.Presentacion
         private void timerCentrar_Tick(object sender, EventArgs e)
         {
             CenterToScreen();
-        }
 
-        private void EliminarAgenda(object sender, EventArgs e)
+            List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>();
+            bool iguales = true;
+            if (orientaciones.Count == this.orientaciones.Count)
+            {
+                for (int x = 0; x < orientaciones.Count; x++)
+                {
+                    if (!(orientaciones[x].Id == this.orientaciones[x].Id && orientaciones[x].Nombre == this.orientaciones[x].Nombre))
+                    {
+                        iguales = false;
+                    }
+                }
+            }
+            else
+            {
+                iguales = false;
+            }
+            if (!iguales)
+            {
+                this.orientaciones = orientaciones;
+                cmbxOrientacion.Items.Clear();
+                foreach (Logica.Orientacion ori in orientaciones)
+                {
+                    cmbxOrientacion.Items.Add(ori.Nombre);
+
+                }
+            }
+        }
+                private void EliminarAgenda(object sender, EventArgs e)
         {
             if (sender.GetType().ToString() == "System.Windows.Forms.Label")
             {

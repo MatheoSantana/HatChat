@@ -799,16 +799,22 @@ namespace Hatchat.Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
-            Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
-            if (al.Ci != "" && al.SelectAlumno())
+            if (txtBajaCi.Text.Length == 8)
             {
-                DialogResult eliminarAlumno = MessageBox.Show(msgBorrar + al.Nombre + " " + al.Primer_apellido + "?", titBorrar, MessageBoxButtons.YesNo);
-                if (eliminarAlumno == DialogResult.Yes)
+                Logica.Usuario al = new Logica.Usuario().SelectUsuarioCiActivo(txtBajaCi.Text);
+                if (al.Ci != "" && al.SelectAlumno())
                 {
-                    al.RemoveUsuario();
-                    MessageBox.Show(borrado);
-                    txtBajaCi.Text = "";
+                    DialogResult eliminarAlumno = MessageBox.Show(msgBorrar + al.Nombre + " " + al.Primer_apellido + "?", titBorrar, MessageBoxButtons.YesNo);
+                    if (eliminarAlumno == DialogResult.Yes)
+                    {
+                        al.RemoveUsuario();
+                        MessageBox.Show(borrado);
+                        txtBajaCi.Text = "";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(eliminadont);
                 }
             }
             else
@@ -829,10 +835,37 @@ namespace Hatchat.Presentacion
         private void timerCentrar_Tick(object sender, EventArgs e)
         {
             CenterToScreen();
+
+            List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>();
+            bool iguales = true;
+            if (orientaciones.Count == this.orientaciones.Count)
+            {
+                for (int x = 0; x < orientaciones.Count; x++)
+                {
+                    if (!(orientaciones[x].Id == this.orientaciones[x].Id && orientaciones[x].Nombre == this.orientaciones[x].Nombre))
+                    {
+                        iguales = false;
+                    }
+                }
+            }
+            else
+            {
+                iguales = false;
+            }
+            if (!iguales)
+            {
+                this.orientaciones = orientaciones;
+                cmbxOrientacion.Items.Clear();
+                foreach (Logica.Orientacion ori in orientaciones)
+                {
+                    cmbxOrientacion.Items.Add(ori.Nombre);
+                }
+            }
         }
 
         private void btnBuscarModficar_Click(object sender, EventArgs e)
         {
+
             if (new Logica.Usuario().SelectAlumno(txtCiModif.Text))
             {
                 alModif = new Logica.Usuario().SelectUsuarioCiActivo(txtCiModif.Text);
@@ -863,22 +896,29 @@ namespace Hatchat.Presentacion
         }
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            DialogResult eliminarAlumno = MessageBox.Show(msgModificar, titModificar, MessageBoxButtons.YesNo);
-            if (eliminarAlumno == DialogResult.Yes)
+            if (alModif.Ci != null)
             {
-                alModif.Apodo = txtApodoModificar.Text;
-                alModif.Password = txtPasswordModificar.Text;
-                alModif.Respuesta_seguridad = txtRespuesta.Text;
-                alModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
-                alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFotoModificar.Image);
-                alModif.UpdatePerfil();
-                MessageBox.Show(modificado);
-                txtApodoModificar.Text = "";
-                txtPassword.Text = "";
-                txtRespuesta.Text = "";
-                cbxPregsModificar.SelectedIndex = -1;
-                pbxFotoModificar.Image = null;
-                txtCiModif.Text = "";
+                DialogResult eliminarAlumno = MessageBox.Show(msgModificar, titModificar, MessageBoxButtons.YesNo);
+                if (eliminarAlumno == DialogResult.Yes)
+                {
+                    alModif.Apodo = txtApodoModificar.Text;
+                    alModif.Password = txtPasswordModificar.Text;
+                    alModif.Respuesta_seguridad = txtRespuesta.Text;
+                    alModif.Preguta_seguridad = (cbxPregsModificar.SelectedIndex + 1);
+                    alModif.FotoDePerfil = alModif.ImageToByteArray(pbxFotoModificar.Image);
+                    alModif.UpdatePerfil();
+                    MessageBox.Show(modificado);
+                    txtApodoModificar.Text = "";
+                    txtPassword.Text = "";
+                    txtRespuesta.Text = "";
+                    cbxPregsModificar.SelectedIndex = -1;
+                    pbxFotoModificar.Image = null;
+                    txtCiModif.Text = "";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe ingresar una usuario");
             }
         }
 

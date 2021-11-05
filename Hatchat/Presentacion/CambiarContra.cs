@@ -149,7 +149,7 @@ namespace Hatchat.Presentacion
 
         private void txtCedula_TextChanged(object sender, EventArgs e)
         {
-            if (txtCedula.Text.Length == 8)
+            if (txtCedula.Text.Length == 8 && new Logica.Usuario().VerficarCedula(txtCedula.Text))
             {
                 us = new Logica.Usuario().SelectUsuarioCi(txtCedula.Text);
 
