@@ -316,6 +316,7 @@ namespace Hatchat.Presentacion
             // 
             // rtbxRespuesta
             // 
+            this.rtbxRespuesta.Font = new System.Drawing.Font("Arial", 12F);
             this.rtbxRespuesta.Location = new System.Drawing.Point(77, 319);
             this.rtbxRespuesta.Name = "rtbxRespuesta";
             this.rtbxRespuesta.Size = new System.Drawing.Size(647, 132);

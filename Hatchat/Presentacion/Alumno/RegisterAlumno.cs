@@ -20,6 +20,7 @@ namespace Hatchat.Presentacion
         string nombreNumerico;
         string apellidoNumerico;
         string sApellidoNumerico;
+        string grandes;
 
 
         public Form login;
@@ -59,6 +60,7 @@ namespace Hatchat.Presentacion
                 nombreNumerico="El nombre no puede tener numeros";
                 apellidoNumerico="El primer apellido no puede tener numeros";
                 sApellidoNumerico="El segundo apellido no peude tener numeros";
+                grandes = "Los datos no pueden tener un tamaño mayor a 30 caracteres";
 
             }
             else
@@ -87,7 +89,10 @@ namespace Hatchat.Presentacion
                 distintas = "Passwords do not match";
                 existe = "That ID is already entered";
                 real = "The ID must be real";
-
+                nombreNumerico = "The name cannot have numbers";
+                apellidoNumerico = "The first surname cannot have numbers";
+                sApellidoNumerico = "The second surname cannot have numbers";
+                grandes = "Data cannot be larger than 30 characters";
             }
 
             try
@@ -133,79 +138,53 @@ namespace Hatchat.Presentacion
 
             string error = cuidado;
             bool aceptable = true;
-            bool errorn = false;
-            bool errora = false;
-            bool errore = false;
-            for (int x = 0; x < txtNombre.Text.Length; x++)
-            {
-                
-                if (txtNombre.Text[x].ToString() == "1" || txtNombre.Text[x].ToString() == "2" || txtNombre.Text[x].ToString() == "3" || txtNombre.Text[x].ToString() == "4" || txtNombre.Text[x].ToString() == "5" || txtNombre.Text[x].ToString() == "6" || txtNombre.Text[x].ToString() == "7" || txtNombre.Text[x].ToString() == "8" || txtNombre.Text[x].ToString() == "9" || txtNombre.Text[x].ToString() == "0")
-                {
-                    errorn = true;
-                }
-                
-            }
-            if (errorn)
+            
+            
+            if (alu.NumerosEnStrings(txtNombre.Text))
             {
                 error += "\n" + nombreNumerico;
                 aceptable = false;
             }
-            for (int x = 0; x < txtPrimerApellido.Text.Length; x++)
-            {
-                
-                if (txtPrimerApellido.Text[x].ToString() == "1" || txtPrimerApellido.Text[x].ToString() == "2" || txtPrimerApellido.Text[x].ToString() == "3" || txtPrimerApellido.Text[x].ToString() == "4" || txtPrimerApellido.Text[x].ToString() == "5" || txtPrimerApellido.Text[x].ToString() == "6" || txtPrimerApellido.Text[x].ToString() == "7" || txtPrimerApellido.Text[x].ToString() == "8" || txtPrimerApellido.Text[x].ToString() == "9" || txtPrimerApellido.Text[x].ToString() == "0")
-                {
-                    errora = true;
-                }
-                
-            }
-            if (errora)
+            
+            if (alu.NumerosEnStrings(txtPrimerApellido.Text))
             {
                 error += "\n" + apellidoNumerico;
                 aceptable = false;
             }
-            for (int x = 0; x < txtSegundoApellido.Text.Length; x++)
-            {
-                
-                if (txtSegundoApellido.Text[x].ToString() == "1" || txtSegundoApellido.Text[x].ToString() == "2" || txtSegundoApellido.Text[x].ToString() == "3" || txtSegundoApellido.Text[x].ToString() == "4" || txtSegundoApellido.Text[x].ToString() == "5" || txtSegundoApellido.Text[x].ToString() == "6" || txtSegundoApellido.Text[x].ToString() == "7" || txtSegundoApellido.Text[x].ToString() == "8" || txtSegundoApellido.Text[x].ToString() == "9" || txtSegundoApellido.Text[x].ToString() == "0")
-                {
-                    errore = true;
-                }
-                
-            }
-            if (errore)
+            
+            if (alu.NumerosEnStrings(txtSegundoApellido.Text))
             {
                 error += "\n" + sApellidoNumerico;
                 aceptable = false;
             }
-            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "" || cbxPreguntas.SelectedIndex==-1)
+            if (alu.campoVacio(txtCedula.Text) || alu.campoVacio(txtNombre.Text) || alu.campoVacio(txtPrimerApellido.Text) || alu.campoVacio(txtSegundoApellido.Text) || alu.campoVacio(txtPassword.Text) || alu.campoVacio(txtConfirmarPassword.Text) || alu.campoVacio(txtRespuesta.Text)  || alu.sinPregunta(cbxPreguntas.SelectedIndex))
             {
-
                 aceptable = false;
                 error += "\n"+rellenar;
             }
-            else
-            {
                 if (!alu.VerficarCedula(txtCedula.Text))
                 {
                     aceptable = false;
                     error += "\n" + real;
                 }
+            if (alu.TamañoIncorrecto(txtNombre.Text) || alu.TamañoIncorrecto(txtPrimerApellido.Text) || alu.TamañoIncorrecto(txtSegundoApellido.Text) || alu.TamañoIncorrecto(txtPassword.Text) || alu.TamañoIncorrecto(txtConfirmarPassword.Text) || alu.TamañoIncorrecto(txtRespuesta.Text))
+            {
+                aceptable = false;
+                error += "\n" + grandes;
             }
-            
-            if (txtPassword.Text.Length < 8)
+
+            if (alu.TamañoMinimoContra(txtPassword.Text))
             {
                 aceptable = false;
                 error += "\n"+corta;
             }
-            if (txtConfirmarPassword.Text != txtPassword.Text)
+            if (txtConfirmarPassword.Text == txtPassword.Text)
             {
                 aceptable = false;
                 error += "\n"+distintas;
             }
 
-
-            if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
+            if (alu.ExisteUsuarioCi(txtCedula.Text))
             {
                 aceptable = false;
                 error += "\n\n"+existe;

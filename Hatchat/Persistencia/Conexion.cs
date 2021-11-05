@@ -17,7 +17,7 @@ namespace Hatchat.Persistencia
     {
 
         static string server = "Server = localhost; ";//192.168.5.50
-        static string port = "Port = 3306; ";//
+        static string port = "Port = 3306; ";//3306
         static string database = "Database = Hatchat; ";//
         static string uid = "Uid = root; ";//matheo.santana
         static string pwd = "Pwd = math2002;";//52848682
@@ -66,13 +66,29 @@ namespace Hatchat.Persistencia
             }
             conexion.Close();
         }
-        public void EnviarSolicitudClaseAl(SolicitudClaseAl soli)
+        public bool EnviarSolicitudClaseAl(SolicitudClaseAl soli)
         {
+            bool funca = true;
             MySqlConnection conexion = new MySqlConnection(connection);
-            conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into solicitudClaseAl (fechaHora,pendiente,alumno) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.Pendiente + ",'" + soli.Alumno + "');", conexion);
-            insert.ExecuteNonQuery();
+            MySqlCommand insert = new MySqlCommand();
+            try
+            {
+                conexion.Open();
+                insert = new MySqlCommand("start transaction;", conexion);
+                insert.ExecuteNonQuery();
+                insert = new MySqlCommand("insert into solicitudClaseAl (fechaHora,pendiente,alumno) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "'," + soli.Pendiente + ",'" + soli.Alumno + "');", conexion);
+                insert.ExecuteNonQuery();
+                insert = new MySqlCommand("commit;", conexion);
+                insert.ExecuteNonQuery();
+            }
+            catch 
+            {
+                insert = new MySqlCommand("rollback;", conexion);
+                insert.ExecuteNonQuery();
+                funca = false;
+            }
             conexion.Close();
+            return funca;
         }
         public void EnviarSolicitudModif(SolicitudModif soli)
         {

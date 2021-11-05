@@ -78,11 +78,11 @@ namespace Hatchat.Presentacion
             // 
             // cbxPreguntas
             // 
-            this.cbxPreguntas.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.cbxPreguntas.Font = new System.Drawing.Font("Arial", 12.25F);
             this.cbxPreguntas.FormattingEnabled = true;
             this.cbxPreguntas.Location = new System.Drawing.Point(564, 212);
             this.cbxPreguntas.Name = "cbxPreguntas";
-            this.cbxPreguntas.Size = new System.Drawing.Size(401, 30);
+            this.cbxPreguntas.Size = new System.Drawing.Size(401, 26);
             this.cbxPreguntas.TabIndex = 37;
             // 
             // lblExplicacion

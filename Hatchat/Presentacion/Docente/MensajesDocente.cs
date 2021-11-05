@@ -20,6 +20,7 @@ namespace Hatchat.Presentacion
         string msgCerrarSesion;
         string cerrarSesionTitulo;
         string respondido;
+        string largo;
         Image recibido;
         Image contestado;
         Image realizado;
@@ -69,6 +70,7 @@ namespace Hatchat.Presentacion
                 btnEnviar.Text = "Enviar";
                 enviado = "Se ha enviado el mensaje correctamente";
                 respondido = "este mensaje ya ha sido respondido";
+                largo = "El mensaje es demasiado largo, pruebe con menos de 500 caracteres";
             }
             else
             {
@@ -84,7 +86,7 @@ namespace Hatchat.Presentacion
                 lblFechaDocente.Text = fecha;
                 alumno = "Student:";
                 lblNombreAlumno.Text = alumno;
-                consulta = "Consulta: ";
+                consulta = "Iusse: ";
                 lblConsultaAlumno.Text = consulta;
                 lblConsultaDocente.Text = consulta;
                 error = "  Contact an administrator.";
@@ -93,6 +95,7 @@ namespace Hatchat.Presentacion
                 btnEnviar.Text = "Send";
                 enviado = "The message has been sent successfully";
                 respondido = "this message has already been answered";
+                largo = "The message is too long, try less than 500 characters";
             }
             try
             {
@@ -417,14 +420,22 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                mensajeSeleccionado.FechaHoraDocente = DateTime.Now;
-                mensajeSeleccionado.MensajeDocente = rtbxRespuesta.Text;
-                mensajeSeleccionado.Estado = "contestado";
-                mensajeSeleccionado.EnviarMensajeDocente();
-                MessageBox.Show(enviado);
-                mensajeSeleccionado = new Logica.Mensaje();
-                CargarMensajes();
-                panelContenedor.Visible = false;
+                if (rtbxRespuesta.Text.Length >= 500)
+                {
+                    MessageBox.Show(largo);
+                }
+                else
+                {
+                    mensajeSeleccionado.FechaHoraDocente = DateTime.Now;
+                    mensajeSeleccionado.MensajeDocente = rtbxRespuesta.Text;
+                    mensajeSeleccionado.Estado = "contestado";
+                    mensajeSeleccionado.EnviarMensajeDocente();
+                    MessageBox.Show(enviado);
+                    mensajeSeleccionado = new Logica.Mensaje();
+                    CargarMensajes();
+                    panelContenedor.Visible = false;
+                }
+
             }
 
         }

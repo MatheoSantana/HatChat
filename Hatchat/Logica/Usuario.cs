@@ -95,19 +95,7 @@ namespace Hatchat.Logica
             get { return activo; }
             set { activo = value; }
         }
-        /*
-         * public byte[] ToByteArray(string StringToConvert)
-        {
 
-            char[] CharArray = StringToConvert.ToCharArray();
-            byte[] ByteArray = new byte[CharArray.Length];
-            for (int i = 0; i < CharArray.Length; i++)
-            {
-                ByteArray[i] = Convert.ToByte(CharArray);
-            }
-            return ByteArray;
-        }
-        */
         public Image ByteArrayToImage(byte[] byteArrayIn)
         {
             if (!(byteArrayIn == null))
@@ -201,9 +189,44 @@ namespace Hatchat.Logica
                 return false;
             }
         }
+    
+        public bool NumerosEnStrings(string cadena)
+        {
+            bool hay = false;
+            for (int x = 0; x < cadena.Length; x++)
+            {
+                if (cadena[x].ToString() == "1" || cadena[x].ToString() == "2" || cadena[x].ToString() == "3" || cadena[x].ToString() == "4" || cadena[x].ToString() == "5" || cadena[x].ToString() == "6" || cadena[x].ToString() == "7" || cadena[x].ToString() == "8" || cadena[x].ToString() == "9" || cadena[x].ToString() == "0")
+                {
+                    hay = true;
+                }
+            }
+            return hay;
+        }
+        public bool campoVacio(string cadena)
+        {
+            return cadena == null || cadena == "";
+        }
+        public bool sinPregunta(int numero)
+        {
+            return numero == -1;
+        }
+        public bool TamañoIncorrecto(string cadena)
+        {
+            return cadena.Length > 31;
+        }
+        public bool TamañoMinimoContra(string cadena)
+        {
+            return cadena.Length < 8;
+        }
+         
         public void AltaUsuario()
         {
+
             Persistencia.Conexion conexion = new Persistencia.Conexion();
+            /*if(!(VerficarCedula(ci) && 
+                NumerosEnStrings(nombre) && NumerosEnStrings(primer_apellido) && NumerosEnStrings(segundo_apellido) && 
+                campoVacio(nombre) && campoVacio(ci) && campoVacio(respuesta_seguridad) && campoVacio(primer_apellido) && campoVacio(segundo_apellido) && sinPregunta(pregunta_seguridad) && campoVacio(password) &&
+                TamañoIncorrecto(nombre) && TamañoIncorrecto(primer_apellido) && TamañoIncorrecto(segundo_apellido) && TamañoIncorrecto(password) && TamañoIncorrecto(respuesta_seguridad) && TamañoMinimoContra(password) && ExisteUsuarioCi(Ci)))*/
             conexion.AltaUsuario(this);
         }
         public Usuario SelectUsuarioCiActivo(string ci)

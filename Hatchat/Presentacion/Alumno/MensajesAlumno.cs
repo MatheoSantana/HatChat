@@ -21,6 +21,8 @@ namespace Hatchat.Presentacion
         string cerrarSesionTitulo;
         string noRespondio;
         string destinatariont;
+        string asuntoCorto;
+        string largo;
         Image recibido;
         Image contestado;
         Image realizado;
@@ -78,6 +80,8 @@ namespace Hatchat.Presentacion
                 noRespondio="''El mensaje no ha sido respondido''";
                 enviado = "Se ha enviado el mensaje correctamente";
                 destinatariont = "Debe ingresar un destinatario";
+                asuntoCorto = "Debe tener un asunto con un maximo de 60 caracteres";
+                largo = "El mensaje es demasiado largo, pruebe con menos de 500 caracteres";
             }
             else
             {
@@ -94,7 +98,7 @@ namespace Hatchat.Presentacion
                 lblFechaDocente.Text = fecha;
                 alumno = "Student:";
                 lblNombreAlumno.Text = alumno;
-                consulta = "Consulta: ";
+                consulta = "Iusse: ";
                 lblConsultaAlumno.Text = consulta;
                 lblConsultaDocente.Text = consulta;
                 error = "  Contact an administrator.";
@@ -109,6 +113,8 @@ namespace Hatchat.Presentacion
                 noRespondio = "''The message has not been answered''";
                 enviado = "The message has been sent successfully";
                 destinatariont = "You must enter a addressee";
+                asuntoCorto = "Must have a iusse with a maximum of 60 characters";
+                largo = "The message is too long, try less than 500 characters";
             }
             //nav
             pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
@@ -445,19 +451,33 @@ namespace Hatchat.Presentacion
         }
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            try
+            if (cbxDestinatario.SelectedIndex != -1)
             {
-                Logica.Mensaje men = new Logica.Mensaje(Login.encontrado.Ci, txtAsunto.Text, DateTime.Now, rtbxMensajeAEnviar.Text, docentes[cbxDestinatario.SelectedIndex].Ci, "realizado");
-                men.EnviarMensajeAlumno();
-                MessageBox.Show(enviado);
-                txtAsunto.Text = "";
-                rtbxMensajeAEnviar.Text = "";
-                cbxDestinatario.Items.Clear();
-                docentes.Clear();
-                CargarMensajes();
-                panelEnviarMensaje.Visible = false;
+                if (txtAsunto.Text.Length < 61 && txtAsunto.Text.Length>0)
+                {
+                    if (rtbxMensajeAEnviar.Text.Length < 501)
+                    {
+                        Logica.Mensaje men = new Logica.Mensaje(Login.encontrado.Ci, txtAsunto.Text, DateTime.Now, rtbxMensajeAEnviar.Text, docentes[cbxDestinatario.SelectedIndex].Ci, "realizado");
+                        men.EnviarMensajeAlumno();
+                        MessageBox.Show(enviado);
+                        txtAsunto.Text = "";
+                        rtbxMensajeAEnviar.Text = "";
+                        cbxDestinatario.Items.Clear();
+                        docentes.Clear();
+                        CargarMensajes();
+                        panelEnviarMensaje.Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show(largo);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(asuntoCorto);
+                }
             }
-            catch (System.ArgumentOutOfRangeException ex)
+            else
             {
                 MessageBox.Show(destinatariont);
             }
