@@ -229,8 +229,6 @@ namespace Hatchat.Logica
                 TamañoIncorrecto(nombre) && TamañoIncorrecto(primer_apellido) && TamañoIncorrecto(segundo_apellido) && TamañoIncorrecto(password) && TamañoIncorrecto(respuesta_seguridad) && TamañoMinimoContra(password) && ExisteUsuarioCi(Ci)))
             {
                 Activo = true;
-                try { FotoDePerfil = ImageToByteArray(Image.FromFile("alumno.png")); }
-                catch { }
                 apodo = nombre;
                 creado = conexion.AltaUsuario(this);
             }
@@ -249,32 +247,74 @@ namespace Hatchat.Logica
         public bool SelectAlumno()
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectAlumno(ci);
+            if (VerficarCedula(ci))
+            {
+                return conexion.SelectAlumno(ci);
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool SelectDocente()
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectDocente(ci);
+            if (VerficarCedula(ci))
+            {
+                return conexion.SelectDocente(ci);
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool SelectAdministrador()
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectAdministrador(ci);
+            if (VerficarCedula(ci))
+            {
+                return conexion.SelectAdministrador(ci);
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool SelectAlumno(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectAlumno(ci);
+            if (VerficarCedula(ci))
+            {
+                return conexion.SelectAlumno(ci);
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool SelectDocente(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectDocente(ci);
+            if (VerficarCedula(ci))
+            {
+                return conexion.SelectDocente(ci);
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool SelectAdministrador(string ci)
         {
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            return conexion.SelectAdministrador(ci);
+            if (VerficarCedula(ci))
+            {
+                return conexion.SelectAdministrador(ci);
+            }
+            else
+            {
+                return false;
+            }
         }
         public PreguntaSeg SelectPreguntaSeguridad()
         {

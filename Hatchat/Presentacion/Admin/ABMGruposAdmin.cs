@@ -252,46 +252,54 @@ namespace Hatchat.Presentacion
         }
         private void btnDarAltaOrientacion_Click(object sender, EventArgs e)
         {
-            if (!(new Logica.Orientacion().SelectExisteNombreOrientacion(txtNombreAltaOrientacion.Text)))
+            if (txtNombreAltaOrientacion.Text != "")
             {
-                Logica.Orientacion ori = new Logica.Orientacion();
-                ori.AltaOrientacion(txtNombreAltaOrientacion.Text);
-                ori=ori.SelectOrientacionPorNombre(txtNombreAltaOrientacion.Text);
-                foreach (Logica.Contiene contiene in contieneAltaOrientacion)
+                if (!(new Logica.Orientacion().SelectExisteNombreOrientacion(txtNombreAltaOrientacion.Text)))
                 {
-                    contiene.Orientacion = ori.Id;
-                    contiene.AltaContiene();
-                }
-                MessageBox.Show("Se ha registrado la orientacion correctamente");
-                int ychbx = 5, xchbx = 5;
-                asignaturasAltaOrientacion.Clear();
-                panelAltaOrientacionAsignaturas.Controls.Clear();
-                txtNombreAltaOrientacion.Text = "";
-                asignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
-                foreach (Logica.Asignatura asig in asignaturasAltaOrientacion)
-                {
-                    CheckBox dina = new CheckBox();
+                    Logica.Orientacion ori = new Logica.Orientacion();
+                    ori.AltaOrientacion(txtNombreAltaOrientacion.Text);
+                    ori = ori.SelectOrientacionPorNombre(txtNombreAltaOrientacion.Text);
 
-                    dina.Height = 46;
-                    dina.Width = 150;
-                    dina.Location = new Point(xchbx, ychbx);
-                    if (xchbx == 180)
+                    foreach (Logica.Contiene contiene in contieneAltaOrientacion)
                     {
-                        xchbx = -170;
-                        ychbx += 48;
+                        contiene.Orientacion = ori.Id;
+                        contiene.AltaContiene();
                     }
-                    xchbx += 175;
-                    dina.Font = new Font("arial", 12);
-                    dina.Name = "chbx" + asig.Id;
-                    dina.Text = asig.Nombre;
+                    MessageBox.Show("Se ha registrado la orientacion correctamente");
+                    int ychbx = 5, xchbx = 5;
+                    asignaturasAltaOrientacion.Clear();
+                    panelAltaOrientacionAsignaturas.Controls.Clear();
+                    txtNombreAltaOrientacion.Text = "";
+                    asignaturasAltaOrientacion.AddRange(new Logica.Asignatura().SelectAsignaturas());
+                    foreach (Logica.Asignatura asig in asignaturasAltaOrientacion)
+                    {
+                        CheckBox dina = new CheckBox();
 
-                    dina.CheckedChanged += new EventHandler(AsignaturaCambiadaAltaOrientacion);
-                    panelAltaOrientacionAsignaturas.Controls.Add(dina);
+                        dina.Height = 46;
+                        dina.Width = 150;
+                        dina.Location = new Point(xchbx, ychbx);
+                        if (xchbx == 180)
+                        {
+                            xchbx = -170;
+                            ychbx += 48;
+                        }
+                        xchbx += 175;
+                        dina.Font = new Font("arial", 12);
+                        dina.Name = "chbx" + asig.Id;
+                        dina.Text = asig.Nombre;
+
+                        dina.CheckedChanged += new EventHandler(AsignaturaCambiadaAltaOrientacion);
+                        panelAltaOrientacionAsignaturas.Controls.Add(dina);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ese nombre ya existe, pruebe con otro");
                 }
             }
             else
             {
-                MessageBox.Show("Ese nombre ya existe, pruebe con otro");
+                MessageBox.Show("Debe ingresar un nombre");
             }
         }
         private void btnBajaOrientacion_Click(object sender, EventArgs e)
@@ -504,31 +512,37 @@ namespace Hatchat.Presentacion
         private void btnAgregarAsignaturaAltaAsignatura_Click(object sender, EventArgs e)
         {
             bool hacer = true;
-            foreach (Logica.Asignatura asig in asignaturasAltaAsignatura)
-            {
-                if (asig.Id == txtIdAltaAsignatura.Text)
+            if (!(txtIdAltaAsignatura.Text == "" || txtNombreAltaAsignatura.Text == "" || cmbxAnioAltaAsignatura.SelectedIndex == -1)) {
+                foreach (Logica.Asignatura asig in asignaturasAltaAsignatura)
                 {
-                    hacer = false;
+                    if (asig.Id == txtIdAltaAsignatura.Text)
+                    {
+                        hacer = false;
+                    }
                 }
-            }
-            if (hacer)
-            {
-                Logica.Asignatura asig = new Logica.Asignatura(txtIdAltaAsignatura.Text, txtNombreAltaAsignatura.Text, Convert.ToInt32(cmbxAnioAltaAsignatura.SelectedItem), true);
-                asig.AltaAsignatura();
-                MessageBox.Show("Se ha creado correctamente la asignatura");
+                if (hacer)
+                {
+                    Logica.Asignatura asig = new Logica.Asignatura(txtIdAltaAsignatura.Text, txtNombreAltaAsignatura.Text, Convert.ToInt32(cmbxAnioAltaAsignatura.SelectedItem), true);
+                    asig.AltaAsignatura();
+                    MessageBox.Show("Se ha creado correctamente la asignatura");
 
-                asignaturasAltaAsignatura.Clear();
-                asignaturasAltaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
-                dgvAsignaturasAltaAsignatura.DataSource = new Logica.Asignatura().SelectAsignaturasGrilla();
-                dgvAsignaturasAltaAsignatura.Columns[0].Width = 93;
-                dgvAsignaturasAltaAsignatura.Columns[1].Width = 201;
-                dgvAsignaturasAltaAsignatura.Columns[2].Width = 76;
-                txtNombreAltaAsignatura.Text = "";
-                txtIdAltaAsignatura.Text = "";
+                    asignaturasAltaAsignatura.Clear();
+                    asignaturasAltaAsignatura.AddRange(new Logica.Asignatura().SelectAsignaturas());
+                    dgvAsignaturasAltaAsignatura.DataSource = new Logica.Asignatura().SelectAsignaturasGrilla();
+                    dgvAsignaturasAltaAsignatura.Columns[0].Width = 93;
+                    dgvAsignaturasAltaAsignatura.Columns[1].Width = 201;
+                    dgvAsignaturasAltaAsignatura.Columns[2].Width = 76;
+                    txtNombreAltaAsignatura.Text = "";
+                    txtIdAltaAsignatura.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("Esa id ya existe");
+                }
             }
             else
             {
-                MessageBox.Show("Esa id ya existe");
+                MessageBox.Show("Debe rellenar todos los campos");
             }
         }
 
@@ -574,18 +588,22 @@ namespace Hatchat.Presentacion
             DialogResult cerrarSesion = MessageBox.Show("¿Desea eliminar la asignatura "+ cmbxAsignaturaBajaAsignatura.SelectedItem.ToString() +"? ", "Eliminar Asignatura", MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
+                Logica.Asignatura enc = new Logica.Asignatura();
                 foreach (Logica.Asignatura asig in asignaturasBajaAsignatura)
                 {
                     if (asig.Id + " - " + asig.Nombre == cmbxAsignaturaBajaAsignatura.SelectedItem.ToString())
                     {
-                        asig.BajaAsignatura();
-                        MessageBox.Show("Se ha eliminado la asignatura correctamente");
-                        cmbxAsignaturaBajaAsignatura.Items.Clear();
-                        asignaturasBajaAsignatura.Clear();
-                        cmbxAnioBajaAsignatura.SelectedIndex = -1;
-                        cmbxAsignaturaBajaAsignatura.Enabled = false;
+                        enc = asig;
                     }
                 }
+                
+                    enc.BajaAsignatura();
+                    MessageBox.Show("Se ha eliminado la asignatura correctamente");
+                    cmbxAsignaturaBajaAsignatura.Items.Clear();
+                    asignaturasBajaAsignatura.Clear();
+                    cmbxAnioBajaAsignatura.SelectedIndex = -1;
+                    cmbxAsignaturaBajaAsignatura.Enabled = false;
+                
             }
         }
         private void btnModificarAsignatura_Click(object sender, EventArgs e)

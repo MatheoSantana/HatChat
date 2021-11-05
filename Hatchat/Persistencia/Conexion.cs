@@ -286,6 +286,7 @@ namespace Hatchat.Persistencia
             MySqlDataReader reader = null;
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
+            
             string query = "select * from Docente where ci='" + ci + "';";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
@@ -2047,14 +2048,15 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlConnection conexion2 = new MySqlConnection(connection);
-            conexion2.Open();
+            
             MySqlCommand update = new MySqlCommand("update Orientacion set nombre ='" + ori.Nombre + "' where id=" + ori.Id + ";", conexion);
             update.ExecuteNonQuery();
             update = new MySqlCommand("update Contiene set activo =false where idOri=" + ori.Id + ";", conexion);
             update.ExecuteNonQuery();
             foreach (Contiene cont in contienes)
             {
+                MySqlConnection conexion2 = new MySqlConnection(connection);
+                conexion2.Open();
                 MySqlDataReader reader = null;
                 string query = "select * from Contiene where idOri=" + ori.Id + " and idAsig='" + cont.Asignatura + "';";
                 MySqlCommand select = new MySqlCommand(string.Format(query), conexion2);
@@ -2072,10 +2074,10 @@ namespace Hatchat.Persistencia
                     MySqlCommand insert = new MySqlCommand("insert into Contiene values('" + cont.Asignatura + "'," + cont.Orientacion + ",true);", conexion);
                     insert.ExecuteNonQuery();
                 }
-
+                conexion2.Close();
             }
             conexion.Close();
-            conexion2.Close();
+            
         }
         public DataTable SelectAsignaturasGrilla()
         {
