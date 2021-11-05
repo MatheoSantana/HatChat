@@ -899,6 +899,8 @@ namespace Hatchat.Presentacion
         {
             CenterToScreen();
         }
+
+        
     }
 
 

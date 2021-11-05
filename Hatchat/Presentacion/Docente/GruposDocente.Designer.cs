@@ -218,7 +218,7 @@ namespace Hatchat.Presentacion
             this.lblAsignatura.AutoSize = true;
             this.lblAsignatura.Font = new System.Drawing.Font("Arial", 12F);
             this.lblAsignatura.ForeColor = System.Drawing.Color.White;
-            this.lblAsignatura.Location = new System.Drawing.Point(142, 19);
+            this.lblAsignatura.Location = new System.Drawing.Point(88, 8);
             this.lblAsignatura.Name = "lblAsignatura";
             this.lblAsignatura.Size = new System.Drawing.Size(154, 18);
             this.lblAsignatura.TabIndex = 0;
@@ -694,10 +694,10 @@ namespace Hatchat.Presentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(53)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panelHistorialesNav);
             this.Controls.Add(this.panelParticipantes);
             this.Controls.Add(this.panelInformacion);
             this.Controls.Add(this.panelTextoChat);
-            this.Controls.Add(this.panelHistorialesNav);
             this.Controls.Add(this.panelNav);
             this.Controls.Add(this.panelContenedorGrupos);
             this.Controls.Add(this.panelEntrarGrupo);

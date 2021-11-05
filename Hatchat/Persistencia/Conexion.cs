@@ -16,11 +16,11 @@ namespace Hatchat.Persistencia
     public class Conexion
     {
 
-        static string server = "Server = localhost; ";
-        static string port = "Port = 3306; ";
-        static string database = "Database = Hatchat; ";
-        static string uid = "Uid = root; ";
-        static string pwd = "Pwd = math2002;";
+        static string server = "Server = localhost; ";//192.168.5.50
+        static string port = "Port = 3306; ";//
+        static string database = "Database = Hatchat; ";//
+        static string uid = "Uid = root; ";//matheo.santana
+        static string pwd = "Pwd = math2002;";//52848682
         static string connection = server + port + database + uid + pwd;
         //inserts
         public void AltaUsuario(Usuario usuario)
@@ -1447,7 +1447,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada ="+soliAsig.Aceptada+" where idSolicitudClaseAl=" + soliAsig.IdSolicitudClaseAl + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig=" + soliAsig.IdClaseAsig + " and oriClaseAsig="+ soliAsig + ";", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =" + soliAsig.Aceptada+ " where idSolicitudClaseAl=" + soliAsig.IdSolicitudClaseAl + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig=" + soliAsig.IdClaseAsig + " and oriClaseAsig=" + soliAsig.OriClaseAsig + ";", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1699,7 +1699,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();    
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =" + soliAsig.Aceptada + " where idSolicitudClaseDo=" + soliAsig.IdSolicitudClaseDo + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig = " + soliAsig.IdClaseAsig + " and oriClaseAsig = " + soliAsig + "; ", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =" + soliAsig.Aceptada + " where idSolicitudClaseDo=" + soliAsig.IdSolicitudClaseDo + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig = " + soliAsig.IdClaseAsig + " and oriClaseAsig = " + soliAsig.OriClaseAsig + "; ", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }

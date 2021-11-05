@@ -22,6 +22,9 @@ namespace Hatchat.Presentacion
         string consulta;
         string msgCerrarSesion;
         string cerrarSesionTitulo;
+        Image recibido;
+        Image constestado;
+        Image realizado;
 
         private List<Logica.Docente> docentes = new List<Logica.Docente>();
         private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
@@ -122,8 +125,12 @@ namespace Hatchat.Presentacion
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje blanco.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pcbxLogo.Image = Image.FromFile("Logo Completa.png");
-
+                recibido = Image.FromFile("circulo recibido.png");
+                constestado = Image.FromFile("circulo contestado.png");
+                realizado = Image.FromFile("circulo realizado.png");
             }
+
+
             catch (System.IO.FileNotFoundException ex)
             {
                 MessageBox.Show(ex.Message + error, "Error");
@@ -444,15 +451,15 @@ namespace Hatchat.Presentacion
                     PictureBox picCirculito = new PictureBox();
                     if (men.Estado == "recibido")
                     {
-                        picCirculito.Image = Image.FromFile("circulo recibido.png");
+                        picCirculito.Image = recibido;
                     }
                     else if (men.Estado == "contestado")
                     {
-                        picCirculito.Image = Image.FromFile("circulo contestado.png");
+                        picCirculito.Image = constestado;
                     }
                     else
                     {
-                        picCirculito.Image = Image.FromFile("circulo realizado.png");
+                        picCirculito.Image = realizado;
 
                     }
 
