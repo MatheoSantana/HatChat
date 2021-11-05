@@ -12,6 +12,10 @@ namespace Hatchat.Presentacion
 {
     public partial class ABMAlumnoAdmin : Form
     {
+        string nombreNumerico;
+        string apellidoNumerico;
+        string sApellidoNumerico;
+        string grandes;
         string error;
         string cuidado;
         string corta;
@@ -123,8 +127,14 @@ namespace Hatchat.Presentacion
                 distintas = "Las contraseñas no son iguales";
                 existe = "Esa cedula ya esta ingresada";
                 real = "La cedula debe ser real";
-
-
+                nombreNumerico = "El nombre no puede tener numeros";
+                apellidoNumerico = "El primer apellido no puede tener numeros";
+                sApellidoNumerico = "El segundo apellido no peude tener numeros";
+                grandes = "Los datos no pueden tener un tamaño mayor a 30 caracteres";
+                nombreNumerico = "The name cannot have numbers";
+                apellidoNumerico = "The first surname cannot have numbers";
+                sApellidoNumerico = "The second surname cannot have numbers";
+                grandes = "Data cannot be larger than 30 characters";
                 ingresadas = "El alumno a ingresado a los grupos correctamente";
                 fallo = "EL ALUMNO YA ESTABA CURSANDO LAS SIGUIENTES ASIGNATURAS:\n";
                 creado = "Se ha creado el alumno correctamente";
@@ -689,35 +699,54 @@ namespace Hatchat.Presentacion
             string error = cuidado;
             bool aceptable = true;
             Logica.Alumno alu = new Logica.Alumno();
-            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
+            if (alu.NumerosEnStrings(txtNombre.Text))
             {
+                error += "\n" + nombreNumerico;
                 aceptable = false;
-                error += "\n"+rellenar;
-            }
-            if (txtCedula.Text != "")
-            {
-                if (!alu.VerficarCedula(txtCedula.Text))
-                {
-                    aceptable = false;
-                    error += "\n"+real;
-                }
-            }
-            if (txtPassword.Text.Length < 8)
-            {
-                aceptable = false;
-                error += "\n"+corta;
-            }
-            if (txtConfirmarPassword.Text != txtPassword.Text)
-            {
-                aceptable = false;
-                error += "\n"+distintas;
             }
 
+            if (alu.NumerosEnStrings(txtPrimerApellido.Text))
+            {
+                error += "\n" + apellidoNumerico;
+                aceptable = false;
+            }
 
-            if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
+            if (alu.NumerosEnStrings(txtSegundoApellido.Text))
+            {
+                error += "\n" + sApellidoNumerico;
+                aceptable = false;
+            }
+            if (alu.campoVacio(txtCedula.Text) || alu.campoVacio(txtNombre.Text) || alu.campoVacio(txtPrimerApellido.Text) || alu.campoVacio(txtSegundoApellido.Text) || alu.campoVacio(txtPassword.Text) || alu.campoVacio(txtConfirmarPassword.Text) || alu.campoVacio(txtRespuesta.Text) || alu.sinPregunta(cmbxPreguntaSeg.SelectedIndex))
             {
                 aceptable = false;
-                error += "\n\n"+existe;
+                error += "\n" + rellenar;
+            }
+            if (!alu.VerficarCedula(txtCedula.Text))
+            {
+                aceptable = false;
+                error += "\n" + real;
+            }
+            if (alu.TamañoIncorrecto(txtNombre.Text) || alu.TamañoIncorrecto(txtPrimerApellido.Text) || alu.TamañoIncorrecto(txtSegundoApellido.Text) || alu.TamañoIncorrecto(txtPassword.Text) || alu.TamañoIncorrecto(txtConfirmarPassword.Text) || alu.TamañoIncorrecto(txtRespuesta.Text))
+            {
+                aceptable = false;
+                error += "\n" + grandes;
+            }
+
+            if (alu.TamañoMinimoContra(txtPassword.Text))
+            {
+                aceptable = false;
+                error += "\n" + corta;
+            }
+            if (!(txtConfirmarPassword.Text == txtPassword.Text))
+            {
+                aceptable = false;
+                error += "\n" + distintas;
+            }
+
+            if (alu.ExisteUsuarioCi(txtCedula.Text))
+            {
+                aceptable = false;
+                error += "\n\n" + existe;
             }
 
 

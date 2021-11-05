@@ -10,8 +10,35 @@ using System.Windows.Forms;
 
 namespace Hatchat.Presentacion
 {
+
     public partial class ABMDocenteAdmin : Form
     {
+        string nombreNumerico;
+        string apellidoNumerico;
+        string sApellidoNumerico;
+        string grandes;
+        string error;
+        string cuidado;
+        string corta;
+        string distintas;
+        string rellenar;
+        string existe;
+        string real;
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+        string seleccionaImagen;
+        string modificado;
+        string msgBorrar;
+        string msgModificar;
+        string titBorrar;
+        string titModificar;
+        string borrado;
+        string yaIngresadas;
+        string creado;
+        string ingresadas;
+        string fallo;
+        string eliminadont;
+
         private int yPanel = 0;
         private List<Logica.Orientacion> orientaciones = new List<Logica.Orientacion>(new Logica.Orientacion().SelectOrientaciones());
         private Logica.Orientacion orientacionSeleccionada = new Logica.Orientacion();
@@ -42,6 +69,40 @@ namespace Hatchat.Presentacion
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             StartPosition = FormStartPosition.CenterScreen;
+            if (Login.idioma == "Español")
+            {
+                
+                msgModificar = "¿Desea modificar su perfil?";
+                titModificar = "Modificar perfil";
+                modificado = "Se han modificado sus datos";
+                msgBorrar = "¿Desea eliminar a ";
+                titBorrar = "Borrar Perfil";
+                borrado = "Usuario eliminado";
+                seleccionaImagen = "Seleccionar imagen";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+
+                error = " comuníquese con el administrador.";
+                cuidado = "Cuidado:";
+                rellenar = "Debe rellenar todos los campos ";
+                corta = "La contraseña es demasiado corta ";
+                distintas = "Las contraseñas no son iguales";
+                existe = "Esa cedula ya esta ingresada";
+                real = "La cedula debe ser real";
+                nombreNumerico = "El nombre no puede tener numeros";
+                apellidoNumerico = "El primer apellido no puede tener numeros";
+                sApellidoNumerico = "El segundo apellido no peude tener numeros";
+                grandes = "Los datos no pueden tener un tamaño mayor a 30 caracteres";
+                nombreNumerico = "The name cannot have numbers";
+                apellidoNumerico = "The first surname cannot have numbers";
+                sApellidoNumerico = "The second surname cannot have numbers";
+                grandes = "Data cannot be larger than 30 characters";
+                ingresadas = "El alumno a ingresado a los grupos correctamente";
+                fallo = "EL ALUMNO YA ESTABA CURSANDO LAS SIGUIENTES ASIGNATURAS:\n";
+                creado = "Se ha creado el alumno correctamente";
+                eliminadont = "Alumno no encontrado";
+            }
+            
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
@@ -532,35 +593,54 @@ namespace Hatchat.Presentacion
             string error = "Cuidado: ";
             bool aceptable = true;
             Logica.Docente doc = new Logica.Docente();
-            if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
+            if (doc.NumerosEnStrings(txtNombre.Text))
             {
+                error += "\n" + nombreNumerico;
                 aceptable = false;
-                error += "\nDebe rellenar todos los campos";
-            }
-            if (txtCedula.Text != "")
-            {
-                if (!doc.VerficarCedula(txtCedula.Text))
-                {
-                    aceptable = false;
-                    error += "\nLa cedula debe ser real";
-                }
-            }
-            if (txtPassword.Text.Length < 8)
-            {
-                aceptable = false;
-                error += "\nLa contraseña es demaciado corta";
-            }
-            if (txtConfirmarPassword.Text != txtPassword.Text)
-            {
-                aceptable = false;
-                error += "\nLas contraseñas no son iguales";
             }
 
+            if (doc.NumerosEnStrings(txtPrimerApellido.Text))
+            {
+                error += "\n" + apellidoNumerico;
+                aceptable = false;
+            }
 
-            if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
+            if (doc.NumerosEnStrings(txtSegundoApellido.Text))
+            {
+                error += "\n" + sApellidoNumerico;
+                aceptable = false;
+            }
+            if (doc.campoVacio(txtCedula.Text) || doc.campoVacio(txtNombre.Text) || doc.campoVacio(txtPrimerApellido.Text) || doc.campoVacio(txtSegundoApellido.Text) || doc.campoVacio(txtPassword.Text) || doc.campoVacio(txtConfirmarPassword.Text) || doc.campoVacio(txtRespuesta.Text) || doc.sinPregunta(cmbxPreguntaSeg.SelectedIndex))
             {
                 aceptable = false;
-                error += "\n\nAdvertencia: esa cedula ya esta ingresada";
+                error += "\n" + rellenar;
+            }
+            if (!doc.VerficarCedula(txtCedula.Text))
+            {
+                aceptable = false;
+                error += "\n" + real;
+            }
+            if (doc.TamañoIncorrecto(txtNombre.Text) || doc.TamañoIncorrecto(txtPrimerApellido.Text) || doc.TamañoIncorrecto(txtSegundoApellido.Text) || doc.TamañoIncorrecto(txtPassword.Text) || doc.TamañoIncorrecto(txtConfirmarPassword.Text) || doc.TamañoIncorrecto(txtRespuesta.Text))
+            {
+                aceptable = false;
+                error += "\n" + grandes;
+            }
+
+            if (doc.TamañoMinimoContra(txtPassword.Text))
+            {
+                aceptable = false;
+                error += "\n" + corta;
+            }
+            if (!(txtConfirmarPassword.Text == txtPassword.Text))
+            {
+                aceptable = false;
+                error += "\n" + distintas;
+            }
+
+            if (doc.ExisteUsuarioCi(txtCedula.Text))
+            {
+                aceptable = false;
+                error += "\n\n" + existe;
             }
 
 
@@ -688,8 +768,8 @@ namespace Hatchat.Presentacion
             if (new Logica.Usuario().SelectDocente(txtCiModif.Text))
             {
                 doModif = new Logica.Usuario().SelectUsuarioCiActivo(txtCiModif.Text);
-                lblNombreModificar.Text += doModif.Nombre + " " + doModif.Primer_apellido + " " + doModif.Segundo_apellido;
-                lblCedulaModificar.Text += doModif.Ci;
+                lblNombreModificar.Text ="Nombre"+ doModif.Nombre + " " + doModif.Primer_apellido + " " + doModif.Segundo_apellido;
+                lblCedulaModificar.Text ="Cedula"+ doModif.Ci;
                 pbxFotoModificar.Image = doModif.ByteArrayToImage(doModif.FotoDePerfil);
                 txtApodoModificar.Text = doModif.Apodo;
                 txtPasswordModificar.Text = doModif.Password;
