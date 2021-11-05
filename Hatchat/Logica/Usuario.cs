@@ -219,15 +219,22 @@ namespace Hatchat.Logica
             return cadena.Length < 8;
         }
          
-        public void AltaUsuario()
+        public bool AltaUsuario()
         {
-
+            bool creado = false;
             Persistencia.Conexion conexion = new Persistencia.Conexion();
-            /*if(!(VerficarCedula(ci) && 
+            if(!(VerficarCedula(ci) && 
                 NumerosEnStrings(nombre) && NumerosEnStrings(primer_apellido) && NumerosEnStrings(segundo_apellido) && 
                 campoVacio(nombre) && campoVacio(ci) && campoVacio(respuesta_seguridad) && campoVacio(primer_apellido) && campoVacio(segundo_apellido) && sinPregunta(pregunta_seguridad) && campoVacio(password) &&
-                TamañoIncorrecto(nombre) && TamañoIncorrecto(primer_apellido) && TamañoIncorrecto(segundo_apellido) && TamañoIncorrecto(password) && TamañoIncorrecto(respuesta_seguridad) && TamañoMinimoContra(password) && ExisteUsuarioCi(Ci)))*/
-            conexion.AltaUsuario(this);
+                TamañoIncorrecto(nombre) && TamañoIncorrecto(primer_apellido) && TamañoIncorrecto(segundo_apellido) && TamañoIncorrecto(password) && TamañoIncorrecto(respuesta_seguridad) && TamañoMinimoContra(password) && ExisteUsuarioCi(Ci)))
+            {
+                Activo = true;
+                try { FotoDePerfil = ImageToByteArray(Image.FromFile("alumno.png")); }
+                catch { }
+                apodo = nombre;
+                creado = conexion.AltaUsuario(this);
+            }
+            return creado;
         }
         public Usuario SelectUsuarioCiActivo(string ci)
         {

@@ -256,7 +256,7 @@ namespace Hatchat.Presentacion
             {
                 Logica.Orientacion ori = new Logica.Orientacion();
                 ori.AltaOrientacion(txtNombreAltaOrientacion.Text);
-                ori.SelectOrientacionPorNombre(txtNombreAltaOrientacion.Text);
+                ori=ori.SelectOrientacionPorNombre(txtNombreAltaOrientacion.Text);
                 foreach (Logica.Contiene contiene in contieneAltaOrientacion)
                 {
                     contiene.Orientacion = ori.Id;

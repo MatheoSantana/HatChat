@@ -23,11 +23,11 @@ namespace Hatchat.Persistencia
         static string pwd = "Pwd = math2002;";//52848682
         static string connection = server + port + database + uid + pwd;
         //inserts
-        public void AltaUsuario(Usuario usuario)
+        public bool AltaUsuario(Usuario usuario)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-
+            bool funca = false;
             bool encontrado = false;
             MySqlDataReader reader = null;
             string query = "select * from Usuario where ci='" + usuario.Ci + "';";
@@ -41,30 +41,57 @@ namespace Hatchat.Persistencia
             }
             if (encontrado)
             {
-                MySqlCommand updateUsuario = new MySqlCommand("update usuario set activo=true where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set nombre='" + usuario.Nombre + "' where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set contrasenia='" + usuario.Password + "' where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set apellido='" + usuario.Primer_apellido + "' where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set segApellido='" + usuario.Segundo_apellido + "' where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set resSeguridad='" + usuario.Respuesta_seguridad + "' where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
-                updateUsuario = new MySqlCommand("update usuario set id=" + usuario.Preguta_seguridad + " where ci='" + usuario.Ci + "';", conexion2);
-                updateUsuario.ExecuteNonQuery();
+                MySqlCommand updateUsuario = new MySqlCommand();
+                try
+                {
+                    updateUsuario = new MySqlCommand("start transaction;", conexion2);
+                    updateUsuario = new MySqlCommand("update usuario set activo=true where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("update usuario set nombre='" + usuario.Nombre + "' where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("update usuario set contrasenia='" + usuario.Password + "' where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("update usuario set apellido='" + usuario.Primer_apellido + "' where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("update usuario set segApellido='" + usuario.Segundo_apellido + "' where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("update usuario set resSeguridad='" + usuario.Respuesta_seguridad + "' where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("update usuario set id=" + usuario.Preguta_seguridad + " where ci='" + usuario.Ci + "';", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    updateUsuario = new MySqlCommand("commit;", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                    funca = true;
+                } catch
+                {
+                    updateUsuario = new MySqlCommand("rollback;", conexion2);
+                    updateUsuario.ExecuteNonQuery();
+                }
+
+
             }
             else
             {
-                MySqlCommand insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + true + "," + usuario.Preguta_seguridad + ");", conexion2);
-                insertUsuario.Parameters.AddWithValue("imagen", usuario.FotoDePerfil);
-                MySqlCommand insertHijo = new MySqlCommand("insert into " + usuario.GetType().Name + " values('" + usuario.Ci + "');", conexion2);
-                insertUsuario.ExecuteNonQuery();
-                insertHijo.ExecuteNonQuery();
+                MySqlCommand insertUsuario = new MySqlCommand();
+                try
+                {
+                    insertUsuario = new MySqlCommand("insert into Usuario values('" + usuario.Ci + "','" + usuario.Apodo + "','" + usuario.Nombre + "','" + usuario.Password + "','" + usuario.Primer_apellido + "','" + usuario.Segundo_apellido + "','" + usuario.Respuesta_seguridad + "',@imagen," + true + "," + usuario.Preguta_seguridad + ");", conexion2);
+                    insertUsuario.Parameters.AddWithValue("imagen", usuario.FotoDePerfil);
+                    insertUsuario.ExecuteNonQuery();
+                    insertUsuario = new MySqlCommand("insert into " + usuario.GetType().Name + " values('" + usuario.Ci + "');", conexion2);
+                    insertUsuario.ExecuteNonQuery();
+
+                    insertUsuario = new MySqlCommand("commit;", conexion2);
+                    insertUsuario.ExecuteNonQuery();
+                    funca = true;
+                }
+                catch
+                {
+                    insertUsuario = new MySqlCommand("rollback;", conexion2);
+                }
             }
             conexion.Close();
+            return funca;
         }
         public bool EnviarSolicitudClaseAl(SolicitudClaseAl soli)
         {
@@ -81,7 +108,7 @@ namespace Hatchat.Persistencia
                 insert = new MySqlCommand("commit;", conexion);
                 insert.ExecuteNonQuery();
             }
-            catch 
+            catch
             {
                 insert = new MySqlCommand("rollback;", conexion);
                 insert.ExecuteNonQuery();
@@ -94,7 +121,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into SolicitudModif (fechaHora,contraNueva,pendiente,usuario) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "','"+soli.ContraNueva+"'," + soli.Pendiente + ",'" + soli.Usuario + "');", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into SolicitudModif (fechaHora,contraNueva,pendiente,usuario) values('" + soli.FechaHora.ToString("yyyy") + "-" + soli.FechaHora.ToString("MM") + "-" + soli.FechaHora.ToString("dd") + "T" + soli.FechaHora.ToString("HH") + ":" + soli.FechaHora.ToString("mm") + ":" + soli.FechaHora.ToString("ss") + "','" + soli.ContraNueva + "'," + soli.Pendiente + ",'" + soli.Usuario + "');", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
         }
@@ -155,7 +182,7 @@ namespace Hatchat.Persistencia
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
             string fechaHoraDocente = mensaje.FechaHoraDocente.ToString("yyyy") + "-" + mensaje.FechaHoraDocente.ToString("MM") + "-" + mensaje.FechaHoraDocente.ToString("dd") + "T" + mensaje.FechaHoraDocente.ToString("HH") + ":" + mensaje.FechaHoraDocente.ToString("mm") + ":" + mensaje.FechaHoraDocente.ToString("ss");
-            MySqlCommand updateRespuesta = new MySqlCommand("update Mensaje set mensajeDocente ='" + mensaje.MensajeDocente + "' where idMensaje="+mensaje.IdMensaje+";", conexion);
+            MySqlCommand updateRespuesta = new MySqlCommand("update Mensaje set mensajeDocente ='" + mensaje.MensajeDocente + "' where idMensaje=" + mensaje.IdMensaje + ";", conexion);
             MySqlCommand updateFechaDocente = new MySqlCommand("update Mensaje set fechaHoraDocente ='" + fechaHoraDocente + "' where idMensaje=" + mensaje.IdMensaje + ";", conexion);
             MySqlCommand updateEstado = new MySqlCommand("update Mensaje set estado ='" + mensaje.Estado + "' where idMensaje=" + mensaje.IdMensaje + ";", conexion);
             updateRespuesta.ExecuteNonQuery();
@@ -716,7 +743,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Chat.* from Chat, asignaturaCursa where asignaturaCursa.asignaturaCursada=Chat.asignatura and asignaturaCursa.idClase=Chat.idClase and asignaturaCursa.orientacion=Chat.oriClase and Chat.activo=true and asignaturaCursa.cursando=true and asignaturaCursa.ci='"+ci+"' and Chat.idChat not in(select idChat from chateaAl where ci='"+ci+"') group by chat.idChat;", conexion);
+            MySqlCommand select = new MySqlCommand("select Chat.* from Chat, asignaturaCursa where asignaturaCursa.asignaturaCursada=Chat.asignatura and asignaturaCursa.idClase=Chat.idClase and asignaturaCursa.orientacion=Chat.oriClase and Chat.activo=true and asignaturaCursa.cursando=true and asignaturaCursa.ci='" + ci + "' and Chat.idChat not in(select idChat from chateaAl where ci='" + ci + "') group by chat.idChat;", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -936,7 +963,7 @@ namespace Hatchat.Persistencia
                     try
                     {
                         chat.HoraFin = chat.StringADateTime(reader.GetString("horaFin"));
-                        
+
                     }
                     catch (Exception ex) { }
                     chat.Activo = false;
@@ -1248,7 +1275,7 @@ namespace Hatchat.Persistencia
                 }
                 catch (Exception ex) { }
             } while (enviado);
-            
+
             conexion.Close();
         }
         public void InsertChateaDo(ChateaDo chatea)
@@ -1267,8 +1294,8 @@ namespace Hatchat.Persistencia
                 }
                 catch (Exception ex) { }
             } while (enviado);
-        
-        conexion.Close();
+
+            conexion.Close();
         }
         public void CerrarChat(Chat chat)
         {
@@ -1463,7 +1490,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =" + soliAsig.Aceptada+ " where idSolicitudClaseAl=" + soliAsig.IdSolicitudClaseAl + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig=" + soliAsig.IdClaseAsig + " and oriClaseAsig=" + soliAsig.OriClaseAsig + ";", conexion);
+            MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseAl set aceptada =" + soliAsig.Aceptada + " where idSolicitudClaseAl=" + soliAsig.IdSolicitudClaseAl + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig=" + soliAsig.IdClaseAsig + " and oriClaseAsig=" + soliAsig.OriClaseAsig + ";", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
@@ -1714,12 +1741,12 @@ namespace Hatchat.Persistencia
         public void AceptarAsignaturaSolicitudClaseDo(AsignaturaSolicitudClaseDo soliAsig)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
-            conexion.Open();    
+            conexion.Open();
             MySqlCommand updateaceptada = new MySqlCommand("update asignaturaSolicitudClaseDo set aceptada =" + soliAsig.Aceptada + " where idSolicitudClaseDo=" + soliAsig.IdSolicitudClaseDo + " and idAsignatura='" + soliAsig.IdAsignatura + "' and idClaseAsig = " + soliAsig.IdClaseAsig + " and oriClaseAsig = " + soliAsig.OriClaseAsig + "; ", conexion);
             updateaceptada.ExecuteNonQuery();
             conexion.Close();
         }
-        
+
         public void InsertDicta(Dicta dicta)
         {
             MySqlConnection conexion = new MySqlConnection(connection);
@@ -1749,8 +1776,8 @@ namespace Hatchat.Persistencia
                     {
                         soli.Pendiente = true;
                     }
-                    try 
-                    { 
+                    try
+                    {
                         if (reader.GetString("aceptada") == "True")
                         {
                             soli.Aceptada = true;
@@ -1761,7 +1788,8 @@ namespace Hatchat.Persistencia
                         {
                             soli.Aceptada = false;
                         }
-                    }catch(Exception ex) { }
+                    }
+                    catch (Exception ex) { }
                     soli.Usuario = reader.GetString("usuario");
                 }
             }
@@ -1780,7 +1808,7 @@ namespace Hatchat.Persistencia
             }
             MySqlCommand updatePendiente = new MySqlCommand("update SolicitudModif set pendiente =false where idSolicitudModif=" + soli.IdSolicitudModif + ";", conexion);
             updatePendiente.ExecuteNonQuery();
-            MySqlCommand updateAceptado = new MySqlCommand("update SolicitudModif set aceptada ="+soli.Aceptada+" where idSolicitudModif=" + soli.IdSolicitudModif + ";", conexion);
+            MySqlCommand updateAceptado = new MySqlCommand("update SolicitudModif set aceptada =" + soli.Aceptada + " where idSolicitudModif=" + soli.IdSolicitudModif + ";", conexion);
             updateAceptado.ExecuteNonQuery();
             MySqlCommand insertResponde = new MySqlCommand("insert into Responde values(" + soli.IdSolicitudModif + ",'" + ci + "');", conexion);
             insertResponde.ExecuteNonQuery();
@@ -1906,7 +1934,7 @@ namespace Hatchat.Persistencia
             MySqlDataReader reader = null;
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            string query = "select * from Orientacion where nombre='" + nombre + "';";
+            string query = "select * from Orientacion where nombre='" + nombre + "' and activo=true;";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
             if (reader.HasRows)
@@ -1923,8 +1951,16 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into Orientacion (nombre,activo) values('" + nombre + ",'true');", conexion);
-            insert.ExecuteNonQuery();
+            try
+            {
+                MySqlCommand insert = new MySqlCommand("insert into Orientacion (nombre,activo) values('" + nombre + "',true);", conexion);
+                insert.ExecuteNonQuery();
+            }
+            catch
+            {
+                MySqlCommand insert = new MySqlCommand("update Orientacion set activo=true where nombre='" + nombre + "';", conexion);
+                insert.ExecuteNonQuery();
+            }
             conexion.Close();
         }
         public Orientacion SelectOrientacionPorNombre(string nombre)
@@ -1943,7 +1979,7 @@ namespace Hatchat.Persistencia
                     ori.Id = Convert.ToInt32(reader.GetString("id"));
                     ori.Nombre = reader.GetString("nombre");
                     ori.Activo = false;
-                    if(reader.GetString("activo")== "True")
+                    if (reader.GetString("activo") == "True")
                     {
                         ori.Activo = true;
                     }
@@ -1956,8 +1992,16 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into Contiene (idAsig,idOri,activo) values('" + cont.Asignatura + ","+cont.Orientacion+",true);", conexion);
-            insert.ExecuteNonQuery();
+            try
+            {
+                MySqlCommand insert = new MySqlCommand("insert into Contiene (idAsig,idOri,activo) values('" + cont.Asignatura + "'," + cont.Orientacion + ",true);", conexion);
+                insert.ExecuteNonQuery();
+            }
+            catch
+            {
+                MySqlCommand insert = new MySqlCommand("update contiene set activo=true where idAsig='" + cont.Asignatura + "' and idOri=" + cont.Orientacion + ";", conexion);
+                insert.ExecuteNonQuery();
+            }
             conexion.Close();
         }
         public void BajaOrientacion(Orientacion ori)
@@ -1983,7 +2027,7 @@ namespace Hatchat.Persistencia
             List<Contiene> conts = new List<Contiene>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select * from contiene where idOri="+id+" and activo=true;", conexion);
+            MySqlCommand select = new MySqlCommand("select * from contiene where idOri=" + id + " and activo=true;", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -2003,32 +2047,35 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand update = new MySqlCommand("update Orientacion set nombre ='"+ori.Nombre+"' where id=" + ori.Id + ";", conexion);
+            MySqlConnection conexion2 = new MySqlConnection(connection);
+            conexion2.Open();
+            MySqlCommand update = new MySqlCommand("update Orientacion set nombre ='" + ori.Nombre + "' where id=" + ori.Id + ";", conexion);
             update.ExecuteNonQuery();
             update = new MySqlCommand("update Contiene set activo =false where idOri=" + ori.Id + ";", conexion);
             update.ExecuteNonQuery();
             foreach (Contiene cont in contienes)
             {
                 MySqlDataReader reader = null;
-                string query = "select * from Contiene where idOri=" + ori.Id + " and idAsig='"+cont.Asignatura+"';";
-                MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
+                string query = "select * from Contiene where idOri=" + ori.Id + " and idAsig='" + cont.Asignatura + "';";
+                MySqlCommand select = new MySqlCommand(string.Format(query), conexion2);
                 reader = select.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        update = new MySqlCommand("update Contiene set activo =true where idOri=" + ori.Id + ";", conexion);
+                        update = new MySqlCommand("update Contiene set activo =true where idOri=" + ori.Id + " and idAsig='"+ cont.Asignatura + "';", conexion);
                         update.ExecuteNonQuery();
                     }
                 }
                 else
                 {
-                    MySqlCommand insert = new MySqlCommand("insert into Contiene values('"+cont.Asignatura+"',"+cont.Orientacion+",true);", conexion);
+                    MySqlCommand insert = new MySqlCommand("insert into Contiene values('" + cont.Asignatura + "'," + cont.Orientacion + ",true);", conexion);
                     insert.ExecuteNonQuery();
                 }
-                
+
             }
             conexion.Close();
+            conexion2.Close();
         }
         public DataTable SelectAsignaturasGrilla()
         {
@@ -2046,7 +2093,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand insert = new MySqlCommand("insert into Asignatura values('" + asig.Id + "','" + asig.Nombre + "',"+asig.Anio+",true);", conexion);
+            MySqlCommand insert = new MySqlCommand("insert into Asignatura values('" + asig.Id + "','" + asig.Nombre + "'," + asig.Anio + ",true);", conexion);
             insert.ExecuteNonQuery();
             conexion.Close();
         }
@@ -2056,7 +2103,7 @@ namespace Hatchat.Persistencia
             conexion.Open();
             MySqlCommand update = new MySqlCommand("update Asignatura set Activo=false where id='" + asig.Id + "';", conexion);
             update.ExecuteNonQuery();
-            update=new MySqlCommand("update Contiene set Activo=false where idAsig='" + asig.Id + "';", conexion);
+            update = new MySqlCommand("update Contiene set Activo=false where idAsig='" + asig.Id + "';", conexion);
             update.ExecuteNonQuery();
             conexion.Close();
         }
@@ -2064,9 +2111,9 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand update = new MySqlCommand("update Asignatura set nombre='"+asig.Nombre+"' where id='" + asig.Id + "';", conexion);
+            MySqlCommand update = new MySqlCommand("update Asignatura set nombre='" + asig.Nombre + "' where id='" + asig.Id + "';", conexion);
             update.ExecuteNonQuery();
-            update = new MySqlCommand("update Asignatura set anio="+asig.Anio+ " where id='" + asig.Id + "';", conexion);
+            update = new MySqlCommand("update Asignatura set anio=" + asig.Anio + " where id='" + asig.Id + "';", conexion);
             update.ExecuteNonQuery();
             conexion.Close();
         }
@@ -2126,7 +2173,7 @@ namespace Hatchat.Persistencia
             List<SolicitudClaseAl> solicitudesClaseAl = new List<SolicitudClaseAl>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select SolicitudClaseAl.* from SolicitudClaseAl, RespondeClaseAl where SolicitudClaseAl.idSolicitudClaseAl = RespondeClaseAl.idSolicitudClaseAl and SolicitudClaseAl.pendiente = false and RespondeClaseAl.ciAdmin='" + ci +"' order by fechaHora; ", conexion);
+            MySqlCommand select = new MySqlCommand("select SolicitudClaseAl.* from SolicitudClaseAl, RespondeClaseAl where SolicitudClaseAl.idSolicitudClaseAl = RespondeClaseAl.idSolicitudClaseAl and SolicitudClaseAl.pendiente = false and RespondeClaseAl.ciAdmin='" + ci + "' order by fechaHora; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -2269,7 +2316,7 @@ namespace Hatchat.Persistencia
             List<Mensaje> mensajes = new List<Mensaje>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Mensaje.* from Mensaje, Usuario where Usuario.ci=Mensaje.Alumno and docente='"+docente+"' and estado!='realizado' and usuario.nombre like '"+nombre+"%' and usuario.apellido like '"+apellido+"%' order by fechaHoraDocente desc, fechaHora desc;", conexion); ;
+            MySqlCommand select = new MySqlCommand("select Mensaje.* from Mensaje, Usuario where Usuario.ci=Mensaje.Alumno and docente='" + docente + "' and estado!='realizado' and usuario.nombre like '" + nombre + "%' and usuario.apellido like '" + apellido + "%' order by fechaHoraDocente desc, fechaHora desc;", conexion); ;
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -2307,7 +2354,7 @@ namespace Hatchat.Persistencia
             MySqlDataReader reader = null;
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            string query = "select * from Chat, ChateaDo where Chat.idChat=ChateaDo.idChat and chat.activo=true and chat.idClase="+clase+ " and chateaDo.ci='"+ci+"' and chat.asignatura='"+asig+"';";
+            string query = "select * from Chat, ChateaDo where Chat.idChat=ChateaDo.idChat and chat.activo=true and chat.idClase=" + clase + " and chateaDo.ci='" + ci + "' and chat.asignatura='" + asig + "';";
             MySqlCommand select = new MySqlCommand(string.Format(query), conexion);
             reader = select.ExecuteReader();
             if (reader.HasRows)
@@ -2357,7 +2404,7 @@ namespace Hatchat.Persistencia
             List<Usuario> usuarios = new List<Usuario>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select Nombre, apellido from Usuario, AsignaturaCursa where Usuario.ci = AsignaturaCursa.ci and AsignaturaCursa.idClase="+asig.IdClase+ " and AsignaturaCursa.orientacion="+asig.Orientacion+ " and AsignaturaCursa.anio="+asig.Anio+ " and AsignaturaCursa.asignaturaCursada='"+asig.AsignaturaCursada+ "' and cursando=true order by apellido; ", conexion);
+            MySqlCommand select = new MySqlCommand("select Nombre, apellido from Usuario, AsignaturaCursa where Usuario.ci = AsignaturaCursa.ci and AsignaturaCursa.idClase=" + asig.IdClase + " and AsignaturaCursa.orientacion=" + asig.Orientacion + " and AsignaturaCursa.anio=" + asig.Anio + " and AsignaturaCursa.asignaturaCursada='" + asig.AsignaturaCursada + "' and cursando=true order by apellido; ", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -2396,7 +2443,7 @@ namespace Hatchat.Persistencia
         {
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand update = new MySqlCommand("update asignaturaCursa set cursando=false where ci ='" + asig.Ci+"' and idClase=" + asig.IdClase + " and orientacion=" + asig.Orientacion + " and anio=" + asig.Anio + " and asignaturaCursada='" + asig.AsignaturaCursada + "';", conexion);
+            MySqlCommand update = new MySqlCommand("update asignaturaCursa set cursando=false where ci ='" + asig.Ci + "' and idClase=" + asig.IdClase + " and orientacion=" + asig.Orientacion + " and anio=" + asig.Anio + " and asignaturaCursada='" + asig.AsignaturaCursada + "';", conexion);
             update.ExecuteNonQuery();
             conexion.Close();
         }
@@ -2413,7 +2460,7 @@ namespace Hatchat.Persistencia
             List<AsignaturaSolicitudClaseAl> asigs = new List<AsignaturaSolicitudClaseAl>();
             MySqlConnection conexion = new MySqlConnection(connection);
             conexion.Open();
-            MySqlCommand select = new MySqlCommand("select AsignaturaSolicitudClaseAl.* from AsignaturaSolicitudClaseAl, solicitudClaseAl where AsignaturaSolicitudClaseAl.idsolicitudClaseAl=solicitudClaseAl.idsolicitudClaseAl and solicitudClaseAl.pendiente=true and solicitudClaseAl.alumno='"+ci+"';", conexion);
+            MySqlCommand select = new MySqlCommand("select AsignaturaSolicitudClaseAl.* from AsignaturaSolicitudClaseAl, solicitudClaseAl where AsignaturaSolicitudClaseAl.idsolicitudClaseAl=solicitudClaseAl.idsolicitudClaseAl and solicitudClaseAl.pendiente=true and solicitudClaseAl.alumno='" + ci + "';", conexion);
             MySqlDataAdapter adapter = new MySqlDataAdapter(select);
             DataTable data = new DataTable();
             adapter.Fill(data);
@@ -2493,4 +2540,5 @@ namespace Hatchat.Persistencia
     }
 
 }
+
 

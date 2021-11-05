@@ -256,7 +256,7 @@ namespace Hatchat.Presentacion
             dictaAsigs = new List<Logica.AsignaturaDictada>();
 
             asigs = new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cmbxClase.SelectedItem.ToString(), Convert.ToInt32(cmbxAnio.SelectedItem.ToString()), orientaciones[cmbxOrientacion.SelectedIndex].Id);
-
+            orientacionSeleccionada = orientaciones[cmbxOrientacion.SelectedIndex];
             claseSeleccionada.Nombre = cmbxClase.SelectedItem.ToString();
             claseSeleccionada.Anio = Convert.ToInt32(cmbxAnio.SelectedItem.ToString());
             claseSeleccionada.Orientacion = orientaciones[cmbxOrientacion.SelectedIndex].Id;

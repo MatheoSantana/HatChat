@@ -229,14 +229,8 @@ namespace Hatchat.Presentacion
             cmbxOrientacion.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbxClase.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbxPreguntaSeg.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
-            {
-                cmbxPreguntaSeg.Items.Add(preg.Pregunta);
-                cbxPregsModificar.Items.Add(preg.Pregunta);
-
-            }
+            
             cbxPregsModificar.DropDownStyle = ComboBoxStyle.DropDownList;
-
             cmbxPreguntaSeg.SelectedIndex = 0;
             txtPassword.UseSystemPasswordChar = true;
             txtConfirmarPassword.UseSystemPasswordChar = true;
@@ -396,7 +390,7 @@ namespace Hatchat.Presentacion
             cursaAsigs = new List<Logica.AsignaturaCursa>();
 
             asigs = new Logica.Asignatura().SelectAsignaturasPorClaseAnioYorientacion(cmbxClase.SelectedItem.ToString(), Convert.ToInt32(cmbxAnio.SelectedItem.ToString()), orientaciones[cmbxOrientacion.SelectedIndex].Id);
-
+            orientacionSeleccionada  = orientaciones[cmbxOrientacion.SelectedIndex];
             claseSeleccionada.Nombre = cmbxClase.SelectedItem.ToString();
             claseSeleccionada.Anio = Convert.ToInt32(cmbxAnio.SelectedItem.ToString());
             claseSeleccionada.Orientacion = orientaciones[cmbxOrientacion.SelectedIndex].Id;
