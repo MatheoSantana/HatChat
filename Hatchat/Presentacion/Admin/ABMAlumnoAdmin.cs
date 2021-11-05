@@ -16,11 +16,11 @@ namespace Hatchat.Presentacion
         string apellidoNumerico;
         string sApellidoNumerico;
         string grandes;
-        string error;
         string cuidado;
         string corta;
         string distintas;
         string rellenar;
+        string error;
         string existe;
         string real;
         string msgCerrarSesion;
@@ -63,8 +63,7 @@ namespace Hatchat.Presentacion
             {
                 cmbxOrientacion.Items.Add(ori.Nombre);
             }
-            if (Login.idioma == "Español")
-            {
+            
                 lblABMAlumno.Text = "ABM Alumno";
                 lblAnio.Text = "Año";
                 lblApodoModificar.Text = "Apodo";
@@ -139,48 +138,7 @@ namespace Hatchat.Presentacion
                 fallo = "EL ALUMNO YA ESTABA CURSANDO LAS SIGUIENTES ASIGNATURAS:\n";
                 creado = "Se ha creado el alumno correctamente";
                 eliminadont = "Alumno no encontrado";
-            }
-            else
-            {
-                lblABMAlumno.Text = "";
-                lblAnio.Text = "";
-                lblApodoModificar.Text = "";
-                lblBienvenido.Text = "";
-                lblCambiarFotoModificar.Text = "";
-                lblCedulaBaja.Text = "";
-                lblCedulaModificar.Text = "";
-                lblCi.Text = "";
-                lblCiModf.Text = "";
-                lblClase.Text = "";
-                lblConfirmarPassword.Text = "";
-                lblCrearAlmuno.Text = "";
-                lblEliminarAlumno.Text = "";
-                lblEstudianteModificar.Text = "";
-                lblExpliModi.Text = "";
-                lblExpliPregSegur.Text = "";
-                lblInformacionModificar.Text = "";
-                lblModificar.Text = "";
-                lblNombre.Text = "";
-                lblNombreModificar.Text = "";
-                lblOrientacion.Text = "";
-                lblPassword.Text = "";
-                lblPasswordConfirmarModificar.Text = "";
-                lblPasswordModificar.Text = "";
-                lblPregSegur.Text = "";
-                lblPregsModificar.Text = "";
-                lblPrimerApellido.Text = "";
-                lblRespuestaModificar.Text = "";
-                lblSegundoApellido.Text = "";
-
-                btnActualizar.Text = "";
-                btnAgregar.Text = "";
-                btnAlta.Text = "";
-                btnAltaAlumno.Text = "";
-                btnAlterar.Text = "";
-                btnBaja.Text = "";
-                btnEliminar.Text = "";
-                btnModificar.Text = "";
-
+            /*
                 msgCerrarSesion = "Do you want to log out?";
                 cerrarSesionTitulo = "Logout";
                 cbxPregsModificar.Items.Add("What is the name of your first pet?");
@@ -203,8 +161,8 @@ namespace Hatchat.Presentacion
                 msgBorrar = "Do you want to delete your profile?";
                 titBorrar = "Delete profile";
                 borrado = "User delete";
-
-            }
+            */
+            
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
