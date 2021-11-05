@@ -619,7 +619,7 @@ namespace Hatchat.Presentacion
             Logica.AsignaturaCursa asignaturaCursada = new Logica.AsignaturaCursa().SelectAsignaturaCursaPorAsignaturaYCiInclusivo(chat.Asignatura, Login.encontrado.Ci);
             Logica.Usuario doc = new Logica.Usuario().SelectUsuarioCi(new Logica.AsignaturaDictada().SelectCiPorAsignaturaDictadaYClase(chat.Asignatura, asignaturaCursada.IdClase));
 
-            lblHoras.Text += "\n" + chat.HoraInicio.ToString("HH") + chat.HoraInicio.ToString("mm") + " " + chat.HoraFin.ToString("HH") + chat.HoraFin.ToString("mm");
+            lblHoras.Text += "\n" + chat.HoraInicio.ToString("HH") +":"+ chat.HoraInicio.ToString("mm") + " " + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
 
             lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(asignaturaCursada.AsignaturaCursada).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
             List<Logica.ChateaAl> mensajesAl = new Logica.ChateaAl().SelectChateaAlsPorIdChatMasFecha(chat.IdChat, chat.Fecha);

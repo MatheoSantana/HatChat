@@ -314,10 +314,6 @@ namespace Hatchat.Presentacion
                     txtPassword.Text = Login.encontrado.Password;
                     txtPasswordCon.Text = Login.encontrado.Password;
                     pbxFotoPerfilNav.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
-                    foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
-                    {
-                        cbxPregs.Items.Add(preg.Pregunta);
-                    }
                     cbxPregs.SelectedIndex = (Login.encontrado.SelectPreguntaSeguridad().Id - 1);
                     txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
                 }

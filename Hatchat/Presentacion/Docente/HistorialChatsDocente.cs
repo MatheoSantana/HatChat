@@ -608,7 +608,7 @@ namespace Hatchat.Presentacion
             {
                 chat = new Logica.Chat().SelectChatPorId(new Logica.Chat().StringAId(((Panel)sender).Name));
             }
-            lblHoras.Text += "\n" + chat.HoraInicio.ToString("HH") + chat.HoraInicio.ToString("mm") + " " + chat.HoraFin.ToString("HH") + chat.HoraFin.ToString("mm");
+            lblHoras.Text += "\n" + chat.HoraInicio.ToString("HH") +":"+ chat.HoraInicio.ToString("mm") + " " + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm");
 
 
             lblMateriaClaseChat.Text = new Logica.Asignatura().SelectAsignaturaPorId(chat.Asignatura).Nombre + " " + new Logica.Clase().SelectClasePorId(chat.IdClase).Anio.ToString() + new Logica.Clase().SelectClasePorId(chat.IdClase).Nombre;
