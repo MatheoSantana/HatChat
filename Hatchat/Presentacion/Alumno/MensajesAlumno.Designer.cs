@@ -31,7 +31,7 @@ namespace Hatchat.Presentacion
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MensajesAlumno));
-            this.btnNuevoChat = new System.Windows.Forms.Button();
+            this.btnNuevoMensaje = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.panelNavMensajes = new System.Windows.Forms.Panel();
             this.panelContenedor = new System.Windows.Forms.Panel();
@@ -98,18 +98,18 @@ namespace Hatchat.Presentacion
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnNuevoChat
+            // btnNuevoMensaje
             // 
-            this.btnNuevoChat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNuevoChat.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.btnNuevoChat.ForeColor = System.Drawing.Color.White;
-            this.btnNuevoChat.Location = new System.Drawing.Point(10, 166);
-            this.btnNuevoChat.Name = "btnNuevoChat";
-            this.btnNuevoChat.Size = new System.Drawing.Size(321, 23);
-            this.btnNuevoChat.TabIndex = 4;
-            this.btnNuevoChat.Text = "Nuevo Mensaje";
-            this.btnNuevoChat.UseVisualStyleBackColor = true;
-            this.btnNuevoChat.Click += new System.EventHandler(this.btnNuevoChat_Click);
+            this.btnNuevoMensaje.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnNuevoMensaje.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.btnNuevoMensaje.ForeColor = System.Drawing.Color.White;
+            this.btnNuevoMensaje.Location = new System.Drawing.Point(10, 166);
+            this.btnNuevoMensaje.Name = "btnNuevoMensaje";
+            this.btnNuevoMensaje.Size = new System.Drawing.Size(321, 23);
+            this.btnNuevoMensaje.TabIndex = 4;
+            this.btnNuevoMensaje.Text = "Nuevo Mensaje";
+            this.btnNuevoMensaje.UseVisualStyleBackColor = true;
+            this.btnNuevoMensaje.Click += new System.EventHandler(this.btnNuevoChat_Click);
             // 
             // lblTitulo
             // 
@@ -596,7 +596,7 @@ namespace Hatchat.Presentacion
             this.Controls.Add(this.panelHistorialesNav);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.btnNuevoChat);
+            this.Controls.Add(this.btnNuevoMensaje);
             this.Controls.Add(this.panelNavMensajes);
             this.Controls.Add(this.panelEnviarMensaje);
             this.Controls.Add(this.panelContenedor);
@@ -633,7 +633,7 @@ namespace Hatchat.Presentacion
         }
 
         #endregion
-        private System.Windows.Forms.Button btnNuevoChat;
+        private System.Windows.Forms.Button btnNuevoMensaje;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panelNavMensajes;
         private System.Windows.Forms.Panel panelContenedor;

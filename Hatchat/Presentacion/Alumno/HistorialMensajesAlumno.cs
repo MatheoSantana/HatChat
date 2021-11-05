@@ -355,7 +355,7 @@ namespace Hatchat.Presentacion
             {
                 for (int x = 0; x < mensajes.Count; x++)
                 {
-                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje))
+                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje && mensajes[x].Estado == this.mensajes[x].Estado))
                     {
                         iguales = false;
                     }
@@ -574,7 +574,7 @@ namespace Hatchat.Presentacion
             {
                 for (int x = 0; x < mensajes.Count; x++)
                 {
-                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje))
+                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje && mensajes[x].Estado == this.mensajes[x].Estado))
                     {
                         iguales = false;
                     }

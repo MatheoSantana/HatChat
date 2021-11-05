@@ -10,6 +10,20 @@ namespace Hatchat.Presentacion
 {
     public partial class MensajesDocente : Form
     {
+        string error;
+        string enviado;
+        string hora;
+        string fecha;
+        string docente;
+        string alumno;
+        string consulta;
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+        string respondido;
+        Image recibido;
+        Image contestado;
+        Image realizado;
+        Image flecha;
         private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
 
         public Form login;
@@ -32,7 +46,54 @@ namespace Hatchat.Presentacion
             ClientSize = new Size(1280, 720);
 
             StartPosition = FormStartPosition.CenterScreen;
-
+            if (Login.idioma == "Español")
+            {
+                lblMensajes.Text = "Mensajes";
+                alumno = "Alumno: ";
+                lblNombreAlumno.Text = alumno;
+                consulta = "Consulta: ";
+                lblConsultaAlumno.Text = consulta;
+                lblConsultaDocente.Text = consulta;
+                docente = "Docente: ";
+                lblNombreDocente.Text = docente;
+                lblBienvenido.Text = "Bienvenido";
+                hora = "Hora: ";
+                lblHoraAlumno.Text = hora;
+                lblHoraDocente.Text = hora;
+                fecha = "Fecha: ";
+                lblFechaAlumno.Text = fecha;
+                lblFechaDocente.Text = fecha;
+                error = " comuníquese con el administrador.";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+                btnEnviar.Text = "Enviar";
+                enviado = "Se ha enviado el mensaje correctamente";
+                respondido = "este mensaje ya ha sido respondido";
+            }
+            else
+            {
+                lblMensajes.Text = "Message";
+                docente = "Teacher: ";
+                lblNombreDocente.Text = docente;
+                lblBienvenido.Text = "Welcome";
+                hora = "Hour: ";
+                lblHoraAlumno.Text = hora;
+                lblHoraDocente.Text = hora;
+                fecha = "Date: ";
+                lblFechaAlumno.Text = fecha;
+                lblFechaDocente.Text = fecha;
+                alumno = "Student:";
+                lblNombreAlumno.Text = alumno;
+                consulta = "Consulta: ";
+                lblConsultaAlumno.Text = consulta;
+                lblConsultaDocente.Text = consulta;
+                error = "  Contact an administrator.";
+                msgCerrarSesion = "Do you want to log out?";
+                cerrarSesionTitulo = "Logout";
+                btnEnviar.Text = "Send";
+                enviado = "The message has been sent successfully";
+                respondido = "this message has already been answered";
+            }
             try
             {
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
@@ -45,10 +106,14 @@ namespace Hatchat.Presentacion
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pictureBox1.Image = Image.FromFile("Logo Completa.png");
+                recibido = Image.FromFile("circulo recibido.png");
+                contestado = Image.FromFile("circulo contestado.png");
+                realizado = Image.FromFile("circulo realizado.png");
+                flecha = Image.FromFile("flecha blanca entrar.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
 
@@ -148,7 +213,7 @@ namespace Hatchat.Presentacion
         }
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            DialogResult cerrarSesion = MessageBox.Show(msgCerrarSesion, cerrarSesionTitulo, MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
                 Login.encontrado = new Logica.Usuario();
@@ -168,7 +233,7 @@ namespace Hatchat.Presentacion
             {
                 for (int x = 0; x < mensajes.Count; x++)
                 {
-                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje))
+                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje && mensajes[x].Estado == this.mensajes[x].Estado))
                     {
                         iguales = false;
                     }
@@ -187,6 +252,7 @@ namespace Hatchat.Presentacion
                 {
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Alumno);
                     Logica.Docente alumno = new Logica.Docente();
+                    alumno.Ci = usuario.Ci;
                     alumno.Nombre = usuario.Nombre;
                     alumno.Primer_apellido = usuario.Primer_apellido;
                     alumno.FotoDePerfil = usuario.FotoDePerfil;
@@ -218,21 +284,21 @@ namespace Hatchat.Presentacion
                     fecha.ForeColor = Color.White;
                     fecha.Font = new Font("Arial", 8.0f);
                     fecha.Name = "lblMF" + men.IdMensaje.ToString();
-                    fecha.Text = "Fecha:\n" + men.FechaHoraAlumno.ToString("dd") + "/" + men.FechaHoraAlumno.ToString("MM") + "/" + men.FechaHoraAlumno.ToString("yyyy");
+                    fecha.Text = this.fecha+"\n" + men.FechaHoraAlumno.ToString("dd") + "/" + men.FechaHoraAlumno.ToString("MM") + "/" + men.FechaHoraAlumno.ToString("yyyy");
                     fecha.Click += new EventHandler(AbrirMensaje);
 
                     PictureBox picCirculito = new PictureBox();
                     if (men.Estado == "recibido")
                     {
-                        picCirculito.Image = Image.FromFile("circulo recibido.png");
+                        picCirculito.Image = recibido;
                     }
                     else if (men.Estado == "contestado")
                     {
-                        picCirculito.Image = Image.FromFile("circulo contestado.png");
+                        picCirculito.Image =contestado;
                     }
                     else
                     {
-                        picCirculito.Image = Image.FromFile("circulo realizado.png");
+                        picCirculito.Image = realizado;
 
                     }
 
@@ -244,7 +310,7 @@ namespace Hatchat.Presentacion
                     picCirculito.Click += new EventHandler(AbrirMensaje);
 
                     PictureBox picflecha = new PictureBox();
-                    picflecha.Image = Image.FromFile("flecha blanca entrar.png");
+                    picflecha.Image = flecha;
                     picflecha.SizeMode = PictureBoxSizeMode.StretchImage;
                     picflecha.Height = 69;
                     picflecha.Width = 69;
@@ -284,16 +350,16 @@ namespace Hatchat.Presentacion
             panelContenedor.Visible = true;
             pbxDocente.Image = null;
             pbxAlumno.Image = null;
-            lblNombreDocente.Text = "Docente:";
-            lblFechaAlumno.Text = "Fecha:";
-            lblHoraAlumno.Text = "Hora:";
-            lblConsultaAlumno.Text = "Consulta:";
-            lblConsultaDocente.Text = "Consulta:";
-            lblNombreAlumno.Text = "Alumno:";
+            lblNombreDocente.Text = docente;
+            lblFechaAlumno.Text = fecha;
+            lblHoraAlumno.Text = hora;
+            lblConsultaAlumno.Text = consulta;
+            lblConsultaDocente.Text = consulta;
+            lblNombreAlumno.Text = this.alumno;
             panelMensajeAlumno.Controls.Clear();
 
-            lblFechaDocente.Text = "Fecha:";
-            lblHoraDocente.Text = "Hora:";
+            lblFechaDocente.Text = fecha;
+            lblHoraDocente.Text = hora;
             rtbxRespuesta.Text = "";
 
             Logica.Mensaje men = new Logica.Mensaje();
@@ -318,10 +384,7 @@ namespace Hatchat.Presentacion
             alumno.Nombre = usuario.Nombre;
             alumno.Primer_apellido = usuario.Primer_apellido;
             alumno.Segundo_apellido = usuario.Segundo_apellido;
-            if (!(usuario.FotoDePerfil == null))
-            {
-                alumno.FotoDePerfil = usuario.FotoDePerfil;
-            }
+            alumno.FotoDePerfil = usuario.FotoDePerfil;
             alumno.Activo = usuario.Activo;
 
             panelContenedor.Visible = true;
@@ -350,7 +413,7 @@ namespace Hatchat.Presentacion
         {
             if (mensajeSeleccionado.Estado != "realizado")
             {
-                MessageBox.Show("este mensaje ya ha sido respondido");
+                MessageBox.Show(respondido);
             }
             else
             {
@@ -358,7 +421,7 @@ namespace Hatchat.Presentacion
                 mensajeSeleccionado.MensajeDocente = rtbxRespuesta.Text;
                 mensajeSeleccionado.Estado = "contestado";
                 mensajeSeleccionado.EnviarMensajeDocente();
-                MessageBox.Show("Se ha enviado el mensaje correctamente");
+                MessageBox.Show(enviado);
                 mensajeSeleccionado = new Logica.Mensaje();
                 CargarMensajes();
                 panelContenedor.Visible = false;

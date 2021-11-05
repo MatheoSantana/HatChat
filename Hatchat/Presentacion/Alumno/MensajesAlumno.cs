@@ -21,7 +21,10 @@ namespace Hatchat.Presentacion
         string cerrarSesionTitulo;
         string noRespondio;
         string destinatariont;
-
+        Image recibido;
+        Image contestado;
+        Image realizado;
+        Image flecha;
 
         private List<Logica.Docente> docentes = new List<Logica.Docente>();
         private List<Logica.Mensaje> mensajes = new List<Logica.Mensaje>();
@@ -48,7 +51,7 @@ namespace Hatchat.Presentacion
             if (Login.idioma == "Español")
             {
                 lblMensajes.Text = "Mensajes";
-                btnNuevoChat.Text = "Nuevo Chat";
+                btnNuevoMensaje.Text = "Nuevo Mensaje";
                 alumno = "Alumno: ";
                 lblNombreAlumno.Text = alumno;
                 consulta = "Consulta: ";
@@ -78,6 +81,7 @@ namespace Hatchat.Presentacion
             }
             else
             {
+                btnNuevoMensaje.Text = "New Message";
                 lblMensajes.Text = "Message";
                 docente = "Teacher: ";
                 lblNombreDocente.Text = docente;
@@ -120,6 +124,10 @@ namespace Hatchat.Presentacion
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
                 pictureBox1.Image = Image.FromFile("Logo Completa.png");
+                recibido = Image.FromFile("circulo recibido.png");
+                contestado = Image.FromFile("circulo contestado.png");
+                realizado = Image.FromFile("circulo realizado.png");
+                flecha = Image.FromFile("flecha blanca entrar.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -246,7 +254,7 @@ namespace Hatchat.Presentacion
             {
                 for (int x = 0; x < mensajes.Count; x++)
                 {
-                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje))
+                    if (!(mensajes[x].IdMensaje == this.mensajes[x].IdMensaje && mensajes[x].Estado == this.mensajes[x].Estado))
                     {
                         iguales = false;
                     }
@@ -302,15 +310,15 @@ namespace Hatchat.Presentacion
                     PictureBox picCirculito = new PictureBox();
                     if (men.Estado == "recibido")
                     {
-                        picCirculito.Image = Image.FromFile("circulo recibido.png");
+                        picCirculito.Image = recibido;
                     }
                     else if (men.Estado == "contestado")
                     {
-                        picCirculito.Image = Image.FromFile("circulo contestado.png");
+                        picCirculito.Image = contestado;
                     }
                     else
                     {
-                        picCirculito.Image = Image.FromFile("circulo realizado.png");
+                        picCirculito.Image = realizado;
 
                     }
 
@@ -322,7 +330,7 @@ namespace Hatchat.Presentacion
                     picCirculito.Click += new EventHandler(AbrirMensaje);
 
                     PictureBox picflecha = new PictureBox();
-                    picflecha.Image = Image.FromFile("flecha blanca entrar.png");
+                    picflecha.Image = flecha;
                     picflecha.SizeMode = PictureBoxSizeMode.StretchImage;
                     picflecha.Height = 69;
                     picflecha.Width = 69;

@@ -6329,16 +6329,16 @@ values('2021-11-05T23:34:09','alumno71234',false,false,'50007008');
 insert into Responde
 values(7,'00000000');
 
-insert into SolicitudModif(fechaHora,contraNueva,pendiente,usuario)
-values('2021-12-05T23:34:09','alumno91234',true,'50009006');
+insert into SolicitudModif(fechaHora,contraNueva,pendiente,aceptada,usuario)
+values('2021-12-05T23:34:09','alumno91234',true,false,'50009006');
 
 
-insert into SolicitudModif(fechaHora,contraNueva,pendiente,usuario)
-values('2021-12-06T23:34:09','alumno101234',true,'50010003');
+insert into SolicitudModif(fechaHora,contraNueva,pendiente,aceptada,usuario)
+values('2021-12-06T23:34:09','alumno101234',true,false,'50010003');
 
 
-insert into SolicitudModif(fechaHora,contraNueva,pendiente,usuario)
-values('2021-12-08T23:34:09','alumno111234',true,'50011007');
+insert into SolicitudModif(fechaHora,contraNueva,pendiente,aceptada,usuario)
+values('2021-12-08T23:34:09','alumno111234',true,false,'50011007');
 
 /*-------------------------------------------Ingreso-Solicitud-Clase-Alumno-----------------------------------------*/
 
@@ -6787,9 +6787,6 @@ values(10,12,2,'proyds',true);
 insert into asignaturaSolicitudClaseAl
 values(10,12,2,'rds2',true);
 
-insert into RespondeClaseAl
-values(10,'00000000');
-
 /*-Sol-Alum-11-*/
 insert into SolicitudClaseAl(fechaHora,pendiente,alumno)
 values('2021-03-16T13:34:09',true,'50010003');
@@ -6829,9 +6826,6 @@ values(11,12,2,'proyds',true);
 
 insert into asignaturaSolicitudClaseAl
 values(11,12,2,'rds2',true);
-
-insert into RespondeClaseAl
-values(11,'00000000');
 
 /*-Sol-Alum-12-*/
 insert into SolicitudClaseAl(fechaHora,pendiente,alumno)
@@ -6873,9 +6867,6 @@ values(12,12,2,'proyds',true);
 insert into asignaturaSolicitudClaseAl
 values(12,12,2,'rds2',true);
 
-insert into RespondeClaseAl
-values(12,'00000000');
-
 /*-Sol-Alum-13-*/
 insert into SolicitudClaseAl(fechaHora,pendiente,alumno)
 values('2021-03-16T14:34:09',true,'50012001');
@@ -6915,9 +6906,6 @@ values(13,12,2,'proyds',true);
 
 insert into asignaturaSolicitudClaseAl
 values(13,12,2,'rds2',true);
-
-insert into RespondeClaseAl
-values(13,'00000000');
 
 /*-------------------------------------------Ingreso-Solicitud-Clase-Docente-----------------------------------------*/
 
@@ -7389,9 +7377,6 @@ values(9,14,2);
 insert into asignaturaSolicitudClaseDo
 values(9,14,2,'progdw3',true);
 
-insert into RespondeClaseDo
-values(9,'00000000');
-
 /*-Sol-Docen-10-*/
 insert into SolicitudClaseDo(fechaHora,pendiente,docente)
 values('2021-03-28T23:34:09',true,'30010007');
@@ -7419,9 +7404,6 @@ values(10,18,3);
 
 insert into asignaturaSolicitudClaseDo
 values(10,18,3,'proydw',true);
-
-insert into RespondeClaseDo
-values(10,'00000000');
 
 /*-Sol-Docen-11-*/
 insert into SolicitudClaseDo(fechaHora,pendiente,docente)
@@ -7451,9 +7433,6 @@ values(11,18,3);
 insert into asignaturaSolicitudClaseDo
 values(11,18,3,'progdw3',true);
 
-insert into RespondeClaseDo
-values(11,'00000000');
-
 /*-Sol-Docen-12-*/
 insert into SolicitudClaseDo(fechaHora,pendiente,docente)
 values('2021-03-28T23:36:09',true,'30012005');
@@ -7481,9 +7460,6 @@ values(12,18,3);
 
 insert into asignaturaSolicitudClaseDo
 values(12,18,3,'progdw3',true);
-
-insert into RespondeClaseDo
-values(12,'00000000');
 
 /*----------------------------------------------Ingreso-Solicitud-de-Chat---------------------------------------------*/
 

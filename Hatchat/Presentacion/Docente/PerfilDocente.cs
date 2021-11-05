@@ -10,6 +10,21 @@ namespace Hatchat.Presentacion
 {
     public partial class PerfilDocente : Form
     {
+        string error;
+        string msgCerrarSesion;
+        string cerrarSesionTitulo;
+        string seleccionaImagen;
+        string cuidado;
+        string corta;
+        string distintas;
+        string modificado;
+        string msgBorrar;
+        string msgModificar;
+        string rellenar;
+        string titBorrar;
+        string titModificar;
+        string borrado;
+
         public Form login;
         public Form mensajesDocente;
         public Form principalChatDocente;
@@ -33,6 +48,74 @@ namespace Hatchat.Presentacion
             FormBorderStyle = FormBorderStyle.FixedSingle;
 
             StartPosition = FormStartPosition.CenterScreen;
+            if (Login.idioma == "Español")
+            {
+                lblPerfil.Text = "Perfil";
+                lblNombre.Text = "Nombre: ";
+                lblCedula.Text = "Cedula: ";
+                lblDocente.Text = "Docente";
+                lblApodo.Text = "Apodo: ";
+                lblPassword.Text = "Contraseña: ";
+                lblPasswordCon.Text = "Confirmar Contraseña: ";
+                lblPregs.Text = "Pregunta de Seguridad: ";
+                lblRespuesta.Text = "Respuesta: ";
+                error = " comuníquese con el administrador.";
+                msgCerrarSesion = "¿Desea cerrar sesion?";
+                cerrarSesionTitulo = "Cerrar Sesion";
+                btnEliminar.Text = "Eliminar Cuenta";
+                btnModificar.Text = "Modificar";
+                cbxPregs.Items.Add("¿Cuál es el nombre de tu primer mascota?");
+                cbxPregs.Items.Add("¿En qué calle está ubicado tu primer hogar?");
+                cbxPregs.Items.Add("¿Cual es tu sabor de helado favorito?");
+                lblCambiarFoto.Text = "Cambiar foto de perfil";
+                lblInformacion.Text = "Mi Informacion";
+                seleccionaImagen = "Seleccionar imagen";
+                cuidado = "Cuidado:";
+                rellenar = "Debe rellenar todos los campos ";
+                corta = "La contraseña es demasiado corta ";
+                distintas = "Las contraseñas no son iguales";
+                msgModificar = "¿Desea modificar su perfil?";
+                titModificar = "Modificar perfil";
+                modificado = "Se han modificado sus datos";
+                msgBorrar = "¿Desea borrar su perfil?";
+                titBorrar = "Borrar Perfil";
+                borrado = "Usuario eliminado, cerrando sesion";
+
+
+            }
+            else
+            {
+                lblPerfil.Text = "Profile";
+                lblNombre.Text = "Name: ";
+                lblCedula.Text = "ID: ";
+                lblDocente.Text = "Teacher";
+                lblApodo.Text = "NickName: ";
+                lblPassword.Text = "password: ";
+                lblPasswordCon.Text = "confirm Password: ";
+                lblPregs.Text = "Security Question: ";
+                lblRespuesta.Text = "Answer: ";
+                btnEliminar.Text = "Delete Account";
+                btnModificar.Text = "Modify";
+                lblCambiarFoto.Text = "Change profile picture";
+                lblInformacion.Text = "My Information";
+                error = "  Contact an administrator.";
+                msgCerrarSesion = "Do you want to log out?";
+                cerrarSesionTitulo = "Logout";
+                cbxPregs.Items.Add("What is the name of your first pet?");
+                cbxPregs.Items.Add("On what street is your first home located?");
+                cbxPregs.Items.Add("What is your favorite ice cream flavor?");
+                seleccionaImagen = "Select image";
+                cuidado = "Warning:";
+                rellenar = "You must complete all the data ";
+                corta = "the password is too short ";
+                distintas = "Passwords do not match";
+                msgModificar = "Do you want to modify your profile?";
+                titModificar = "Modify profile";
+                modificado = "Your data has been modified";
+                msgBorrar = "Do you want to delete your profile?";
+                titBorrar = "Delete profile";
+                borrado = "User deleted, session closed";
+            }
             try
             {
 
@@ -49,7 +132,7 @@ namespace Hatchat.Presentacion
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
 
@@ -88,10 +171,6 @@ namespace Hatchat.Presentacion
                 cmbxMinutoInicio.Items.Add(x);
             }
 
-            foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
-            {
-                cbxPregs.Items.Add(preg.Pregunta);
-            }
             cbxPregs.SelectedIndex = (Login.encontrado.SelectPreguntaSeguridad().Id - 1);
             txtRespuesta.Text = Login.encontrado.Respuesta_seguridad;
 
@@ -177,7 +256,7 @@ namespace Hatchat.Presentacion
         }
         private void pbxCerrarSesionNav_Click(object sender, EventArgs e)
         {
-            DialogResult cerrarSesion = MessageBox.Show("¿Desea cerrar sesion?", "Cerrar Sesion", MessageBoxButtons.YesNo);
+            DialogResult cerrarSesion = MessageBox.Show(msgCerrarSesion, cerrarSesionTitulo, MessageBoxButtons.YesNo);
             if (cerrarSesion == DialogResult.Yes)
             {
                 Login.encontrado = new Logica.Usuario();
@@ -197,7 +276,7 @@ namespace Hatchat.Presentacion
             OpenFileDialog ofdFoto = new OpenFileDialog();
             ofdFoto.Filter = "Imagenes|*.jpeg;*.jpg;*.png";
             ofdFoto.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            ofdFoto.Title = "Seleccionar imagen";
+            ofdFoto.Title = seleccionaImagen;
             if (ofdFoto.ShowDialog() == DialogResult.OK)
             {
                 pbxFoto.Image = Image.FromFile(ofdFoto.FileName);
@@ -206,24 +285,24 @@ namespace Hatchat.Presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            string error = "Cuidado: ";
+            string error = cuidado;
             bool aceptable = true;
 
             if (txtPassword.Text == "" || txtPasswordCon.Text == "" || txtRespuesta.Text == "" || txtApodo.Text == "")
             {
                 aceptable = false;
-                error += "\nDebe rellenar todos los campos";
+                error += "\n"+rellenar;
             }
 
             if (txtPassword.Text.Length < 8)
             {
                 aceptable = false;
-                error += "\nLa contraseña es demaciado corta";
+                error += "\n"+corta;
             }
             if (txtPasswordCon.Text != txtPassword.Text)
             {
                 aceptable = false;
-                error += "\nLas contraseñas no son iguales";
+                error += "\n"+distintas;
             }
 
             if (!aceptable)
