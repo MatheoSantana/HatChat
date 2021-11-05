@@ -178,7 +178,7 @@ namespace Hatchat.Presentacion
                 aceptable = false;
                 error += "\n"+corta;
             }
-            if (txtConfirmarPassword.Text == txtPassword.Text)
+            if (!(txtConfirmarPassword.Text == txtPassword.Text))
             {
                 aceptable = false;
                 error += "\n"+distintas;
