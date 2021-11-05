@@ -482,7 +482,7 @@ namespace Hatchat.Presentacion
             this.lblAsignatura.AutoSize = true;
             this.lblAsignatura.Font = new System.Drawing.Font("Arial", 12F);
             this.lblAsignatura.ForeColor = System.Drawing.Color.White;
-            this.lblAsignatura.Location = new System.Drawing.Point(142, 19);
+            this.lblAsignatura.Location = new System.Drawing.Point(88, 10);
             this.lblAsignatura.Name = "lblAsignatura";
             this.lblAsignatura.Size = new System.Drawing.Size(154, 18);
             this.lblAsignatura.TabIndex = 0;

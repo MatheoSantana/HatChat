@@ -115,7 +115,7 @@ namespace Hatchat.Logica
             minutoAgFin += ag.horaFin[3].ToString() + ag.horaFin[4].ToString();
 
             DateTime agendaInicio = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(horaAgInicio), Convert.ToInt32(minutoAgInicio), 0);
-            DateTime agendaFin = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(horaAgFin), Convert.ToInt32(horaAgFin), 0);
+            DateTime agendaFin = new DateTime(hoy.Year, hoy.Month, hoy.Day, Convert.ToInt32(horaAgFin), Convert.ToInt32(minutoAgFin), 0);
 
             if (ag.NomDia == dia && hoy>=agendaInicio && hoy < agendaFin)
             {

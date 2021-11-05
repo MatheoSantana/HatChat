@@ -53,8 +53,6 @@ namespace Hatchat.Presentacion
             this.lblOrientacion = new System.Windows.Forms.Label();
             this.cbxClases = new System.Windows.Forms.ComboBox();
             this.panelAsignaturas = new System.Windows.Forms.Panel();
-            this.lblAsignaturas = new System.Windows.Forms.Label();
-            this.lblAdvertencia = new System.Windows.Forms.Label();
             this.timerCentrar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -136,8 +134,6 @@ namespace Hatchat.Presentacion
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.lblTitulo);
-            this.panel1.Controls.Add(this.lblAsignaturas);
-            this.panel1.Controls.Add(this.lblAdvertencia);
             this.panel1.Location = new System.Drawing.Point(117, 60);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1023, 563);
@@ -305,24 +301,6 @@ namespace Hatchat.Presentacion
             this.panelAsignaturas.Size = new System.Drawing.Size(507, 164);
             this.panelAsignaturas.TabIndex = 41;
             // 
-            // lblAsignaturas
-            // 
-            this.lblAsignaturas.AutoSize = true;
-            this.lblAsignaturas.Location = new System.Drawing.Point(414, 168);
-            this.lblAsignaturas.Name = "lblAsignaturas";
-            this.lblAsignaturas.Size = new System.Drawing.Size(62, 13);
-            this.lblAsignaturas.TabIndex = 40;
-            this.lblAsignaturas.Text = "Asignaturas";
-            // 
-            // lblAdvertencia
-            // 
-            this.lblAdvertencia.AutoSize = true;
-            this.lblAdvertencia.Location = new System.Drawing.Point(491, 168);
-            this.lblAdvertencia.Name = "lblAdvertencia";
-            this.lblAdvertencia.Size = new System.Drawing.Size(166, 13);
-            this.lblAdvertencia.TabIndex = 42;
-            this.lblAdvertencia.Text = "Debe ingresar un año y una clase";
-            // 
             // timerCentrar
             // 
             this.timerCentrar.Enabled = true;
@@ -376,8 +354,6 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Label lblOrientacion;
         private System.Windows.Forms.ComboBox cbxClases;
         private System.Windows.Forms.Panel panelAsignaturas;
-        private System.Windows.Forms.Label lblAsignaturas;
-        private System.Windows.Forms.Label lblAdvertencia;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblInfoModif;

@@ -10,6 +10,14 @@ namespace Hatchat.Presentacion
 {
     public partial class RegisterAlumno : Form
     {
+        string error;
+        string cuidado;
+        string corta;
+        string distintas;
+        string rellenar;
+        string existe;
+        string real;
+
         public Form login;
         public Form register;
         public Form registerClasesAlumno;
@@ -20,6 +28,58 @@ namespace Hatchat.Presentacion
             Text = "Register Alumno";
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+
+            if (Login.idioma == "Español")
+            {
+                lblTitulo.Text = "Crea tu cuenta de Alumno";
+                lblRellene.Text = "Rellene las casillas con su informacion:";
+                lblNombre.Text = "Nombre: ";
+                lblCedula.Text = "Cedula: ";
+                lblPrimerApellido.Text = "Primer Apellido: ";
+                lblSegundoApellido.Text = "Segundo Apellido: ";
+                lblPassword.Text = "Contraseña: ";
+                lblConfirmarPassword.Text = "Confirmar Contraseña: ";
+                lblPreguntas.Text = "Pregunta de Seguridad: ";
+                lblExplicacion.Text = "Rellene la casilla de texto con una respuesta que nunca \nolvide, para poder tomar medidas en caso de perdida de\nla cuenta";
+                error = " comuníquese con el administrador.";
+                btnSiguiente.Text = "Siguiente";
+                cbxPreguntas.Items.Add("¿Cuál es el nombre de tu primer mascota?");
+                cbxPreguntas.Items.Add("¿En qué calle está ubicado tu primer hogar?");
+                cbxPreguntas.Items.Add("¿Cual es tu sabor de helado favorito?");
+                cuidado = "Cuidado:";
+                rellenar = "Debe rellenar todos los campos ";
+                corta = "La contraseña es demasiado corta ";
+                distintas = "Las contraseñas no son iguales";
+                existe = "Esa cedula ya esta ingresada";
+                real= "La cedula debe ser real";
+
+
+            }
+            else
+            {
+                lblTitulo.Text = "Create your Student account";
+                lblRellene.Text = "fill in the boxes with your information:";
+                lblNombre.Text = "Name: ";
+                lblCedula.Text = "ID: ";
+                lblPrimerApellido.Text = "Surname: ";
+                lblSegundoApellido.Text = "Second surname: ";
+                lblPassword.Text = "Password: ";
+                lblConfirmarPassword.Text = "Confirm Password: ";
+                lblPreguntas.Text = "Security Question: ";
+                lblExplicacion.Text = "Fill in the textbox an answer that you never forget,\nso that you can take actions in the event of account loss";
+                error = "  Contact an administrator.";
+                cbxPreguntas.Items.Add("What is the name of your first pet?");
+                cbxPreguntas.Items.Add("On what street is your first home located?");
+                cbxPreguntas.Items.Add("What is your favorite ice cream flavor?");
+                cuidado = "Warning:";
+                rellenar = "You must complete all the data ";
+                corta = "the password is too short ";
+                distintas = "Passwords do not match";
+                existe = "That ID is already entered";
+                real = "The ID must be real";
+
+            }
+
             try
             {
                 Icon = new Icon(Application.StartupPath + "//logo imagen.ico");
@@ -29,7 +89,7 @@ namespace Hatchat.Presentacion
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
             StartPosition = FormStartPosition.CenterScreen;
@@ -38,20 +98,12 @@ namespace Hatchat.Presentacion
 
             pbxLogin.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            lblTitulo.Text = "Crea tu cuenta de alumno";
-
             cbxPreguntas.DropDownStyle = ComboBoxStyle.DropDownList;
-            foreach (Logica.PreguntaSeg preg in new Logica.PreguntaSeg().SelectPreguntasSeguridad())
-            {
-                cbxPreguntas.Items.Add(preg.Pregunta);
-            }
-            cbxPreguntas.SelectedIndex = 0;
-
-
+            
             txtPassword.UseSystemPasswordChar = true;
             txtConfirmarPassword.UseSystemPasswordChar = true;
             btnSiguiente.BackColor = Color.FromArgb(242, 144, 97);
-            btnSiguiente.FlatStyle = FlatStyle.Flat;
+            btnSiguiente.FlatStyle = FlatStyle.Popup;
             btnSiguiente.FlatAppearance.BorderSize = 0;
         }
 
@@ -69,35 +121,40 @@ namespace Hatchat.Presentacion
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
 
-            string error = "Cuidado: ";
+            string error = cuidado;
             bool aceptable = true;
 
             if (txtCedula.Text == "" || txtNombre.Text == "" || txtPrimerApellido.Text == "" || txtSegundoApellido.Text == "" || txtPassword.Text == "" || txtConfirmarPassword.Text == "" || txtRespuesta.Text == "")
             {
+
                 aceptable = false;
-                error += "\nDebe rellenar todos los campos";
+                error += "\n"+rellenar;
             }
-            if (!alu.VerficarCedula(txtCedula.Text))
+            else
             {
-                aceptable = false;
-                error += "\nLa cedula debe ser real";
+                if (!alu.VerficarCedula(txtCedula.Text))
+                {
+                    aceptable = false;
+                    error += "\n" + real;
+                }
             }
+            
             if (txtPassword.Text.Length < 8)
             {
                 aceptable = false;
-                error += "\nLa contraseña es demaciado corta";
+                error += "\n"+corta;
             }
             if (txtConfirmarPassword.Text != txtPassword.Text)
             {
                 aceptable = false;
-                error += "\nLas contraseñas no son iguales";
+                error += "\n"+distintas;
             }
 
 
             if (new Logica.Usuario().ExisteUsuarioCi(txtCedula.Text))
             {
                 aceptable = false;
-                error += "\n\nAdvertencia: esa cedula ya esta ingresada";
+                error += "\n\n"+existe;
             }
 
 
@@ -122,10 +179,6 @@ namespace Hatchat.Presentacion
                 registerClasesAlumno.Show();
                 this.Hide();
             }
-
-
-
-
         }
 
         private void pbxVolver_Click(object sender, EventArgs e)

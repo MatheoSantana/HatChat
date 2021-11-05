@@ -262,11 +262,11 @@ namespace Hatchat.Presentacion
             // 
             // cmbxMateria
             // 
-            this.cmbxMateria.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbxMateria.Font = new System.Drawing.Font("Arial", 12.25F);
             this.cmbxMateria.FormattingEnabled = true;
             this.cmbxMateria.Location = new System.Drawing.Point(20, 85);
             this.cmbxMateria.Name = "cmbxMateria";
-            this.cmbxMateria.Size = new System.Drawing.Size(278, 30);
+            this.cmbxMateria.Size = new System.Drawing.Size(278, 26);
             this.cmbxMateria.TabIndex = 4;
             // 
             // lblMateriaNuevoChat

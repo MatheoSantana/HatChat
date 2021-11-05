@@ -80,7 +80,6 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                
                 lblHistrialMensajes.Text = "Message History";
                 lblHistrialMensajes.Location = new Point(44, 0);
                 btnFiltrarDocente.Text = "Filter Teacher";
@@ -104,11 +103,9 @@ namespace Hatchat.Presentacion
                 cerrarSesionTitulo = "Logout";
                 alumno = "Student:";
                 lblNombreAlumno.Text = alumno;
-                consulta = "Consulta: ";
+                consulta = "Issue: ";
                 lblConsultaAlumno.Text = consulta;
                 lblConsultaDocente.Text = consulta;
-
-
 
             }
 
@@ -391,14 +388,10 @@ namespace Hatchat.Presentacion
                 {
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
                     Logica.Docente doc = new Logica.Docente();
-
+                    doc.Ci = usuario.Ci;
                     doc.Nombre = usuario.Nombre;
                     doc.Primer_apellido = usuario.Primer_apellido;
-                    if (!(doc.FotoDePerfil == null))
-                    {
-                        doc.FotoDePerfil = usuario.FotoDePerfil;
-                    }
-
+                    doc.FotoDePerfil = usuario.FotoDePerfil;
                     PictureBox picPhoto = new PictureBox();
                     picPhoto.Image = doc.ByteArrayToImage(doc.FotoDePerfil);
                     picPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -604,13 +597,10 @@ namespace Hatchat.Presentacion
                     this.mensajes = mensajes;
                     Logica.Usuario usuario = new Logica.Usuario().SelectUsuarioCi(men.Docente);
                     Logica.Docente doc = new Logica.Docente();
-
+                    doc.Ci = usuario.Ci;
                     doc.Nombre = usuario.Nombre;
                     doc.Primer_apellido = usuario.Primer_apellido;
-                    if (!(usuario.FotoDePerfil == null))
-                    {
-                        doc.FotoDePerfil = usuario.FotoDePerfil;
-                    }
+                    doc.FotoDePerfil = usuario.FotoDePerfil;
 
                     PictureBox picPhoto = new PictureBox();
                     picPhoto.Image = doc.ByteArrayToImage(doc.FotoDePerfil) ;

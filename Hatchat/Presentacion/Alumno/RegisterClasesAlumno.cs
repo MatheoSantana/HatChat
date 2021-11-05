@@ -10,6 +10,12 @@ namespace Hatchat.Presentacion
 {
     public partial class RegisterClasesAlumno : Form
     {
+        string error;
+        string yaIngresadas;
+        string creado;
+        Image imagenCruz;
+        Image imagenAlumno;
+
         bool visibles=false;
         public Form login;
         public Form registerAlumno;
@@ -33,15 +39,50 @@ namespace Hatchat.Presentacion
             StartPosition = FormStartPosition.CenterScreen;
             ClientSize = new Size(1280, 720);
 
-            lblTitulo.Text = "Crea tu cuenta de alumno";
+            if (Login.idioma == "Español")
+            {
+                error = " comuníquese con el administrador.";
+                lblTitulo.Text = "Crea tu cuenta de alumno";
+                lblIngresarA.Text = "Ingresar a...";
+                lblAnio.Text = "Año:";
+                lblClase.Text = "Clase:";
+                lblInfoModif.Text = "Si no pertenece a todas las \nasignaturas configurelas\naquí:";
+                lblOrientacion.Text = "orientación:";
+                btnAgregar.Text = "Agregar";
+                btnModificar.Text = "Modificar";
+                btnRegistrar.Text = "registrar";
+
+                yaIngresadas = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+                creado = "Se ha creado el alumno correctamente\nVolviendo al Login";
+
+            }
+            else
+            {
+                error = "  Contact an administrator.";
+                lblTitulo.Text = "Create your Student account";
+                lblIngresarA.Text = "Enter...";
+                lblAnio.Text = "Year:";
+                lblClase.Text = "Class:";
+                lblInfoModif.Text = "If it does not belong to\ncourse configure them here:";
+                lblOrientacion.Text = "Orientation:";
+                btnAgregar.Text = "Agree";
+                btnModificar.Text = "Modify";
+                btnRegistrar.Text = "Create Account";
+
+                yaIngresadas = "Application denied, already on request to enter the following subjects: ";
+                creado = "The student has been created correctly\nReturning to Login";
+
+            }
             try
             {
                 Icon = new Icon(Application.StartupPath + "/logo imagen.ico");
                 pbxVolver.Image = Image.FromFile("volver.png");
+                imagenCruz=Image.FromFile("cruz negra.png");
+                imagenAlumno = Image.FromFile("alumno.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
-                MessageBox.Show(ex.Message + " comuníquese con el administrador.", "Error");
+                MessageBox.Show(ex.Message + error, "Error");
 
             }
             pbxVolver.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -262,7 +303,7 @@ namespace Hatchat.Presentacion
         {
             panelAgregadas.AutoScrollPosition = Point.Empty;
 
-            string error = "Solicitud denegada, ya a pedido para ingresar a las siguientes asignaturas: ";
+            string error = yaIngresadas;
             bool mandable = true;
             foreach (Logica.AsignaturaSolicitudClaseAl asigPend in asignaturasSolicitudClaseAlPre)
             {
@@ -293,7 +334,7 @@ namespace Hatchat.Presentacion
                     grupo.Click += new EventHandler(EliminarClase);
 
                     PictureBox pic = new PictureBox();
-                    pic.Image = Image.FromFile("cruz negra.png");
+                    pic.Image = imagenCruz;
                     pic.SizeMode = PictureBoxSizeMode.StretchImage;
                     pic.Height = 20;
                     pic.Width = 20;
@@ -423,7 +464,7 @@ namespace Hatchat.Presentacion
                 grupo.Click += new EventHandler(EliminarClase);
 
                 PictureBox pic = new PictureBox();
-                pic.Image = Image.FromFile("profesor.png");
+                pic.Image = imagenCruz;
                 pic.SizeMode = PictureBoxSizeMode.StretchImage;
                 pic.Height = 20;
                 pic.Width = 20;
@@ -456,7 +497,7 @@ namespace Hatchat.Presentacion
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             alumno.Activo = true;
-            alumno.FotoDePerfil = alumno.ImageToByteArray(Image.FromFile("alumno.png"));
+            alumno.FotoDePerfil = alumno.ImageToByteArray(imagenAlumno);
             alumno.AltaUsuario();
             Logica.SolicitudClaseAl solicitudClaseAl = new Logica.SolicitudClaseAl(DateTime.Now, true, alumno.Ci);
             solicitudClaseAl.EnviarSolicitudClaseAl();
@@ -473,7 +514,7 @@ namespace Hatchat.Presentacion
                 soliAsig.EnviarAsignaturaSolicitudClaseAl();
             }
 
-            MessageBox.Show("Se ha creado el alumno correctamente\nVolviendo al Login");
+            MessageBox.Show(creado);
             login.Show();
             this.Dispose();
         }
