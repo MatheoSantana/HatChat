@@ -1260,7 +1260,7 @@ namespace Hatchat.Persistencia
             conexion.Open();
             MySqlCommand updateEstado = new MySqlCommand("update Chat set activo = false where idChat=" + chat.IdChat + ";", conexion);
             updateEstado.ExecuteNonQuery();
-            MySqlCommand updateHoraFin = new MySqlCommand("update Chat set horaFin = '" + chat.HoraFin.ToString("HH") + ":" + chat.HoraFin.ToString("mm") + ":" + chat.HoraFin.ToString("ss") + "' where idChat=" + chat.IdChat + ";", conexion);
+            MySqlCommand updateHoraFin = new MySqlCommand("update Chat set horaFin = '" + DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm") + ":" + DateTime.Now.ToString("ss") + "' where idChat=" + chat.IdChat + ";", conexion);
             updateHoraFin.ExecuteNonQuery();
             MySqlCommand updateTitulo = new MySqlCommand("update Chat set titulo = '" + chat.Titulo + "' where idChat=" + chat.IdChat + ";", conexion);
             updateTitulo.ExecuteNonQuery();

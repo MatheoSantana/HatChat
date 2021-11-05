@@ -284,7 +284,7 @@ namespace Hatchat.Presentacion
             {
                 iguales = false;
             }
-            if (!iguales)
+            if (!iguales )
             {
                 this.chats = chats;
                 int yPanel = 0;
@@ -721,14 +721,13 @@ namespace Hatchat.Presentacion
                 }
                 panel1.Enabled = true;
                 panelChat.Enabled = true;
+                panelChat.Visible = false;
                 panelChatsActivos.Enabled = true;
                 panelIngresarChat.Enabled = true;
                 panelNuevoChat.Enabled = true;
                 btnNuevoChat.Enabled = true;
                 btnIngresarChat.Enabled = true;
                 paneltitulo.Visible = false;
-                cerrar = true;
-                chats = new List<Logica.Chat>();
                 cargarChats();
             }
             

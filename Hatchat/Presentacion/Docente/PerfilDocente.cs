@@ -24,6 +24,14 @@ namespace Hatchat.Presentacion
         string titBorrar;
         string titModificar;
         string borrado;
+        string horario;
+        string horariosLunes;
+        string horariosMartes;
+        string horariosMiercoles;
+        string horariosJueves;
+        string horariosViernes;
+
+        Image cruz;
 
         public Form login;
         public Form mensajesDocente;
@@ -82,6 +90,31 @@ namespace Hatchat.Presentacion
                 borrado = "Usuario eliminado, cerrando sesion";
 
 
+                btnLu.Text = "";
+                btnMa.Text = "";
+                btnMi.Text = "";
+                btnJu.Text = "";
+                btnVi.Text = "";
+                btnLunes.Text = "";
+                btnMartes.Text = "";
+                btnMiercoles.Text = "";
+                btnJueves.Text = "";
+                btnViernes.Text = "";
+                btnListo.Text = "";
+                btnNuevaAgenda.Text = "";
+
+                lblAgenda.Text = "";
+                lblCierre.Text = "";
+                lblInicio.Text = "";
+
+                horariosLunes = "Horarios del dia: Lunes:";
+                horariosMartes = "Horarios del dia: Martes:";
+                horariosMiercoles = "Horarios del dia: Miercoles:";
+                horariosJueves = "Horarios del dia: Jueves:";
+                horariosViernes = "Horarios del dia: Viernes:";
+                horario = "Horarios del dia: ";
+
+
             }
             else
             {
@@ -115,6 +148,13 @@ namespace Hatchat.Presentacion
                 msgBorrar = "Do you want to delete your profile?";
                 titBorrar = "Delete profile";
                 borrado = "User deleted, session closed";
+
+                horariosLunes = "Hours of the day: Monday:";
+                horariosMartes = "Hours of the day: Tuesday:";
+                horariosMiercoles = "Hours of the day: Wednesday:";
+                horariosJueves = "Hours of the day: Thursday:";
+                horariosViernes = "Hours of the day: Friday:";
+                horario = "Hours of the day: ";
             }
             try
             {
@@ -129,6 +169,7 @@ namespace Hatchat.Presentacion
                 pcbxHistorialChatNav.Image = Image.FromFile("historial chat gris.png");
                 pcbxHistorialMensajesNav.Image = Image.FromFile("historial mensaje gris.png");
                 pbxCerrarSesionNav.Image = Image.FromFile("cerrar sesion.png");
+                cruz = Image.FromFile("Cruz.png");
             }
             catch (System.IO.FileNotFoundException ex)
             {
@@ -311,7 +352,7 @@ namespace Hatchat.Presentacion
             }
             else
             {
-                DialogResult modificarCuenta = MessageBox.Show("¿Desea modificar su perfil?", "Modificar perfil", MessageBoxButtons.YesNo);
+                DialogResult modificarCuenta = MessageBox.Show(msgModificar, titModificar, MessageBoxButtons.YesNo);
                 if (modificarCuenta == DialogResult.Yes)
                 {
                     Login.encontrado.Apodo = txtApodo.Text;
@@ -320,7 +361,7 @@ namespace Hatchat.Presentacion
                     Login.encontrado.Preguta_seguridad = (cbxPregs.SelectedIndex + 1);
                     Login.encontrado.FotoDePerfil = Login.encontrado.ImageToByteArray(pbxFoto.Image);
                     Login.encontrado.UpdatePerfil();
-                    MessageBox.Show("Se han modificado sus datos");
+                    MessageBox.Show(modificado);
 
                     pbxFoto.Image = Login.encontrado.ByteArrayToImage(Login.encontrado.FotoDePerfil);
                     pbxFoto.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -340,12 +381,13 @@ namespace Hatchat.Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            DialogResult borrarCuenta = MessageBox.Show("¿Desea borrar su perfil?", "Borrar perfil", MessageBoxButtons.YesNo);
+            DialogResult borrarCuenta = MessageBox.Show(msgBorrar, titBorrar, MessageBoxButtons.YesNo);
             if (borrarCuenta == DialogResult.Yes)
             {
                 Login.encontrado.Activo = false;
                 Login.encontrado.RemoveUsuario();
                 Login.encontrado = new Logica.Usuario();
+                MessageBox.Show(borrado);
                 login.Show();
                 this.Dispose();
             }
@@ -436,7 +478,7 @@ namespace Hatchat.Presentacion
                     cruz.Height = 20;
                     cruz.Width = 20;
                     cruz.Location = new Point(160, 0);
-                    cruz.Image = Image.FromFile("Cruz.png");
+                    cruz.Image = this.cruz;
                     cruz.ForeColor = Color.White;
                     cruz.Name = "pcbxCruz" + agenda.IdAgenda.ToString();
                     cruz.SizeMode = PictureBoxSizeMode.StretchImage;

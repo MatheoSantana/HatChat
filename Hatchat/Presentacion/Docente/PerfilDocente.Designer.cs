@@ -46,7 +46,7 @@ namespace Hatchat.Presentacion
             this.btnMi = new System.Windows.Forms.Button();
             this.btnMa = new System.Windows.Forms.Button();
             this.btnLu = new System.Windows.Forms.Button();
-            this.btnCerrarInformacion = new System.Windows.Forms.Button();
+            this.btnCerrarAgenda = new System.Windows.Forms.Button();
             this.btnListo = new System.Windows.Forms.Button();
             this.lblCierre = new System.Windows.Forms.Label();
             this.cmbxMinutoCierre = new System.Windows.Forms.ComboBox();
@@ -244,7 +244,7 @@ namespace Hatchat.Presentacion
             this.panelAgregarAgenda.Controls.Add(this.btnMi);
             this.panelAgregarAgenda.Controls.Add(this.btnMa);
             this.panelAgregarAgenda.Controls.Add(this.btnLu);
-            this.panelAgregarAgenda.Controls.Add(this.btnCerrarInformacion);
+            this.panelAgregarAgenda.Controls.Add(this.btnCerrarAgenda);
             this.panelAgregarAgenda.Controls.Add(this.btnListo);
             this.panelAgregarAgenda.Controls.Add(this.lblCierre);
             this.panelAgregarAgenda.Controls.Add(this.cmbxMinutoCierre);
@@ -323,17 +323,17 @@ namespace Hatchat.Presentacion
             this.btnLu.UseVisualStyleBackColor = true;
             this.btnLu.Click += new System.EventHandler(this.btnLun_Click);
             // 
-            // btnCerrarInformacion
+            // btnCerrarAgenda
             // 
-            this.btnCerrarInformacion.BackColor = System.Drawing.Color.Red;
-            this.btnCerrarInformacion.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCerrarInformacion.Location = new System.Drawing.Point(307, 3);
-            this.btnCerrarInformacion.Name = "btnCerrarInformacion";
-            this.btnCerrarInformacion.Size = new System.Drawing.Size(23, 23);
-            this.btnCerrarInformacion.TabIndex = 29;
-            this.btnCerrarInformacion.Text = "X";
-            this.btnCerrarInformacion.UseVisualStyleBackColor = false;
-            this.btnCerrarInformacion.Click += new System.EventHandler(this.btnCerrarInformacion_Click);
+            this.btnCerrarAgenda.BackColor = System.Drawing.Color.Red;
+            this.btnCerrarAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCerrarAgenda.Location = new System.Drawing.Point(307, 3);
+            this.btnCerrarAgenda.Name = "btnCerrarAgenda";
+            this.btnCerrarAgenda.Size = new System.Drawing.Size(23, 23);
+            this.btnCerrarAgenda.TabIndex = 29;
+            this.btnCerrarAgenda.Text = "X";
+            this.btnCerrarAgenda.UseVisualStyleBackColor = false;
+            this.btnCerrarAgenda.Click += new System.EventHandler(this.btnCerrarInformacion_Click);
             // 
             // btnListo
             // 
@@ -848,7 +848,7 @@ namespace Hatchat.Presentacion
         private System.Windows.Forms.Panel panelAgenda;
         private System.Windows.Forms.Timer timerHistorial;
         private System.Windows.Forms.Timer timerCargarFoto;
-        private System.Windows.Forms.Button btnCerrarInformacion;
+        private System.Windows.Forms.Button btnCerrarAgenda;
         private System.Windows.Forms.Timer timerCentrar;
         private System.Windows.Forms.Panel panelHistorialesNav;
         private System.Windows.Forms.PictureBox pcbxHistorialMensajesNav;

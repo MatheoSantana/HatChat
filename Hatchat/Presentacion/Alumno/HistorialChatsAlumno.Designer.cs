@@ -165,7 +165,8 @@ namespace Hatchat.Presentacion
             // 
             // timerCargarFoto
             // 
-            this.timerCargarFoto.Interval = 5000;
+            this.timerCargarFoto.Enabled = true;
+            this.timerCargarFoto.Interval = 500;
             this.timerCargarFoto.Tick += new System.EventHandler(this.timerCargarFoto_Tick);
             // 
             // panelHistorialesNav
